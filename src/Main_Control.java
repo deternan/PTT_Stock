@@ -2,7 +2,7 @@
  * PTT Stock - Main Control
  * 
  * version: April 29, 2018 02:23 AM
- * Last revision: April 29, 2018 02:23 AM
+ * Last revision: May 08, 2018 01:10 AM
  * 
  * 
  */
@@ -14,7 +14,8 @@ import java.util.Vector;
 public class Main_Control 
 {
 	// Read file
-	private String path = "";	
+	private String path = "D:\\GitHub\\PTT_Stock\\";
+	//private String path = "https://github.com/deternan/PTT_Stock/blob/master/";
 	private String twse = "TWSE_2018.txt";
 	private String tpex = "TPEX_2018.txt";
 	
@@ -25,12 +26,20 @@ public class Main_Control
 	private Vector tpex_id = new Vector();
 	private Vector tpex_name = new Vector();
 	
+	
+	
+	
 	public Main_Control() throws Exception
-	{
-		
+	{		
 		Read_TWSE_Info();
 		Read_TPEX_Info();
 		
+//		System.out.println(twse_id.size());
+//		System.out.println(twse_name.size());		
+//		System.out.println(tpex_id.size());
+//		System.out.println(tpex_name.size());
+		
+		Text_match tm = new Text_match(twse_id, twse_name, tpex_id, tpex_name); 
 	}
 	
 	private void Read_TWSE_Info() throws Exception 
@@ -63,11 +72,12 @@ public class Main_Control
 		{
 			//System.out.println(Line);
 			array_temp = Line.split("\t");
-			System.out.println(array_temp[0]+"	"+array_temp[1]);
+			//System.out.println(array_temp[0]+"	"+array_temp[1]);
 			tpex_id.add(array_temp[0]);
 			tpex_name.add(array_temp[1]);			
 		}
 	}
+	
 	
 	
 	public static void main(String[] args)
