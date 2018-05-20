@@ -2,7 +2,7 @@
  * PTT Stock - Main Control
  * 
  * version: April 29, 2018 02:23 AM
- * Last revision: May 08, 2018 01:10 AM
+ * Last revision: May 21, 2018 00:54 AM
  * 
  * 
  */
@@ -17,8 +17,7 @@ public class Main_Control
 	private String path = "D:\\GitHub\\PTT_Stock\\";
 	//private String path = "https://github.com/deternan/PTT_Stock/blob/master/";
 	private String twse = "TWSE_2018.txt";
-	private String tpex = "TPEX_2018.txt";
-	
+	private String tpex = "TPEX_2018.txt";	
 	//TWSE
 	private Vector twse_id = new Vector();
 	private Vector twse_name = new Vector();
@@ -27,19 +26,28 @@ public class Main_Control
 	private Vector tpex_name = new Vector();
 	
 	
+	// ---------------- Get current Value
+	private double value;
+	
 	
 	
 	public Main_Control() throws Exception
 	{		
-		Read_TWSE_Info();
-		Read_TPEX_Info();
+//		Read_TWSE_Info();
+//		Read_TPEX_Info();
 		
 //		System.out.println(twse_id.size());
 //		System.out.println(twse_name.size());		
 //		System.out.println(tpex_id.size());
 //		System.out.println(tpex_name.size());
 		
-		Text_match tm = new Text_match(twse_id, twse_name, tpex_id, tpex_name); 
+		// ------------
+		Get_value gv = new Get_value(2317);
+		value = gv.return_value();
+		System.out.println(value);
+		
+		// ------------
+//		Text_match tm = new Text_match(twse_id, twse_name, tpex_id, tpex_name); 
 	}
 	
 	private void Read_TWSE_Info() throws Exception 
