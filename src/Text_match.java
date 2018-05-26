@@ -21,7 +21,6 @@ import org.json.JSONObject;
 
 public class Text_match 
 {
-
 	private String read_file_path = "C:\\Users\\Barry\\Desktop\\";
 	private String read_file_name = "Stock-3002-3002.json";
 	private BufferedReader bfr;
