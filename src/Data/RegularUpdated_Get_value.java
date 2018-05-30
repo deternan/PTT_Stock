@@ -8,7 +8,7 @@ package Data;
  * divided information source
  * https://goodinfo.tw/StockInfo
  * 
- * Last revision: May 30, 2018 00:55 PM
+ * Last revision: May 30, 2018 06:53 PM
  * 
  * JAR
  * jsoup-1.10.2.jar
@@ -119,7 +119,12 @@ public class RegularUpdated_Get_value
 		Document doc = Jsoup.connect(stock_path).get();
 		Elements tr = doc.select("td[style]");
 		
-		value = Double.parseDouble(tr.get(16).text());	
+		if(tr.get(16).text().contains("%")){
+			value = Double.parseDouble(tr.get(14).text());
+		}else{
+			value = Double.parseDouble(tr.get(16).text());	
+		}		
+		//value = Double.parseDouble(tr.get(16).text());	
 	}
 	
 	private void Output_file(String outputname, Vector id, Vector value) throws Exception
