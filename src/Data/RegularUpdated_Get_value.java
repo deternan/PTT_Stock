@@ -8,7 +8,7 @@ package Data;
  * divided information source
  * https://goodinfo.tw/StockInfo
  * 
- * Last revision: May 30, 2018 06:53 PM
+ * Last revision: May 30, 2018 09:51 PM
  * 
  * JAR
  * jsoup-1.10.2.jar
@@ -37,23 +37,25 @@ public class RegularUpdated_Get_value
 	private String tpex = "TPEX_2018.txt";	
 	//TWSE
 	private Vector twse_id = new Vector();	
+	private Vector twse_name = new Vector();
 	// TPEX
 	private Vector tpex_id = new Vector();			
-	
+	private Vector tpex_name = new Vector();
 	// Parser
 	private String stock_url = "https://goodinfo.tw/StockInfo/StockDividendPolicy.asp?STOCK_ID=";
 	private String stock_path = "";		
 	private double value;
 	
 	// Save	
+	BufferedWriter writer;
 	private String output_folder = "";	
 	private String TWSE_output_filename;
 	private String TPEX_output_filename;
-	private Vector Save_TWSE_value = new Vector();
-	private Vector Save_TPEX_value = new Vector();
+//	private Vector Save_TWSE_value = new Vector();
+//	private Vector Save_TPEX_value = new Vector();
 	
 	public RegularUpdated_Get_value() throws Exception
-	{
+	{		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		TWSE_output_filename = "TWSE_"+dateFormat.format(date).toString()+".txt";
@@ -62,25 +64,29 @@ public class RegularUpdated_Get_value
 		
 		// Get TWSE value
 		Read_TWSE_Info();
+		// output file			
+		writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(output_folder + TWSE_output_filename), "utf-8"));
 		for(int i=0; i<twse_id.size(); i++)
 		{
 			stock_path = stock_url + twse_id.get(i).toString();
-			value(Integer.parseInt(twse_id.get(i).toString()));
+			value = value(Integer.parseInt(twse_id.get(i).toString()));
 			//System.out.println(twse_id.get(i)+"	"+value);
-			Save_TWSE_value.add(value);
+			//Save_TWSE_value.add(value);
+			Output_file(twse_id.get(i).toString(), twse_name.get(i).toString(), value);
 		}
-		Output_file(TWSE_output_filename, twse_id, Save_TWSE_value);
+		
+		writer.close();
 		
 		// Get TPEX value
 		Read_TPEX_Info();
 		for(int i=0; i<tpex_id.size(); i++)
 		{
 			stock_path = stock_url + tpex_id.get(i).toString();
-			value(Integer.parseInt(tpex_id.get(i).toString()));
+			value = value(Integer.parseInt(tpex_id.get(i).toString()));
 			//System.out.println(twse_id.get(i)+"	"+value);
-			Save_TPEX_value.add(value);
-		}
-		Output_file(TPEX_output_filename, tpex_id, Save_TPEX_value);
+			//Save_TPEX_value.add(value);
+			Output_file(tpex_id.get(i).toString(), tpex_name.get(i).toString(), value);
+		}		
 		
 	}
 	
@@ -96,7 +102,8 @@ public class RegularUpdated_Get_value
 		{			
 			array_temp = Line.split("\t");
 			//System.out.println(array_temp[0]+"	"+array_temp[1]);
-			twse_id.add(array_temp[0]);					
+			twse_id.add(array_temp[0]);	
+			twse_name.add(array_temp[1]);
 		}
 	}
 	
@@ -111,12 +118,14 @@ public class RegularUpdated_Get_value
 		while ((Line = bfr.readLine()) != null) 
 		{			
 			array_temp = Line.split("\t");			
-			tpex_id.add(array_temp[0]);					
+			tpex_id.add(array_temp[0]);	
+			tpex_name.add(array_temp[1]);
 		}
 	}
 	
-	private void value(int code) throws Exception
+	private double value(int code) throws Exception
 	{
+		double return_value;
 		// Add Thread		
 		Thread.sleep(3000);		// delay 3 secs
 		
@@ -124,22 +133,20 @@ public class RegularUpdated_Get_value
 		Elements tr = doc.select("td[style]");
 		
 		if(tr.get(16).text().contains("%")){
-			value = Double.parseDouble(tr.get(14).text());
+			return_value = Double.parseDouble(tr.get(14).text());
 		}else{
-			value = Double.parseDouble(tr.get(16).text());	
+			return_value = Double.parseDouble(tr.get(16).text());	
 		}		
-		//value = Double.parseDouble(tr.get(16).text());	
+		
+		return return_value;
 	}
 	
-	private void Output_file(String outputname, Vector id, Vector value) throws Exception
-	{
-		BufferedWriter writer;		
-		writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(output_folder + outputname), "utf-8"));
-		for(int i=0; i<value.size(); i++)
+	private void Output_file(String id, String name, double value) throws Exception
+	{		
+		//for(int i=0; i<value.size(); i++)
 		{
-			writer.write(id.get(i)+"	"+value.get(i)+"\n");
-		}		
-		writer.close();
+			writer.write(id+"	"+name+"	"+value+"\n");
+		}
 	}
 
 	public static void main(String[] args) 
