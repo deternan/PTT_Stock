@@ -59,6 +59,7 @@ public class RegularUpdated_Get_value
 		TWSE_output_filename = "TWSE_"+dateFormat.format(date).toString()+".txt";
 		TPEX_output_filename = "TPEX_"+dateFormat.format(date).toString()+".txt";
 		
+		
 		// Get TWSE value
 		Read_TWSE_Info();
 		for(int i=0; i<twse_id.size(); i++)
@@ -116,6 +117,9 @@ public class RegularUpdated_Get_value
 	
 	private void value(int code) throws Exception
 	{
+		// Add Thread		
+		Thread.sleep(3000);		// delay 3 secs
+		
 		Document doc = Jsoup.connect(stock_path).get();
 		Elements tr = doc.select("td[style]");
 		
