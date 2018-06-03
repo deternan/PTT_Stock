@@ -30,6 +30,9 @@ public class StandardData_Text extends Parameters
 	// value regular
 	private String regex = "[0-9]+\\.?[0-9]+";
 	private Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+	// other info.
+	private String date_str;
+	private String author_str;
 	
 	
 	public StandardData_Text(Vector twse_id, Vector twse_name, Vector tpex_id, Vector tpex_name) throws Exception
@@ -57,7 +60,11 @@ public class StandardData_Text extends Parameters
 			Tag = "";
 			
 			array_temp = Line.split("\t");
-			System.out.println(array_temp[0]+"	"+array_temp[1]);
+			author_str = array_temp[1];
+			date_str = array_temp[2];
+			System.out.println(array_temp[0]+"		"+date_str);
+			
+			
 			
 			// TWSE
 			TWSE_id_match(array_temp[3]);
@@ -120,7 +127,7 @@ public class StandardData_Text extends Parameters
 		// Parsing
 		Matcher matcher = pattern.matcher(input_content);
 		while (matcher.find()) {
-			System.out.println(matcher.group());
+			//System.out.println(matcher.group());
 		}
 	}
 	
