@@ -30,18 +30,23 @@ public class StandardData_Text_Testing extends Parameters
 	private Vector value = new Vector();
 	// value tag
 	private String Tag;
-	// value regular
-	private String regex = "[0-9]+\\.{1}[0-9]+";
-	private Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+	// value regular	
+	private String regex_point = "[0-9]+\\.{1}[0-9]+";
+	private Pattern pattern_point;	
+	//private Pattern pattern = Pattern.compile(regex_point, Pattern.MULTILINE);
+	private String regex = "[0-9]+";
+	private Pattern pattern;
 	Vector all_value_temp = new Vector();
 	// other info.
 	private String articleid;
 	private String date_str;
 	private String author_str;
 	// Current value
-	private String current_value;
-	
-	
+	private double current_value;
+//	private double rangevalue_up;
+//	private double rangevalue_down;
+	private boolean range_check;
+	private double rate = 1.5;
 	
 	public StandardData_Text_Testing(Vector twse_id, Vector twse_name, Vector tpex_id, Vector tpex_name, Vector id, Vector value) throws Exception
 	{		
@@ -68,32 +73,34 @@ public class StandardData_Text_Testing extends Parameters
 		while ((Line = bfr.readLine()) != null) 
 		{
 			Tag = "";
-			current_value = "";
+			current_value = 0;
 			all_value_temp.clear();
+			range_check = false;
 			
 			array_temp = Line.split("\t");
 			articleid = array_temp[0];
 			author_str = array_temp[1];
 			date_str = array_temp[2];
 			
-//			System.out.println(array_temp[0]+"		"+date_str);
 			// TWSE
 			TWSE_id_match(array_temp[3]);
 			// TPEX
 			TPEX_id_match(array_temp[3]);
 			
-			if(all_value_temp.size() <= 3) {
+			if(all_value_temp.size() <= 10) 
+			{
+				//range_check = Ranger_filetr(current_value);
 				for(int i=0; i<all_value_temp.size(); i++)
 				{
-					System.out.println(all_value_temp.get(i));
+					range_check = Ranger_filetr(current_value, Double.parseDouble(all_value_temp.get(i).toString()));
+					System.out.println(all_value_temp.get(i)+"	"+range_check);
 				}
 			}
 		}
 	}
 	
 	private void TWSE_id_match(String input_content)
-	{
-		
+	{		
 		for(int i=0; i<twse_id.size(); i++)
 		{
 			// ID
@@ -103,7 +110,8 @@ public class StandardData_Text_Testing extends Parameters
 					Tag = Tag_matching(input_content);
 					Value_matching(input_content);
 					current_value = Current_value_matching(twse_id.get(i).toString());
-					System.out.println(articleid+"	"+date_str+"	"+twse_id.get(i)+"	"+twse_name.get(i)+"	"+Tag+"	"+current_value);					
+					System.out.println(articleid+"	"+date_str+"	"+twse_id.get(i)+"	"+twse_name.get(i)+"	"+Tag+"	"+current_value);
+					break;
 				}
 			}			
 		}		
@@ -121,7 +129,7 @@ public class StandardData_Text_Testing extends Parameters
 					Value_matching(input_content);
 					current_value = Current_value_matching(tpex_id.get(i).toString());
 					System.out.println(articleid+"	"+date_str+"	"+tpex_id.get(i) + "	" + tpex_name.get(i)+"	"+Tag+"	"+current_value);
-
+					break;
 				}
 			}
 		}
@@ -140,29 +148,57 @@ public class StandardData_Text_Testing extends Parameters
 	}
 
 	private void Value_matching(String input_content)
-	{
+	{		
 		// Parsing
+		pattern_point = Pattern.compile(regex_point, Pattern.MULTILINE);
+		Matcher matcher_point = pattern_point.matcher(input_content);
+		while (matcher_point.find()) 
+		{
+			all_value_temp.add(matcher_point.group());
+			//System.out.println(matcher_point.group());
+		}
+		
+		pattern = Pattern.compile(regex, Pattern.MULTILINE);
 		Matcher matcher = pattern.matcher(input_content);
 		while (matcher.find()) 
 		{
 			all_value_temp.add(matcher.group());
 			//System.out.println(matcher.group());
 		}
+		
 	}
 	
-	private String Current_value_matching(String id_input)
+	private double Current_value_matching(String id_input)
 	{
-		String return_value = "";
+		double return_value = 0;
 		for(int i=0; i<id.size(); i++)
 		{
 			if(id_input.equalsIgnoreCase(id.get(i).toString())) {
-				return_value = value.get(i).toString();
+				return_value = Double.parseDouble(value.get(i).toString());
 				break;
 			}
 			
 		}
 		
 		return return_value;
+	}
+	
+	private boolean Ranger_filetr(double value, double testing_value)
+	{
+		double up_temp = value * rate;
+		double down_temp = value - (up_temp - value);
+		boolean check = false;		
+		//System.out.println(value+"	"+up_temp+"	"+down_temp);
+		if((testing_value >= down_temp) && (testing_value <= up_temp)) {
+			check = true;
+		}
+		
+		return check;
+	}
+	
+	private void class_Tagging()
+	{
+		
 	}
 	
 }
