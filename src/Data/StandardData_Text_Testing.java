@@ -4,13 +4,13 @@ package Data;
  * create standard dataset
  * 
  * version: June 02, 2018 12:12 PM
- * Last revision: June 03, 2018 01:21 AM
+ * Last revision: June 05, 2018 07:08 PM
  * 
  */
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-
+import java.util.Arrays;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,11 +31,8 @@ public class StandardData_Text_Testing extends Parameters
 	// value tag
 	private String Tag;
 	// value regular	
-	private String regex_point = "[0-9]+\\.{1}[0-9]+";
-	private Pattern pattern_point;	
-	//private Pattern pattern = Pattern.compile(regex_point, Pattern.MULTILINE);
-	private String regex = "[0-9]+";
-	private Pattern pattern;
+	private String regex = "([0-9]+\\.?[0-9]+)";
+	private Pattern pattern;		
 	Vector all_value_temp = new Vector();
 	// other info.
 	private String articleid;
@@ -43,10 +40,19 @@ public class StandardData_Text_Testing extends Parameters
 	private String author_str;
 	// Current value
 	private double current_value;
-//	private double rangevalue_up;
-//	private double rangevalue_down;
 	private boolean range_check;
+	private boolean numerical_check;
 	private double rate = 1.5;
+	// Range value 	
+	//private double [] rangevalue = new double[10];
+	private Vector rangevalue_vec = new Vector();
+	
+	// Index
+	private String comid;
+	private String comname;
+	// Evaluation
+	private int totalCount = 0;
+	
 	
 	public StandardData_Text_Testing(Vector twse_id, Vector twse_name, Vector tpex_id, Vector tpex_name, Vector id, Vector value) throws Exception
 	{		
@@ -58,8 +64,7 @@ public class StandardData_Text_Testing extends Parameters
 		this.value = value;
 		
 		// Read PTT Text & matching
-		Read_PTTText();
-		
+		Read_PTTText();		
 	}
 	
 	private void Read_PTTText() throws Exception
@@ -75,7 +80,11 @@ public class StandardData_Text_Testing extends Parameters
 			Tag = "";
 			current_value = 0;
 			all_value_temp.clear();
-			range_check = false;
+			range_check = false;			
+			//Arrays.fill(rangevalue, 0);
+			rangevalue_vec.clear();
+			comid = "";
+			comname = "";
 			
 			array_temp = Line.split("\t");
 			articleid = array_temp[0];
@@ -87,15 +96,28 @@ public class StandardData_Text_Testing extends Parameters
 			// TPEX
 			TPEX_id_match(array_temp[3]);
 			
-			if(all_value_temp.size() <= 10) 
+			//if(all_value_temp.size() <= 10) 
 			{
 				//range_check = Ranger_filetr(current_value);
 				for(int i=0; i<all_value_temp.size(); i++)
 				{
+					numerical_check = false;
 					range_check = Ranger_filetr(current_value, Double.parseDouble(all_value_temp.get(i).toString()));
-					System.out.println(all_value_temp.get(i)+"	"+range_check);
-				}
+					if(all_value_temp.get(i).toString().subSequence(all_value_temp.get(i).toString().length() -1, all_value_temp.get(i).toString().length()).toString().equalsIgnoreCase(".") == false){
+						numerical_check = true;
+					}
+					 
+					if((range_check == true) && (numerical_check == true)){
+						rangevalue_vec.add(all_value_temp.get(i));
+					}
+					
+					//System.out.println(all_value_temp.get(i)+"	"+range_check+"	"+numerical_check);
+				}				
+							
 			}
+			// Tagging
+			//System.out.println(articleid+"	"+current_value+"	"+rangevalue_vec.size());
+			class_Tagging(articleid, current_value, rangevalue_vec);
 		}
 	}
 	
@@ -107,10 +129,12 @@ public class StandardData_Text_Testing extends Parameters
 			if(input_content.contains(twse_id.get(i).toString())) {
 				// Name
 				if(input_content.contains(twse_name.get(i).toString())){
-					Tag = Tag_matching(input_content);
-					Value_matching(input_content);
+					Tag = Tag_matching(input_content);					
 					current_value = Current_value_matching(twse_id.get(i).toString());
-					System.out.println(articleid+"	"+date_str+"	"+twse_id.get(i)+"	"+twse_name.get(i)+"	"+Tag+"	"+current_value);
+//					System.out.println(articleid+"	"+date_str+"	"+twse_id.get(i)+"	"+twse_name.get(i)+"	"+Tag+"	"+current_value);
+					Value_matching(input_content);
+					comid = twse_id.get(i).toString();
+					comname = twse_name.get(i).toString();
 					break;
 				}
 			}			
@@ -125,10 +149,12 @@ public class StandardData_Text_Testing extends Parameters
 			if (input_content.contains(tpex_id.get(i).toString())) {
 				// Name
 				if (input_content.contains(tpex_name.get(i).toString())) {					
-					Tag = Tag_matching(input_content);
-					Value_matching(input_content);
+					Tag = Tag_matching(input_content);					
 					current_value = Current_value_matching(tpex_id.get(i).toString());
-					System.out.println(articleid+"	"+date_str+"	"+tpex_id.get(i) + "	" + tpex_name.get(i)+"	"+Tag+"	"+current_value);
+//					System.out.println(articleid+"	"+date_str+"	"+tpex_id.get(i) + "	" + tpex_name.get(i)+"	"+Tag+"	"+current_value);
+					Value_matching(input_content);
+					comid = tpex_id.get(i).toString();
+					comname = tpex_name.get(i).toString();
 					break;
 				}
 			}
@@ -150,22 +176,13 @@ public class StandardData_Text_Testing extends Parameters
 	private void Value_matching(String input_content)
 	{		
 		// Parsing
-		pattern_point = Pattern.compile(regex_point, Pattern.MULTILINE);
-		Matcher matcher_point = pattern_point.matcher(input_content);
-		while (matcher_point.find()) 
-		{
-			all_value_temp.add(matcher_point.group());
-			//System.out.println(matcher_point.group());
-		}
-		
 		pattern = Pattern.compile(regex, Pattern.MULTILINE);
 		Matcher matcher = pattern.matcher(input_content);
 		while (matcher.find()) 
 		{
 			all_value_temp.add(matcher.group());
 			//System.out.println(matcher.group());
-		}
-		
+		}		
 	}
 	
 	private double Current_value_matching(String id_input)
@@ -176,10 +193,8 @@ public class StandardData_Text_Testing extends Parameters
 			if(id_input.equalsIgnoreCase(id.get(i).toString())) {
 				return_value = Double.parseDouble(value.get(i).toString());
 				break;
-			}
-			
-		}
-		
+			}		
+		}		
 		return return_value;
 	}
 	
@@ -196,9 +211,55 @@ public class StandardData_Text_Testing extends Parameters
 		return check;
 	}
 	
-	private void class_Tagging()
+	private void class_Tagging(String articleid, double realValue, Vector rangeValue)
 	{
+		if(comid.length() > 0)
+		{
+			//System.out.println(comid+"	"+comname+"	"+realValue+"	"+rangeValue.size());
+			if(rangeValue.size() == 1){
+				//System.out.println(comid+"	"+comname+"	"+realValue+"	"+rangeValue.size());
+				//System.out.println("1:	"+rangeValue.get(0));
+				
+				// Evaluation
+				oneValue_accuracy(Tag, Double.parseDouble(rangeValue.get(0).toString()), current_value);
+			}else if(rangeValue.size() == 2){				
+				//System.out.println(comid+"	"+comname+"	"+realValue+"	"+rangeValue.size());
+				//System.out.println("2:	"+rangeValue.get(0)+"	"+rangeValue.get(1));
+				
+				// Evaluation
+				twoValue_accuracy(Tag, Double.parseDouble(rangeValue.get(0).toString()), Double.parseDouble(rangeValue.get(1).toString()), current_value);
+			}else if(rangeValue.size() > 2){
+				//Vector_Sort(rangeValue);
+				
+			}
+		}
 		
+	}
+	
+	private void Vector_Sort(Vector rangeValue)
+	{
+		double max = -1;
+		double min = 3000;
+		double [] temp = new double[rangeValue.size()];
+		for(int i=0; i<rangeValue.size(); i++)
+		{
+			temp[i] = Double.parseDouble(rangeValue.get(i).toString());
+		}
+		//System.out.println(temp.length);
+		Arrays.sort(temp);
+		System.out.println("M:	"+temp[0]+"	"+temp[temp.length-1]);		// small	large
+	}
+	
+	private void oneValue_accuracy(String Texttag, double textValue, double realValue)
+	{
+		double X = textValue;
+		System.out.println(Texttag+"	"+X+"	"+realValue);
+	}
+	
+	private void twoValue_accuracy(String Texttag, double min, double max, double realValue)
+	{
+		double X = (min + max) / 2;
+		System.out.println(Texttag+"	"+X+"	"+realValue);
 	}
 	
 }
