@@ -121,6 +121,10 @@ public class StandardData_Text_Testing extends Parameters
 			//System.out.println(articleid+"	"+current_value+"	"+rangevalue_vec.size());
 			class_Tagging(articleid, current_value, rangevalue_vec);
 		}
+		
+		// Accuracy
+		System.out.println("-------------------------------------------");
+		System.out.println(totalCount+"	"+correct_num+"	"+error_num);
 	}
 	
 	private void TWSE_id_match(String input_content)
@@ -223,7 +227,7 @@ public class StandardData_Text_Testing extends Parameters
 				//System.out.println("1:	"+rangeValue.get(0));
 				
 				// Evaluation
-//				oneValue_accuracy(Tag, Double.parseDouble(rangeValue.get(0).toString()), current_value);
+				oneValue_accuracy(Tag, Double.parseDouble(rangeValue.get(0).toString()), current_value);
 				totalCount++;
 			}else if(rangeValue.size() == 2){				
 				//System.out.println(comid+"	"+comname+"	"+realValue+"	"+rangeValue.size());
@@ -237,8 +241,6 @@ public class StandardData_Text_Testing extends Parameters
 				
 			}
 		}
-		
-		// Accuracy
 		
 	}
 	
@@ -257,24 +259,25 @@ public class StandardData_Text_Testing extends Parameters
 	}
 	
 	private void oneValue_accuracy(String Texttag, double textValue, double realValue)
-	{
+	{		
 		double X = textValue;
 		//System.out.println(Texttag+"	"+X+"	"+realValue);
 		if(Texttag.equalsIgnoreCase("多")) {
-			if(realValue >= X) {
+			if(realValue >= X) {  
+				
 				correct_num++;
-//				System.out.println(Texttag+"	"+realValue+"	"+X+"	correct");
+				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	correct");
 			}else {
 				error_num++;
-//				System.out.println(Texttag+"	"+realValue+"	"+X+"	error");
+				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	error");
 			}
 		}else if(Texttag.equalsIgnoreCase("空")) {
 			if(realValue < X) {
 				correct_num++;
-				System.out.println(Texttag+"	"+realValue+"	"+X+"	correct");
+				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	correct");
 			}else {
 				error_num++;
-				System.out.println(Texttag+"	"+realValue+"	"+X+"	error");
+				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	error");
 			}
 		}
 	}
@@ -286,18 +289,18 @@ public class StandardData_Text_Testing extends Parameters
 		if (Texttag.equalsIgnoreCase("多")) {
 			if(realValue >= X) {
 				correct_num++;
-				//System.out.println(Texttag+"	"+realValue+"	"+X+"	correct");
+				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	correct");
 			}else {
 				error_num++;
-				//System.out.println(Texttag+"	"+realValue+"	"+X+"	error");
+				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	error");
 			}
 		} else if (Texttag.equalsIgnoreCase("空")) {
 			if(realValue < X) {
 				correct_num++;
-				System.out.println(Texttag+"	"+realValue+"	"+X+"	correct");
+				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	correct");
 			}else {
 				error_num++;
-				System.out.println(Texttag+"	"+realValue+"	"+X+"	error");
+				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	error");
 			}
 		}
 	}
