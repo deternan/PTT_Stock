@@ -1,10 +1,10 @@
 package Data;
 
 /*
- * create standard dataset
+ * create standard dataset & evaluation
  * 
  * version: June 02, 2018 12:12 PM
- * Last revision: June 05, 2018 07:08 PM
+ * Last revision: June 06, 2018 01:28 AM
  * 
  */
 
@@ -52,6 +52,8 @@ public class StandardData_Text_Testing extends Parameters
 	private String comname;
 	// Evaluation
 	private int totalCount = 0;
+	private double correct_num = 0;
+	private double error_num = 0;
 	
 	
 	public StandardData_Text_Testing(Vector twse_id, Vector twse_name, Vector tpex_id, Vector tpex_name, Vector id, Vector value) throws Exception
@@ -213,7 +215,7 @@ public class StandardData_Text_Testing extends Parameters
 	
 	private void class_Tagging(String articleid, double realValue, Vector rangeValue)
 	{
-		if(comid.length() > 0)
+		if((comid.length() > 0) && (Tag.length() > 0))
 		{
 			//System.out.println(comid+"	"+comname+"	"+realValue+"	"+rangeValue.size());
 			if(rangeValue.size() == 1){
@@ -221,18 +223,22 @@ public class StandardData_Text_Testing extends Parameters
 				//System.out.println("1:	"+rangeValue.get(0));
 				
 				// Evaluation
-				oneValue_accuracy(Tag, Double.parseDouble(rangeValue.get(0).toString()), current_value);
+//				oneValue_accuracy(Tag, Double.parseDouble(rangeValue.get(0).toString()), current_value);
+				totalCount++;
 			}else if(rangeValue.size() == 2){				
 				//System.out.println(comid+"	"+comname+"	"+realValue+"	"+rangeValue.size());
 				//System.out.println("2:	"+rangeValue.get(0)+"	"+rangeValue.get(1));
 				
 				// Evaluation
 				twoValue_accuracy(Tag, Double.parseDouble(rangeValue.get(0).toString()), Double.parseDouble(rangeValue.get(1).toString()), current_value);
+				totalCount++;
 			}else if(rangeValue.size() > 2){
 				//Vector_Sort(rangeValue);
 				
 			}
 		}
+		
+		// Accuracy
 		
 	}
 	
@@ -253,13 +259,47 @@ public class StandardData_Text_Testing extends Parameters
 	private void oneValue_accuracy(String Texttag, double textValue, double realValue)
 	{
 		double X = textValue;
-		System.out.println(Texttag+"	"+X+"	"+realValue);
+		//System.out.println(Texttag+"	"+X+"	"+realValue);
+		if(Texttag.equalsIgnoreCase("多")) {
+			if(realValue >= X) {
+				correct_num++;
+//				System.out.println(Texttag+"	"+realValue+"	"+X+"	correct");
+			}else {
+				error_num++;
+//				System.out.println(Texttag+"	"+realValue+"	"+X+"	error");
+			}
+		}else if(Texttag.equalsIgnoreCase("空")) {
+			if(realValue < X) {
+				correct_num++;
+				System.out.println(Texttag+"	"+realValue+"	"+X+"	correct");
+			}else {
+				error_num++;
+				System.out.println(Texttag+"	"+realValue+"	"+X+"	error");
+			}
+		}
 	}
 	
 	private void twoValue_accuracy(String Texttag, double min, double max, double realValue)
 	{
 		double X = (min + max) / 2;
-		System.out.println(Texttag+"	"+X+"	"+realValue);
+		//System.out.println(Texttag+"	"+X+"	"+realValue);
+		if (Texttag.equalsIgnoreCase("多")) {
+			if(realValue >= X) {
+				correct_num++;
+				//System.out.println(Texttag+"	"+realValue+"	"+X+"	correct");
+			}else {
+				error_num++;
+				//System.out.println(Texttag+"	"+realValue+"	"+X+"	error");
+			}
+		} else if (Texttag.equalsIgnoreCase("空")) {
+			if(realValue < X) {
+				correct_num++;
+				System.out.println(Texttag+"	"+realValue+"	"+X+"	correct");
+			}else {
+				error_num++;
+				System.out.println(Texttag+"	"+realValue+"	"+X+"	error");
+			}
+		}
 	}
 	
 }
