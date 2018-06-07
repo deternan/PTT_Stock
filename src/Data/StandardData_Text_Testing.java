@@ -4,7 +4,7 @@ package Data;
  * create standard dataset & evaluation
  * 
  * version: June 02, 2018 12:12 PM
- * Last revision: June 06, 2018 01:28 AM
+ * Last revision: June 07, 2018 01:28 AM
  * 
  */
 
@@ -30,8 +30,10 @@ public class StandardData_Text_Testing extends Parameters
 	private Vector value = new Vector();
 	// value tag
 	private String Tag;
+	private String tag_regex = "(2\\.){1}(.*)?(3\\.){1}\\s?分析{1}";
+	private String Tag_reg;	
 	// value regular	
-	private String regex = "([0-9]+\\.?[0-9]+)";
+	private String val_regex = "([0-9]+\\.?[0-9]+)";
 	private Pattern pattern;		
 	Vector all_value_temp = new Vector();
 	// other info.
@@ -80,6 +82,7 @@ public class StandardData_Text_Testing extends Parameters
 		while ((Line = bfr.readLine()) != null) 
 		{
 			Tag = "";
+			Tag_reg = "";			
 			current_value = 0;
 			all_value_temp.clear();
 			range_check = false;			
@@ -111,8 +114,7 @@ public class StandardData_Text_Testing extends Parameters
 					 
 					if((range_check == true) && (numerical_check == true)){
 						rangevalue_vec.add(all_value_temp.get(i));
-					}
-					
+					}					
 					//System.out.println(all_value_temp.get(i)+"	"+range_check+"	"+numerical_check);
 				}				
 							
@@ -137,10 +139,15 @@ public class StandardData_Text_Testing extends Parameters
 				if(input_content.contains(twse_name.get(i).toString())){
 					Tag = Tag_matching(input_content);					
 					current_value = Current_value_matching(twse_id.get(i).toString());
-//					System.out.println(articleid+"	"+date_str+"	"+twse_id.get(i)+"	"+twse_name.get(i)+"	"+Tag+"	"+current_value);
 					Value_matching(input_content);
+					Tag_reg = Tag_matching_Regular(input_content);
 					comid = twse_id.get(i).toString();
 					comname = twse_name.get(i).toString();
+					
+					//System.out.println(articleid+"	"+date_str+"	"+tpex_id.get(i) + "	" + tpex_name.get(i)+"	"+Tag+"	"+current_value);
+//					if(Tag_reg.trim().length() == 1){						
+//						System.out.println(articleid+"	"+date_str+"	"+twse_id.get(i) + "	" + twse_name.get(i)+"	"+Tag_reg+"	"+current_value);
+//					}					
 					break;
 				}
 			}			
@@ -156,11 +163,18 @@ public class StandardData_Text_Testing extends Parameters
 				// Name
 				if (input_content.contains(tpex_name.get(i).toString())) {					
 					Tag = Tag_matching(input_content);					
-					current_value = Current_value_matching(tpex_id.get(i).toString());
-//					System.out.println(articleid+"	"+date_str+"	"+tpex_id.get(i) + "	" + tpex_name.get(i)+"	"+Tag+"	"+current_value);
+					current_value = Current_value_matching(tpex_id.get(i).toString());					
 					Value_matching(input_content);
+					Tag_reg = Tag_matching_Regular(input_content);
 					comid = tpex_id.get(i).toString();
 					comname = tpex_name.get(i).toString();
+					
+					//System.out.println(articleid+"	"+date_str+"	"+tpex_id.get(i) + "	" + tpex_name.get(i)+"	"+Tag+"	"+current_value);
+					if(Tag_reg.trim().length() == 1){
+						
+						System.out.println(articleid+"	"+date_str+"	"+tpex_id.get(i) + "	" + tpex_name.get(i)+"	"+Tag_reg+"	"+current_value);
+					}
+					
 					break;
 				}
 			}
@@ -179,10 +193,40 @@ public class StandardData_Text_Testing extends Parameters
 		return tag_temp;
 	}
 
+	private String Tag_matching_Regular(String input_content)
+	{				
+		String temp = "";
+		String pattern_str;
+		int start_point;
+		int end_point;
+		// Parsing
+		pattern = Pattern.compile(tag_regex, Pattern.MULTILINE);
+		Matcher matcher = pattern.matcher(input_content);		
+		while (matcher.find()) 
+		{			
+			//System.out.println(matcher.group());
+			if(matcher.group().toString().length() < 20){
+				pattern_str = matcher.group().toString();
+				start_point = pattern_str.indexOf("分類"); 
+				end_point = pattern_str.indexOf("3.");
+				//System.out.println(pattern_str);
+				
+				temp = pattern_str.substring(start_point+3, end_point);
+				if(temp.contains(":")){
+					temp = temp.substring(0, temp.indexOf(":"));
+				}else if(temp.contains("/")){
+					temp = temp.substring(0, temp.indexOf("/"));
+				}				
+			}
+		}		
+		
+		return temp;
+	}
+	
 	private void Value_matching(String input_content)
 	{		
 		// Parsing
-		pattern = Pattern.compile(regex, Pattern.MULTILINE);
+		pattern = Pattern.compile(val_regex, Pattern.MULTILINE);
 		Matcher matcher = pattern.matcher(input_content);
 		while (matcher.find()) 
 		{
@@ -219,23 +263,26 @@ public class StandardData_Text_Testing extends Parameters
 	
 	private void class_Tagging(String articleid, double realValue, Vector rangeValue)
 	{
-		if((comid.length() > 0) && (Tag.length() > 0))
+		//if((comid.length() > 0) && (Tag.length() > 0))
+		//if((comid.length() > 0) && (Tag_reg.length() > 0))
 		{
 			//System.out.println(comid+"	"+comname+"	"+realValue+"	"+rangeValue.size());
 			if(rangeValue.size() == 1){
 				//System.out.println(comid+"	"+comname+"	"+realValue+"	"+rangeValue.size());
 				//System.out.println("1:	"+rangeValue.get(0));
 				
-				// Evaluation
-				oneValue_accuracy(Tag, Double.parseDouble(rangeValue.get(0).toString()), current_value);
-				totalCount++;
+				// Evaluation	// 
+				//oneValue_accuracy(Tag, Double.parseDouble(rangeValue.get(0).toString()), current_value);
+				oneValue_accuracy(Tag_reg, Double.parseDouble(rangeValue.get(0).toString()), current_value);
+				//totalCount++;
 			}else if(rangeValue.size() == 2){				
 				//System.out.println(comid+"	"+comname+"	"+realValue+"	"+rangeValue.size());
 				//System.out.println("2:	"+rangeValue.get(0)+"	"+rangeValue.get(1));
 				
 				// Evaluation
-				twoValue_accuracy(Tag, Double.parseDouble(rangeValue.get(0).toString()), Double.parseDouble(rangeValue.get(1).toString()), current_value);
-				totalCount++;
+				//twoValue_accuracy(Tag, Double.parseDouble(rangeValue.get(0).toString()), Double.parseDouble(rangeValue.get(1).toString()), current_value);
+				twoValue_accuracy(Tag_reg, Double.parseDouble(rangeValue.get(0).toString()), Double.parseDouble(rangeValue.get(1).toString()), current_value);
+				//totalCount++;
 			}else if(rangeValue.size() > 2){
 				//Vector_Sort(rangeValue);
 				
@@ -262,15 +309,16 @@ public class StandardData_Text_Testing extends Parameters
 	{		
 		double X = textValue;
 		//System.out.println(Texttag+"	"+X+"	"+realValue);
-		if(Texttag.equalsIgnoreCase("多")) {
-			if(realValue >= X) {  
-				
+		//System.out.println(articleid+"	"+date_str+"	"+comid + "	" + comname+"	"+Tag_reg+"	"+current_value);
+		if(Texttag.trim().equalsIgnoreCase("多")) {
+			if(realValue >= X) {  				
 				correct_num++;
 				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	correct");
 			}else {
 				error_num++;
 				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	error");
 			}
+			totalCount++;
 		}else if(Texttag.equalsIgnoreCase("空")) {
 			if(realValue < X) {
 				correct_num++;
@@ -279,6 +327,7 @@ public class StandardData_Text_Testing extends Parameters
 				error_num++;
 				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	error");
 			}
+			totalCount++;
 		}
 	}
 	
@@ -286,7 +335,8 @@ public class StandardData_Text_Testing extends Parameters
 	{
 		double X = (min + max) / 2;
 		//System.out.println(Texttag+"	"+X+"	"+realValue);
-		if (Texttag.equalsIgnoreCase("多")) {
+		//System.out.println(articleid+"	"+date_str+"	"+comid + "	" + comname+"	"+Tag_reg+"	"+current_value);
+		if (Texttag.trim().equalsIgnoreCase("多")) {
 			if(realValue >= X) {
 				correct_num++;
 				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	correct");
@@ -294,6 +344,7 @@ public class StandardData_Text_Testing extends Parameters
 				error_num++;
 				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	error");
 			}
+			totalCount++;
 		} else if (Texttag.equalsIgnoreCase("空")) {
 			if(realValue < X) {
 				correct_num++;
@@ -302,6 +353,7 @@ public class StandardData_Text_Testing extends Parameters
 				error_num++;
 				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	error");
 			}
+			totalCount++;
 		}
 	}
 	
