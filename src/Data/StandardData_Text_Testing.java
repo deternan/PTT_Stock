@@ -9,7 +9,11 @@ package Data;
  */
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -40,6 +44,7 @@ public class StandardData_Text_Testing extends Parameters
 	private String articleid;
 	private String date_str;
 	private String author_str;
+	private String PTTtext;
 	// Current value
 	private double current_value;
 	private boolean range_check;
@@ -57,6 +62,8 @@ public class StandardData_Text_Testing extends Parameters
 	private double correct_num = 0;
 	private double error_num = 0;
 	
+	// output
+	BufferedWriter writer;
 	
 	public StandardData_Text_Testing(Vector twse_id, Vector twse_name, Vector tpex_id, Vector tpex_name, Vector id, Vector value) throws Exception
 	{		
@@ -67,8 +74,12 @@ public class StandardData_Text_Testing extends Parameters
 		this.id = id;
 		this.value = value;
 		
+		writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(text_path + tex_filename), "utf-8"));
+		
 		// Read PTT Text & matching
 		Read_PTTText();		
+		
+		writer.close();
 	}
 	
 	private void Read_PTTText() throws Exception
@@ -85,6 +96,7 @@ public class StandardData_Text_Testing extends Parameters
 			Tag_reg = "";			
 			current_value = 0;
 			all_value_temp.clear();
+			PTTtext = "";
 			range_check = false;			
 			//Arrays.fill(rangevalue, 0);
 			rangevalue_vec.clear();
@@ -95,6 +107,7 @@ public class StandardData_Text_Testing extends Parameters
 			articleid = array_temp[0];
 			author_str = array_temp[1];
 			date_str = array_temp[2];
+			PTTtext = array_temp[3];
 			
 			// TWSE
 			TWSE_id_match(array_temp[3]);
@@ -172,7 +185,7 @@ public class StandardData_Text_Testing extends Parameters
 					//System.out.println(articleid+"	"+date_str+"	"+tpex_id.get(i) + "	" + tpex_name.get(i)+"	"+Tag+"	"+current_value);
 					if(Tag_reg.trim().length() == 1){
 						
-						System.out.println(articleid+"	"+date_str+"	"+tpex_id.get(i) + "	" + tpex_name.get(i)+"	"+Tag_reg+"	"+current_value);
+						//System.out.println(articleid+"	"+date_str+"	"+tpex_id.get(i) + "	" + tpex_name.get(i)+"	"+Tag_reg+"	"+current_value);
 					}
 					
 					break;
@@ -261,7 +274,7 @@ public class StandardData_Text_Testing extends Parameters
 		return check;
 	}
 	
-	private void class_Tagging(String articleid, double realValue, Vector rangeValue)
+	private void class_Tagging(String articleid, double realValue, Vector rangeValue) throws Exception
 	{
 		//if((comid.length() > 0) && (Tag.length() > 0))
 		//if((comid.length() > 0) && (Tag_reg.length() > 0))
@@ -283,15 +296,14 @@ public class StandardData_Text_Testing extends Parameters
 				//twoValue_accuracy(Tag, Double.parseDouble(rangeValue.get(0).toString()), Double.parseDouble(rangeValue.get(1).toString()), current_value);
 				twoValue_accuracy(Tag_reg, Double.parseDouble(rangeValue.get(0).toString()), Double.parseDouble(rangeValue.get(1).toString()), current_value);
 				//totalCount++;
-			}else if(rangeValue.size() > 2){
-				//Vector_Sort(rangeValue);
-				
+			}else if((rangeValue.size() > 2) && (rangeValue.size() < 10)){
+				//Vector_Sort(rangeValue, Tag_reg, current_value);				
 			}
 		}
 		
 	}
 	
-	private void Vector_Sort(Vector rangeValue)
+	private void Vector_Sort(Vector rangeValue, String Texttag, double realValue)
 	{
 		double max = -1;
 		double min = 3000;
@@ -302,10 +314,32 @@ public class StandardData_Text_Testing extends Parameters
 		}
 		//System.out.println(temp.length);
 		Arrays.sort(temp);
-		System.out.println("M:	"+temp[0]+"	"+temp[temp.length-1]);		// small	large
+//		System.out.println("M:	"+temp[0]+"	"+temp[temp.length-1]);		// small	large
+		
+		// Accuracy evaluation
+		double X = (min + max) / 2;
+		if (Texttag.trim().equalsIgnoreCase("多")) {
+			if(realValue >= X) {
+				correct_num++;
+				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	correct"+"	"+PTTtext.length());
+			}else {
+				error_num++;
+				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	error"+"	"+PTTtext.length());
+			}
+			totalCount++;
+		} else if (Texttag.equalsIgnoreCase("空")) {
+			if(realValue < X) {
+				correct_num++;
+				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	correct"+"	"+PTTtext.length());
+			}else {
+				error_num++;
+				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	error"+"	"+PTTtext.length());
+			}
+			totalCount++;
+		}
 	}
 	
-	private void oneValue_accuracy(String Texttag, double textValue, double realValue)
+	private void oneValue_accuracy(String Texttag, double textValue, double realValue) throws Exception
 	{		
 		double X = textValue;
 		//System.out.println(Texttag+"	"+X+"	"+realValue);
@@ -313,25 +347,29 @@ public class StandardData_Text_Testing extends Parameters
 		if(Texttag.trim().equalsIgnoreCase("多")) {
 			if(realValue >= X) {  				
 				correct_num++;
-				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	correct");
+				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	correct"+"	"+PTTtext.length());
+				output_processing("1");
 			}else {
 				error_num++;
-				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	error");
+				output_processing("-1");
+				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	error"+"	"+PTTtext.length());
 			}
 			totalCount++;
 		}else if(Texttag.equalsIgnoreCase("空")) {
 			if(realValue < X) {
 				correct_num++;
-				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	correct");
+				output_processing("1");
+				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	correct"+"	"+PTTtext.length());
 			}else {
 				error_num++;
-				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	error");
+				output_processing("-1");
+				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	error"+"	"+PTTtext.length());
 			}
 			totalCount++;
 		}
 	}
 	
-	private void twoValue_accuracy(String Texttag, double min, double max, double realValue)
+	private void twoValue_accuracy(String Texttag, double min, double max, double realValue) throws Exception
 	{
 		double X = (min + max) / 2;
 		//System.out.println(Texttag+"	"+X+"	"+realValue);
@@ -339,22 +377,32 @@ public class StandardData_Text_Testing extends Parameters
 		if (Texttag.trim().equalsIgnoreCase("多")) {
 			if(realValue >= X) {
 				correct_num++;
-				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	correct");
+				output_processing("1");
+				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	correct"+"	"+PTTtext.length());
 			}else {
 				error_num++;
-				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	error");
+				output_processing("-1");
+				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	error"+"	"+PTTtext.length());
 			}
 			totalCount++;
 		} else if (Texttag.equalsIgnoreCase("空")) {
 			if(realValue < X) {
 				correct_num++;
-				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	correct");
+				output_processing("1");
+				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	correct"+"	"+PTTtext.length());
 			}else {
 				error_num++;
-				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	error");
+				output_processing("-1");
+				System.out.println(articleid+"	"+date_str+"	"+comid+"	"+comname+"	"+Texttag+"	"+realValue+"	"+X+"	error"+"	"+PTTtext.length());
 			}
 			totalCount++;
 		}
 	}
+	
+	private void output_processing(String classTag) throws Exception
+	{
+		writer.write(classTag+"\t"+PTTtext.replaceAll("\\[標的\\]", "")+"\n");
+	}
+	
 	
 }
