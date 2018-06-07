@@ -1,10 +1,23 @@
 package Data;
 
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+/*
+ * PTT Stock - Excel to Text
+ * 
+ * version: May 21, 2018 00:54 AM
+ * Last revision: June 06, 2018 06:58 PM
+ * 
+ */
+
+/*
+ * JAR
+ * poi-3.17.jar
+ * poi-ooxml-3.17.jar
+ * 
+ */
+
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,8 +27,7 @@ import java.util.List;
 
 public class Get_value_Excel 
 {
-	private static final String FILE_NAME = "C:\\Users\\Barry\\Desktop\\value_20180530.xls";
-	//public static final String SAMPLE_XLSX_FILE_PATH = "C:\\Users\\Barry\\Desktop\\value_20180530.xls";
+	private static final String FILE_NAME = "D:\\Phelps\\GitHub\\PTT_Stock\\source\\20180605.csv";	
 	
 	public Get_value_Excel() throws Exception
 	{
