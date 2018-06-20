@@ -25,7 +25,7 @@ import org.json.JSONObject;
 public class Sticker_Lottery 
 {
 	// Get source
-	private String read_file_path = "C:\\Users\\Barry\\Desktop\\";
+	private String read_file_path = "";
 	private String read_file_name = "M.1529344339.A.0DB.json";
 	private BufferedReader bfr;
 	// output
