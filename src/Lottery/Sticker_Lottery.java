@@ -26,7 +26,7 @@ public class Sticker_Lottery
 {
 	// Get source
 	private String read_file_path = "";
-	private String read_file_name = "M.1529344339.A.0DB.json";
+	private String read_file_name = "Stock-4458-4458.json";
 	private BufferedReader bfr;
 	// output
 	private String outputAll_folder = read_file_path;
@@ -43,7 +43,7 @@ public class Sticker_Lottery
 	private int max;
 	private int randomNum;
 		// Random
-		int seed = 0616;	// lopm27
+		int seed = 720;	// 
 	
 	public Sticker_Lottery() throws Exception
 	{
@@ -88,9 +88,9 @@ public class Sticker_Lottery
 		
 		for(int i=0; i<L_Num; i++)
 		{
-			randomNum = min + rand.nextInt(max);
-			//System.out.println((i+1)+"	"+randomNum);
-			System.out.println((i+1)+"	"+randomNum+"	"+All_date.get(randomNum)+"	"+All_userid.get(randomNum)+"	"+All_content.get(randomNum));
+			randomNum = min + rand.nextInt(max);			
+			//System.out.println((i+1)+"	"+randomNum+"	"+All_date.get(randomNum)+"	"+All_userid.get(randomNum)+"	"+All_content.get(randomNum));
+			System.out.println(randomNum+"	"+All_date.get(randomNum)+"	"+All_userid.get(randomNum)+"	"+All_content.get(randomNum));
 		}	
 	}
 	
