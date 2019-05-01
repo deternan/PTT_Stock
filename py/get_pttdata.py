@@ -5,13 +5,13 @@ import threading
 import time
 
 '''
-Created on April 23, 2018 08:43 PM
+Created on May 01, 2019 08:51 PM
 
 @author: Phelps
 '''
 
 def workerthread(num):    
-    #os.system("python crawler.py -b Stock -i "+str(num)+" "+str(num)+ " &")
+    os.system("python crawler.py -b Stock -i "+str(num)+" "+str(num)+ " &")
     print(num)
     return
 
