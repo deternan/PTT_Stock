@@ -1,20 +1,185 @@
 package ptt.other;
 
+
+
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import java.util.regex.Pattern;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 public class Data_Output {
 
-	private String folder_source = "Users/phelps/Desktop/temp/";
+	private String folder_source = "/Users/phelps/temp/";
 	private BufferedReader bfr;
+	// Parsing
+	JSONParser parser = new JSONParser();
+	// DateTime
+	private String isotime_pattern = "EEE MMM dd HH:mm:ss zzz yyyy";
+	DateTimeFormatter formatter;
+	// File Check
+	String extension_Json = "json";
+	// Date 
+	String year;
+	String month;
+	String day;
 	
-	public Data_Output()
+	public Data_Output() throws Exception
 	{
+		boolean checkResponse;
+		File folder = new File(folder_source);
+		File[] listOfFiles = folder.listFiles();
 		
+		for (File file : listOfFiles) {
+		    if (file.isFile()) {
+		        System.out.println(file.getName());
+		        		    
+		        // Check extension file name
+		        checkResponse = ExtensionCheck(folder_source + file.getName());
+		        if(checkResponse) {
+		        	 // Read files
+			        ReadFile(folder_source + file.getName());
+		        }
+		       
+		    }
+		}
+	}
+	
+	private boolean ExtensionCheck(String path)
+	{
+		boolean checkResponse = false;
+		        		        
+		        String Getextension = getFileExtension(new File(path));
+		        String extension = Getextension.substring(1, Getextension.length());
+		        if(extension.equalsIgnoreCase(extension_Json)) {
+		        	checkResponse = true;
+		        }
+		return checkResponse;
+	}
+	
+	private static String getFileExtension(File file) {
+        String extension = "";
+ 
+        try {
+            if (file != null && file.exists()) {
+                String name = file.getName();
+                extension = name.substring(name.lastIndexOf("."));
+            }
+        } catch (Exception e) {
+            extension = "";
+        }
+ 
+        return extension;
+ 
+    }
+		
+	private void ReadFile(String path) throws Exception
+	{
+		FileReader fr = new FileReader(path);
+		bfr = new BufferedReader(fr);
+		String Line;
+		String allText = "";
+		while((Line = bfr.readLine())!=null)
+		{								
+			allText += Line;
+		}
+		fr.close();
+		bfr.close();	
+		
+		year = "";
+		month = "";
+		day = "";
+		
+		// Parsing
+		Parsing(allText);
+	}
+	
+	private void Parsing(String lineStr) throws Exception
+	{
+		JSONObject json = (JSONObject) parser.parse(lineStr);
+		JSONArray msg = (JSONArray) json.get("articles");
+			
+		String author;
+		
+		for(int i=0; i<msg.size(); i++) {
+			JSONObject articlejson = (JSONObject) parser.parse(msg.get(i).toString());
+			
+			// article_id
+			//System.out.println(i+"	"+articlejson.get("article_id"));
+				
+			
+			// title
+			//System.out.println(i+"	"+articlejson.get("title"));
+			
+			// content
+			//System.out.println(i+"	"+articlejson.get("content"));
+			
+			// Date
+			//DatePasring(articlejson.get("date").toString());
+			Date_Split(articlejson.get("date").toString());
+			//System.out.println(i+"	"+articlejson.get("article_id")+"	"+articlejson.get("article_title"));
+		}
+		
+	}
+	
+	private void Date_Split(String dateStr)
+	{
+		//"date":"Tue Aug 30 13:38:20 2016",
+		String temp[];
+		temp = dateStr.split(" ");
+		if(temp.length == 6) 
+		{
+			//System.out.println(dateStr+"	"+temp.length);
+			month = temp[1];
+			day = temp[3];
+			year = temp[5];
+			System.out.println(year+"_"+month+"_"+day);
+		}
+	}
+
+	
+	private void DatePasring(String dateStr)
+	{
+		//"date":"Tue Aug 30 13:38:20 2016",
+		boolean chinesecheck;
+		chinesecheck = isChinese(dateStr);
+		
+		if(chinesecheck == true) {
+			formatter = DateTimeFormatter.ofPattern(isotime_pattern, Locale.TAIWAN);
+		}else {
+			formatter = DateTimeFormatter.ofPattern(isotime_pattern, Locale.ENGLISH);
+		}
+		
+		LocalDate dateTime = LocalDate.parse(dateStr, formatter);
+		System.out.println(dateTime.getYear()+"	"+dateTime.getMonth()+"	"+dateTime.getDayOfMonth());
+	}
+	
+	private boolean isChinese(String con)
+	{
+		for (int i = 0; i < con.substring(0, 3).length(); i++) {
+			if (!Pattern.compile("[\u4e00-\u9fa5]").matcher(
+					String.valueOf(con.charAt(i))).find()) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 	
 	public static void main(String args[])
 	{
-		Data_Output dd = new Data_Output();
+		try {
+			Data_Output dd = new Data_Output();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }
