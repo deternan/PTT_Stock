@@ -1,6 +1,15 @@
 package ptt.other;
 
-
+/*
+ * ouput the last date
+ * version: May 02, 2019 07:00 PM
+ * Last revision: May 06, 2019 09:12 PM
+ * 
+ * Author : Chao-Hsuan Ke
+ * Institute: Delta Research Center
+ * Company : Delta Electronics Inc. (Taiwan)
+ * 
+ */
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -30,6 +39,9 @@ public class Data_Output {
 	String month;
 	String day;
 	
+	// output
+	private String outputBase = "";
+	
 	public Data_Output() throws Exception
 	{
 		boolean checkResponse;
@@ -49,6 +61,8 @@ public class Data_Output {
 		       
 		    }
 		}
+		
+		System.out.println(outputBase+".txt");
 	}
 	
 	private boolean ExtensionCheck(String path)
@@ -110,20 +124,8 @@ public class Data_Output {
 		for(int i=0; i<msg.size(); i++) {
 			JSONObject articlejson = (JSONObject) parser.parse(msg.get(i).toString());
 			
-			// article_id
-			//System.out.println(i+"	"+articlejson.get("article_id"));
-				
-			
-			// title
-			//System.out.println(i+"	"+articlejson.get("title"));
-			
-			// content
-			//System.out.println(i+"	"+articlejson.get("content"));
-			
-			// Date
 			//DatePasring(articlejson.get("date").toString());
 			Date_Split(articlejson.get("date").toString());
-			//System.out.println(i+"	"+articlejson.get("article_id")+"	"+articlejson.get("article_title"));
 		}
 		
 	}
@@ -133,13 +135,12 @@ public class Data_Output {
 		//"date":"Tue Aug 30 13:38:20 2016",
 		String temp[];
 		temp = dateStr.split(" ");
-		if(temp.length == 6) 
-		{
-			//System.out.println(dateStr+"	"+temp.length);
+		if(temp.length == 6) {
 			month = temp[1];
 			day = temp[3];
 			year = temp[5];
-			System.out.println(year+"_"+month+"_"+day);
+//			System.out.println(year+"_"+month+"_"+day);
+			outputBase = String.valueOf(year)+"_"+String.valueOf(month)+"_"+String.valueOf(day);
 		}
 	}
 
