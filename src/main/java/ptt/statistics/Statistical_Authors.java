@@ -1,10 +1,9 @@
 package ptt.statistics;
 
-
 /*
  * Authors Statistical
  * version: May 02, 2019 07:00 PM
- * Last revision: May 03, 2019 06:45 PM
+ * Last revision: May 07, 2019 00:20 AM
  * 
  * Author : Chao-Hsuan Ke
  * Institute: Delta Research Center
@@ -27,9 +26,13 @@ package ptt.statistics;
  */
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -44,9 +47,13 @@ import org.json.simple.parser.JSONParser;
 
 public class Statistical_Authors {
 
-//	private String folder_source = "D:\\Phelps\\GitHub\\PTT_Stock\\source\\Stock data\\";
-	private String folder_source = "C:\\Users\\barry.ke\\Desktop\\PTT\\";
+	// Read source
+//	private String folder_source = "/Users/phelps/temp/";
+	private String folder_source = "/data/git/DataSet/ptt/Stock data/";
 	private BufferedReader bfr;
+	// Output files
+	private String folder_output = "/Users/phelps/Desktop/";
+	private BufferedWriter writer;
 	// Parsing
 	JSONParser parser = new JSONParser();
 	
@@ -60,19 +67,40 @@ public class Statistical_Authors {
 	// Map
 		Map<String, Integer> duplicates = new HashMap<String, Integer>();
 	
+	// File Check
+	String extension_Json = "json";
+	// Date 
+	String year;
+	String month;
+	String day;
+	// output
+	private String outputBase = "";
+		// Statistical
+		private String outputAuthorStatistical = "AuthorStatistical";
+		// author array
+		ArrayList<String> allAuthor_array = new ArrayList<String>();
+		ArrayList<Integer> allAuthorStastic_array = new ArrayList<Integer>();
 		
 	public Statistical_Authors() throws Exception
 	{
-		
+		boolean checkResponse;
 		File folder = new File(folder_source);
-		File[] listOfFiles = folder.listFiles();
-
+		File[] listOfFiles = folder.listFiles();		
+		Arrays.sort(listOfFiles);
+		
 		for (File file : listOfFiles) {
 		    if (file.isFile()) {
-		        System.out.println(file.getName());
+		    	outputBase = "";
+		        //System.out.println(file.getName());
 		        		        
-		        // Read files
-		        ReadFile(folder_source + file.getName());
+		        // Check extension file name
+		        checkResponse = ExtensionCheck(folder_source + file.getName());
+		        if(checkResponse) {
+		        	 // Read files
+			        ReadFile(folder_source + file.getName());
+			        
+			        System.out.println(file.getName()+"	"+outputBase);
+		        }
 		    }
 		}
 		
@@ -83,13 +111,47 @@ public class Statistical_Authors {
 //		System.out.println(allAuthor.size());
 		
 		// ArrayList
-		System.out.println(allAuthor_array_temp.size());
+//		System.out.println(allAuthor_array_temp.size());
 		// 
 		CountDuplicatedList();
 		// ArrayList Sort
 		MapSort_byValue();
 		
+		// output
+		writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(folder_output + outputAuthorStatistical+"_"+outputBase+".txt"), "utf-8"));
+		for(int i=0; i<allAuthor_array.size(); i++) {
+			writer.write(allAuthor_array.get(i)+"	"+allAuthorStastic_array.get(i)+"\n");
+		}
+		writer.close();
 	}
+	
+	private boolean ExtensionCheck(String path)
+	{
+		boolean checkResponse = false;
+		        		        
+		        String Getextension = getFileExtension(new File(path));
+		        String extension = Getextension.substring(1, Getextension.length());
+		        if(extension.equalsIgnoreCase(extension_Json)) {
+		        	checkResponse = true;
+		        }
+		return checkResponse;
+	}
+	
+	private static String getFileExtension(File file) {
+        String extension = "";
+ 
+        try {
+            if (file != null && file.exists()) {
+                String name = file.getName();
+                extension = name.substring(name.lastIndexOf("."));
+            }
+        } catch (Exception e) {
+            extension = "";
+        }
+ 
+        return extension;
+ 
+    }
 	
 	private void ReadFile(String path) throws Exception
 	{
@@ -103,6 +165,10 @@ public class Statistical_Authors {
 		}
 		fr.close();
 		bfr.close();	
+		
+		year = "";
+		month = "";
+		day = "";
 		
 		// Parsing
 		Parsing(allText);
@@ -122,7 +188,6 @@ public class Statistical_Authors {
 			//System.out.println(i+"	"+articlejson.get("article_id"));
 			
 			// author
-			//System.out.println(i+"	"+articlejson.get("author"));
 			if(articlejson.containsKey("author")) 
 			{
 				if(articlejson.get("author") != null) {
@@ -146,10 +211,29 @@ public class Statistical_Authors {
 			// content
 			//System.out.println(i+"	"+articlejson.get("content"));
 			
+			// Date
+			if(articlejson.containsKey("date")) {
+				Date_Split(articlejson.get("date").toString());
+			}
+			
 			//System.out.println(i+"	"+articlejson.get("article_id")+"	"+articlejson.get("article_title"));
 		}
 		
 		
+	}
+	
+	private void Date_Split(String dateStr)
+	{
+		//"date":"Tue Aug 30 13:38:20 2016",
+		String temp[];
+		temp = dateStr.split(" ");
+		if(temp.length == 6) {
+			month = temp[1];
+			day = temp[3];
+			year = temp[5];
+
+			outputBase = String.valueOf(year)+"_"+String.valueOf(month)+"_"+String.valueOf(day);
+		}
 	}
 	
 	private void CountDuplicatedList() {
@@ -164,9 +248,12 @@ public class Statistical_Authors {
 			}
 		}
 
-//		for (Map.Entry<String, Integer> entry : duplicates.entrySet()) {
-//			System.out.println(entry.getKey() + " = " + entry.getValue());
-//		}		
+		
+		for (Map.Entry<String, Integer> entry : duplicates.entrySet()) {
+			//System.out.println(entry.getKey() + " = " + entry.getValue());
+			allAuthor_array.add(entry.getKey());
+			allAuthorStastic_array.add(entry.getValue());
+		}		
 	}
 	
 	private void MapSort_byValue() {
@@ -178,8 +265,9 @@ public class Statistical_Authors {
 
 		//System.out.println("Reverse Sorted Map   : " + reverseSortedMap);
 
+		// Display
 		for (Map.Entry<String, Integer> entry : reverseSortedMap.entrySet()) {
-			System.out.println(entry.getKey() + " = " + entry.getValue());
+//			System.out.println(entry.getKey() + " = " + entry.getValue());
 		}
 	}
 	

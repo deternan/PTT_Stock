@@ -1,7 +1,7 @@
 package ptt.other;
 
 /*
- * Authors Statistical
+ * Authors List
  * version: May 02, 2019 07:00 PM
  * Last revision: May 06, 2019 11:58 PM
  * 
@@ -33,10 +33,7 @@ import java.io.FileReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Vector;
 
@@ -76,7 +73,7 @@ public class AuthorsList {
 	// output
 	private String outputBase = "";
 		// author
-		private String outputAuthor = "AuthorList";
+		private String outputAuthorStatistic = "AuthorList";
 		// author array
 		ArrayList<String> allAuthor_array = new ArrayList<String>();
 		
@@ -103,21 +100,8 @@ public class AuthorsList {
 		    }
 		}
 		
-		// Vector
-//		System.out.println(allAuthor_temp.size());
-		// Remove duplication
-//		allAuthor = new Vector(new LinkedHashSet(allAuthor_temp));
-//		System.out.println(allAuthor.size());
-		
-		// ArrayList
-//		System.out.println(allAuthor_array_temp.size());
-		// 
-		CountDuplicatedList();
-		// ArrayList Sort
-		MapSort_byValue();
-		
 		// output
-		writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(folder_output + outputAuthor+"_"+outputBase+".txt"), "utf-8"));
+		writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(folder_output + outputAuthorStatistic+"_"+outputBase+".txt"), "utf-8"));
 		for(int i=0; i<allAuthor_array.size(); i++) {
 			writer.write(allAuthor_array.get(i)+"\n");
 		}
@@ -183,9 +167,6 @@ public class AuthorsList {
 		for(int i=0; i<msg.size(); i++) {
 			JSONObject articlejson = (JSONObject) parser.parse(msg.get(i).toString());
 			
-			// article_id
-			//System.out.println(i+"	"+articlejson.get("article_id"));
-			
 			// author
 			if(articlejson.containsKey("author")) 
 			{
@@ -204,18 +185,11 @@ public class AuthorsList {
 			}			
 				
 			
-			// title
-			//System.out.println(i+"	"+articlejson.get("title"));
-			
-			// content
-			//System.out.println(i+"	"+articlejson.get("content"));
-			
 			// Date
 			if(articlejson.containsKey("date")) {
 				Date_Split(articlejson.get("date").toString());
 			}
 			
-			//System.out.println(i+"	"+articlejson.get("article_id")+"	"+articlejson.get("article_title"));
 		}
 		
 		
@@ -234,41 +208,7 @@ public class AuthorsList {
 			outputBase = String.valueOf(year)+"_"+String.valueOf(month)+"_"+String.valueOf(day);
 		}
 	}
-	
-	private void CountDuplicatedList() {
 		
-		//Map<String, Integer> duplicates = new HashMap<String, Integer>();
-
-		for (String str : allAuthor_array_temp) {
-			if (duplicates.containsKey(str)) {
-				duplicates.put(str, duplicates.get(str) + 1);
-			} else {
-				duplicates.put(str, 1);
-			}
-		}
-
-		
-		for (Map.Entry<String, Integer> entry : duplicates.entrySet()) {
-			//System.out.println(entry.getKey() + " = " + entry.getValue());
-			allAuthor_array.add(entry.getKey());
-		}		
-	}
-	
-	private void MapSort_byValue() {
-		//Map<String, Integer> unSortedMap = getUnSortedMap();
-
-		LinkedHashMap<String, Integer> reverseSortedMap = new LinkedHashMap<>();
-		duplicates.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-				.forEachOrdered(x -> reverseSortedMap.put(x.getKey(), x.getValue()));
-
-		//System.out.println("Reverse Sorted Map   : " + reverseSortedMap);
-
-		// Display
-		for (Map.Entry<String, Integer> entry : reverseSortedMap.entrySet()) {
-//			System.out.println(entry.getKey() + " = " + entry.getValue());
-		}
-	}
-	
 	public static void main(String args[])
 	{
 		try {
