@@ -110,8 +110,6 @@ public class Statistical_Authors {
 //		allAuthor = new Vector(new LinkedHashSet(allAuthor_temp));
 //		System.out.println(allAuthor.size());
 		
-		// ArrayList
-//		System.out.println(allAuthor_array_temp.size());
 		// 
 		CountDuplicatedList();
 		// ArrayList Sort
@@ -196,7 +194,7 @@ public class Statistical_Authors {
 					}else {
 						author = articlejson.get("author").toString();
 					}			
-//					System.out.println(author);
+
 					// Vector
 //					allAuthor_temp.add(author.trim());
 					// ArrayList
@@ -247,13 +245,12 @@ public class Statistical_Authors {
 				duplicates.put(str, 1);
 			}
 		}
-
 		
-		for (Map.Entry<String, Integer> entry : duplicates.entrySet()) {
-			//System.out.println(entry.getKey() + " = " + entry.getValue());
-			allAuthor_array.add(entry.getKey());
-			allAuthorStastic_array.add(entry.getValue());
-		}		
+//		for (Map.Entry<String, Integer> entry : duplicates.entrySet()) {
+//			//System.out.println(entry.getKey() + " = " + entry.getValue());
+//			allAuthor_array.add(entry.getKey());
+//			allAuthorStastic_array.add(entry.getValue());
+//		}		
 	}
 	
 	private void MapSort_byValue() {
@@ -268,6 +265,8 @@ public class Statistical_Authors {
 		// Display
 		for (Map.Entry<String, Integer> entry : reverseSortedMap.entrySet()) {
 //			System.out.println(entry.getKey() + " = " + entry.getValue());
+			allAuthor_array.add(entry.getKey());
+			allAuthorStastic_array.add(entry.getValue());
 		}
 	}
 	
