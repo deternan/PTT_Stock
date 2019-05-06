@@ -124,8 +124,10 @@ public class Data_Output {
 		for(int i=0; i<msg.size(); i++) {
 			JSONObject articlejson = (JSONObject) parser.parse(msg.get(i).toString());
 			
-			//DatePasring(articlejson.get("date").toString());
-			Date_Split(articlejson.get("date").toString());
+			if(articlejson.containsKey("date")) {
+				//DatePasring(articlejson.get("date").toString());
+				Date_Split(articlejson.get("date").toString());
+			}
 		}
 		
 	}
