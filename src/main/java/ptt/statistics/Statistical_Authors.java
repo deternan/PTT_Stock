@@ -36,9 +36,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.Map;
-import java.util.Vector;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -57,11 +55,6 @@ public class Statistical_Authors {
 	// Parsing
 	JSONParser parser = new JSONParser();
 	
-	// Vector
-		// All (temp)
-		Vector allAuthor_temp = new Vector();	
-		// Non-duplication
-		Vector allAuthor = new Vector();
 	// ArrayList
 		ArrayList<String> allAuthor_array_temp = new ArrayList<String>();
 	// Map
@@ -103,12 +96,6 @@ public class Statistical_Authors {
 		        }
 		    }
 		}
-		
-		// Vector
-//		System.out.println(allAuthor_temp.size());
-		// Remove duplication
-//		allAuthor = new Vector(new LinkedHashSet(allAuthor_temp));
-//		System.out.println(allAuthor.size());
 		
 		// 
 		CountDuplicatedList();
