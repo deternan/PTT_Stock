@@ -3,7 +3,7 @@ package ptt.statistics;
 /*
  * Message (Push) Statistical
  * version: May 08, 2019 05:56 AM
- * Last revision: May 08, 2019 06:20 AM
+ * Last revision: May 08, 2019 10:33 PM
  * 
  * Author : Chao-Hsuan Ke
  * Institute: Delta Research Center
@@ -15,7 +15,10 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -32,7 +35,20 @@ public class Statistical_articlePush {
 	private BufferedWriter writer;
 	// Parsing
 	JSONParser parser = new JSONParser();
+	// ArrayList
+	int countIndex = 0;
+		ArrayList<ArrayList> all_array_temp = new ArrayList<ArrayList>();
+		//ArrayList<String[]> all_array_temp = new ArrayList<String[]>();
+		//ArrayList<ArrayList<String>> all_array_temp = new ArrayList<ArrayList<String>>();
+		// Map
+		Map<String, Integer> duplicates = new HashMap<String, Integer>();
 	
+	// atribute
+	private String articleId;
+	private String author;
+	private String title;
+	private int messageCount;
+	private String Date;
 	// File Check
 	String extension_Json = "json";
 	// Date
@@ -52,7 +68,6 @@ public class Statistical_articlePush {
 		
 		for (File file : listOfFiles) {
 		    if (file.isFile()) {
-		    	outputBase = "";
 		        //System.out.println(file.getName());
 		        		        
 		        // Check extension file name
@@ -113,60 +128,93 @@ public class Statistical_articlePush {
 		day = "";
 		
 		// Parsing
-		Parsing(allText);
+		Parsing(allText);		
 	}
 	
 	private void Parsing(String lineStr) throws Exception
 	{
 		JSONObject json = (JSONObject) parser.parse(lineStr);
 		JSONArray msg = (JSONArray) json.get("articles");
-			
-		String author;
 		
-		for(int i=0; i<msg.size(); i++) {
+		System.out.println(msg.size());
+		for(int i=0; i<msg.size(); i++) 
+		{
+			articleId = "";
+			author = "";
+			title = "";
+			messageCount = 0;
+			outputBase= "";
+			
 			JSONObject articlejson = (JSONObject) parser.parse(msg.get(i).toString());
 			
 			// article_id
+			if(articlejson.containsKey("article_id")) {
+				articleId = articlejson.get("article_id").toString().trim();
+			}else {
+				articleId = "";
+			}
 			//System.out.println(i+"	"+articlejson.get("article_id"));
 			
 			// author
-//			if(articlejson.containsKey("author")) 
-//			{
-//				if(articlejson.get("author") != null) {
-//					if(articlejson.get("author").toString().indexOf("(") > 0) {
-//						author = articlejson.get("author").toString().substring(0, articlejson.get("author").toString().indexOf("(")).trim();
-//					}else {
-//						author = articlejson.get("author").toString();
-//					}			
-//				}				
-//			}			
+			if(articlejson.containsKey("author")) {
+				if(articlejson.get("author") != null) {
+					if(articlejson.get("author").toString().indexOf("(") > 0) {
+						author = articlejson.get("author").toString().substring(0, articlejson.get("author").toString().indexOf("(")).trim();
+					}else {
+						author = articlejson.get("author").toString();
+					}			
+				}				
+			}else {
+				author = "";
+			}
 				
 			
 			// title
-			//System.out.println(i+"	"+articlejson.get("title"));
+			if(articlejson.containsKey("article_title")) {
+				title = articlejson.get("article_title").toString();
+			}else {
+				title = "";
+			}
+			
 			
 			// content
 			//System.out.println(i+"	"+articlejson.get("content"));
 			
 			// Message (Push)
-			if(articlejson.containsKey("message_count")) 
-			{
+			if(articlejson.containsKey("message_count")) {
 				if(articlejson.get("message_count") != null) {
 					//System.out.println(articlejson.get("message_count"));
 					JSONObject messagejson = (JSONObject) parser.parse(articlejson.get("message_count").toString());
-					System.out.println(articlejson.get("article_id")+"	"+messagejson.get("all"));
+					messageCount = Integer.parseInt(messagejson.get("all").toString().trim());
 				}
+			}else {
+				messageCount = 0;
 			}
 			
 			// Date
 			if(articlejson.containsKey("date")) {
 				Date_Split(articlejson.get("date").toString());
+				Date = outputBase;
 			}
 			
-			//System.out.println(i+"	"+articlejson.get("article_id")+"	"+articlejson.get("article_title"));
+			ArrayList listArray = new ArrayList();
+			listArray.add(articleId);
+			listArray.add(author);
+			listArray.add(String.valueOf(messageCount));
+			
+			all_array_temp.add(listArray);
+			
+			//ArrayList aa = all_array_temp.get(countIndex);
+			//System.out.println(i+"	"+countIndex+"	"+articleId+"	"+messageCount+"	"+author+"	"+title+"	"+listArray.size()+"	"+aa.size()+"	"+all_array_temp.get(countIndex));
+			//System.out.println(articleId+"	"+messageCount+"	"+author+"	"+title+"	"+listTemp[2]+"	"+listArray.size()+"	"+aa.get(2));
+			
+			listArray.clear();
+			countIndex++;
 		}
 		
-		
+		//ArrayList<String>a = all_array_temp.get(0);
+		//System.out.println(a);
+		//System.out.println(all_array_temp.get(0));
 	}
 	
 	private void Date_Split(String dateStr)
@@ -181,6 +229,33 @@ public class Statistical_articlePush {
 
 			outputBase = String.valueOf(year)+"_"+String.valueOf(month)+"_"+String.valueOf(day);
 		}
+	}
+	
+	private void CountDuplicatedList() {
+		
+		//Map<String, Integer> duplicates = new HashMap<String, Integer>();
+		String str;
+		for(int i=0; i<all_array_temp.size(); i++) {
+			//str = all_array_temp.;
+			//if() 
+			{
+				
+			}
+		}
+//		
+//		for (String str : all_array_temp) {
+//			if (duplicates.containsKey(str)) {
+//				duplicates.put(str, duplicates.get(str) + 1);
+//			} else {
+//				duplicates.put(str, 1);
+//			}
+//		}
+		
+//		for (Map.Entry<String, Integer> entry : duplicates.entrySet()) {
+//			//System.out.println(entry.getKey() + " = " + entry.getValue());
+//			allAuthor_array.add(entry.getKey());
+//			allAuthorStastic_array.add(entry.getValue());
+//		}		
 	}
 	
 	public static void main(String args[]) {
