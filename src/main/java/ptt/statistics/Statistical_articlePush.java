@@ -3,7 +3,7 @@ package ptt.statistics;
 /*
  * Message (Push) Statistical
  * version: May 08, 2019 05:56 AM
- * Last revision: May 08, 2019 10:33 PM
+ * Last revision: May 09, 2019 06:29 AM
  * 
  * Author : Chao-Hsuan Ke
  * Institute: Delta Research Center
@@ -14,7 +14,9 @@ package ptt.statistics;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -37,13 +39,19 @@ public class Statistical_articlePush {
 	JSONParser parser = new JSONParser();
 	// ArrayList
 	int countIndex = 0;
+		// Data Storage
+		// Type 1
+	ArrayList<String> articleId_Array = new ArrayList<String>(); 
+	ArrayList<Integer> messageCount_Array = new ArrayList<Integer>(); 
+	ArrayList<String> author_Array = new ArrayList<String>();
+	ArrayList<String> title_Array = new ArrayList<String>();
+	ArrayList<String> date_Array = new ArrayList<String>();
+		// Type 2
 		ArrayList<ArrayList> all_array_temp = new ArrayList<ArrayList>();
-		//ArrayList<String[]> all_array_temp = new ArrayList<String[]>();
-		//ArrayList<ArrayList<String>> all_array_temp = new ArrayList<ArrayList<String>>();
 		// Map
 		Map<String, Integer> duplicates = new HashMap<String, Integer>();
 	
-	// atribute
+	// attribute
 	private String articleId;
 	private String author;
 	private String title;
@@ -57,9 +65,10 @@ public class Statistical_articlePush {
 	String day;
 	// output
 	private String outputBase = "";
+	// Statistical
+		private String outputMessageStatistical = "MessageStatistical";
 	
 	public Statistical_articlePush() throws Exception {
-		
 		
 		boolean checkResponse;
 		File folder = new File(folder_source);
@@ -80,6 +89,17 @@ public class Statistical_articlePush {
 		        }
 		    }
 		}
+		
+		// Sort
+		BubbleSort();
+//		for(int i=0;i<author_Array.size();i++) {
+//			System.out.println(articleId_Array.get(i)+"	"+author_Array.get(i)+"	"+messageCount_Array.get(i));
+//		}
+		writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(folder_output + outputMessageStatistical+"_"+outputBase+".txt"), "utf-8"));
+		for(int i=0;i<author_Array.size();i++)  {
+			writer.write(articleId_Array.get(i)+"	"+author_Array.get(i)+"	"+messageCount_Array.get(i)+"	"+title_Array.get(i)+"	"+date_Array.get(i)+"\n");
+		}
+		writer.close();
 	}
 
 	private boolean ExtensionCheck(String path)
@@ -136,7 +156,8 @@ public class Statistical_articlePush {
 		JSONObject json = (JSONObject) parser.parse(lineStr);
 		JSONArray msg = (JSONArray) json.get("articles");
 		
-		System.out.println(msg.size());
+		ArrayList listArray = new ArrayList();
+		
 		for(int i=0; i<msg.size(); i++) 
 		{
 			articleId = "";
@@ -197,24 +218,25 @@ public class Statistical_articlePush {
 				Date = outputBase;
 			}
 			
-			ArrayList listArray = new ArrayList();
-			listArray.add(articleId);
-			listArray.add(author);
-			listArray.add(String.valueOf(messageCount));
+			
+			// Type 1
+			articleId_Array.add(articleId);
+			author_Array.add(author);
+			messageCount_Array.add(messageCount);
+			title_Array.add(title);
+			date_Array.add(Date);
+			// Type 2
+			listArray.add(articleId);						// 0
+			listArray.add(author);							// 1
+			listArray.add(String.valueOf(messageCount));	// 2
 			
 			all_array_temp.add(listArray);
 			
-			//ArrayList aa = all_array_temp.get(countIndex);
-			//System.out.println(i+"	"+countIndex+"	"+articleId+"	"+messageCount+"	"+author+"	"+title+"	"+listArray.size()+"	"+aa.size()+"	"+all_array_temp.get(countIndex));
-			//System.out.println(articleId+"	"+messageCount+"	"+author+"	"+title+"	"+listTemp[2]+"	"+listArray.size()+"	"+aa.get(2));
+//			System.out.println(i+"	"+countIndex+"	"+articleId+"	"+messageCount+"	"+author+"	"+title+"	"+listArray.size()+"	"+all_array_temp.get(countIndex));
 			
 			listArray.clear();
 			countIndex++;
 		}
-		
-		//ArrayList<String>a = all_array_temp.get(0);
-		//System.out.println(a);
-		//System.out.println(all_array_temp.get(0));
 	}
 	
 	private void Date_Split(String dateStr)
@@ -231,12 +253,56 @@ public class Statistical_articlePush {
 		}
 	}
 	
+	private void BubbleSort()
+    {
+    	int lenD = articleId_Array.size();
+		int j = 0;
+		int tmp = 0;
+		String idtmp = "";
+		String authortmp = "";
+		String titletmp = "";
+		String datetmp = "";
+		
+		for(int i=0; i<lenD; i++)
+		{
+		    j = i;
+		    for(int k=i; k<lenD; k++)
+		    {
+		    	if(messageCount_Array.get(j) < messageCount_Array.get(k)){
+		        j = k;		        
+		      }
+		    }
+		    
+		    tmp = messageCount_Array.get(i);		    		  
+		    messageCount_Array.set(i, messageCount_Array.get(j));
+		    messageCount_Array.set(j, tmp);
+		    
+		    idtmp = articleId_Array.get(i);
+		    articleId_Array.set(i, articleId_Array.get(j));
+		    articleId_Array.set(j, idtmp);
+		    
+		    authortmp = author_Array.get(i);
+		    author_Array.set(i, author_Array.get(j));
+		    author_Array.set(j, authortmp);
+		    
+		    titletmp = title_Array.get(i);
+		    title_Array.set(i, title_Array.get(j));
+		    title_Array.set(j, titletmp);
+		    
+		    datetmp = date_Array.get(i);
+		    date_Array.set(i, date_Array.get(j));
+		    date_Array.set(j, datetmp);
+		}
+	
+    }
+	
 	private void CountDuplicatedList() {
 		
 		//Map<String, Integer> duplicates = new HashMap<String, Integer>();
 		String str;
 		for(int i=0; i<all_array_temp.size(); i++) {
-			//str = all_array_temp.;
+			ArrayList aa = all_array_temp.get(i);
+			str = aa.get(1).toString();
 			//if() 
 			{
 				
