@@ -3,7 +3,7 @@ package ptt.statistics;
 /*
  * Message (Push) Statistical
  * version: May 08, 2019 05:56 AM
- * Last revision: May 09, 2019 06:29 AM
+ * Last revision: May 09, 2019 07:26 AM
  * 
  * Author : Chao-Hsuan Ke
  * Institute: Delta Research Center
@@ -29,8 +29,8 @@ import org.json.simple.parser.JSONParser;
 public class Statistical_articlePush {
 	
 	// Read source
-	private String folder_source = "/Users/phelps/temp/";
-	//private String folder_source = "/data/git/DataSet/ptt/Stock data/";
+	//private String folder_source = "/Users/phelps/temp/";
+	private String folder_source = "/data/git/DataSet/ptt/Stock data/";
 	private BufferedReader bfr;
 	// Output files
 	private String folder_output = "/Users/phelps/Desktop/";
@@ -77,7 +77,7 @@ public class Statistical_articlePush {
 		
 		for (File file : listOfFiles) {
 		    if (file.isFile()) {
-		        //System.out.println(file.getName());
+		        System.out.println(file.getName());
 		        		        
 		        // Check extension file name
 		        checkResponse = ExtensionCheck(folder_source + file.getName());
@@ -169,7 +169,7 @@ public class Statistical_articlePush {
 			JSONObject articlejson = (JSONObject) parser.parse(msg.get(i).toString());
 			
 			// article_id
-			if(articlejson.containsKey("article_id")) {
+			if(articlejson.containsKey("article_id") && articlejson.get("article_id")!=null) {
 				articleId = articlejson.get("article_id").toString().trim();
 			}else {
 				articleId = "";
@@ -191,7 +191,7 @@ public class Statistical_articlePush {
 				
 			
 			// title
-			if(articlejson.containsKey("article_title")) {
+			if(articlejson.containsKey("article_title") && articlejson.get("article_title")!= null) {
 				title = articlejson.get("article_title").toString();
 			}else {
 				title = "";
