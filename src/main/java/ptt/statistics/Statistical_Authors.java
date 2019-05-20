@@ -6,8 +6,6 @@ package ptt.statistics;
  * Last revision: May 20, 2019 08:40 PM
  * 
  * Author : Chao-Hsuan Ke
- * Institute: Delta Research Center
- * Company : Delta Electronics Inc. (Taiwan)
  * 
  */
 
