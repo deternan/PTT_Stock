@@ -3,7 +3,7 @@ package ptt.statistics;
 /*
  * Authors Statistical
  * version: May 02, 2019 07:00 PM
- * Last revision: May 20, 2019 06:10 PM
+ * Last revision: May 20, 2019 08:40 PM
  * 
  * Author : Chao-Hsuan Ke
  * Institute: Delta Research Center
@@ -11,19 +11,6 @@ package ptt.statistics;
  * 
  */
 
-/*
- * 
- * [Author]
-	1.  哪些 author (id) 常發表文章 ?
-	2. 那些人最常推文 (不管 推/噓)
-	3. 那些 author的文章被推文最多
-   [Company]
-	1. 那些公司被討論最多
-	2. 那些公司被說看漲最多
-	3. 那些公司被說看跌最多
- *
- * 
- */
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -46,7 +33,6 @@ import org.json.simple.parser.JSONParser;
 public class Statistical_Authors {
 
 	// Read source
-//	private String folder_source = "/Users/phelps/temp/";
 	private String folder_source = "/data/git/DataSet/ptt/Stock data/";
 	private BufferedReader bfr;
 	// Output files
@@ -219,13 +205,22 @@ public class Statistical_Authors {
 	{
 		//"date":"Tue Aug 30 13:38:20 2016",
 		String temp[];
+		String monthStr;
+		String dayStr;
 		temp = dateStr.split(" ");
 		if(temp.length == 6) {
 			month = temp[1];
+			monthStr = MonthTranslation(month);
 			day = temp[3];
+			if(day.length() == 1) {
+				dayStr = "0"+String.valueOf(day);
+			}else {
+				dayStr = String.valueOf(day);
+			}
 			year = temp[5];
 
-			outputBase = String.valueOf(year)+"_"+String.valueOf(month)+"_"+String.valueOf(day);
+			//outputBase = String.valueOf(year)+"_"+String.valueOf(month)+"_"+String.valueOf(day);
+			outputBase = String.valueOf(year)+monthStr+dayStr;
 		}
 	}
 	
@@ -263,6 +258,52 @@ public class Statistical_Authors {
 			allAuthor_array.add(entry.getKey());
 			allAuthorStastic_array.add(entry.getValue());
 		}
+	}
+	
+	private String MonthTranslation(String inputStr) {
+		
+		String monthInt = ""; 
+		switch(inputStr)
+		{
+		case "Jan":
+			monthInt = "01";
+			break;
+		case "Feb":
+			monthInt = "02";
+			break;
+		case "Mar":
+			monthInt = "03";
+			break;
+		case "Apr":
+			monthInt = "04";
+			break;
+		case "May":
+			monthInt = "05";
+			break;
+		case "Jun":
+			monthInt = "06";
+		break;
+		case "Jul":
+			monthInt = "07";
+		break;
+		case "Aug":
+			monthInt = "08";
+		break;
+		case "Sep":
+			monthInt = "09";
+		break;
+		case "Oct":
+			monthInt = "10";
+		break;
+		case "Nov":
+			monthInt = "11";
+		break;
+		case "Dec":
+			monthInt = "12";
+		break;
+		}
+		
+		return monthInt;
 	}
 	
 	public static void main(String args[])
