@@ -91,7 +91,7 @@ public class Statistical_Authors {
 		MapSort_byValue();
 		
 		// output (author list)
-		writer_1 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(folder_output + outputAuthorList+".txt"), "utf-8"));
+		writer_1 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(folder_output + outputAuthorList+"_"+outputBase+".txt"), "utf-8"));
 		for(int i=0; i<allAuthor_array.size(); i++) {
 			writer_1.write(allAuthor_array.get(i)+"\n");
 		}
