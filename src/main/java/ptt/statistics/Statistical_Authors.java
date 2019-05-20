@@ -3,7 +3,7 @@ package ptt.statistics;
 /*
  * Authors Statistical
  * version: May 02, 2019 07:00 PM
- * Last revision: May 07, 2019 00:20 AM
+ * Last revision: May 20, 2019 06:10 PM
  * 
  * Author : Chao-Hsuan Ke
  * Institute: Delta Research Center
@@ -51,7 +51,8 @@ public class Statistical_Authors {
 	private BufferedReader bfr;
 	// Output files
 	private String folder_output = "/Users/phelps/Desktop/";
-	private BufferedWriter writer;
+	private BufferedWriter writer_1;
+	private BufferedWriter writer_2;
 	// Parsing
 	JSONParser parser = new JSONParser();
 	
@@ -69,6 +70,7 @@ public class Statistical_Authors {
 	// output
 	private String outputBase = "";
 		// Statistical
+		private String outputAuthorList = "AuthorList";
 		private String outputAuthorStatistical = "AuthorStatistical";
 		// author array
 		ArrayList<String> allAuthor_array = new ArrayList<String>();
@@ -102,12 +104,18 @@ public class Statistical_Authors {
 		// ArrayList Sort
 		MapSort_byValue();
 		
-		// output
-		writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(folder_output + outputAuthorStatistical+"_"+outputBase+".txt"), "utf-8"));
+		// output (author list)
+		writer_1 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(folder_output + outputAuthorList+".txt"), "utf-8"));
 		for(int i=0; i<allAuthor_array.size(); i++) {
-			writer.write(allAuthor_array.get(i)+"	"+allAuthorStastic_array.get(i)+"\n");
+			writer_1.write(allAuthor_array.get(i)+"\n");
 		}
-		writer.close();
+		writer_1.close();
+		// output (author and published count)
+		writer_2 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(folder_output + outputAuthorStatistical+"_"+outputBase+".txt"), "utf-8"));
+		for(int i=0; i<allAuthor_array.size(); i++) {
+			writer_2.write(allAuthor_array.get(i)+"	"+allAuthorStastic_array.get(i)+"\n");
+		}
+		writer_2.close();
 	}
 	
 	private boolean ExtensionCheck(String path)
