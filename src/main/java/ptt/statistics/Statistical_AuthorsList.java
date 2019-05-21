@@ -28,7 +28,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 
-public class Statistical_Authors {
+public class Statistical_AuthorsList {
 
 	// Read source
 	private String folder_source = "/data/git/DataSet/ptt/Stock data/";
@@ -60,7 +60,7 @@ public class Statistical_Authors {
 		ArrayList<String> allAuthor_array = new ArrayList<String>();
 		ArrayList<Integer> allAuthorStastic_array = new ArrayList<Integer>();
 		
-	public Statistical_Authors() throws Exception
+	public Statistical_AuthorsList() throws Exception
 	{
 		boolean checkResponse;
 		File folder = new File(folder_source);
@@ -307,7 +307,7 @@ public class Statistical_Authors {
 	public static void main(String args[])
 	{
 		try {
-			Statistical_Authors st_au = new Statistical_Authors();
+			Statistical_AuthorsList st_au = new Statistical_AuthorsList();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

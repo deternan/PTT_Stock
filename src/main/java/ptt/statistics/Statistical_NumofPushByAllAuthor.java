@@ -1,7 +1,7 @@
 package ptt.statistics;
 
 /*
- * Authors Statistical
+ * Published number in article by Authors
  * version: May 20, 2019 07:40 PM
  * Last revision: May 21, 2019 11:04 PM
  * 
