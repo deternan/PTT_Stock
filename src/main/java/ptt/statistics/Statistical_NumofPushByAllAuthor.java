@@ -3,15 +3,18 @@ package ptt.statistics;
 /*
  * Authors Statistical
  * version: May 20, 2019 07:40 PM
- * Last revision: May 21, 2019 00:10 AM
+ * Last revision: May 21, 2019 11:04 PM
  * 
  * Author : Chao-Hsuan Ke
  * 
  */
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -20,28 +23,38 @@ public class Statistical_NumofPushByAllAuthor
 	// Read source
 	private String folder_source = "/Users/phelps/Documents/github/PTT_Stock/output/";
 	private BufferedReader bfr;
-
+	private String folder_output = "/Users/phelps/Desktop/";
+	private BufferedWriter writer;
+	String finalFileName = "";
 	// Statistical
 	private String outputAuthorList = "AuthorList";
 	private String outputMessageStatistical = "MessageStatistical";
+	private String outputAuthorMessageStatistical = "AuthorPushNumber";
 	// check latest file
 	int checkNum;
-	
 	// Author List
 	ArrayList<String> allAuthor_array = new ArrayList<String>();
 	// Author pushed bumber
 	ArrayList<Integer> allAuthorPushedNum_array = new ArrayList<Integer>();
+	// output
+	String outputBase = "";
+	
 	
 	public Statistical_NumofPushByAllAuthor() throws Exception{
 		
 		AllAuthorList();
 		// Read Push Number
 		ReadPushRecord();
+		// Sort
+		BubbleSort();
 		
+		writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(folder_output + outputAuthorMessageStatistical+"_"+outputBase+".txt"), "utf-8"));
 		//System.out.println(allAuthor_array.size()+"	"+allAuthorPushedNum_array.size());
 		for(int i=0; i<allAuthorPushedNum_array.size(); i++) {
-			System.out.println(allAuthor_array.get(i)+"	"+allAuthorPushedNum_array.get(i));
+			//System.out.println(allAuthor_array.get(i)+"	"+allAuthorPushedNum_array.get(i));
+			writer.write(allAuthor_array.get(i)+"	"+allAuthorPushedNum_array.get(i)+"\n");
 		}
+		writer.close();
 	}
 	
 	private void AllAuthorList() throws Exception {
@@ -53,7 +66,7 @@ public class Statistical_NumofPushByAllAuthor
 		Arrays.sort(listOfFiles);
 		
 		checkNum = 0;
-		String finalFileName = "";
+		finalFileName = "";
 		
 		// To get the latest file
 		for (File file : listOfFiles) {
@@ -100,11 +113,11 @@ public class Statistical_NumofPushByAllAuthor
 		Arrays.sort(listOfFiles);
 		
 		checkNum = 0;
-		String finalFileName = "";
+		finalFileName = "";
 		
 		// To get the latest file
 		for (File file : listOfFiles) {
-
+			
 			if(file.getName().indexOf(outputMessageStatistical) == 0) {
 				finalFile = file.getName();
 				// Check Latest file
@@ -112,8 +125,10 @@ public class Statistical_NumofPushByAllAuthor
 			}
 		}
 		
+		outputBase = finalFileName;
 		finalFileName = outputMessageStatistical + "_" + finalFileName + ".txt";
-		//System.out.println(finalFileDate);
+		
+		//System.out.println(finalFileName);
 		
 		ImportPushNumber(folder_source + finalFileName);
 	}
@@ -153,6 +168,31 @@ public class Statistical_NumofPushByAllAuthor
 		fr.close();
 		bfr.close();	
 	}
+	
+	private void BubbleSort()
+    {
+    	int lenD = allAuthorPushedNum_array.size();
+		int j = 0;
+		int tmp = 0;
+		String name = "";
+		
+		for(int i=0; i<lenD; i++)
+		{
+		    j = i;
+		    for(int k=i; k<lenD; k++)
+		    {
+		      
+		    	if(allAuthorPushedNum_array.get(j) < allAuthorPushedNum_array.get(k)){
+		        j = k;		        
+		      }
+		    }
+		    
+		    tmp = allAuthorPushedNum_array.get(i);		   							 	name = allAuthor_array.get(i);
+		    allAuthorPushedNum_array.set(i, allAuthorPushedNum_array.get(j));			allAuthor_array.set(i, allAuthor_array.get(j));
+		    allAuthorPushedNum_array.set(j, tmp);										allAuthor_array.set(j, name);
+		}
+		
+    }
 	
 	private String LatestFileCheck(String TagStr, String fileName) {
 		String fileNameDate = fileName.substring(TagStr.length() + 1, fileName.indexOf(".txt"));
