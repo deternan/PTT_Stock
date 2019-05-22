@@ -81,7 +81,7 @@ public class Statistical_NumofPushByAllAuthor
 		}
 		
 		finalFileName = outputAuthorList + "_" + finalFileName + ".txt";
-		//System.out.println(finalFileDate);
+		//System.out.println(finalFileName);
 		
 		// Import
 		ImportAuthorList(folder_source + finalFileName);
