@@ -25,8 +25,8 @@ import org.json.simple.parser.JSONParser;
 public class Statistical_AuthorsPushedNumber 
 {
 	// Read source
-//	private String folder_source = "/data/git/DataSet/ptt/Stock data/";
-	private String folder_source  = "/Users/phelps/Desktop/temp/";
+	private String folder_source = "/data/git/DataSet/ptt/Stock data/";
+//	private String folder_source  = "/Users/phelps/Desktop/temp/";
 	private BufferedReader bfr;
 	private String output_source = "/Users/phelps/Documents/github/PTT_Stock/output/";
 	// output
