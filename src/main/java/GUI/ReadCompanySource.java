@@ -8,7 +8,7 @@ package GUI;
  * Last revision: June 22, 2019 09:26 PM
  * 
  * Author : Chao-Hsuan Ke
- * 
+ * Email: phelpske.dev at gmail dot com
  */
 
 import java.io.BufferedReader;
