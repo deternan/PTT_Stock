@@ -17,12 +17,21 @@ package GUI.httpGet;
  */
 
 import java.io.BufferedReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import GUI.httpGet.company.get_TWSECompany_list;
 import GUI.httpGet.Units;
 
 public class HttpsGet {
 
+	private String basic_pattern = Units.basic_pattern;
+	DateFormat df = new SimpleDateFormat(basic_pattern, Locale.getDefault());
+	private String todayStr = "";
+	
 	//private String twselisrUrl = "https://isin.twse.com.tw/isin/C_public.jsp?strMode=2";
 	
 	// value
@@ -34,8 +43,9 @@ public class HttpsGet {
 	{
 		System.setProperty("file.encoding", "UTF-8");
 		
-		GerCompanyList(url);
+		Today();
 		
+		GerCompanyList(url);
 		
 		// https
 //		HttpsReader https = new HttpsReader();
@@ -80,8 +90,15 @@ public class HttpsGet {
         while((line = buf.readLine()) != null){
         	allLine += line;
         }
-        
-        get_TWSECompany_list twse = new get_TWSECompany_list(allLine);
+
+        get_TWSECompany_list twse = new get_TWSECompany_list(allLine, todayStr);
+	}
+	
+	private void Today()
+	{
+		Date today = Calendar.getInstance().getTime();
+		todayStr = df.format(today.getTime());
+		//System.out.println(todayStr);
 	}
 	
 	public static void main(String[] args) {

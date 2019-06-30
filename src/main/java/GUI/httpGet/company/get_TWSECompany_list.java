@@ -25,11 +25,15 @@ import GUI.httpGet.Units;
 
 public class get_TWSECompany_list {
 	
+	String todayStr;
+	
 	Vector companyId = new Vector();
 	Vector companyName = new Vector();
 	
-	public get_TWSECompany_list(String htmlStr) throws Exception
+	public get_TWSECompany_list(String htmlStr, String todayStr) throws Exception
 	{
+		this.todayStr = todayStr;
+		
 		System.setProperty("file.encoding", "UTF-8");
 		String UTF_8_str = new String(htmlStr.getBytes("UTF-8"), "UTF-8");
 		
@@ -55,7 +59,7 @@ public class get_TWSECompany_list {
 				if(temp[0].trim().length() == 4) {
 					companyId.add(temp[0].trim());
 					companyName.add(temp[1].trim());
-					System.out.println(temp[0]+"	"+temp[1]);
+					//System.out.println(temp[0]+"	"+temp[1]);
 				}
 			}						
 		}
@@ -69,7 +73,7 @@ public class get_TWSECompany_list {
 	{
 		BufferedWriter writer;
 		try {
-			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Units.output_folder + Units.output_file), "utf-8"));
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Units.output_folder + Units.TWSE_outputTag+"_" + todayStr + Units.extension), "utf-8"));
 			
 			for(int i=0; i<companyId.size(); i++) {
 				writer.write(companyId.get(i)+"	"+companyName.get(i)+"\n");

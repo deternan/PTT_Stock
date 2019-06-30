@@ -7,6 +7,10 @@ public class Units {
 	
 	// storage
 	public static final String output_folder = "/Users/phelps/Desktop/";
-	public static final String output_file = "TWSE.txt";
+	public static final String TWSE_outputTag = "TWSE";
+	public static final String extension = ".txt";
+	
+	// Date
+	public static final String basic_pattern = "yyyyMMdd";
 	
 }
