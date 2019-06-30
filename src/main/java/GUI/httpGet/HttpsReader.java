@@ -11,8 +11,6 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager; 
 import javax.net.ssl.X509TrustManager; 
 
-
-
 /**
  * 以https方式讀取網頁資料(ssl)
  * @author Ray

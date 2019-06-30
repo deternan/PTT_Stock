@@ -1,4 +1,4 @@
-package ptt;
+package GUI.httpGet.company;
 
 /*
  * 
