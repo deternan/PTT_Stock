@@ -30,10 +30,11 @@ public class get_TWSECompany_list {
 	
 	public get_TWSECompany_list(String htmlStr) throws Exception
 	{
-		Document doc = Jsoup.parse(htmlStr);
-		Elements trs = doc.select("tr");
+		System.setProperty("file.encoding", "UTF-8");
+		String UTF_8_str = new String(htmlStr.getBytes("UTF-8"), "UTF-8");
 		
-		System.out.println(trs.size());
+		Document doc = Jsoup.parse(UTF_8_str);
+		Elements trs = doc.select("tr");
 			
 		/*
 		 * <tr> <td bgcolor="#FAFAD2">034071 台苯國票88購01</td> <td
@@ -48,10 +49,10 @@ public class get_TWSECompany_list {
 			//System.out.println(trs.get(i));
 			Elements tds = trs.get(i).select("td");
 			if(tds.size() == 7) {
-				System.out.println(tds.get(0).text());
-				temp = tds.get(0).text().split("\\t");
-				//System.out.println(temp.length);
-				if(temp[0].length() == 4) {
+				//System.out.println(tds.get(0).text());
+				temp = tds.get(0).text().split("　");
+				//System.out.println(temp[0].trim());
+				if(temp[0].trim().length() == 4) {
 					companyId.add(temp[0].trim());
 					companyName.add(temp[1].trim());
 					System.out.println(temp[0]+"	"+temp[1]);

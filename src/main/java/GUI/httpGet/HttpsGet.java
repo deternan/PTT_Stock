@@ -32,6 +32,8 @@ public class HttpsGet {
 	
 	public HttpsGet() throws Exception
 	{
+		System.setProperty("file.encoding", "UTF-8");
+		
 		GerCompanyList(url);
 		
 		
@@ -64,7 +66,8 @@ public class HttpsGet {
 	private void GerCompanyList(String url) throws Exception
 	{
 		HttpsReader https = new HttpsReader();
-		https.charSet = "utf-8";
+		//https.charSet = "UTF-8";
+		https.charSet = "BIG5";			// Taiwanese
         https.root = url;
         
         String cookie = "";				//cookie字串
