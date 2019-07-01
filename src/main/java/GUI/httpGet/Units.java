@@ -6,8 +6,8 @@ public class Units {
 	public static final String twselisrUrl = "https://isin.twse.com.tw/isin/C_public.jsp?strMode=2";
 	// Value source
 	public static final String valueUrl = "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=";
-		public static final String startYear = "2015";
-		public static final String startMonth = "06";
+		public static final String startYear = "2019";
+		public static final String startMonth = "05";
 		public static final String startDay = "01";
 		
 	
