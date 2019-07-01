@@ -3,7 +3,7 @@ package GUI.DataProcessing;
 /*
  * Parser values
  * version: June 30, 2019 07:23 PM
- * Last revision: July 02, 2019 00:10 AM
+ * Last revision: July 02, 2019 00:52 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -31,8 +31,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
@@ -48,8 +46,9 @@ import GUI.httpGet.Units;
 
 public class GetValueandProcessing 
 {
-	// Temp (Read specific JSON)
+	// Temp (Parameter)
 	private String ID = "2388";
+	// Get JsonResponse
 	String sourceLine = "";
 	
 	// Date
@@ -66,7 +65,6 @@ public class GetValueandProcessing
 	public GetValueandProcessing() throws Exception
 	{
 		dataData_check = true;
-		//StorageInitial(ID);
 		file = new File(Units.value_folder + ID + Units.extension);
 		writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"));
 		
@@ -99,31 +97,29 @@ public class GetValueandProcessing
 					GetValues(monthList.get(i) + Units.startDay);
 					// Processing
 					Processing(sourceLine);
+					
+				// Thread sleep
+				Thread.sleep((int) Units.sleepTime);
 			}
-			
 			bfr.close();
 		}
 
 		writer.close();
+		
+		// Message
+		System.out.println(ID+"	Finished");
 	}
 	
 	private void GetValues(String DateStr)
 	{
-		//System.out.println(DateStr);
-		//https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=20190628&stockNo=2388
 		String URL = Units.valueUrl + DateStr + "8&stockNo=" + ID;
-		//System.out.println(URL);
-		
 		try {
 			HttpsGet https = new HttpsGet();
-			sourceLine = https.responseJSON(URL);			
-			
+			sourceLine = https.responseJSON(URL);					
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
 	private void Processing(String jsonStr) throws Exception
@@ -157,7 +153,6 @@ public class GetValueandProcessing
 		while((Line = bfr.readLine())!=null)
 		{					
 			temp = Line.split("	");
-			//System.out.println(temp.length);	
 			if(temp.length == 2) {	
 				YYMM = temp[0].substring(0, temp[0].length()-2);
 				//System.out.println(DateStr+"	"+YYMM);
@@ -173,8 +168,6 @@ public class GetValueandProcessing
 	{
 		List<String> monthList = new ArrayList();
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMM");
-        //String startDate="201805";
-        //int addMonths = 12;
         
         for(int i=0; i<=addMonths; i++){
         	//Thread.sleep(10000);
@@ -213,12 +206,12 @@ public class GetValueandProcessing
         } else {
             result = 12*(year1 - year2) + month1 - month2;
         }
-        //System.out.println(result);
         
         return result;
 	}
 	
-	private String convertTWDate(String AD) throws Exception {
+	private String convertTWDate(String AD) throws Exception 
+	{
 	    SimpleDateFormat df4 = new SimpleDateFormat("yyyyMM");
 	    SimpleDateFormat df2 = new SimpleDateFormat("MMdd");
 	    Calendar cal = Calendar.getInstance();
