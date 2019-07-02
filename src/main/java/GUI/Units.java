@@ -3,7 +3,7 @@ package GUI;
 public class Units {
 
 	// Exercise parameter
-	public final static int sleepTime = 2000;
+	public final static int sleepTime = 2000;	// 2 secs
 	
 	// Company source
 	public static final String twselisrUrl = "https://isin.twse.com.tw/isin/C_public.jsp?strMode=2";
