@@ -23,8 +23,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import GUI.Units;
 import GUI.httpGet.company.get_Company_list;
-import GUI.httpGet.Units;
 
 public class HttpsGet {
 

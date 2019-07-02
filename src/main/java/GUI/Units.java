@@ -1,4 +1,4 @@
-package GUI.httpGet;
+package GUI;
 
 public class Units {
 
@@ -12,7 +12,7 @@ public class Units {
 //	public static final String twselist = "";
 	// Values source
 	public static final String valueUrl = "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=";
-		public static final String startYear = "2019";
+		public static final String startYear = "2018";
 		public static final String startMonth = "01";
 		public static final String startDay = "01";
 		

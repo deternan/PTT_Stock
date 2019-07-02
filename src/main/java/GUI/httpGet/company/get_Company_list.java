@@ -21,7 +21,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import GUI.httpGet.Units;
+import GUI.Units;
 
 public class get_Company_list {
 	

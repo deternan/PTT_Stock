@@ -42,12 +42,13 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import GUI.httpGet.Units;
+import GUI.Units;
 
 public class GetValueandProcessing 
 {
 	// Temp (Parameter)
-	private String ID = "2388";
+//	private String ID = "2388";
+	private String ID;
 	// Get JsonResponse
 	String sourceLine = "";
 	
@@ -62,10 +63,12 @@ public class GetValueandProcessing
 	// check
 	boolean dataData_check;
 	
-	public GetValueandProcessing() throws Exception
+	public GetValueandProcessing(String ID) throws Exception
 	{
+		this.ID = ID;
+		
 		dataData_check = true;
-		file = new File(Units.value_folder + ID + Units.extension);
+		file = new File(Units.value_folder + this.ID + Units.extension);
 		writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"));
 		
 		// Date
@@ -95,11 +98,14 @@ public class GetValueandProcessing
 				// Processing and Storage
 					// get data from URL
 					GetValues(monthList.get(i) + Units.startDay);
-					// Processing
-					Processing(sourceLine);
 					
-				// Thread sleep
-				Thread.sleep((int) Units.sleepTime);
+					if(sourceLine.length() > 0) {
+						// Processing
+						Processing(sourceLine);
+						
+						// Thread sleep
+						Thread.sleep((int) Units.sleepTime);
+					}
 			}
 			bfr.close();
 		}
@@ -107,15 +113,21 @@ public class GetValueandProcessing
 		writer.close();
 		
 		// Message
-		System.out.println(ID+"	Finished");
+		System.out.println(this.ID+"	Finished");
 	}
+	
 	
 	private void GetValues(String DateStr)
 	{
+		sourceLine = "";
 		String URL = Units.valueUrl + DateStr + "8&stockNo=" + ID;
 		try {
 			HttpsGet https = new HttpsGet();
-			sourceLine = https.responseJSON(URL);					
+			
+			if(https.responseJSON(URL).isEmpty() == false) {
+				sourceLine = https.responseJSON(URL);
+			}
+								
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -223,13 +235,13 @@ public class GetValueandProcessing
         return TWDate;
 	}
 	
-	public static void main(String args[])
-	{
-		try {
-			GetValueandProcessing vp = new GetValueandProcessing();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String args[])
+//	{
+//		try {
+//			GetValueandProcessing vp = new GetValueandProcessing();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 }
