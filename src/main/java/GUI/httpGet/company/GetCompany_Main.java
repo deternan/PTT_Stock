@@ -24,8 +24,8 @@ import GUI.httpGet.Units;
 
 public class GetCompany_Main {
 
-	private String basic_pattern = Units.basic_pattern;
-	DateFormat df = new SimpleDateFormat(basic_pattern, Locale.getDefault());
+	//private String basic_pattern = Units.basic_pattern;
+	DateFormat df = new SimpleDateFormat(Units.basic_pattern, Locale.getDefault());
 	private String todayStr = "";
 	
 	public GetCompany_Main() throws Exception

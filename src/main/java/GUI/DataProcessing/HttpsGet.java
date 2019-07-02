@@ -24,7 +24,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import GUI.httpGet.company.get_TWSECompany_list;
+import GUI.httpGet.company.get_Company_list;
 import GUI.httpGet.HttpsReader;
 import GUI.httpGet.Units;
 
