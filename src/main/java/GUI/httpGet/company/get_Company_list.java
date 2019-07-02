@@ -23,14 +23,14 @@ import org.jsoup.select.Elements;
 
 import GUI.httpGet.Units;
 
-public class get_TWSECompany_list {
+public class get_Company_list {
 	
 	String todayStr;
 	
 	Vector companyId = new Vector();
 	Vector companyName = new Vector();
 	
-	public get_TWSECompany_list(String htmlStr, String todayStr) throws Exception
+	public get_Company_list(String htmlStr, String todayStr, String tag) throws Exception
 	{
 		this.todayStr = todayStr;
 		
@@ -64,16 +64,21 @@ public class get_TWSECompany_list {
 			}						
 		}
 		
+		
 		// output		
-		output();
+		if(tag.equals("twse")) {
+			output(Units.TWSE_outputTag);
+		}else if(tag.equals("tpex")) {
+			output(Units.TPEX_outputTag);
+		}
 		
 	}
 	
-	private void output()
+	private void output(String tag)
 	{
 		BufferedWriter writer;
 		try {
-			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Units.output_folder + Units.TWSE_outputTag+"_" + todayStr + Units.extension), "utf-8"));
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Units.output_folder + tag +"_" + todayStr + Units.extension), "utf-8"));
 			
 			for(int i=0; i<companyId.size(); i++) {
 				writer.write(companyId.get(i)+"	"+companyName.get(i)+"\n");

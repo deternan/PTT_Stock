@@ -23,7 +23,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import GUI.httpGet.company.get_TWSECompany_list;
+import GUI.httpGet.company.get_Company_list;
 import GUI.httpGet.Units;
 
 public class HttpsGet {
@@ -91,7 +91,7 @@ public class HttpsGet {
         	allLine += line;
         }
 
-        get_TWSECompany_list twse = new get_TWSECompany_list(allLine, todayStr);
+        get_Company_list twse = new get_Company_list(allLine, todayStr, "tpex");
 	}
 	
 	private void Today()
