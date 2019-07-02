@@ -98,7 +98,7 @@ public class GetValueandProcessing
 				// Processing and Storage
 					// get data from URL
 					GetValues(monthList.get(i) + Units.startDay);
-					
+					System.out.println(this.ID+"	"+monthList.get(i)+Units.startDay);
 					if(sourceLine.length() > 0) {
 						// Processing
 						Processing(sourceLine);
