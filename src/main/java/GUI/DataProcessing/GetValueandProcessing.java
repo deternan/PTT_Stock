@@ -3,7 +3,7 @@ package GUI.DataProcessing;
 /*
  * Parser values
  * version: June 30, 2019 07:23 PM
- * Last revision: July 02, 2019 07:09 PM
+ * Last revision: July 04, 2019 00:12 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -33,14 +33,19 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import GUI.Units;
 
@@ -62,6 +67,11 @@ public class GetValueandProcessing
 	
 	// check
 	boolean dataData_check;
+	
+	// Timer
+	TimeZone tz = TimeZone.getTimeZone("Asia/Taipei");		
+	DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+	String nowAsISO;
 	
 	public GetValueandProcessing(String ID) throws Exception
 	{
@@ -98,16 +108,23 @@ public class GetValueandProcessing
 				// Processing and Storage
 					// get data from URL
 					GetValues(monthList.get(i) + Units.startDay);
-					System.out.println(this.ID+"	"+monthList.get(i)+Units.startDay+"	"+sourceLine);
-					if(sourceLine.length() > 0) {
+					//System.out.println(this.ID+"	"+monthList.get(i)+Units.startDay+"	"+sourceLine);
+					// Timer			  		
+					df.setTimeZone(tz);
+					nowAsISO = df.format(new Date());
+					System.out.println(this.ID+"	"+monthList.get(i)+Units.startDay+"	"+nowAsISO);
+					//if(sourceLine.length() > 0)
+					if(isJSONValid(sourceLine)){
 						// Processing
 						Processing(sourceLine);
-						
-						// Thread sleep
-						Thread.sleep((int) Units.sleepTime);
 					}
+					bfr.close();
+			}else {
+				bfr.close();
 			}
-			bfr.close();
+			
+			// Thread sleep
+			Thread.sleep((int) Units.sleepTime);
 		}
 
 		writer.close();
@@ -233,6 +250,15 @@ public class GetValueandProcessing
         cal.add(Calendar.YEAR, -1911);
         TWDate = Integer.toString(cal.get(Calendar.YEAR)) + df2.format(cal.getTime());
         return TWDate;
+	}
+
+	private boolean isJSONValid(String jsonInString) {
+		
+		JsonParser parser = new JsonParser();
+		JsonElement jsonele = parser.parse(jsonInString);
+		boolean check; 
+		check = jsonele.isJsonObject();
+		return check;
 	}
 	
 //	public static void main(String args[])
