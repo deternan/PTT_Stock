@@ -62,6 +62,7 @@ public class GetValueandProcessing
 	
 	// Read data
 	File file;
+		boolean filecheck;
 	// Storage
 	BufferedWriter writer;
 	
@@ -76,10 +77,14 @@ public class GetValueandProcessing
 	public GetValueandProcessing(String ID) throws Exception
 	{
 		this.ID = ID;
+		filecheck = false;
 		
 		dataData_check = true;
 		file = new File(Units.value_folder + this.ID + Units.extension);
-		writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"));
+		if(file.exists() == false) {
+			filecheck = true;
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"));
+		}
 		
 		// Date
 		Date today = Calendar.getInstance().getTime();
@@ -87,7 +92,6 @@ public class GetValueandProcessing
 		String todayStr = sdf.format(today);
 		String specificDateStr = Units.startYear + Units.startMonth + Units.startDay;
 		monthGap = getMonthGap(todayStr, specificDateStr);
-		//System.out.println(monthGap);
 		
 		List<String> monthList = MonthIncrement(Units.startYear + Units.startMonth, monthGap);
 		
@@ -117,17 +121,21 @@ public class GetValueandProcessing
 					if(isJSONValid(sourceLine)){
 						// Processing
 						Processing(sourceLine);
-					}
-					bfr.close();
-			}else {
-				bfr.close();
+					}		
 			}
 			
-			// Thread sleep
-			Thread.sleep((int) Units.sleepTime);
+			bfr.close();
+			
+			if(filecheck == true) {
+				// Thread sleep
+				Thread.sleep((int) Units.sleepTime);
+			}
+			
 		}
 
-		writer.close();
+		if(filecheck == true) {
+			writer.close();
+		}
 		
 		// Message
 		System.out.println(this.ID+"	Finished");
