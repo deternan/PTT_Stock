@@ -112,15 +112,11 @@ public class GetValueandProcessing
 				// Processing and Storage
 					// get data from URL
 					GetValues(monthList.get(i) + Units.startDay);
-					//System.out.println(this.ID+"	"+monthList.get(i)+Units.startDay+"	"+sourceLine);
-					// Timer			  		
-					df.setTimeZone(tz);
-					nowAsISO = df.format(new Date());
-					System.out.println(this.ID+"	"+monthList.get(i)+Units.startDay+"	"+nowAsISO);
-					//if(sourceLine.length() > 0)
+					
 					if(isJSONValid(sourceLine)){
 						// Processing
 						Processing(sourceLine);
+						System.out.println(this.ID+"	"+monthList.get(i)+Units.startDay);
 					}		
 			}
 			

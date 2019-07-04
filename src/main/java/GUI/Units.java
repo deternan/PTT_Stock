@@ -3,13 +3,12 @@ package GUI;
 public class Units {
 
 	// Exercise parameter
-	public final static int sleepTime = 11000;	// 13 secs
+	public final static int sleepTime = 10200;	// 10.3 secs
 	
 	// Company source
-	public static final String twselisrUrl = "https://isin.twse.com.tw/isin/C_public.jsp?strMode=2";
-	public static final String tpexlisrUrl = "https://isin.twse.com.tw/isin/C_public.jsp?strMode=4";
+	public static final String twselisrUrl = "https://isin.twse.com.tw/isin/C_public.jsp?strMode=2";	// TWSE
+	public static final String tpexlisrUrl = "https://isin.twse.com.tw/isin/C_public.jsp?strMode=4";	// TPEX
 	
-//	public static final String twselist = "";
 	// Values source
 	public static final String valueUrl = "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=";
 		public static final String startYear = "2018";
