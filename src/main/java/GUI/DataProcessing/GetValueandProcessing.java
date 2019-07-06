@@ -33,6 +33,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.PrintStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -52,8 +53,8 @@ import GUI.Units;
 public class GetValueandProcessing 
 {
 	// Temp (Parameter)
-//	private String ID = "2388";
 	private String ID;
+	private String tag;
 	// Get JsonResponse
 	String sourceLine = "";
 	
@@ -65,6 +66,8 @@ public class GetValueandProcessing
 		boolean filecheck;
 	// Storage
 	BufferedWriter writer;
+//	FileOutputStream writer;
+//	PrintStream ps;
 	
 	// check
 	boolean dataData_check;
@@ -74,9 +77,10 @@ public class GetValueandProcessing
 	DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
 	String nowAsISO;
 	
-	public GetValueandProcessing(String ID) throws Exception
+	public GetValueandProcessing(String ID, String tag) throws Exception
 	{
 		this.ID = ID;
+		this.tag = tag;
 		filecheck = false;
 		
 		dataData_check = true;
@@ -84,7 +88,10 @@ public class GetValueandProcessing
 		if(file.exists() == false) {
 			filecheck = true;
 			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"));
+		}else {
+			FileOutputStream fos = new FileOutputStream(Units.value_folder + this.ID + Units.extension, true);
 		}
+//		writer = new FileOutputStream(Units.value_folder + this.ID + Units.extension, true);
 		
 		// Date
 		Date today = Calendar.getInstance().getTime();
@@ -96,6 +103,7 @@ public class GetValueandProcessing
 		List<String> monthList = MonthIncrement(Units.startYear + Units.startMonth, monthGap);
 		
 		String existDate = "";
+		String TW_YYMM;
 		for(int i=0; i<monthList.size(); i++)
 		{
 			sourceLine = "";
@@ -103,21 +111,26 @@ public class GetValueandProcessing
 			
 			existDate = convertTWDate(monthList.get(i));
 			existDate = existDate.substring(0, existDate.length()-2);
-			//System.out.println(monthList.get(i)+"	"+existDate);
 			// check whether data is exist ?
 			checkExistDate(existDate, bfr);
-		
+			//System.out.println(monthList.get(i)+"	"+existDate+"	"+dataData_check);
+			
 			// Save new values to file
 			if(dataData_check == true) {
 				// Processing and Storage
 					// get data from URL
-					GetValues(monthList.get(i) + Units.startDay);
-					
-					if(isJSONValid(sourceLine)){
-						// Processing
-						Processing(sourceLine);
-						System.out.println(this.ID+"	"+monthList.get(i)+Units.startDay);
-					}		
+				if("twse".equalsIgnoreCase(this.tag)) {
+					GetValues(monthList.get(i) + Units.startDay, "twse");
+					if(isJSONValid(sourceLine)) {
+						Processing_TWSE(sourceLine);
+					}
+				}else if("tpex".equalsIgnoreCase(this.tag)) {
+					GetValues(existDate.substring(0, 3) + "/"+ Units.startDay, "tpex");
+					if(isJSONValid(sourceLine)) {
+						Processing_TPEX(sourceLine);
+					}
+				}
+							
 			}
 			
 			bfr.close();
@@ -132,16 +145,26 @@ public class GetValueandProcessing
 		if(filecheck == true) {
 			writer.close();
 		}
+//		writer.close();
 		
 		// Message
 		System.out.println(this.ID+"	Finished");
 	}
 	
-	
-	private void GetValues(String DateStr)
+	private void GetValues(String DateStr, String tag)
 	{
 		sourceLine = "";
-		String URL = Units.valueUrl + DateStr + "8&stockNo=" + ID;
+		String URL = "";
+		if("twse".equalsIgnoreCase(tag)) {
+			// TWSE
+			// https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=20190101&stockNo=2388
+			URL = Units.TWSEvalueUrl + DateStr + "8&stockNo=" + ID;
+		}else if("tpex".equalsIgnoreCase(tag)) {
+			// TPEX
+			// https://www.tpex.org.tw/web/stock/aftertrading/daily_trading_info/st43_result.php?d=107/08&stkno=3105
+			URL = Units.TPEXvalueUrl + DateStr + "&stkno=" + ID;
+		}
+		
 		try {
 			HttpsGet https = new HttpsGet();
 			
@@ -155,7 +178,7 @@ public class GetValueandProcessing
 		}
 	}
 	
-	private void Processing(String jsonStr) throws Exception
+	private void Processing_TWSE(String jsonStr) throws Exception
 	{
 		JSONObject obj = new JSONObject(jsonStr);
 		//System.out.println(obj.get("data"));
@@ -170,10 +193,26 @@ public class GetValueandProcessing
 		}
 	}
 	
+	private void Processing_TPEX(String jsonStr) throws Exception
+	{
+		JSONObject obj = new JSONObject(jsonStr);
+		//System.out.println(obj.get("data"));
+		if(obj.has("aaData")) {
+			JSONArray jsonarray = new JSONArray(obj.get("aaData").toString());
+			for(int i=0; i<jsonarray.length(); i++)
+			{
+				JSONArray arrayData = new JSONArray(jsonarray.get(i).toString());
+				Storage(arrayData.get(0).toString(), arrayData.get(6).toString());
+			}
+		}
+	}
+	
 	private void Storage(String inputDate, String inputValue) throws Exception
 	{
-		//fw.write("\n"+inputDate.replaceAll("/", "")+"	"+inputValue);
 		writer.write(inputDate.replaceAll("/", "")+"	"+inputValue+"\n");
+//		ps = new PrintStream(writer); 
+//		ps.println(inputDate.replaceAll("/", "")+"	"+inputValue);
+//		ps.close();
 	}
 	
 	// avoid duplication
@@ -203,7 +242,6 @@ public class GetValueandProcessing
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMM");
         
         for(int i=0; i<=addMonths; i++){
-        	//Thread.sleep(10000);
         	Date dt=sdf.parse(startDate);
         	Calendar rightNow = Calendar.getInstance();
         	rightNow.setTime(dt);
@@ -265,13 +303,4 @@ public class GetValueandProcessing
 		return check;
 	}
 	
-//	public static void main(String args[])
-//	{
-//		try {
-//			GetValueandProcessing vp = new GetValueandProcessing();
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
 }

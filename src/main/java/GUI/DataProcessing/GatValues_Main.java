@@ -1,9 +1,18 @@
 package GUI.DataProcessing;
 
+/*
+ * download values (Main)
+ * version: July 03, 2019 07:23 PM
+ * Last revision: July 06, 2019 11:15 AM
+ * 
+ * Author : Chao-Hsuan Ke
+ * E-mail : phelpske.dev at gmail dot com
+ * 
+ */
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -22,6 +31,8 @@ public class GatValues_Main
 	// 
 	Vector companyId = new Vector();
 	
+	GetValueandProcessing value;
+	
 	public GatValues_Main() throws Exception
 	{
 		Today();
@@ -29,32 +40,46 @@ public class GatValues_Main
 		// TWSE
 		String twseStr = Units.sourceFoder + Units.TWSE_outputTag +"_" + todayStr + Units.extension;
 		ReadCompany(twseStr);
-		// TPEX
-		String tpexStr = Units.sourceFoder + Units.TPEX_outputTag +"_" + todayStr + Units.extension;
-		ReadCompany(tpexStr);
-		
 		for(int i=0; i<companyId.size(); i++)
 		{
-			GetValueandProcessing value = new GetValueandProcessing(companyId.get(i).toString());
+			// TWSE
+			GetValueandProcessing value = new GetValueandProcessing(companyId.get(i).toString(), "twse");
 		}
+		// TPEX
+		companyId.clear();
+		String tpexStr = Units.sourceFoder + Units.TPEX_outputTag +"_" + todayStr + Units.extension;
+		ReadCompany(tpexStr);
+		for(int i=0; i<companyId.size(); i++)
+		{
+			//System.out.println(companyId.get(i));
+			// TPEX
+			GetValueandProcessing value = new GetValueandProcessing(companyId.get(i).toString(), "tpex");
+		}
+		
+		
 		
 	}
 	
 	private void ReadCompany(String pathfile) throws Exception
 	{
 		File file = new File(pathfile);
-		BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-		
-		String Line;
-		String temp[];
-		while((Line = bfr.readLine())!=null)
-		{
-			temp = Line.split("\\t");
-			//System.out.println(temp[0]+"	"+temp[1]);
-			companyId.add(temp[0]);
+		if(file.exists()) {
+			BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+			
+			String Line;
+			String temp[];
+			while((Line = bfr.readLine())!=null)
+			{
+				temp = Line.split("\\t");
+				//System.out.println(temp[0]+"	"+temp[1]);
+				companyId.add(temp[0]);
+			}
+			
+			bfr.close();
+		}else {
+			System.out.println(pathfile + " the file is not exist");
 		}
 		
-		bfr.close();
 	}
 	
 	private void Today()
