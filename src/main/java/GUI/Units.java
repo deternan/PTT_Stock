@@ -3,7 +3,7 @@ package GUI;
 public class Units {
 
 	// Exercise parameter
-	public final static int sleepTime = 6200;	// 5.2 secs
+	public final static int sleepTime = 5200;	// 5.2 secs
 				// 20 --> 15 --> 13 --> 11 --> 10.5 --> 9.9 --> 8.8 --> 7.8 --> 5.8 --> 5.2
 	
 	// Company source
@@ -18,8 +18,8 @@ public class Units {
 		public static final String startDay = "01";
 		
 	// Storage
-	public static final String sourceFoder = "/Users/phelps/Documents/github/PTT_Stock/source/";
-	public static final String output_folder = "/Users/phelps/Desktop/";
+	public static final String sourceFolder = "/Users/phelps/Documents/github/PTT_Stock/source/";
+	//public static final String outputFolder = "/Users/phelps/Desktop/";
 	public static final String TWSE_outputTag = "TWSE";
 	public static final String TPEX_outputTag = "TPEX";
 	public static final String extension = ".txt";
@@ -27,5 +27,12 @@ public class Units {
 	
 	// Date
 	public static final String basic_pattern = "yyyyMMdd";
+	
+	// Articles
+	public static final String articleFolder = "/data/git/DataSet/ptt/Stock data/";
+	
+	// History
+	public static final String historyFolder = sourceFolder;
+	public static final String historyName = "history.txt";
 	
 }
