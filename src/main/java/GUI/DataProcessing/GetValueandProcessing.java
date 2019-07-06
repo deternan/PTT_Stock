@@ -103,7 +103,6 @@ public class GetValueandProcessing
 		List<String> monthList = MonthIncrement(Units.startYear + Units.startMonth, monthGap);
 		
 		String existDate = "";
-		String TW_YYMM;
 		for(int i=0; i<monthList.size(); i++)
 		{
 			sourceLine = "";
@@ -120,17 +119,16 @@ public class GetValueandProcessing
 				// Processing and Storage
 					// get data from URL
 				if("twse".equalsIgnoreCase(this.tag)) {
-					GetValues(monthList.get(i) + Units.startDay, "twse");
+					GetValues(monthList.get(i) + Units.startDay, this.tag);
 					if(isJSONValid(sourceLine)) {
 						Processing_TWSE(sourceLine);
 					}
 				}else if("tpex".equalsIgnoreCase(this.tag)) {
-					GetValues(existDate.substring(0, 3) + "/"+ Units.startDay, "tpex");
+					GetValues(existDate.substring(0, 3) + "/"+ existDate.substring(3, 5), this.tag);
 					if(isJSONValid(sourceLine)) {
 						Processing_TPEX(sourceLine);
 					}
-				}
-							
+				}			
 			}
 			
 			bfr.close();
@@ -138,6 +136,7 @@ public class GetValueandProcessing
 			if(filecheck == true) {
 				// Thread sleep
 				Thread.sleep((int) Units.sleepTime);
+				//Thread.sleep((int) 1000);
 			}
 			
 		}
@@ -165,6 +164,8 @@ public class GetValueandProcessing
 			URL = Units.TPEXvalueUrl + DateStr + "&stkno=" + ID;
 		}
 		
+		System.out.println(DateStr);
+		
 		try {
 			HttpsGet https = new HttpsGet();
 			
@@ -187,7 +188,7 @@ public class GetValueandProcessing
 			for(int i=0; i<jsonarray.length(); i++)
 			{
 				JSONArray arrayData = new JSONArray(jsonarray.get(i).toString());
-				//System.out.println(arrayData.get(0)+"	"+arrayData.get(6));
+				System.out.println(arrayData.get(0)+"	"+arrayData.get(6));
 				Storage(arrayData.get(0).toString(), arrayData.get(6).toString());
 			}
 		}
@@ -196,7 +197,7 @@ public class GetValueandProcessing
 	private void Processing_TPEX(String jsonStr) throws Exception
 	{
 		JSONObject obj = new JSONObject(jsonStr);
-		//System.out.println(obj.get("data"));
+		//System.out.println(obj.get("aaData"));
 		if(obj.has("aaData")) {
 			JSONArray jsonarray = new JSONArray(obj.get("aaData").toString());
 			for(int i=0; i<jsonarray.length(); i++)

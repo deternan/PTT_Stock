@@ -42,20 +42,17 @@ public class GatValues_Main
 		ReadCompany(twseStr);
 		for(int i=0; i<companyId.size(); i++)
 		{
-			// TWSE
 			GetValueandProcessing value = new GetValueandProcessing(companyId.get(i).toString(), "twse");
 		}
+		
 		// TPEX
 		companyId.clear();
 		String tpexStr = Units.sourceFoder + Units.TPEX_outputTag +"_" + todayStr + Units.extension;
 		ReadCompany(tpexStr);
 		for(int i=0; i<companyId.size(); i++)
 		{
-			//System.out.println(companyId.get(i));
-			// TPEX
 			GetValueandProcessing value = new GetValueandProcessing(companyId.get(i).toString(), "tpex");
 		}
-		
 		
 		
 	}
