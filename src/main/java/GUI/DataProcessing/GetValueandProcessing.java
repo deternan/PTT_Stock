@@ -136,7 +136,6 @@ public class GetValueandProcessing
 			if(filecheck == true) {
 				// Thread sleep
 				Thread.sleep((int) Units.sleepTime);
-				//Thread.sleep((int) 1000);
 			}
 			
 		}

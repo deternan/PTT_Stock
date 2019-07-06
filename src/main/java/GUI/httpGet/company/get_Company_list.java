@@ -78,7 +78,7 @@ public class get_Company_list {
 	{
 		BufferedWriter writer;
 		try {
-			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Units.sourceFoder + tag +"_" + todayStr + Units.extension), "utf-8"));
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Units.sourceFolder + tag +"_" + todayStr + Units.extension), "utf-8"));
 			
 			for(int i=0; i<companyId.size(); i++) {
 				writer.write(companyId.get(i)+"	"+companyName.get(i)+"\n");

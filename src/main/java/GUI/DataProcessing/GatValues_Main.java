@@ -38,7 +38,7 @@ public class GatValues_Main
 		Today();
 		
 		// TWSE
-		String twseStr = Units.sourceFoder + Units.TWSE_outputTag +"_" + todayStr + Units.extension;
+		String twseStr = Units.sourceFolder + Units.TWSE_outputTag +"_" + todayStr + Units.extension;
 		ReadCompany(twseStr);
 		for(int i=0; i<companyId.size(); i++)
 		{
@@ -47,7 +47,7 @@ public class GatValues_Main
 		
 		// TPEX
 		companyId.clear();
-		String tpexStr = Units.sourceFoder + Units.TPEX_outputTag +"_" + todayStr + Units.extension;
+		String tpexStr = Units.sourceFolder + Units.TPEX_outputTag +"_" + todayStr + Units.extension;
 		ReadCompany(tpexStr);
 		for(int i=0; i<companyId.size(); i++)
 		{
