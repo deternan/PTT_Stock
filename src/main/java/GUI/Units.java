@@ -19,7 +19,6 @@ public class Units {
 		
 	// Storage
 	public static final String sourceFolder = "/Users/phelps/Documents/github/PTT_Stock/source/";
-	//public static final String outputFolder = "/Users/phelps/Desktop/";
 	public static final String TWSE_outputTag = "TWSE";
 	public static final String TPEX_outputTag = "TPEX";
 	public static final String extension = ".txt";
