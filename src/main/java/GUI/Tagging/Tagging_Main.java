@@ -5,7 +5,7 @@ import java.io.BufferedReader;
 /*
  * Get values (Main)
  * version: July 06, 2019 15:03 PM
- * Last revision: July 07, 2019 00:22 AM
+ * Last revision: July 07, 2019 11:40 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -15,7 +15,6 @@ import java.io.BufferedReader;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.InputStreamReader;
@@ -39,30 +38,44 @@ public class Tagging_Main
 	
 	FileOutputStream writer;
 	PrintStream ps;
-	
-//	private String articleIdIndex;	
-//	private String nextfileName;
-	
-	
+		
 	// Parameters
 		private String fileName_index = "";
 		private String artileID_index = "";
-		private String fileName_latest = "";
-		//private String content_index;
 	
 	private boolean filestartPoint = false;
 	private boolean startPoint = false;
 	private Vector filenameVec = new Vector();
 	private Vector articleIdVec = new Vector();
 		
+	// article content
+	private String author;
+	private String title;
+	private String content;
+	private String date;
+	private int messagesCount;
+	
 		
 	public Tagging_Main() throws Exception
 	{
 		// Read history
 		ReadHistory();
-		//System.out.println(fileName_index+"	"+artileID_index);
-		
+			//System.out.println(fileName_index+"	"+artileID_index);
+		// Find start point by history record 
 		ReadAllArticles(fileName_index, artileID_index);
+			//System.out.println(filenameVec.size()+"	"+articleIdVec.size());
+		// Get article content
+			for(int i=0; i<filenameVec.size(); i++) {
+				
+				author = "";
+				title = "";
+				content = "";
+				date = "";
+				messagesCount = 0;
+				GetContentByArticleId(filenameVec.get(i).toString(), articleIdVec.get(i).toString());
+				
+				
+			}
 		
 		// Save history
 		//StoragedHistory(aa, bb);
@@ -82,7 +95,6 @@ public class Tagging_Main
 			while((Line = bfr.readLine())!=null)
 			{
 				temp = Line.split("\\t");
-				//System.out.println(temp[0]+"	"+temp[1]);
 				fileName_index = temp[0];
 				artileID_index = temp[1];
 			}
@@ -97,12 +109,8 @@ public class Tagging_Main
 		File[] listOfFiles = folder.listFiles();
 		Arrays.sort(listOfFiles);
 		
-		int listOfFilesSize = listOfFiles.length;
-		int index = 0;
-		
 		for (File file : listOfFiles) {
 		    if (file.isFile()) {
-		    	index++;
 		    	
 		    	if((filestartPoint == true) && (startPoint == true)) {
 		    		System.out.println(file.getName());
@@ -114,7 +122,6 @@ public class Tagging_Main
 	    			filestartPoint = true;
 	    			articleIndex(historyfileName, historyarticleId, file.getName());
 	    		}
-		    	
 		    }
 		}
 	}
@@ -126,8 +133,6 @@ public class Tagging_Main
 		BufferedReader bfr = new BufferedReader(fr);
 		
 		String strTmp = "";
-		String article_id;
-		boolean indexcheck;
 		while((Line = bfr.readLine())!=null)
 		{	
 			strTmp += Line;
@@ -148,7 +153,9 @@ public class Tagging_Main
 						
 						if((filestartPoint == true) && (startPoint == true)) {
 							// ==== Collection
-							System.out.println(currentFileName+"	"+idTmp+"	"+startPoint);
+							//System.out.println(currentFileName+"	"+idTmp+"	"+startPoint);
+							filenameVec.add(currentFileName);
+							articleIdVec.add(idTmp);
 						}
 						
 						if((filestartPoint == true) && (idTmp.equalsIgnoreCase(historyarticleId))) {
@@ -158,7 +165,6 @@ public class Tagging_Main
 				}
 			}
 		}
-		
 	}
 	
 	private void StartCoolection(String currentFileName) throws Exception
@@ -168,8 +174,6 @@ public class Tagging_Main
 		BufferedReader bfr = new BufferedReader(fr);
 		
 		String strTmp = "";
-		String article_id;
-		boolean indexcheck;
 		while((Line = bfr.readLine())!=null)
 		{	
 			strTmp += Line;
@@ -189,7 +193,66 @@ public class Tagging_Main
 					if(articleobj.has("article_id")) {
 						idTmp = articleobj.getString("article_id");
 						// ==== Collection
-						System.out.println(currentFileName+"	"+idTmp+"	"+startPoint);
+						//System.out.println(currentFileName+"	"+idTmp+"	"+startPoint);
+						filenameVec.add(currentFileName);
+						articleIdVec.add(idTmp);
+					}
+				}
+			}
+		}
+	}
+	
+	private void GetContentByArticleId(String filename, String articleId) throws Exception
+	{
+		String Line = "";
+		FileReader fr = new FileReader(Units.articleFolder + filename);
+		BufferedReader bfr = new BufferedReader(fr);
+		
+		String strTmp = "";
+		while((Line = bfr.readLine())!=null)
+		{	
+			strTmp += Line;
+		}
+		fr.close();
+		bfr.close();
+		
+		String idTmp;
+		if(isJSONValid(strTmp)) {
+			JSONObject obj = new JSONObject(strTmp);
+			if(obj.has("articles")) {
+				JSONArray jsonarray = new JSONArray(obj.get("articles").toString());
+				for(int i=0; i<jsonarray.length(); i++)
+				{
+					JSONObject articleobj = new JSONObject(jsonarray.get(i).toString());
+					if(articleobj.has("article_id")) {
+						idTmp = articleobj.getString("article_id");
+						if(idTmp.equalsIgnoreCase(articleId)) {
+							
+							// author
+							if(articleobj.has("author")) {
+								author = articleobj.getString("author");
+							}
+							// title
+							if(articleobj.has("article_title")) {
+								title = articleobj.getString("article_title");
+							}		
+							// content
+							if(articleobj.has("content")) {
+								content = articleobj.getString("content");
+							}
+							// date
+							if(articleobj.has("date")) {
+								date = articleobj.getString("date");
+							}
+							// message
+							if(articleobj.has("messages")) {
+								JSONArray mesarray = new JSONArray(articleobj.getString("messages"));
+								messagesCount = mesarray.length();
+								
+							}
+							
+							break;
+						}
 					}
 				}
 			}
