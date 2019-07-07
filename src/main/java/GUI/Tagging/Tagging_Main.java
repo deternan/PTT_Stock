@@ -3,7 +3,7 @@ package GUI.Tagging;
 /*
  * Get values (Main)
  * version: July 06, 2019 15:03 PM
- * Last revision: July 07, 2019 11:40 PM
+ * Last revision: July 08, 2019 00:20 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -46,6 +46,7 @@ public class Tagging_Main
 	private Vector articleIdVec = new Vector();
 		
 	// article content
+	private String articleId;
 	private String author;
 	private String title;
 	private String content;
@@ -63,7 +64,7 @@ public class Tagging_Main
 			//System.out.println(filenameVec.size()+"	"+articleIdVec.size());
 		// Get article content
 			for(int i=0; i<filenameVec.size(); i++) {
-				
+				articleId = "";
 				author = "";
 				title = "";
 				content = "";
@@ -71,7 +72,7 @@ public class Tagging_Main
 				messagesCount = 0;
 				GetContentByArticleId(filenameVec.get(i).toString(), articleIdVec.get(i).toString());
 				
-				
+				System.out.println(filenameVec.get(i)+"	"+articleId+"	"+date+"	"+title+"	"+author+"	"+messagesCount);
 			}
 		
 		// Save history
@@ -110,12 +111,12 @@ public class Tagging_Main
 		    if (file.isFile()) {
 		    	
 		    	if((filestartPoint == true) && (startPoint == true)) {
-		    		System.out.println(file.getName());
+		    		//System.out.println(file.getName());
 		    		StartCoolection(file.getName());
 		    	}
 		    	
 		    	if(file.getName().equalsIgnoreCase(historyfileName)) {
-	    			System.out.println(file.getName());
+	    			//System.out.println(file.getName());
 	    			filestartPoint = true;
 	    			articleIndex(historyfileName, historyarticleId, file.getName());
 	    		}
@@ -199,10 +200,10 @@ public class Tagging_Main
 		}
 	}
 	
-	private void GetContentByArticleId(String filename, String articleId) throws Exception
+	private void GetContentByArticleId(String filenameIndex, String articleIdIndex) throws Exception
 	{
 		String Line = "";
-		FileReader fr = new FileReader(Units.articleFolder + filename);
+		FileReader fr = new FileReader(Units.articleFolder + filenameIndex);
 		BufferedReader bfr = new BufferedReader(fr);
 		
 		String strTmp = "";
@@ -223,7 +224,8 @@ public class Tagging_Main
 					JSONObject articleobj = new JSONObject(jsonarray.get(i).toString());
 					if(articleobj.has("article_id")) {
 						idTmp = articleobj.getString("article_id");
-						if(idTmp.equalsIgnoreCase(articleId)) {
+						articleId = idTmp;
+						if(idTmp.equalsIgnoreCase(articleIdIndex)) {
 							
 							// author
 							if(articleobj.has("author")) {
@@ -243,9 +245,9 @@ public class Tagging_Main
 							}
 							// message
 							if(articleobj.has("messages")) {
-								JSONArray mesarray = new JSONArray(articleobj.getString("messages"));
+								//System.out.println(articleobj.getJSONArray("messages"));
+								JSONArray mesarray = new JSONArray(articleobj.getJSONArray("messages").toString());
 								messagesCount = mesarray.length();
-								
 							}
 							
 							break;
