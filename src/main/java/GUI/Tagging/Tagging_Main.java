@@ -1,7 +1,5 @@
 package GUI.Tagging;
 
-import java.io.BufferedReader;
-
 /*
  * Get values (Main)
  * version: July 06, 2019 15:03 PM
@@ -12,6 +10,7 @@ import java.io.BufferedReader;
  * 
  */
 
+import java.io.BufferedReader;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,9 +32,7 @@ import GUI.Units;
 
 public class Tagging_Main 
 {
-	String aa = "Stock_0002.json";
-	String bb = "M.1441549887.A.0FC";
-	
+	// Storage 
 	FileOutputStream writer;
 	PrintStream ps;
 		
