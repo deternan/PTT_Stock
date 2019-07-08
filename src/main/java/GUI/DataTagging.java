@@ -3,7 +3,7 @@ package GUI;
 /*
  * Data tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: July 09, 2019 00:20 AM
+ * Last revision: July 09, 2019 06:59 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -22,12 +22,20 @@ import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+
+import GUI.function.ReadHistory;
+
 import javax.swing.JMenu;
 
 public class DataTagging {
 
 	private JFrame frame;
 
+	// Parameters
+	 	// read history index
+		private String fileName_index = "";
+		private String artileID_index = "";
+	
 	/**
 	 * Launch the application.
 	 */
@@ -76,15 +84,24 @@ public class DataTagging {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				System.out.println("Selected: " + e.getActionCommand());
-                //buttonActionPerformed(e);
-                
 				JFileChooser fileChooser = new JFileChooser();
 				fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
 				int result = fileChooser.showOpenDialog(frame);
 				if (result == JFileChooser.APPROVE_OPTION) {
-				    File selectedFile = fileChooser.getSelectedFile();
-				    System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+				    // file dialog
+					File selectedFile = fileChooser.getSelectedFile();
+				    // function
+					try {
+						ReadHistory rh = new ReadHistory(selectedFile.getAbsolutePath());
+						//System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+						fileName_index = rh.returnfileName();
+						artileID_index = rh.returnartileID();
+						//System.out.println(fileName_index+"	"+artileID_index);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				    
 				}
 				
 			}
@@ -103,7 +120,6 @@ public class DataTagging {
 				               JOptionPane.WARNING_MESSAGE);
 				    if (result==JOptionPane.YES_OPTION) {System.exit(0);}
 				    
-	
 				}
 			}
 		});
