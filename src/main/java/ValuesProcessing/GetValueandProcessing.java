@@ -1,4 +1,4 @@
-package GUI.DataProcessing;
+package ValuesProcessing;
 
 /*
  * Parser values

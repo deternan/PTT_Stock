@@ -49,7 +49,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 import GUI.Units;
-import GUI.DataProcessing.HttpsGet;
+import ValuesProcessing.HttpsGet;
 
 public class Testing 
 {
