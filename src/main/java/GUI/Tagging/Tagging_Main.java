@@ -3,7 +3,7 @@ package GUI.Tagging;
 /*
  * Get values (Main)
  * version: July 06, 2019 15:03 PM
- * Last revision: July 08, 2019 00:20 AM
+ * Last revision: July 10, 2019 11:27 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.InputStreamReader;
@@ -21,6 +22,8 @@ import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -53,28 +56,47 @@ public class Tagging_Main
 	private String date;
 	private int messagesCount;
 	
-		
+	// Company info.
+	Vector companyId = new Vector();
+	Vector companyName = new Vector();
+	
+	// Regular expression
+	Pattern pattern;
+	
+	// Testing
+	private String contentTmp = "1. 標的：6558興能高 2. 分類：短、中多 3. 分析/正文： 貿易戰暫告一段落，行動裝置鋰電池應會再度回到熱門市場中。貿易戰之前這支已經拉了 一波，前高75。隨著貿易戰進行，穿戴裝置市場保守，掉到50底，後轉強。 昨天貿易戰中場嘉年華，這支獲得跳空缺口（66.5跳69），60ma強勢上揚，搭配之前就已 擺好的5ma、10ma、20ma，均線皆已上揚且依序排列。 K值雖已達87.5，但高檔鈍化可能性高。 4. 進退場機制：(非長期投資者，必須有停損機制) 今早洗盤68已進 分段停利：73起 加碼區：66.568.5 停損：55";
+	
 	public Tagging_Main() throws Exception
 	{
-		// Read history
-		ReadHistory();
-			//System.out.println(fileName_index+"	"+artileID_index);
-		// Find start point by history record 
-		ReadAllArticles(fileName_index, artileID_index);
-			//System.out.println(filenameVec.size()+"	"+articleIdVec.size());
-		// Get article content
-			for(int i=0; i<filenameVec.size(); i++) {
-				articleId = "";
-				author = "";
-				title = "";
-				content = "";
-				date = "";
-				messagesCount = 0;
-				GetContentByArticleId(filenameVec.get(i).toString(), articleIdVec.get(i).toString());
-				
-				System.out.println(filenameVec.get(i)+"	"+articleId+"	"+date+"	"+title+"	"+author+"	"+messagesCount);
-			}
+		// automatic tagging
+			// Company info.
+			ReadCompany();
+			//System.out.println(companyId.size()+"	"+companyName.size());
 		
+		// articles related
+		// Read history
+//		ReadHistory();
+//			//System.out.println(fileName_index+"	"+artileID_index);
+//		// Find start point by history record 
+//		ReadAllArticles(fileName_index, artileID_index);
+//			//System.out.println(filenameVec.size()+"	"+articleIdVec.size());
+//		// Get article content
+//			for(int i=0; i<filenameVec.size(); i++) {
+//				articleId = "";
+//				author = "";
+//				title = "";
+//				content = "";
+//				date = "";
+//				messagesCount = 0;
+//				GetContentByArticleId(filenameVec.get(i).toString(), articleIdVec.get(i).toString());
+//				
+//				System.out.println(filenameVec.get(i)+"	"+articleId+"	"+date+"	"+title+"	"+author+"	"+messagesCount);
+//			}
+		
+		// Pattern Recognition
+			//System.out.println(contentTmp);
+			PatternCheck(contentTmp);	
+			
 		// Save history
 		//StoragedHistory(aa, bb);
 	}
@@ -277,6 +299,60 @@ public class Tagging_Main
 		boolean check; 
 		check = jsonele.isJsonObject();
 		return check;
+	}
+	
+	// Read company name & id
+	private void ReadCompany() throws Exception
+	{
+		// TWSE
+		ReadCompany(Units.sourceFolder, Units.twsefile);
+		// TPEX
+		ReadCompany(Units.sourceFolder, Units.tpexfile);
+	}
+	
+	private void ReadCompany(String pathName, String fileName) throws Exception
+	{
+		File file = new File(pathName + fileName);
+		if(file.exists()) {
+			BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+			String Line;
+			String temp[];
+			while((Line = bfr.readLine())!=null)
+			{
+				temp = Line.split("\\t");
+				companyId.add(temp[0]);
+				companyName.add(temp[1]);
+			}
+			
+			bfr.close();
+		}
+	}
+	
+	// Regular Expression
+	private void PatternCheck(String strTmp)
+	{
+		String regexName = "";
+		String tmp;
+		for(int i=0; i<companyId.size(); i++)
+		{
+			tmp = companyName.get(i).toString().replace("-KY", "");
+			tmp = tmp.replace("-DR", "");
+			regexName = "("+tmp+")+";
+			//regexName = "興能高";
+			//System.out.println(regexName);
+//			if(strTmp.matches(regexName)) {
+//				System.out.println(companyId.get(i)+"	"+companyName.get(i));
+//			}
+			
+			pattern = Pattern.compile(regexName, Pattern.MULTILINE);
+			Matcher matcher = pattern.matcher(strTmp);        
+	        while(matcher.find())
+	        {
+	        	//System.out.println(matcher.group());
+	        	System.out.println(companyId.get(i)+"	"+companyName.get(i)+"	"+matcher.group());
+	        }
+			
+		}
 	}
 	
 	public static void main(String args[])

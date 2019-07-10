@@ -9,6 +9,9 @@ public class Units {
 	// Company source
 	public static final String twselisrUrl = "https://isin.twse.com.tw/isin/C_public.jsp?strMode=2";	// TWSE
 	public static final String tpexlisrUrl = "https://isin.twse.com.tw/isin/C_public.jsp?strMode=4";	// TPEX
+		// file name
+		public static final String twsefile = "TWSE.txt";
+		public static final String tpexfile = "TPEX.txt";
 	
 	// Values source
 	public static final String TWSEvalueUrl = "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=";
