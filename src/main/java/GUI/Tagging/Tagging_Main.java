@@ -3,7 +3,7 @@ package GUI.Tagging;
 /*
  * Get values (Main)
  * version: July 06, 2019 15:03 PM
- * Last revision: July 10, 2019 11:27 PM
+ * Last revision: July 11, 2019 00:32 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -62,6 +62,7 @@ public class Tagging_Main
 	
 	// Regular expression
 	Pattern pattern;
+	Matcher matcher;
 	
 	// Testing
 	private String contentTmp = "1. 標的：6558興能高 2. 分類：短、中多 3. 分析/正文： 貿易戰暫告一段落，行動裝置鋰電池應會再度回到熱門市場中。貿易戰之前這支已經拉了 一波，前高75。隨著貿易戰進行，穿戴裝置市場保守，掉到50底，後轉強。 昨天貿易戰中場嘉年華，這支獲得跳空缺口（66.5跳69），60ma強勢上揚，搭配之前就已 擺好的5ma、10ma、20ma，均線皆已上揚且依序排列。 K值雖已達87.5，但高檔鈍化可能性高。 4. 進退場機制：(非長期投資者，必須有停損機制) 今早洗盤68已進 分段停利：73起 加碼區：66.568.5 停損：55";
@@ -331,28 +332,53 @@ public class Tagging_Main
 	// Regular Expression
 	private void PatternCheck(String strTmp)
 	{
+		// Company Name and ID
 		String regexName = "";
-		String tmp;
+		String regexId = "";
+		String tmpName;
+		String patternName;
+		String patternId;
+		boolean namecheck = false;
+		boolean idcheck = false;
+		
 		for(int i=0; i<companyId.size(); i++)
 		{
-			tmp = companyName.get(i).toString().replace("-KY", "");
-			tmp = tmp.replace("-DR", "");
-			regexName = "("+tmp+")+";
-			//regexName = "興能高";
-			//System.out.println(regexName);
-//			if(strTmp.matches(regexName)) {
-//				System.out.println(companyId.get(i)+"	"+companyName.get(i));
-//			}
+			patternName = "";
+			patternId = "";
 			
+			// Name
+			tmpName = companyName.get(i).toString().replace("-KY", "");
+			tmpName = tmpName.replace("-DR", "");
+			regexName = "("+tmpName+")+";
 			pattern = Pattern.compile(regexName, Pattern.MULTILINE);
-			Matcher matcher = pattern.matcher(strTmp);        
-	        while(matcher.find())
-	        {
-	        	//System.out.println(matcher.group());
-	        	System.out.println(companyId.get(i)+"	"+companyName.get(i)+"	"+matcher.group());
+			matcher = pattern.matcher(strTmp);
+	        if(matcher.find()){
+	        	//System.out.println(companyId.get(i)+"	"+companyName.get(i)+"	"+matcher.group());
+	        	patternName = matcher.group();
+	        	namecheck = true;
 	        }
-			
+	        // Id
+	        regexId = companyId.get(i).toString();
+	        pattern = Pattern.compile(regexId, Pattern.MULTILINE);
+	        matcher = pattern.matcher(strTmp);
+	        if(matcher.find()){
+	        	patternId = matcher.group();
+	        	idcheck = true;
+	        }
+	        
+	        if((patternName.isEmpty() == false) || (patternId.isEmpty() == false)) {
+	        	System.out.println(companyId.get(i)+"	"+companyName.get(i)+"	"+patternName+"	"+patternId);
+	        }     
+	        
 		}
+		
+		// Values
+		String regexValue = "([0-9]+\\.?[0-9]+)";
+		pattern = Pattern.compile(regexValue, Pattern.MULTILINE);
+        matcher = pattern.matcher(strTmp);
+        while(matcher.find()){
+        	System.out.println(matcher.group(0));
+        }
 	}
 	
 	public static void main(String args[])
