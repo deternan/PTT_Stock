@@ -3,7 +3,7 @@ package GUI.Tagging;
 /*
  * Get values (Main)
  * version: July 06, 2019 15:03 PM
- * Last revision: July 11, 2019 00:32 AM
+ * Last revision: July 11, 2019 07:16 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -59,10 +59,14 @@ public class Tagging_Main
 	// Company info.
 	Vector companyId = new Vector();
 	Vector companyName = new Vector();
-	
 	// Regular expression
 	Pattern pattern;
 	Matcher matcher;
+	String regexTitle = "標的?";
+	// display
+	Vector companyIdDisplay = new Vector();
+	Vector companyNameDisplay = new Vector();
+	Vector valueDisplay = new Vector();
 	
 	// Testing
 	private String contentTmp = "1. 標的：6558興能高 2. 分類：短、中多 3. 分析/正文： 貿易戰暫告一段落，行動裝置鋰電池應會再度回到熱門市場中。貿易戰之前這支已經拉了 一波，前高75。隨著貿易戰進行，穿戴裝置市場保守，掉到50底，後轉強。 昨天貿易戰中場嘉年華，這支獲得跳空缺口（66.5跳69），60ma強勢上揚，搭配之前就已 擺好的5ma、10ma、20ma，均線皆已上揚且依序排列。 K值雖已達87.5，但高檔鈍化可能性高。 4. 進退場機制：(非長期投資者，必須有停損機制) 今早洗盤68已進 分段停利：73起 加碼區：66.568.5 停損：55";
@@ -71,16 +75,12 @@ public class Tagging_Main
 	{
 		// automatic tagging
 			// Company info.
-			ReadCompany();
-			//System.out.println(companyId.size()+"	"+companyName.size());
-		
+			ReadCompany();		
 		// articles related
-		// Read history
+		//Read history
 //		ReadHistory();
-//			//System.out.println(fileName_index+"	"+artileID_index);
 //		// Find start point by history record 
 //		ReadAllArticles(fileName_index, artileID_index);
-//			//System.out.println(filenameVec.size()+"	"+articleIdVec.size());
 //		// Get article content
 //			for(int i=0; i<filenameVec.size(); i++) {
 //				articleId = "";
@@ -89,13 +89,23 @@ public class Tagging_Main
 //				content = "";
 //				date = "";
 //				messagesCount = 0;
+//				companyIdDisplay.clear();
+//				companyNameDisplay.clear();
+//				valueDisplay.clear();
+//				
 //				GetContentByArticleId(filenameVec.get(i).toString(), articleIdVec.get(i).toString());
+//				// Filter
+//				
+//				pattern = Pattern.compile(regexTitle, Pattern.MULTILINE);
+//				matcher = pattern.matcher(title);
+//				if(matcher.find()){
+//					
+//				}
 //				
 //				System.out.println(filenameVec.get(i)+"	"+articleId+"	"+date+"	"+title+"	"+author+"	"+messagesCount);
 //			}
 		
 		// Pattern Recognition
-			//System.out.println(contentTmp);
 			PatternCheck(contentTmp);	
 			
 		// Save history
@@ -341,6 +351,12 @@ public class Tagging_Main
 		boolean namecheck = false;
 		boolean idcheck = false;
 		
+		pattern = Pattern.compile(regexTitle, Pattern.MULTILINE);
+		matcher = pattern.matcher(strTmp);
+		if(matcher.find()){
+			System.out.println(matcher.group());
+		}
+		
 		for(int i=0; i<companyId.size(); i++)
 		{
 			patternName = "";
@@ -355,6 +371,7 @@ public class Tagging_Main
 	        if(matcher.find()){
 	        	//System.out.println(companyId.get(i)+"	"+companyName.get(i)+"	"+matcher.group());
 	        	patternName = matcher.group();
+	        	companyNameDisplay.add(patternName);
 	        	namecheck = true;
 	        }
 	        // Id
@@ -364,11 +381,12 @@ public class Tagging_Main
 	        if(matcher.find()){
 	        	patternId = matcher.group();
 	        	idcheck = true;
+	        	companyIdDisplay.add(patternId);
 	        }
 	        
-	        if((patternName.isEmpty() == false) || (patternId.isEmpty() == false)) {
-	        	System.out.println(companyId.get(i)+"	"+companyName.get(i)+"	"+patternName+"	"+patternId);
-	        }     
+//	        if((patternName.isEmpty() == false) || (patternId.isEmpty() == false)) {
+//	        	System.out.println(companyId.get(i)+"	"+companyName.get(i)+"	"+patternName+"	"+patternId);
+//	        }     
 	        
 		}
 		
@@ -377,7 +395,8 @@ public class Tagging_Main
 		pattern = Pattern.compile(regexValue, Pattern.MULTILINE);
         matcher = pattern.matcher(strTmp);
         while(matcher.find()){
-        	System.out.println(matcher.group(0));
+        	//System.out.println(matcher.group(0));
+        	valueDisplay.add(matcher.group(0));
         }
 	}
 	
