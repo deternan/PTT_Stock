@@ -3,7 +3,7 @@ package GUI.Tagging;
 /*
  * Get values (Main)
  * version: July 06, 2019 15:03 PM
- * Last revision: July 11, 2019 07:16 AM
+ * Last revision: July 11, 2019 08:34 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -62,7 +62,7 @@ public class Tagging_Main
 	// Regular expression
 	Pattern pattern;
 	Matcher matcher;
-	String regexTitle = "標的?";
+	String regexTitle = "(標的)|(心得)|(閒聊)|(其他)";
 	// display
 	Vector companyIdDisplay = new Vector();
 	Vector companyNameDisplay = new Vector();
@@ -76,37 +76,38 @@ public class Tagging_Main
 		// automatic tagging
 			// Company info.
 			ReadCompany();		
+		
 		// articles related
 		//Read history
-//		ReadHistory();
-//		// Find start point by history record 
-//		ReadAllArticles(fileName_index, artileID_index);
-//		// Get article content
-//			for(int i=0; i<filenameVec.size(); i++) {
-//				articleId = "";
-//				author = "";
-//				title = "";
-//				content = "";
-//				date = "";
-//				messagesCount = 0;
-//				companyIdDisplay.clear();
-//				companyNameDisplay.clear();
-//				valueDisplay.clear();
-//				
-//				GetContentByArticleId(filenameVec.get(i).toString(), articleIdVec.get(i).toString());
-//				// Filter
-//				
-//				pattern = Pattern.compile(regexTitle, Pattern.MULTILINE);
-//				matcher = pattern.matcher(title);
-//				if(matcher.find()){
-//					
-//				}
-//				
-//				System.out.println(filenameVec.get(i)+"	"+articleId+"	"+date+"	"+title+"	"+author+"	"+messagesCount);
-//			}
+		ReadHistory();
+		// Find start point by history record 
+		ReadAllArticles(fileName_index, artileID_index);
+		// Get article content and filtering
+			for(int i=0; i<filenameVec.size(); i++) {
+				articleId = "";
+				author = "";
+				title = "";
+				content = "";
+				date = "";
+				messagesCount = 0;
+				companyIdDisplay.clear();
+				companyNameDisplay.clear();
+				valueDisplay.clear();
+				
+				GetContentByArticleId(filenameVec.get(i).toString(), articleIdVec.get(i).toString());
+				// Filter
+				
+				pattern = Pattern.compile(regexTitle, Pattern.MULTILINE);
+				matcher = pattern.matcher(title);
+				if(matcher.find()){
+					// Pattern Recognition
+					PatternCheck(content);
+					System.out.println(filenameVec.get(i)+"	"+articleId+"	"+date+"	"+title+"	"+author+"	"+companyIdDisplay.size()+"	"+companyNameDisplay.size()+"	"+valueDisplay.size());
+				}
+				
+				//System.out.println(filenameVec.get(i)+"	"+articleId+"	"+date+"	"+title+"	"+author+"	"+messagesCount);
+			}
 		
-		// Pattern Recognition
-			PatternCheck(contentTmp);	
 			
 		// Save history
 		//StoragedHistory(aa, bb);
@@ -351,11 +352,11 @@ public class Tagging_Main
 		boolean namecheck = false;
 		boolean idcheck = false;
 		
-		pattern = Pattern.compile(regexTitle, Pattern.MULTILINE);
-		matcher = pattern.matcher(strTmp);
-		if(matcher.find()){
-			System.out.println(matcher.group());
-		}
+//		pattern = Pattern.compile(regexTitle, Pattern.MULTILINE);
+//		matcher = pattern.matcher(strTmp);
+//		if(matcher.find()){
+//			System.out.println(matcher.group());
+//		}
 		
 		for(int i=0; i<companyId.size(); i++)
 		{
