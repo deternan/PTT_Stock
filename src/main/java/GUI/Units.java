@@ -37,4 +37,7 @@ public class Units {
 	public static final String historyFolder = sourceFolder;
 	public static final String historyName = "history.txt";
 	
+	// Frame
+	public static final String regexTitle = "(標的)|(心得)|(閒聊)|(其他)";	
+	
 }
