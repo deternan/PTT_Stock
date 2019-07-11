@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: July 12, 2019 00:16 AM
+ * Last revision: July 12, 2019 06:52 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -57,6 +57,7 @@ public class DataTagging_Frame {
 	JTextPane textPane;
 	JTextPane textPane_1;
 	JTextPane textPane_2;
+	JTextPane textPane_3;
 	
 	
 	// Company info.
@@ -189,12 +190,18 @@ public class DataTagging_Frame {
 								companyidStr += companyIdDisplay.get(i).toString() + "\n";
 							}
 							textPane_1.setText(companyidStr);
+							String companyvalueStr = "";
+							for(int i=0; i<valueDisplay.size(); i++) {
+								companyvalueStr += valueDisplay.get(i).toString() + "\n";
+							}
+							textPane_3.setText(companyvalueStr);
 						}else {
 							lblNewLabel_2.setText(date);
 							lblNewLabel_3.setText(author);
 							lblNewLabel_6.setText(title);
 							textPane_1.setText("");
 							textPane_2.setText("");
+							textPane_3.setText("");
 							textPane.setText("");
 							lblNewLabel_6.setEnabled(false);
 							
@@ -270,7 +277,6 @@ public class DataTagging_Frame {
 		//textPane.setBounds(35, 171, 102, 152);
 		JScrollPane scrollPane = new JScrollPane(textPane);
 		scrollPane.setBounds(35, 171, 102, 152);
-		//frame.getContentPane().add(textPane);
         frame.getContentPane().add(scrollPane);
         
         // Company ID
@@ -278,7 +284,6 @@ public class DataTagging_Frame {
 		JScrollPane scrollPane1 = new JScrollPane(textPane_1);
 		//textPane_1.setBounds(172, 171, 102, 152);
 		scrollPane1.setBounds(172, 171, 102, 152);
-		//frame.getContentPane().add(textPane_1);
 		frame.getContentPane().add(scrollPane1);
 		
 		// content panel
@@ -295,9 +300,12 @@ public class DataTagging_Frame {
 		lblNewLabel_7.setBounds(35, 370, 61, 16);
 		frame.getContentPane().add(lblNewLabel_7);
 		
-		JTextPane textPane_3 = new JTextPane();
-		textPane_3.setBounds(35, 398, 78, 117);
-		frame.getContentPane().add(textPane_3);
+		// article values
+		textPane_3 = new JTextPane();
+		JScrollPane scrollPane2 = new JScrollPane(textPane_1);
+		//textPane_3.setBounds(35, 398, 78, 117);
+		scrollPane2.setBounds(35, 398, 78, 117);
+		frame.getContentPane().add(scrollPane2);
 		
 		JLabel lblNewLabel_8 = new JLabel("Real Values");
 		lblNewLabel_8.setBounds(176, 370, 78, 16);
@@ -360,12 +368,18 @@ public class DataTagging_Frame {
 						companyidStr += companyIdDisplay.get(i).toString() + "\n";
 					}
 					textPane_1.setText(companyidStr);
+					String companyvalueStr = "";
+					for(int i=0; i<valueDisplay.size(); i++) {
+						companyvalueStr += valueDisplay.get(i).toString() + "\n";
+					}
+					textPane_3.setText(companyvalueStr);
 				}else {
 					lblNewLabel_2.setText(date);
 					lblNewLabel_3.setText(author);
 					lblNewLabel_6.setText(title);
 					textPane_1.setText("");
 					textPane_2.setText("");
+					textPane_3.setText("");
 					textPane.setText("");
 					lblNewLabel_6.setEnabled(false);
 					
