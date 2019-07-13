@@ -15,7 +15,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
-
 public class ReadHistory {
 
 	private String sourcefilepath;

@@ -3,7 +3,7 @@ package GUI.Tagging;
 /*
  * Get values (Main)
  * version: July 06, 2019 15:03 PM
- * Last revision: July 13, 2019 02:10 PM
+ * Last revision: July 13, 2019 11:40 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -14,11 +14,11 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -56,7 +56,6 @@ public class Tagging_Main {
 	private boolean startPoint = false;
 	private Vector filenameVec = new Vector();
 	private Vector articleIdVec = new Vector();
-
 	// article content
 	private String articleId;
 	private String author;
@@ -64,19 +63,24 @@ public class Tagging_Main {
 	private String content;
 	private String date;
 	private int messagesCount;
-
 	// Company info.
 	Vector companyId = new Vector();
 	Vector companyName = new Vector();
 	// Regular expression
 	Pattern pattern;
 	Matcher matcher;
-	String regexTitle = "(標的)|(心得)|(閒聊)|(其他)";
 	// display
 	Vector companyIdDisplay = new Vector();
 	Vector companyNameDisplay = new Vector();
 	Vector valueDisplay = new Vector();
-
+	// values
+	Vector allvalueVec = new Vector();
+	// Date
+	DateFormat df = new SimpleDateFormat(Units.basic_pattern, Locale.getDefault());
+	private double onemonthAverage;
+	private double twomonthAverage;
+	private double threemonthAverage;
+	private String dateremindTag;
 	// Testing
 	//private String contentTmp = "1. 標的：6558興能高 2. 分類：短、中多 3. 分析/正文： 貿易戰暫告一段落，行動裝置鋰電池應會再度回到熱門市場中。貿易戰之前這支已經拉了 一波，前高75。隨著貿易戰進行，穿戴裝置市場保守，掉到50底，後轉強。 昨天貿易戰中場嘉年華，這支獲得跳空缺口（66.5跳69），60ma強勢上揚，搭配之前就已 擺好的5ma、10ma、20ma，均線皆已上揚且依序排列。 K值雖已達87.5，但高檔鈍化可能性高。 4. 進退場機制：(非長期投資者，必須有停損機制) 今早洗盤68已進 分段停利：73起 加碼區：66.568.5 停損：55";
 	private String contentTmp = "1. 標的：2325 矽品 2. 分類：空 3. 分析/正文： 繼昨天大買1.5萬張矽品後，今天明教再度出手 15 萬張 http://tinyurl.com/jssx42s 不過看那成交金額，每股53.21元，很明顯不是在市場上買 從其它新聞來看，應該是跟特定法人盤後買的吧 今天已經取得30.44%的股權，粗略算一算，應該再買7萬張左右就33%了吧 今年矽品股東會應該很精彩 矽品今天收52.7，明教收購價55元，約4%的差距 收購案要一年後才能提，合併也還沒通過公平會審查 從明教說要收購開始，矽品最高大概就是53左右 而現在收購要拖一年，怎樣看這個價位都是高點，所以可以空空看 下週開盤後可以看看矽品沖多高，然後空個幾張來玩玩(沒券空期貨也行) 反正最高就漲到55元，風險也不會太高(除非阿伯突然有錢可以搶股)， 4. 進退場機制：(停損價位/出場條件/長期投資) 進場：下週一抓高點空，53元以上大概都可以吧 出場：我覺得跌回50元都是很有可能的，不然就是小賺就出場 停損：如果沒人提出高於55元的收購價，應該是沒必要停損，除非遇到強制回補 "; 
@@ -87,6 +91,7 @@ public class Tagging_Main {
 //		writerarticlelist = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Units.sourceFolder + Units.alllist), "utf-8"));
 //		ReadAllArticlesList();
 //		writerarticlelist.close();
+		
 // automatic tagging
 		// Company info.
 		ReadCompany();
@@ -100,6 +105,10 @@ public class Tagging_Main {
 		
 		String inputarticleId;
 		String formatdate;
+		String TWDate;
+		String formatdateAdd;
+		String TWDateAdd;
+		String addtwpday;
 		// Get article content and filtering
 		for (int i = 0; i < articleIdVec.size(); i++) {
 			articleId = "";
@@ -113,30 +122,43 @@ public class Tagging_Main {
 			valueDisplay.clear();
 			inputarticleId = "";
 			formatdate = "";
+			TWDate = "";
+			onemonthAverage = 0;
+			twomonthAverage = 0;
+			threemonthAverage = 0;
+			dateremindTag = "";
+			formatdateAdd = "";
+			TWDateAdd = "";
+			addtwpday = "";
 
 			// Get article content
 			GetContentByArticleId(filenameVec.get(i).toString(), articleIdVec.get(i).toString());
 			// Filter
-			pattern = Pattern.compile(regexTitle, Pattern.MULTILINE);
+			pattern = Pattern.compile(Units.regexTitle, Pattern.MULTILINE);
 			matcher = pattern.matcher(title);
 			if (matcher.find()) {
 				// Pattern Recognition
 				PatternCheck(content);
-				System.out.println(filenameVec.get(i) + "	" + articleId + "	" + date + "	" + title + "	" + author + "	"
-						 + companyIdDisplay.size() + "	" + companyNameDisplay.size() + "	"+ valueDisplay.size());
+//				System.out.println(filenameVec.get(i) + "	" + articleId + "	" + date + "	" + title + "	" + author + "	"
+//						 + companyIdDisplay.size() + "	" + companyNameDisplay.size() + "	"+ valueDisplay.size());
 				
 				if(companyIdDisplay.size() > 0) {
 					inputarticleId = companyIdDisplay.get(0).toString();
 					// date 
 					date = replaceSpace(date);
 					formatdate = ISODateParser(date);
-					String TWDate = convertTWDate(formatdate);
+					TWDate = convertTWDate(formatdate);
+					// add day
+					addtwpday = addTwoDate(formatdate);
+					formatdateAdd = ISODateParserZone(addtwpday);
+					TWDateAdd = convertTWDate(formatdateAdd);
+					
+					//System.out.println(TWDate+"	"+TWDateAdd);
 					// values average
-					getValueAverageByarticleId(inputarticleId, TWDate);
+					getValueAverageByarticleId(inputarticleId, TWDate, TWDateAdd);
 				}
 			}
-			// System.out.println(filenameVec.get(i)+" "+articleId+" "+date+" "+title+"
-			// "+author+" "+messagesCount);
+			//System.out.println(TWDate+"	"+filenameVec.get(i)+"	"+articleIdVec.get(i)+"	"+onemonthAverage+"	"+twomonthAverage+"	"+threemonthAverage);
 		}
 
 		// Save history
@@ -163,7 +185,9 @@ public class Tagging_Main {
 		}
 	}
 
-	private void ReadAllArticles(String historyfileName, String historyarticleId) throws Exception {
+	
+	private void ReadAllArticles(String historyfileName, String historyarticleId) throws Exception 
+	{
 		File folder = new File(Units.articleFolder);
 		File[] listOfFiles = folder.listFiles();
 		Arrays.sort(listOfFiles);
@@ -185,6 +209,7 @@ public class Tagging_Main {
 		}
 	}
 	
+
 	private void ReadAllArticles_v2(String historyfileName, String historyarticleId) throws Exception
 	{
 		File file = new File(Units.sourceFolder + Units.alllist);
@@ -250,7 +275,9 @@ public class Tagging_Main {
 	}
 
 	
-	private void StartCoolection(String currentFileName) throws Exception {
+	
+	private void StartCoolection(String currentFileName) throws Exception 
+	{
 		String Line = "";
 		FileReader fr = new FileReader(Units.articleFolder + currentFileName);
 		BufferedReader bfr = new BufferedReader(fr);
@@ -517,26 +544,86 @@ public class Tagging_Main {
 		}
 	}
 
-	private void getValueAverageByarticleId(String articleId, String dateStr) throws Exception 
+	private void getValueAverageByarticleId(String articleId, String dateStr, String addtwoday) throws Exception 
 	{
 		File file = new File(Units.value_folder + articleId + Units.extension);
 		if (file.exists()) {
-			System.out.println(Units.value_folder + articleId + Units.extension+"	"+dateStr);
 			BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 			String Line;
 			String temp[];
+			int dateindexTag = 0;
+			int dateindextwoTag = 0;
+			int index = 0;
+			allvalueVec.clear();
 			while ((Line = bfr.readLine()) != null) {
 				temp = Line.split("	");
 				if(dateStr.equalsIgnoreCase(temp[0])) {
-					//System.out.println(temp[1]);
-					break;
+					dateindexTag = index;
+					//break;
 				}
+				if(addtwoday.equalsIgnoreCase(temp[0])) {
+					dateindextwoTag = index;
+				}
+				allvalueVec.add(temp[1]);
+				index++;
 			}
 			bfr.close();
+			
+			int nextIndex;
+			if(dateindexTag > dateindextwoTag) {
+				nextIndex = dateindexTag;
+			}else {
+				nextIndex = dateindextwoTag;
+			}
+			
+			//System.out.println(nextIndex+"	"+dateStr+"	"+addtwoday);
+			// values average
+			onemonthAverage = monthAverage(1, nextIndex, allvalueVec);
+			twomonthAverage = monthAverage(2, nextIndex, allvalueVec);
+			threemonthAverage = monthAverage(3, nextIndex, allvalueVec);
 		}
 	}
 	
-	private String ISODateParser(String dateStr) throws Exception {
+	private double monthAverage(int monthInt, int dateIndex, Vector allvalueVec)
+	{
+		int remnants = allvalueVec.size() - dateIndex;
+		double value1 = 0;
+		double value2 = 0;
+		double value3 = 0;
+		double value = 0; 
+		if(monthInt == 1) {
+			if(remnants < 22) {
+				dateremindTag = "less than 30 days";
+			}else {
+				for(int i=0; i<5; i++) {
+					value1 += Double.parseDouble(allvalueVec.get(22+i+dateIndex).toString());
+				}
+				value = value1 / 5;
+			}
+		}else if(monthInt == 2) {
+			if(remnants < 46) {
+				dateremindTag = "less than 60 days";
+			}else {
+				for(int i=0; i<5; i++) {
+					value2 += Double.parseDouble(allvalueVec.get(46+i+dateIndex).toString());
+				}
+				value = value2/ 5;
+			}
+		}else if(monthInt == 3) {
+			if(remnants < 66) {
+				dateremindTag = "less than 90 days";
+			}else {
+				for(int i=0; i<5; i++) {
+					value3 += Double.parseDouble(allvalueVec.get(66+i+dateIndex).toString());
+				}
+				value = value3 / 5;
+			}
+		}
+		
+		return value;
+	}
+	
+ 	private String ISODateParser(String dateStr) throws Exception {
 		boolean chinesecheck;
 		chinesecheck = isChinese(dateStr);
 		DateTimeFormatter formatter;
@@ -549,8 +636,23 @@ public class Tagging_Main {
 		LocalDate dateTime = LocalDate.parse(dateStr, formatter);
 		
 		return dateTime.toString().replaceAll("-", "");
+	}	
+
+ 	private String ISODateParserZone(String dateStr) throws Exception {
+		boolean chinesecheck;
+		chinesecheck = isChinese(dateStr);
+		DateTimeFormatter formatter;
+		if (chinesecheck == true) {
+			formatter = DateTimeFormatter.ofPattern(Units.isotime_patternZone, Locale.TAIWAN);
+		} else {
+			formatter = DateTimeFormatter.ofPattern(Units.isotime_patternZone, Locale.ENGLISH);
+		}
+
+		LocalDate dateTime = LocalDate.parse(dateStr, formatter);
+		
+		return dateTime.toString().replaceAll("-", "");
 	}
-	
+ 	
 	private boolean isChinese(String con) {
 		for (int i = 0; i < con.substring(0, 3).length(); i++) {
 			if (!Pattern.compile("[\u4e00-\u9fa5]").matcher(String.valueOf(con.charAt(i))).find()) {
@@ -560,6 +662,7 @@ public class Tagging_Main {
 
 		return true;
 	}
+	
 	
 	private String replaceSpace(String dateStr) {
 		String dategap = "0";
@@ -574,6 +677,7 @@ public class Tagging_Main {
 		
 		return newdateStr;
 	}
+	
 	
 	private String convertTWDate(String AD) {
 	    SimpleDateFormat df4 = new SimpleDateFormat("yyyyMMdd");
@@ -590,6 +694,19 @@ public class Tagging_Main {
 	    }
 	    
 	    return TWDate;
+	}
+	
+	private String addTwoDate(String dateStr) throws Exception
+	{
+		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+		Date inputDate = dateFormat.parse(dateStr);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(inputDate);
+		int inputDayOfYear = cal.get(Calendar.DAY_OF_YEAR);
+		cal.set(Calendar.DAY_OF_YEAR, inputDayOfYear + 2);
+		
+		return cal.getTime().toString();
+		//return cal.getTime();
 	}
 	
 }
