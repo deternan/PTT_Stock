@@ -3,7 +3,7 @@ package GUI.Tagging;
 /*
  * Get values (Main)
  * version: July 06, 2019 15:03 PM
- * Last revision: July 13, 2019 08:29 AM
+ * Last revision: July 13, 2019 02:10 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.InputStreamReader;
@@ -36,9 +37,9 @@ import GUI.Units;
 
 public class Tagging_Main {
 	// articlelist
+	BufferedWriter writerarticlelist;
 	// File Check
 		String extension_Json = "json";
-		private BufferedWriter writerarticlelist = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Units.sourceFolder + Units.alllist), "utf-8"));
 	// Storage
 	FileOutputStream writer;
 	PrintStream ps;
@@ -79,6 +80,7 @@ public class Tagging_Main {
 	public Tagging_Main() throws Exception {
 
 // article list
+//		writerarticlelist = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Units.sourceFolder + Units.alllist), "utf-8"));
 //		ReadAllArticlesList();
 //		writerarticlelist.close();
 // automatic tagging
@@ -88,38 +90,36 @@ public class Tagging_Main {
 		// Read history
 		ReadHistory();
 		// Find start point by history record
-		//writerlist = new FileOutputStream(Units.historyFolder + Units.alllist, true);
-		ReadAllArticles(fileName_index, artileID_index);
-		//writerlist.close();
+//		ReadAllArticles(fileName_index, artileID_index);
+		ReadAllArticles_v2(fileName_index, artileID_index);
 		// All list
 		
 		// Get article content and filtering
-//		for (int i = 0; i < filenameVec.size(); i++) {
-//			articleId = "";
-//			author = "";
-//			title = "";
-//			content = "";
-//			date = "";
-//			messagesCount = 0;
-//			companyIdDisplay.clear();
-//			companyNameDisplay.clear();
-//			valueDisplay.clear();
-//
-//			GetContentByArticleId(filenameVec.get(i).toString(), articleIdVec.get(i).toString());
-//			// Filter
-//
-//			pattern = Pattern.compile(regexTitle, Pattern.MULTILINE);
-//			matcher = pattern.matcher(title);
-//			if (matcher.find()) {
-//				// Pattern Recognition
-//				PatternCheck(content);
-//				System.out.println(filenameVec.get(i) + "	" + articleId + "	" + date + "	" + title + "	"
-//						+ author + "	" + companyIdDisplay.size() + "	" + companyNameDisplay.size() + "	"
-//						+ valueDisplay.size());
-//			}
-//			// System.out.println(filenameVec.get(i)+" "+articleId+" "+date+" "+title+"
-//			// "+author+" "+messagesCount);
-//		}
+		for (int i = 0; i < articleIdVec.size(); i++) {
+			articleId = "";
+			author = "";
+			title = "";
+			content = "";
+			date = "";
+			messagesCount = 0;
+			companyIdDisplay.clear();
+			companyNameDisplay.clear();
+			valueDisplay.clear();
+
+			GetContentByArticleId(filenameVec.get(i).toString(), articleIdVec.get(i).toString());
+			// Filter
+
+			pattern = Pattern.compile(regexTitle, Pattern.MULTILINE);
+			matcher = pattern.matcher(title);
+			if (matcher.find()) {
+				// Pattern Recognition
+				PatternCheck(content);
+				System.out.println(filenameVec.get(i) + "	" + articleId + "	" + date + "	" + title + "	" + author + "	"
+						 + companyIdDisplay.size() + "	" + companyNameDisplay.size() + "	"+ valueDisplay.size());
+			}
+			// System.out.println(filenameVec.get(i)+" "+articleId+" "+date+" "+title+"
+			// "+author+" "+messagesCount);
+		}
 
 		// Save history
 		// StoragedHistory(aa, bb);
@@ -167,6 +167,31 @@ public class Tagging_Main {
 			}
 		}
 	}
+	
+	private void ReadAllArticles_v2(String historyfileName, String historyarticleId) throws Exception
+	{
+		File file = new File(Units.sourceFolder + Units.alllist);
+		BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+		
+		boolean startcheck = false;
+		if (file.exists()) {
+			String Line;
+			String temp[];
+			while ((Line = bfr.readLine()) != null) {
+				temp = Line.split("\\t");
+				if(startcheck) {
+					filenameVec.add(temp[0]);
+					articleIdVec.add(temp[1]);
+				}
+				
+				if(historyarticleId.equalsIgnoreCase(temp[1])) {
+					startcheck = true;
+					//System.out.println(temp[0]+"	"+temp[1]);
+				}
+			}
+		}
+		bfr.close();
+	}
 
 	private void articleIndex(String historyfileName, String historyarticleId, String currentFileName)
 			throws Exception {
@@ -207,6 +232,7 @@ public class Tagging_Main {
 		}
 	}
 
+	
 	private void StartCoolection(String currentFileName) throws Exception {
 		String Line = "";
 		FileReader fr = new FileReader(Units.articleFolder + currentFileName);
