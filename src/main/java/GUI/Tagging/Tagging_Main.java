@@ -3,7 +3,7 @@ package GUI.Tagging;
 /*
  * Get values (Main)
  * version: July 06, 2019 15:03 PM
- * Last revision: July 11, 2019 08:34 PM
+ * Last revision: July 13, 2019 08:29 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -11,12 +11,13 @@ package GUI.Tagging;
  */
 
 import java.io.BufferedReader;
-
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.Date;
@@ -34,6 +35,10 @@ import GUI.Units;
 
 
 public class Tagging_Main {
+	// articlelist
+	// File Check
+		String extension_Json = "json";
+		private BufferedWriter writerarticlelist = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Units.sourceFolder + Units.alllist), "utf-8"));
 	// Storage
 	FileOutputStream writer;
 	PrintStream ps;
@@ -68,46 +73,53 @@ public class Tagging_Main {
 	Vector valueDisplay = new Vector();
 
 	// Testing
-	private String contentTmp = "1. 標的：6558興能高 2. 分類：短、中多 3. 分析/正文： 貿易戰暫告一段落，行動裝置鋰電池應會再度回到熱門市場中。貿易戰之前這支已經拉了 一波，前高75。隨著貿易戰進行，穿戴裝置市場保守，掉到50底，後轉強。 昨天貿易戰中場嘉年華，這支獲得跳空缺口（66.5跳69），60ma強勢上揚，搭配之前就已 擺好的5ma、10ma、20ma，均線皆已上揚且依序排列。 K值雖已達87.5，但高檔鈍化可能性高。 4. 進退場機制：(非長期投資者，必須有停損機制) 今早洗盤68已進 分段停利：73起 加碼區：66.568.5 停損：55";
-
+	//private String contentTmp = "1. 標的：6558興能高 2. 分類：短、中多 3. 分析/正文： 貿易戰暫告一段落，行動裝置鋰電池應會再度回到熱門市場中。貿易戰之前這支已經拉了 一波，前高75。隨著貿易戰進行，穿戴裝置市場保守，掉到50底，後轉強。 昨天貿易戰中場嘉年華，這支獲得跳空缺口（66.5跳69），60ma強勢上揚，搭配之前就已 擺好的5ma、10ma、20ma，均線皆已上揚且依序排列。 K值雖已達87.5，但高檔鈍化可能性高。 4. 進退場機制：(非長期投資者，必須有停損機制) 今早洗盤68已進 分段停利：73起 加碼區：66.568.5 停損：55";
+	private String contentTmp = "1. 標的：2325 矽品 2. 分類：空 3. 分析/正文： 繼昨天大買1.5萬張矽品後，今天明教再度出手 15 萬張 http://tinyurl.com/jssx42s 不過看那成交金額，每股53.21元，很明顯不是在市場上買 從其它新聞來看，應該是跟特定法人盤後買的吧 今天已經取得30.44%的股權，粗略算一算，應該再買7萬張左右就33%了吧 今年矽品股東會應該很精彩 矽品今天收52.7，明教收購價55元，約4%的差距 收購案要一年後才能提，合併也還沒通過公平會審查 從明教說要收購開始，矽品最高大概就是53左右 而現在收購要拖一年，怎樣看這個價位都是高點，所以可以空空看 下週開盤後可以看看矽品沖多高，然後空個幾張來玩玩(沒券空期貨也行) 反正最高就漲到55元，風險也不會太高(除非阿伯突然有錢可以搶股)， 4. 進退場機制：(停損價位/出場條件/長期投資) 進場：下週一抓高點空，53元以上大概都可以吧 出場：我覺得跌回50元都是很有可能的，不然就是小賺就出場 停損：如果沒人提出高於55元的收購價，應該是沒必要停損，除非遇到強制回補 "; 
+	
 	public Tagging_Main() throws Exception {
-		// automatic tagging
+
+// article list
+//		ReadAllArticlesList();
+//		writerarticlelist.close();
+// automatic tagging
 		// Company info.
 		ReadCompany();
-
 		// articles related
 		// Read history
 		ReadHistory();
 		// Find start point by history record
+		//writerlist = new FileOutputStream(Units.historyFolder + Units.alllist, true);
 		ReadAllArticles(fileName_index, artileID_index);
+		//writerlist.close();
+		// All list
+		
 		// Get article content and filtering
-		for (int i = 0; i < filenameVec.size(); i++) {
-			articleId = "";
-			author = "";
-			title = "";
-			content = "";
-			date = "";
-			messagesCount = 0;
-			companyIdDisplay.clear();
-			companyNameDisplay.clear();
-			valueDisplay.clear();
-
-			GetContentByArticleId(filenameVec.get(i).toString(), articleIdVec.get(i).toString());
-			// Filter
-
-			pattern = Pattern.compile(regexTitle, Pattern.MULTILINE);
-			matcher = pattern.matcher(title);
-			if (matcher.find()) {
-				// Pattern Recognition
-				PatternCheck(content);
-				System.out.println(filenameVec.get(i) + "	" + articleId + "	" + date + "	" + title + "	"
-						+ author + "	" + companyIdDisplay.size() + "	" + companyNameDisplay.size() + "	"
-						+ valueDisplay.size());
-			}
-
-			// System.out.println(filenameVec.get(i)+" "+articleId+" "+date+" "+title+"
-			// "+author+" "+messagesCount);
-		}
+//		for (int i = 0; i < filenameVec.size(); i++) {
+//			articleId = "";
+//			author = "";
+//			title = "";
+//			content = "";
+//			date = "";
+//			messagesCount = 0;
+//			companyIdDisplay.clear();
+//			companyNameDisplay.clear();
+//			valueDisplay.clear();
+//
+//			GetContentByArticleId(filenameVec.get(i).toString(), articleIdVec.get(i).toString());
+//			// Filter
+//
+//			pattern = Pattern.compile(regexTitle, Pattern.MULTILINE);
+//			matcher = pattern.matcher(title);
+//			if (matcher.find()) {
+//				// Pattern Recognition
+//				PatternCheck(content);
+//				System.out.println(filenameVec.get(i) + "	" + articleId + "	" + date + "	" + title + "	"
+//						+ author + "	" + companyIdDisplay.size() + "	" + companyNameDisplay.size() + "	"
+//						+ valueDisplay.size());
+//			}
+//			// System.out.println(filenameVec.get(i)+" "+articleId+" "+date+" "+title+"
+//			// "+author+" "+messagesCount);
+//		}
 
 		// Save history
 		// StoragedHistory(aa, bb);
@@ -218,7 +230,7 @@ public class Tagging_Main {
 					if (articleobj.has("article_id")) {
 						idTmp = articleobj.getString("article_id");
 						// ==== Collection
-						// System.out.println(currentFileName+" "+idTmp+" "+startPoint);
+						System.out.println(currentFileName+" "+idTmp);
 						filenameVec.add(currentFileName);
 						articleIdVec.add(idTmp);
 					}
@@ -294,11 +306,11 @@ public class Tagging_Main {
 	}
 
 	private boolean isJSONValid(String jsonInString) {
-
 		JsonParser parser = new JsonParser();
 		JsonElement jsonele = parser.parse(jsonInString);
 		boolean check;
 		check = jsonele.isJsonObject();
+		
 		return check;
 	}
 
@@ -382,6 +394,77 @@ public class Tagging_Main {
 		}
 	}
 
+	private void ReadAllArticlesList() throws Exception {
+		boolean checkResponse;
+		File folder = new File(Units.articleFolder);
+		File[] listOfFiles = folder.listFiles();
+		Arrays.sort(listOfFiles);
+
+		String articlenameTmp;
+		String idTmp = "";
+		String strTmp = "";
+		String Line = "";
+		for (File file : listOfFiles) {
+			strTmp = "";
+			
+			if (file.isFile()) {
+				articlenameTmp = file.getName();
+				checkResponse = ExtensionCheck(Units.articleFolder + articlenameTmp);
+				if(checkResponse) {
+					FileReader fr = new FileReader(Units.articleFolder + articlenameTmp);
+					BufferedReader bfr = new BufferedReader(fr);
+					while ((Line = bfr.readLine()) != null) {
+						strTmp += Line;
+					}
+					fr.close();
+					bfr.close();
+					
+					if (isJSONValid(strTmp)) {
+						JSONObject obj = new JSONObject(strTmp);
+						if (obj.has("articles")) {
+							JSONArray jsonarray = new JSONArray(obj.get("articles").toString());
+							for (int i = 0; i < jsonarray.length(); i++) {
+								JSONObject articleobj = new JSONObject(jsonarray.get(i).toString());
+								if (articleobj.has("article_id")) {
+									idTmp = articleobj.getString("article_id");							
+								}
+								//System.out.println(articlenameTmp+"	"+idTmp);
+								writerarticlelist.write(articlenameTmp+"	"+idTmp+"\n");
+							}
+						}
+					}
+					System.out.println(articlenameTmp);
+				}				
+			}
+		}
+	}
+	
+	private boolean ExtensionCheck(String path) {
+		boolean checkResponse = false;
+
+		String Getextension = getFileExtension(new File(path));
+		String extension = Getextension.substring(1, Getextension.length());
+		if (extension.equalsIgnoreCase(extension_Json)) {
+			checkResponse = true;
+		}
+		return checkResponse;
+	}
+	
+	private static String getFileExtension(File file) {
+        String extension = "";
+ 
+        try {
+            if (file != null && file.exists()) {
+                String name = file.getName();
+                extension = name.substring(name.lastIndexOf("."));
+            }
+        } catch (Exception e) {
+            extension = "";
+        }
+ 
+        return extension;
+    }
+	
 	public static void main(String args[]) {
 		try {
 			Tagging_Main tagging = new Tagging_Main();
