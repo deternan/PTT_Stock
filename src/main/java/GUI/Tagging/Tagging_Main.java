@@ -18,10 +18,14 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.PrintStream;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -94,6 +98,8 @@ public class Tagging_Main {
 		ReadAllArticles_v2(fileName_index, artileID_index);
 		// All list
 		
+		String inputarticleId;
+		String formatdate;
 		// Get article content and filtering
 		for (int i = 0; i < articleIdVec.size(); i++) {
 			articleId = "";
@@ -105,10 +111,12 @@ public class Tagging_Main {
 			companyIdDisplay.clear();
 			companyNameDisplay.clear();
 			valueDisplay.clear();
+			inputarticleId = "";
+			formatdate = "";
 
+			// Get article content
 			GetContentByArticleId(filenameVec.get(i).toString(), articleIdVec.get(i).toString());
 			// Filter
-
 			pattern = Pattern.compile(regexTitle, Pattern.MULTILINE);
 			matcher = pattern.matcher(title);
 			if (matcher.find()) {
@@ -116,6 +124,16 @@ public class Tagging_Main {
 				PatternCheck(content);
 				System.out.println(filenameVec.get(i) + "	" + articleId + "	" + date + "	" + title + "	" + author + "	"
 						 + companyIdDisplay.size() + "	" + companyNameDisplay.size() + "	"+ valueDisplay.size());
+				
+				if(companyIdDisplay.size() > 0) {
+					inputarticleId = companyIdDisplay.get(0).toString();
+					// date 
+					date = replaceSpace(date);
+					formatdate = ISODateParser(date);
+					String TWDate = convertTWDate(formatdate);
+					// values average
+					getValueAverageByarticleId(inputarticleId, TWDate);
+				}
 			}
 			// System.out.println(filenameVec.get(i)+" "+articleId+" "+date+" "+title+"
 			// "+author+" "+messagesCount);
@@ -141,7 +159,6 @@ public class Tagging_Main {
 				fileName_index = temp[0];
 				artileID_index = temp[1];
 			}
-
 			bfr.close();
 		}
 	}
@@ -500,4 +517,79 @@ public class Tagging_Main {
 		}
 	}
 
+	private void getValueAverageByarticleId(String articleId, String dateStr) throws Exception 
+	{
+		File file = new File(Units.value_folder + articleId + Units.extension);
+		if (file.exists()) {
+			System.out.println(Units.value_folder + articleId + Units.extension+"	"+dateStr);
+			BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+			String Line;
+			String temp[];
+			while ((Line = bfr.readLine()) != null) {
+				temp = Line.split("	");
+				if(dateStr.equalsIgnoreCase(temp[0])) {
+					//System.out.println(temp[1]);
+					break;
+				}
+			}
+			bfr.close();
+		}
+	}
+	
+	private String ISODateParser(String dateStr) throws Exception {
+		boolean chinesecheck;
+		chinesecheck = isChinese(dateStr);
+		DateTimeFormatter formatter;
+		if (chinesecheck == true) {
+			formatter = DateTimeFormatter.ofPattern(Units.isotime_pattern, Locale.TAIWAN);
+		} else {
+			formatter = DateTimeFormatter.ofPattern(Units.isotime_pattern, Locale.ENGLISH);
+		}
+
+		LocalDate dateTime = LocalDate.parse(dateStr, formatter);
+		
+		return dateTime.toString().replaceAll("-", "");
+	}
+	
+	private boolean isChinese(String con) {
+		for (int i = 0; i < con.substring(0, 3).length(); i++) {
+			if (!Pattern.compile("[\u4e00-\u9fa5]").matcher(String.valueOf(con.charAt(i))).find()) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+	
+	private String replaceSpace(String dateStr) {
+		String dategap = "0";
+		String front = dateStr.substring(0, 8);
+		String last = dateStr.substring(9, dateStr.length());
+		String newdateStr = "";
+		if(dateStr.substring(8, 9).equalsIgnoreCase(" ")) {
+			newdateStr = front + dategap + last;
+		}else {
+			newdateStr = dateStr;
+		}
+		
+		return newdateStr;
+	}
+	
+	private String convertTWDate(String AD) {
+	    SimpleDateFormat df4 = new SimpleDateFormat("yyyyMMdd");
+	    SimpleDateFormat df2 = new SimpleDateFormat("MMdd");
+	    Calendar cal = Calendar.getInstance();
+	    String TWDate = "";
+	    try {
+	        cal.setTime(df4.parse(AD));
+	        cal.add(Calendar.YEAR, -1911);
+	        TWDate = Integer.toString(cal.get(Calendar.YEAR)) + df2.format(cal.getTime());
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        //return null;
+	    }
+	    
+	    return TWDate;
+	}
+	
 }
