@@ -1,12 +1,16 @@
 
+### Functions
+1) 擷取 PTT 文章 <br>
+2) PTT 文章人工標記 GUI
 
-## Data Source
+
+### Data Source
 [本國上市證券國際證券辨識號碼一覽表](http://isin.twse.com.tw/isin/C_public.jsp?strMode=2) <br>
 
 
 [本國上櫃證券國際證券辨識號碼一覽表](http://isin.twse.com.tw/isin/C_public.jsp?strMode=4)
 
-### Functions
+
 
 
 
@@ -15,8 +19,8 @@
 
 擷取上市公司名稱 & ID
 
->>/src/Data/TWSE\_info\_collection.java	<br> 
->>/src/ptt/get\_listedcompany\_list.java  <br>
+> /src/Data/TWSE\_info\_collection.java	<br> 
+> /src/ptt/get\_listedcompany\_list.java  <br>
 
 
 擷取上櫃公司名稱 & ID
@@ -27,7 +31,7 @@
 ## Statistics
 
 
-1) 發表過文章的作者 ID 
+1) 發表過文章的作者 ID <br>
 2) 
 
 
