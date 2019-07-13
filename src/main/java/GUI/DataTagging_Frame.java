@@ -37,6 +37,7 @@ import org.json.JSONObject;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import GUI.function.ReadArticleList;
 import GUI.function.ReadHistory;
 
 import javax.swing.JMenu;
@@ -165,7 +166,11 @@ public class DataTagging_Frame {
 						artileID_index = rh.returnartileID();
 						//System.out.println(fileName_index+"	"+artileID_index);
 						
-						ReadAllArticles(fileName_index, artileID_index);
+//						ReadAllArticles(fileName_index, artileID_index);
+						ReadArticleList ra = new ReadArticleList(artileID_index);
+						filenameVec = ra.returnfilename();
+						articleIdVec = ra.returnarticleId();
+						
 						// articleIndex = 0
 						GetContentByArticleId(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString());
 						pattern = Pattern.compile(regexTitle, Pattern.MULTILINE);
@@ -399,102 +404,102 @@ public class DataTagging_Frame {
 		frame.getContentPane().add(btnSaveExit);
 	}
 	
-	private void ReadAllArticles(String historyfileName, String historyarticleId) throws Exception
-	{
-		File folder = new File(Units.articleFolder);
-		File[] listOfFiles = folder.listFiles();
-		Arrays.sort(listOfFiles);
-		
-		for (File file : listOfFiles) {
-		    if (file.isFile()) {
-		    	
-		    	if((filestartPoint == true) && (startPoint == true)) {
-		    		StartCoolection(file.getName());
-		    	}
-		    	
-		    	if(file.getName().equalsIgnoreCase(historyfileName)) {
-	    			filestartPoint = true;
-	    			articleIndex(historyfileName, historyarticleId, file.getName());
-	    		}
-		    }
-		}
-	}
-	
-	private void StartCoolection(String currentFileName) throws Exception
-	{
-		String Line = "";
-		FileReader fr = new FileReader(Units.articleFolder + currentFileName);
-		BufferedReader bfr = new BufferedReader(fr);
-		
-		String strTmp = "";
-		while((Line = bfr.readLine())!=null)
-		{	
-			strTmp += Line;
-		}
-		fr.close();
-		bfr.close();
-		
-		String idTmp;
-		if(isJSONValid(strTmp)) {
-			JSONObject obj = new JSONObject(strTmp);
-			if(obj.has("articles")) {
-				JSONArray jsonarray = new JSONArray(obj.get("articles").toString());
-				for(int i=0; i<jsonarray.length(); i++)
-				{
-					JSONObject articleobj = new JSONObject(jsonarray.get(i).toString());
-					
-					if(articleobj.has("article_id")) {
-						idTmp = articleobj.getString("article_id");
-						// ==== Collection
-						//System.out.println(currentFileName+"	"+idTmp+"	"+startPoint);
-						filenameVec.add(currentFileName);
-						articleIdVec.add(idTmp);
-					}
-				}
-			}
-		}
-	}
-	
-	private void articleIndex(String historyfileName, String historyarticleId, String currentFileName) throws Exception
-	{
-		String Line = "";
-		FileReader fr = new FileReader(Units.articleFolder + historyfileName);
-		BufferedReader bfr = new BufferedReader(fr);
-		
-		String strTmp = "";
-		while((Line = bfr.readLine())!=null)
-		{	
-			strTmp += Line;
-		}
-		fr.close();
-		bfr.close();
-		
-		String idTmp;
-		if(isJSONValid(strTmp)) {
-			JSONObject obj = new JSONObject(strTmp);
-			if(obj.has("articles")) {
-				JSONArray jsonarray = new JSONArray(obj.get("articles").toString());
-				for(int i=0; i<jsonarray.length(); i++)
-				{
-					JSONObject articleobj = new JSONObject(jsonarray.get(i).toString());
-					if(articleobj.has("article_id")) {
-						idTmp = articleobj.getString("article_id");
-						
-						if((filestartPoint == true) && (startPoint == true)) {
-							// ==== Collection
-							//System.out.println(currentFileName+"	"+idTmp+"	"+startPoint);
-							filenameVec.add(currentFileName);
-							articleIdVec.add(idTmp);
-						}
-						
-						if((filestartPoint == true) && (idTmp.equalsIgnoreCase(historyarticleId))) {
-							startPoint = true;
-						}
-					}
-				}
-			}
-		}
-	}
+//	private void ReadAllArticles(String historyfileName, String historyarticleId) throws Exception
+//	{
+//		File folder = new File(Units.articleFolder);
+//		File[] listOfFiles = folder.listFiles();
+//		Arrays.sort(listOfFiles);
+//		
+//		for (File file : listOfFiles) {
+//		    if (file.isFile()) {
+//		    	
+//		    	if((filestartPoint == true) && (startPoint == true)) {
+//		    		StartCoolection(file.getName());
+//		    	}
+//		    	
+//		    	if(file.getName().equalsIgnoreCase(historyfileName)) {
+//	    			filestartPoint = true;
+//	    			articleIndex(historyfileName, historyarticleId, file.getName());
+//	    		}
+//		    }
+//		}
+//	}
+//	
+//	private void StartCoolection(String currentFileName) throws Exception
+//	{
+//		String Line = "";
+//		FileReader fr = new FileReader(Units.articleFolder + currentFileName);
+//		BufferedReader bfr = new BufferedReader(fr);
+//		
+//		String strTmp = "";
+//		while((Line = bfr.readLine())!=null)
+//		{	
+//			strTmp += Line;
+//		}
+//		fr.close();
+//		bfr.close();
+//		
+//		String idTmp;
+//		if(isJSONValid(strTmp)) {
+//			JSONObject obj = new JSONObject(strTmp);
+//			if(obj.has("articles")) {
+//				JSONArray jsonarray = new JSONArray(obj.get("articles").toString());
+//				for(int i=0; i<jsonarray.length(); i++)
+//				{
+//					JSONObject articleobj = new JSONObject(jsonarray.get(i).toString());
+//					
+//					if(articleobj.has("article_id")) {
+//						idTmp = articleobj.getString("article_id");
+//						// ==== Collection
+//						//System.out.println(currentFileName+"	"+idTmp+"	"+startPoint);
+//						filenameVec.add(currentFileName);
+//						articleIdVec.add(idTmp);
+//					}
+//				}
+//			}
+//		}
+//	}
+//	
+//	private void articleIndex(String historyfileName, String historyarticleId, String currentFileName) throws Exception
+//	{
+//		String Line = "";
+//		FileReader fr = new FileReader(Units.articleFolder + historyfileName);
+//		BufferedReader bfr = new BufferedReader(fr);
+//		
+//		String strTmp = "";
+//		while((Line = bfr.readLine())!=null)
+//		{	
+//			strTmp += Line;
+//		}
+//		fr.close();
+//		bfr.close();
+//		
+//		String idTmp;
+//		if(isJSONValid(strTmp)) {
+//			JSONObject obj = new JSONObject(strTmp);
+//			if(obj.has("articles")) {
+//				JSONArray jsonarray = new JSONArray(obj.get("articles").toString());
+//				for(int i=0; i<jsonarray.length(); i++)
+//				{
+//					JSONObject articleobj = new JSONObject(jsonarray.get(i).toString());
+//					if(articleobj.has("article_id")) {
+//						idTmp = articleobj.getString("article_id");
+//						
+//						if((filestartPoint == true) && (startPoint == true)) {
+//							// ==== Collection
+//							//System.out.println(currentFileName+"	"+idTmp+"	"+startPoint);
+//							filenameVec.add(currentFileName);
+//							articleIdVec.add(idTmp);
+//						}
+//						
+//						if((filestartPoint == true) && (idTmp.equalsIgnoreCase(historyarticleId))) {
+//							startPoint = true;
+//						}
+//					}
+//				}
+//			}
+//		}
+//	}
 	
 	private boolean isJSONValid(String jsonInString) {
 		
