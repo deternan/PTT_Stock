@@ -158,7 +158,7 @@ public class Tagging_Main {
 					getValueAverageByarticleId(inputarticleId, TWDate, TWDateAdd);
 				}
 			}
-			//System.out.println(TWDate+"	"+filenameVec.get(i)+"	"+articleIdVec.get(i)+"	"+onemonthAverage+"	"+twomonthAverage+"	"+threemonthAverage);
+			System.out.println(TWDate+"	"+filenameVec.get(i)+"	"+articleIdVec.get(i)+"	"+onemonthAverage+"	"+twomonthAverage+"	"+threemonthAverage);
 		}
 
 		// Save history
@@ -410,6 +410,7 @@ public class Tagging_Main {
 	}
 
 	// Regular Expression
+	
 	private void PatternCheck(String strTmp) {
 		// Company Name and ID
 		String regexName = "";
@@ -446,11 +447,6 @@ public class Tagging_Main {
 				idcheck = true;
 				companyIdDisplay.add(patternId);
 			}
-
-			// if((patternName.isEmpty() == false) || (patternId.isEmpty() == false)) {
-			// System.out.println(companyId.get(i)+" "+companyName.get(i)+" "+patternName+"
-			// "+patternId);
-			// }
 
 		}
 
