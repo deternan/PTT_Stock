@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: July 15, 2019 01:02 AM
+ * Last revision: July 15, 2019 07:40 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -53,6 +53,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextPane;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 
 public class DataTagging_Frame {
@@ -353,13 +354,17 @@ public class DataTagging_Frame {
 		lblMonth3.setText("");
 		frame.getContentPane().add(lblMonth3);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Positive");
-		rdbtnNewRadioButton.setBounds(403, 398, 141, 23);
-		frame.getContentPane().add(rdbtnNewRadioButton);
+		JRadioButton rdbtnNewRadioButtonPositive = new JRadioButton("Positive");
+		rdbtnNewRadioButtonPositive.setBounds(403, 398, 141, 23);
+		frame.getContentPane().add(rdbtnNewRadioButtonPositive);
 		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Negative");
-		rdbtnNewRadioButton_1.setBounds(403, 438, 141, 23);
-		frame.getContentPane().add(rdbtnNewRadioButton_1);
+		JRadioButton rdbtnNewRadioButtonNegative = new JRadioButton("Negative");
+		rdbtnNewRadioButtonNegative.setBounds(403, 438, 141, 23);
+		frame.getContentPane().add(rdbtnNewRadioButtonNegative);
+		
+		ButtonGroup radiogroup = new ButtonGroup();
+		radiogroup.add(rdbtnNewRadioButtonPositive);
+		radiogroup.add(rdbtnNewRadioButtonNegative);
 		
 		// Next article button
 		btnNewButton = new JButton("Next");
