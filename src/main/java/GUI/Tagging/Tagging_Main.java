@@ -364,6 +364,7 @@ public class Tagging_Main {
 		}
 	}
 
+	
 	private void StoragedHistory(String articleFileName, String articleId) throws Exception {
 		writer = new FileOutputStream(Units.historyFolder + Units.historyName, true);
 
