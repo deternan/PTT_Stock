@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: July 14, 2019 08:59 AM
+ * Last revision: July 15, 2019 01:02 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -20,8 +20,10 @@ import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -65,14 +67,17 @@ public class DataTagging_Frame {
 	JTextPane textPane_1;
 	JTextPane textPane_2;
 	JTextPane textPane_3;
-	
+	JLabel lblMonth1;
+	JLabel lblMonth2;
+	JLabel lblMonth3;
+	JLabel mclabel;
+	JLabel labArticleIdStr;
+	JButton btnSaveExit;
 	
 	// Company info.
 	Vector companyId = new Vector();
 	Vector companyName = new Vector();
 	
-	private boolean filestartPoint = false;
-	private boolean startPoint = false;
 	private Vector filenameVec = new Vector();
 	private Vector articleIdVec = new Vector();
 	// display
@@ -112,7 +117,11 @@ public class DataTagging_Frame {
 	private double onemonthAverage;
 	private double twomonthAverage;
 	private double threemonthAverage;
-	private String dateremindTag;		
+	private String dateremindTag;
+	
+	// Storage
+	FileOutputStream writer;
+	PrintStream ps;
 	
 	/**
 	 * Launch the application.
@@ -176,16 +185,16 @@ public class DataTagging_Frame {
 					}
 					
 					btnNewButton.setEnabled(true);
+					btnSaveExit.setEnabled(true);
+					
 				    // file dialog
 					File selectedFile = fileChooser.getSelectedFile();
 				    // function
 					try {
 						// Loading history
 						ReadHistory rh = new ReadHistory(selectedFile.getAbsolutePath());
-						//System.out.println("Selected file: " + selectedFile.getAbsolutePath());
 						fileName_index = rh.returnfileName();
 						artileID_index = rh.returnartileID();
-						//System.out.println(fileName_index+"	"+artileID_index);
 						
 //						ReadAllArticles(fileName_index, artileID_index);
 						ReadArticleList ra = new ReadArticleList(artileID_index);
@@ -205,6 +214,9 @@ public class DataTagging_Frame {
 							lblNewLabel_6.setEnabled(true);
 							lblNewLabel_6.setText(title);
 							textPane_2.setText(content);
+							mclabel.setText(String.valueOf(messagesCount));
+							labArticleIdStr.setText(articleId);
+							
 							
 							String companynameStr = "";
 							for(int i=0; i<companyNameDisplay.size(); i++) {
@@ -260,31 +272,31 @@ public class DataTagging_Frame {
 		menuBar.add(mnHelp);
 		
 		JLabel lblNewLabel = new JLabel("文章發表時間");
-		lblNewLabel.setBounds(35, 51, 130, 16);
+		lblNewLabel.setBounds(34, 34, 130, 16);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("作者");
-		lblNewLabel_1.setBounds(35, 86, 61, 16);
+		lblNewLabel_1.setBounds(34, 62, 61, 16);
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		// article published time
 		lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setBounds(139, 51, 202, 16);
+		lblNewLabel_2.setBounds(139, 34, 202, 16);
 		//lblNewLabel_2.setVisible(false);
 		frame.getContentPane().add(lblNewLabel_2);
 		
 		// article author
 		lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setBounds(139, 86, 202, 16);
+		lblNewLabel_3.setBounds(139, 62, 202, 16);
 		//lblNewLabel_3.setVisible(false);
 		frame.getContentPane().add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("公司名稱");
-		lblNewLabel_4.setBounds(35, 132, 61, 16);
+		lblNewLabel_4.setBounds(35, 143, 61, 16);
 		frame.getContentPane().add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("公司編號");
-		lblNewLabel_5.setBounds(176, 132, 61, 16);
+		lblNewLabel_5.setBounds(176, 143, 61, 16);
 		frame.getContentPane().add(lblNewLabel_5);
 		
 		// Company name
@@ -326,26 +338,26 @@ public class DataTagging_Frame {
 		lblNewLabel_8.setBounds(176, 370, 78, 16);
 		frame.getContentPane().add(lblNewLabel_8);
 		
-		JLabel lblMonth1 = new JLabel("1 month");
-		lblMonth1.setBounds(176, 398, 78, 16);
+		lblMonth1 = new JLabel("1 month");
+		lblMonth1.setBounds(176, 398, 150, 16);
 		lblMonth1.setText("");
 		frame.getContentPane().add(lblMonth1);
 		
-		JLabel lblMonth2 = new JLabel("2 month");
-		lblMonth2.setBounds(176, 442, 78, 16);
+		lblMonth2 = new JLabel("2 month");
+		lblMonth2.setBounds(176, 442, 150, 16);
 		lblMonth2.setText("");
 		frame.getContentPane().add(lblMonth2);
 		
-		JLabel lblMonth3 = new JLabel("3 month");
-		lblMonth3.setBounds(176, 491, 78, 16);
+		lblMonth3 = new JLabel("3 month");
+		lblMonth3.setBounds(176, 491, 150, 16);
 		lblMonth3.setText("");
 		frame.getContentPane().add(lblMonth3);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("New radio button");
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("Positive");
 		rdbtnNewRadioButton.setBounds(403, 398, 141, 23);
 		frame.getContentPane().add(rdbtnNewRadioButton);
 		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("New radio button");
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Negative");
 		rdbtnNewRadioButton_1.setBounds(403, 438, 141, 23);
 		frame.getContentPane().add(rdbtnNewRadioButton_1);
 		
@@ -376,6 +388,9 @@ public class DataTagging_Frame {
 					lblNewLabel_6.setEnabled(true);
 					lblNewLabel_6.setText(title);
 					textPane_2.setText(content);
+					mclabel.setText(String.valueOf(messagesCount));
+					labArticleIdStr.setText(articleId);
+					
 					String companynameStr = "";
 					for(int i=0; i<companyNameDisplay.size(); i++) {
 						companynameStr += companyNameDisplay.get(i).toString() + "\n";
@@ -421,6 +436,11 @@ public class DataTagging_Frame {
 						lblMonth1.setText(String.valueOf(onemonthAverage));
 						lblMonth2.setText(String.valueOf(twomonthAverage));
 						lblMonth3.setText(String.valueOf(threemonthAverage));
+					}else {
+						lblMonth1.setText("");
+						lblMonth2.setText("");
+						lblMonth3.setText("");
+						
 					}
 					
 				}else {
@@ -432,9 +452,40 @@ public class DataTagging_Frame {
 		});
 		frame.getContentPane().add(btnNewButton);
 		
-		JButton btnSaveExit = new JButton("Save");
+		// save button
+		btnSaveExit = new JButton("Save");
 		btnSaveExit.setBounds(540, 486, 117, 29);
+		btnSaveExit.setEnabled(false);
+		btnSaveExit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					StoragedHistory(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString());
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}		
+				
+			}
+		});
 		frame.getContentPane().add(btnSaveExit);
+		
+		JLabel lblMessageCount = new JLabel("Message Count");
+		lblMessageCount.setBounds(35, 563, 102, 16);
+		frame.getContentPane().add(lblMessageCount);
+		
+		mclabel = new JLabel("Message Count");
+		mclabel.setBounds(35, 591, 102, 16);
+		mclabel.setText("");
+		frame.getContentPane().add(mclabel);
+		
+		JLabel lblArticleId = new JLabel("article id");
+		lblArticleId.setBounds(34, 90, 61, 16);
+		frame.getContentPane().add(lblArticleId);
+		
+		labArticleIdStr = new JLabel("");
+		labArticleIdStr.setBounds(139, 90, 202, 16);
+		frame.getContentPane().add(labArticleIdStr);
 	}
 	
 	private boolean isJSONValid(String jsonInString) {
@@ -734,6 +785,8 @@ public class DataTagging_Frame {
 		lblNewLabel_2.setText(date);
 		lblNewLabel_3.setText(author);
 		lblNewLabel_6.setText(title);
+		mclabel.setText(String.valueOf(messagesCount));
+		labArticleIdStr.setText(articleId);
 		textPane_1.setText("");
 		textPane_2.setText("");
 		textPane_3.setText("");
@@ -759,6 +812,21 @@ public class DataTagging_Frame {
 		formatdateAdd = "";
 		TWDateAdd = "";
 		addtwpday = "";
+		lblMonth1.setText("");
+		lblMonth2.setText("");
+		lblMonth3.setText("");
+	}
+	
+	// Storage
+	private void StoragedHistory(String articleFileName, String articleId) throws Exception {
+		writer = new FileOutputStream(Units.historyFolder + Units.historyName, true);
+
+		Date date = new Date();
+		// System.out.println(date.toString());
+
+		ps = new PrintStream(writer);
+		ps.print(articleFileName + "	" + articleId + "	" + date.toString() + "\n");
+		ps.close();
 	}
 	
 }
