@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: July 15, 2019 07:40 AM
+ * Last revision: July 16, 2019 00:32 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -16,6 +16,8 @@ import javax.swing.JFrame;
 import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
@@ -74,6 +76,9 @@ public class DataTagging_Frame {
 	JLabel mclabel;
 	JLabel labArticleIdStr;
 	JButton btnSaveExit;
+	ButtonGroup radiogroup;
+	JRadioButton rdbtnNewRadioButtonPositive;
+	JRadioButton rdbtnNewRadioButtonNegative;
 	
 	// Company info.
 	Vector companyId = new Vector();
@@ -121,8 +126,12 @@ public class DataTagging_Frame {
 	private String dateremindTag;
 	
 	// Storage
-	FileOutputStream writer;
-	PrintStream ps;
+		// history
+		FileOutputStream writer;
+		PrintStream ps;
+		// manual tagging
+		FileOutputStream writerTagging;
+		PrintStream psTagging;
 	
 	/**
 	 * Launch the application.
@@ -354,17 +363,23 @@ public class DataTagging_Frame {
 		lblMonth3.setText("");
 		frame.getContentPane().add(lblMonth3);
 		
-		JRadioButton rdbtnNewRadioButtonPositive = new JRadioButton("Positive");
+		rdbtnNewRadioButtonPositive = new JRadioButton("Positive");
+		rdbtnNewRadioButtonPositive.setText("positive");
+		//rdbtnNewRadioButtonPositive.setActionCommand("positive");
 		rdbtnNewRadioButtonPositive.setBounds(403, 398, 141, 23);
 		frame.getContentPane().add(rdbtnNewRadioButtonPositive);
 		
-		JRadioButton rdbtnNewRadioButtonNegative = new JRadioButton("Negative");
+		rdbtnNewRadioButtonNegative = new JRadioButton("Negative");
+		rdbtnNewRadioButtonNegative.setText("negative");
+		//rdbtnNewRadioButtonNegative.setActionCommand("negative");
 		rdbtnNewRadioButtonNegative.setBounds(403, 438, 141, 23);
 		frame.getContentPane().add(rdbtnNewRadioButtonNegative);
 		
 		ButtonGroup radiogroup = new ButtonGroup();
 		radiogroup.add(rdbtnNewRadioButtonPositive);
 		radiogroup.add(rdbtnNewRadioButtonNegative);
+		
+		
 		
 		// Next article button
 		btnNewButton = new JButton("Next");
@@ -445,7 +460,6 @@ public class DataTagging_Frame {
 						lblMonth1.setText("");
 						lblMonth2.setText("");
 						lblMonth3.setText("");
-						
 					}
 					
 				}else {
@@ -453,6 +467,34 @@ public class DataTagging_Frame {
 				}
 				
 				articleIndex++;
+				
+				// radio group
+				String radiochoice = "";
+				if (rdbtnNewRadioButtonPositive.isSelected()) {
+					radiochoice = rdbtnNewRadioButtonPositive.getText();
+				} else if (rdbtnNewRadioButtonNegative.isSelected()) {
+					radiochoice = rdbtnNewRadioButtonNegative.getText();
+				} 
+				//System.out.println(radiochoice);
+				if(radiochoice.trim().length() == 0) {
+					radiochoice = "null";
+				}
+				String companyIdTag = "";
+				if(companyIdDisplay.size() == 0) {
+					companyIdTag = "null";
+				}else if(companyIdDisplay.size() == 1) {
+					companyIdTag = "single";
+				}else {
+					companyIdTag = "multiple";
+				}
+				
+				// Save tagging result
+				try {
+					manualTagging(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString(), radiochoice, companyIdTag);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		frame.getContentPane().add(btnNewButton);
@@ -827,11 +869,21 @@ public class DataTagging_Frame {
 		writer = new FileOutputStream(Units.historyFolder + Units.historyName, true);
 
 		Date date = new Date();
-		// System.out.println(date.toString());
 
 		ps = new PrintStream(writer);
 		ps.print(articleFileName + "	" + articleId + "	" + date.toString() + "\n");
 		ps.close();
 	}
+
+	// Tagging
+	private void manualTagging(String articleFileName, String articleId, String tagging, String category) throws Exception
+	{
+		writerTagging = new FileOutputStream(Units.taggingFolder + Units.taggingName, true);
+		
+		psTagging = new PrintStream(writerTagging);
+		psTagging.print(articleFileName + "	" + articleId + "	" + tagging + "	"+category+"\n");
+		psTagging.close();
+	}
+	
 	
 }
