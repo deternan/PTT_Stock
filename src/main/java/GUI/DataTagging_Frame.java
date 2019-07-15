@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: July 16, 2019 00:32 AM
+ * Last revision: July 16, 2019 07:42 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -79,6 +79,7 @@ public class DataTagging_Frame {
 	ButtonGroup radiogroup;
 	JRadioButton rdbtnNewRadioButtonPositive;
 	JRadioButton rdbtnNewRadioButtonNegative;
+	JRadioButton rdbtnUndefined;
 	
 	// Company info.
 	Vector companyId = new Vector();
@@ -194,7 +195,6 @@ public class DataTagging_Frame {
 						e2.printStackTrace();
 					}
 					
-					btnNewButton.setEnabled(true);
 					btnSaveExit.setEnabled(true);
 					
 				    // file dialog
@@ -206,7 +206,6 @@ public class DataTagging_Frame {
 						fileName_index = rh.returnfileName();
 						artileID_index = rh.returnartileID();
 						
-//						ReadAllArticles(fileName_index, artileID_index);
 						ReadArticleList ra = new ReadArticleList(artileID_index);
 						filenameVec = ra.returnfilename();
 						articleIdVec = ra.returnarticleId();
@@ -368,26 +367,50 @@ public class DataTagging_Frame {
 		//rdbtnNewRadioButtonPositive.setActionCommand("positive");
 		rdbtnNewRadioButtonPositive.setBounds(403, 398, 141, 23);
 		frame.getContentPane().add(rdbtnNewRadioButtonPositive);
+		rdbtnNewRadioButtonPositive.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				btnNewButton.setEnabled(true);
+			}
+		});
 		
 		rdbtnNewRadioButtonNegative = new JRadioButton("Negative");
 		rdbtnNewRadioButtonNegative.setText("negative");
 		//rdbtnNewRadioButtonNegative.setActionCommand("negative");
-		rdbtnNewRadioButtonNegative.setBounds(403, 438, 141, 23);
+		rdbtnNewRadioButtonNegative.setBounds(403, 435, 141, 23);
 		frame.getContentPane().add(rdbtnNewRadioButtonNegative);
+		rdbtnNewRadioButtonNegative.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				btnNewButton.setEnabled(true);
+			}
+		});
 		
-		ButtonGroup radiogroup = new ButtonGroup();
+		rdbtnUndefined = new JRadioButton("undefined");
+		rdbtnUndefined.setBounds(403, 473, 141, 23);
+		rdbtnUndefined.setText("undefined");
+		frame.getContentPane().add(rdbtnUndefined);
+		rdbtnUndefined.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				btnNewButton.setEnabled(true);
+			}
+		});
+		
+		radiogroup = new ButtonGroup();
 		radiogroup.add(rdbtnNewRadioButtonPositive);
 		radiogroup.add(rdbtnNewRadioButtonNegative);
-		
+		radiogroup.add(rdbtnUndefined);
 		
 		
 		// Next article button
 		btnNewButton = new JButton("Next");
-		btnNewButton.setBounds(403, 486, 117, 29);
+		btnNewButton.setBounds(403, 530, 117, 29);
 		btnNewButton.setEnabled(false);
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				
 				try {
 					GetContentByArticleId(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString());
@@ -474,8 +497,11 @@ public class DataTagging_Frame {
 					radiochoice = rdbtnNewRadioButtonPositive.getText();
 				} else if (rdbtnNewRadioButtonNegative.isSelected()) {
 					radiochoice = rdbtnNewRadioButtonNegative.getText();
-				} 
-				//System.out.println(radiochoice);
+				} else if(rdbtnUndefined.isSelected()) {
+					radiochoice = rdbtnUndefined.getText();
+				}
+				
+				System.out.println(radiochoice);
 				if(radiochoice.trim().length() == 0) {
 					radiochoice = "null";
 				}
@@ -495,13 +521,17 @@ public class DataTagging_Frame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				
+				// Remove radioButton
+				radiogroup.clearSelection();
+				btnNewButton.setEnabled(false);
 			}
 		});
 		frame.getContentPane().add(btnNewButton);
 		
 		// save button
 		btnSaveExit = new JButton("Save");
-		btnSaveExit.setBounds(540, 486, 117, 29);
+		btnSaveExit.setBounds(532, 530, 117, 29);
 		btnSaveExit.setEnabled(false);
 		btnSaveExit.addActionListener(new ActionListener() {
 			@Override
@@ -533,6 +563,8 @@ public class DataTagging_Frame {
 		labArticleIdStr = new JLabel("");
 		labArticleIdStr.setBounds(139, 90, 202, 16);
 		frame.getContentPane().add(labArticleIdStr);
+		
+		
 	}
 	
 	private boolean isJSONValid(String jsonInString) {
@@ -545,6 +577,7 @@ public class DataTagging_Frame {
 	}
 
 	private void GetContentByArticleId(String filenameIndex, String articleIdIndex) throws Exception {
+		
 		String Line = "";
 		FileReader fr = new FileReader(Units.articleFolder + filenameIndex);
 		BufferedReader bfr = new BufferedReader(fr);
