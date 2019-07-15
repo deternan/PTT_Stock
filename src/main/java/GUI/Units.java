@@ -35,6 +35,9 @@ public class Units {
 	// History
 	public static final String historyFolder = sourceFolder;
 	public static final String historyName = "history.txt";
+	// Tagging
+	public static final String taggingFolder = sourceFolder;
+	public static final String taggingName = "tagging.txt";
 	// All list
 	public static final String alllist = "articlelist.txt";
 	// Date

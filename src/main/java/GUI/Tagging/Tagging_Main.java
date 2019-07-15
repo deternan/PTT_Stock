@@ -3,7 +3,7 @@ package GUI.Tagging;
 /*
  * Get values (Main)
  * version: July 06, 2019 15:03 PM
- * Last revision: July 13, 2019 11:40 PM
+ * Last revision: July 15, 2019 11:26 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -44,10 +44,14 @@ public class Tagging_Main {
 	BufferedWriter writerarticlelist;
 	// File Check
 		String extension_Json = "json";
-	// Storage
-	FileOutputStream writer;
-	PrintStream ps;
-
+	// Storage 
+		// history
+		FileOutputStream writerHistory;
+		PrintStream psHistory;
+		// manual tagging
+		FileOutputStream writerTagging;
+		PrintStream psTagging;
+	
 	// Parameters
 	private String fileName_index = "";
 	private String artileID_index = "";
@@ -366,14 +370,13 @@ public class Tagging_Main {
 
 	
 	private void StoragedHistory(String articleFileName, String articleId) throws Exception {
-		writer = new FileOutputStream(Units.historyFolder + Units.historyName, true);
+		writerHistory = new FileOutputStream(Units.historyFolder + Units.historyName, true);
 
 		Date date = new Date();
-		// System.out.println(date.toString());
 
-		ps = new PrintStream(writer);
-		ps.print(articleFileName + "	" + articleId + "	" + date.toString() + "\n");
-		ps.close();
+		psHistory = new PrintStream(writerHistory);
+		psHistory.print(articleFileName + "	" + articleId + "	" + date.toString() + "\n");
+		psHistory.close();
 	}
 
 	private boolean isJSONValid(String jsonInString) {
@@ -704,6 +707,15 @@ public class Tagging_Main {
 		
 		return cal.getTime().toString();
 		//return cal.getTime();
+	}
+	
+	private void manualTagging(String articleFileName, String articleId, String tagging, String category) throws Exception
+	{
+		writerTagging = new FileOutputStream(Units.taggingFolder + Units.taggingName, true);
+
+		psTagging = new PrintStream(writerTagging);
+		psTagging.print(articleFileName + "	" + articleId + "	" + tagging + "	"+category+"\n");
+		psTagging.close();
 	}
 	
 }
