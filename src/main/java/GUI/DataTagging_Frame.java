@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: July 16, 2019 07:42 AM
+ * Last revision: July 16, 2019 09:02 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -80,6 +80,12 @@ public class DataTagging_Frame {
 	JRadioButton rdbtnNewRadioButtonPositive;
 	JRadioButton rdbtnNewRadioButtonNegative;
 	JRadioButton rdbtnUndefined;
+	private JLabel label;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel label_3;
+	private JLabel label_4;
+	private JLabel label_5;
 	
 	// Company info.
 	Vector companyId = new Vector();
@@ -133,6 +139,10 @@ public class DataTagging_Frame {
 		// manual tagging
 		FileOutputStream writerTagging;
 		PrintStream psTagging;
+	
+	// Running Tag
+	int indexNum = 1;
+		
 	
 	/**
 	 * Launch the application.
@@ -206,9 +216,12 @@ public class DataTagging_Frame {
 						fileName_index = rh.returnfileName();
 						artileID_index = rh.returnartileID();
 						
+						// Loading article list
 						ReadArticleList ra = new ReadArticleList(artileID_index);
 						filenameVec = ra.returnfilename();
 						articleIdVec = ra.returnarticleId();
+						indexNum = ra.returnarticleIndex();
+						
 						
 						// start to load article content by articleIndex 
 						GetContentByArticleId(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString());
@@ -218,6 +231,7 @@ public class DataTagging_Frame {
 							// Pattern check
 							PatternCheck(content);
 							
+							// Display on the Frame
 							lblNewLabel_2.setText(date);
 							lblNewLabel_3.setText(author);
 							lblNewLabel_6.setEnabled(true);
@@ -225,7 +239,9 @@ public class DataTagging_Frame {
 							textPane_2.setText(content);
 							mclabel.setText(String.valueOf(messagesCount));
 							labArticleIdStr.setText(articleId);
-							
+							label_3.setText(String.valueOf(articleIdVec.size()));
+							label_4.setText(String.valueOf(indexNum));
+							label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
 							
 							String companynameStr = "";
 							for(int i=0; i<companyNameDisplay.size(); i++) {
@@ -245,15 +261,14 @@ public class DataTagging_Frame {
 						}else {
 							DisplayAndClean();
 						}
-						
+						indexNum++;
 						articleIndex++;
+						
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-				    
 				}
-				
 			}
 		});
 		
@@ -269,7 +284,6 @@ public class DataTagging_Frame {
 				               JOptionPane.YES_NO_OPTION,
 				               JOptionPane.WARNING_MESSAGE);
 				    if (result==JOptionPane.YES_OPTION) {System.exit(0);}
-				    
 				}
 			}
 		});
@@ -411,7 +425,6 @@ public class DataTagging_Frame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				
 				try {
 					GetContentByArticleId(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString());
 				} catch (Exception e1) {
@@ -489,6 +502,9 @@ public class DataTagging_Frame {
 					DisplayAndClean();
 				}
 				
+				label_4.setText(String.valueOf(indexNum+1));
+				label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
+				indexNum++;
 				articleIndex++;
 				
 				// radio group
@@ -563,6 +579,33 @@ public class DataTagging_Frame {
 		labArticleIdStr = new JLabel("");
 		labArticleIdStr.setBounds(139, 90, 202, 16);
 		frame.getContentPane().add(labArticleIdStr);
+		
+		label = new JLabel("總數");
+		label.setBounds(704, 398, 78, 16);
+		frame.getContentPane().add(label);
+		
+		label_1 = new JLabel("已完成");
+		label_1.setBounds(704, 435, 78, 16);
+		frame.getContentPane().add(label_1);
+		
+		label_2 = new JLabel("剩餘");
+		label_2.setBounds(704, 473, 78, 16);
+		frame.getContentPane().add(label_2);
+		
+		// article total number
+		label_3 = new JLabel("");
+		label_3.setBounds(794, 398, 78, 16);
+		frame.getContentPane().add(label_3);
+		
+		// finished number
+		label_4 = new JLabel("");
+		label_4.setBounds(794, 435, 78, 16);
+		frame.getContentPane().add(label_4);
+		
+		// remind number
+		label_5 = new JLabel("");
+		label_5.setBounds(794, 477, 78, 16);
+		frame.getContentPane().add(label_5);
 		
 		
 	}
