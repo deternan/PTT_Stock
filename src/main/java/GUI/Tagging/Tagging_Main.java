@@ -97,17 +97,29 @@ public class Tagging_Main {
 		// article list
 		//Createarticlelist();
 		
-// automatic tagging
+		// Processing
+		Processing();
+	}
+	
+	private void Createarticlelist() throws Exception
+	{
+		writerarticlelist = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Units.sourceFolder + Units.alllist), "utf-8"));
+		ReadAllArticlesList();
+		writerarticlelist.close();
+	}
+	
+	private void Processing() throws Exception {
+		// automatic tagging
 		// Company info.
 		ReadCompany();
 		// articles related
 		// Read history
 		ReadHistory();
 		// Find start point by history record
-//		ReadAllArticles(fileName_index, artileID_index);
+		// ReadAllArticles(fileName_index, artileID_index);
 		ReadAllArticles_v2(fileName_index, artileID_index);
 		// All list
-		
+
 		String inputarticleId;
 		String formatdate;
 		String TWDate;
@@ -115,8 +127,7 @@ public class Tagging_Main {
 		String TWDateAdd;
 		String addtwpday;
 		// Get article content and filtering
-		for (int i = 0; i < articleIdVec.size(); i++) 
-		{
+		for (int i = 0; i < articleIdVec.size(); i++) {
 			articleId = "";
 			author = "";
 			title = "";
@@ -145,12 +156,14 @@ public class Tagging_Main {
 			if (matcher.find()) {
 				// Pattern Recognition
 				PatternCheck(content);
-//				System.out.println(filenameVec.get(i) + "	" + articleId + "	" + date + "	" + title + "	" + author + "	"
-//						 + companyIdDisplay.size() + "	" + companyNameDisplay.size() + "	"+ valueDisplay.size());
-				
-				if(companyIdDisplay.size() > 0) {
+				// System.out.println(filenameVec.get(i) + " " + articleId + " " + date + " " +
+				// title + " " + author + " "
+				// + companyIdDisplay.size() + " " + companyNameDisplay.size() + " "+
+				// valueDisplay.size());
+
+				if (companyIdDisplay.size() > 0) {
 					inputarticleId = companyIdDisplay.get(0).toString();
-					// date 
+					// date
 					date = replaceSpace(date);
 					formatdate = ISODateParser(date);
 					TWDate = convertTWDate(formatdate);
@@ -158,33 +171,27 @@ public class Tagging_Main {
 					addtwpday = addTwoDate(formatdate);
 					formatdateAdd = ISODateParserZone(addtwpday);
 					TWDateAdd = convertTWDate(formatdateAdd);
-					
-					//System.out.println(TWDate+"	"+TWDateAdd);
+
+					// System.out.println(TWDate+" "+TWDateAdd);
 					// values average
 					getValueAverageByarticleId(inputarticleId, TWDate, TWDateAdd);
 				}
 			}
 			String companyIdTag = "";
-			if(companyIdDisplay.size() == 0) {
+			if (companyIdDisplay.size() == 0) {
 				companyIdTag = "null";
-			}else if(companyIdDisplay.size() == 1) {
+			} else if (companyIdDisplay.size() == 1) {
 				companyIdTag = "single";
-			}else {
+			} else {
 				companyIdTag = "multiple";
 			}
-			//System.out.println(TWDate+"	"+filenameVec.get(i)+"	"+articleIdVec.get(i)+"	"+onemonthAverage+"	"+twomonthAverage+"	"+threemonthAverage);
-			
-			// Save tagging result
-			//manualTagging(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString(), radiochoice, companyIdTag);
-		}
+			// System.out.println(TWDate+" "+filenameVec.get(i)+" "+articleIdVec.get(i)+"
+			// "+onemonthAverage+" "+twomonthAverage+" "+threemonthAverage);
 
-	}
-	
-	private void Createarticlelist() throws Exception
-	{
-		writerarticlelist = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Units.sourceFolder + Units.alllist), "utf-8"));
-		ReadAllArticlesList();
-		writerarticlelist.close();
+			// Save tagging result
+			// manualTagging(filenameVec.get(articleIndex).toString(),
+			// articleIdVec.get(articleIndex).toString(), radiochoice, companyIdTag);
+		}
 	}
 	
 // Read History
@@ -526,6 +533,9 @@ public class Tagging_Main {
 								}
 								if (articleobj.has("author")) {
 									authorTmp = articleobj.get("author").toString();
+									if(authorTmp.trim().length() == 0) {
+										authorTmp = "null";
+									}
 									if(authorTmp.indexOf("(")>0) {
 										authorTagIndex = authorTmp.indexOf("(");
 										authorTmp = authorTmp.substring(0, authorTagIndex).trim();

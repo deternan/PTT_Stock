@@ -3,7 +3,7 @@ package GUI.function;
 /*
  * Data tagging GUI (article list)
  * version: July 13, 2019 02:10 PM
- * Last revision: July 16, 2019 10:00 PM
+ * Last revision: July 16, 2019 11:56 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -22,6 +22,7 @@ public class ReadArticleList
 {
 	private Vector fileNameVec = new Vector();
 	private Vector articleIdVec = new Vector();
+	private Vector articleAuthorVec = new Vector();
 	private int articleIndex;
 
 	public ReadArticleList(String historyarticleId) throws Exception
@@ -36,16 +37,20 @@ public class ReadArticleList
 			String temp[];
 			while ((Line = bfr.readLine()) != null) {
 				temp = Line.split("\\t");
-				if(startcheck) {
-					fileNameVec.add(temp[0]);
-					articleIdVec.add(temp[1]);
+				//System.out.println(Line+"	"+temp.length);
+				if(temp.length == 3) {
+					if(startcheck) {
+						fileNameVec.add(temp[0]);
+						articleIdVec.add(temp[1]);
+						articleAuthorVec.add(temp[2]);
+					}
+					
+					if(historyarticleId.equalsIgnoreCase(temp[1])) {
+						startcheck = true;
+						articleIndex = aa;
+					}
+					aa++;
 				}
-				
-				if(historyarticleId.equalsIgnoreCase(temp[1])) {
-					startcheck = true;
-					articleIndex = aa;
-				}
-				aa++;
 			}
 		}
 		bfr.close();
@@ -57,6 +62,10 @@ public class ReadArticleList
 	
 	public Vector returnarticleId(){
 		return articleIdVec;
+	}
+	
+	public Vector returnarticleAuthorVec() {
+		return articleAuthorVec;
 	}
 	
 	public int returnarticleIndex() {
