@@ -93,6 +93,7 @@ public class DataTagging_Frame {
 	
 	private Vector filenameVec = new Vector();
 	private Vector articleIdVec = new Vector();
+	private Vector articleAuthorVec = new Vector();
 	// display
 		Vector companyIdDisplay = new Vector();
 		Vector companyNameDisplay = new Vector();
@@ -220,6 +221,7 @@ public class DataTagging_Frame {
 						ReadArticleList ra = new ReadArticleList(artileID_index);
 						filenameVec = ra.returnfilename();
 						articleIdVec = ra.returnarticleId();
+						articleAuthorVec = ra.returnarticleAuthorVec();
 						indexNum = ra.returnarticleIndex();
 						
 						
@@ -532,7 +534,7 @@ public class DataTagging_Frame {
 				
 				// Save tagging result
 				try {
-					manualTagging(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString(), radiochoice, companyIdTag);
+					manualTagging(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString(), articleAuthorVec.get(articleIndex).toString(), radiochoice, companyIdTag);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -952,12 +954,12 @@ public class DataTagging_Frame {
 	}
 
 	// Tagging
-	private void manualTagging(String articleFileName, String articleId, String tagging, String category) throws Exception
+	private void manualTagging(String articleFileName, String articleId, String articleauthor, String tagging, String category) throws Exception
 	{
 		writerTagging = new FileOutputStream(Units.taggingFolder + Units.taggingName, true);
 		
 		psTagging = new PrintStream(writerTagging);
-		psTagging.print(articleFileName + "	" + articleId + "	" + tagging + "	"+category+"\n");
+		psTagging.print(articleFileName + "	" + articleId + "	" + articleauthor +"	" +tagging + "	"+ category+"\n");
 		psTagging.close();
 	}
 	
