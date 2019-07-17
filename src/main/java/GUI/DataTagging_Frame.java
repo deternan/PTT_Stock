@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: July 17, 2019 00:16 AM
+ * Last revision: July 17, 2019 00:40 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -142,7 +142,7 @@ public class DataTagging_Frame {
 		PrintStream psTagging;
 	
 	// Running Tag
-	int indexNum = 1;
+	int indexNum;
 		
 	
 	/**
@@ -229,8 +229,7 @@ public class DataTagging_Frame {
 						articleIdVec = ra.returnarticleId();
 						articleAuthorVec = ra.returnarticleAuthorVec();
 						indexNum = ra.returnarticleIndex();
-						
-						
+												
 						// start to load article content by articleIndex 
 						GetContentByArticleId(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString());
 						pattern = Pattern.compile(regexTitle, Pattern.MULTILINE);
@@ -267,6 +266,9 @@ public class DataTagging_Frame {
 							}
 							textPane_3.setText(companyvalueStr);
 						}else {
+							label_3.setText(String.valueOf(articleIdVec.size()));
+							label_4.setText(String.valueOf(indexNum));
+							label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
 							DisplayAndClean();
 						}
 						indexNum++;
@@ -507,6 +509,9 @@ public class DataTagging_Frame {
 					}
 					
 				}else {
+					label_3.setText(String.valueOf(articleIdVec.size()));
+					label_4.setText(String.valueOf(indexNum));
+					label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
 					DisplayAndClean();
 				}
 				

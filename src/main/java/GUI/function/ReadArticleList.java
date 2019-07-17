@@ -3,7 +3,7 @@ package GUI.function;
 /*
  * Data tagging GUI (article list)
  * version: July 13, 2019 02:10 PM
- * Last revision: July 18, 2019 00:16 AM
+ * Last revision: July 18, 2019 00:40 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -35,6 +35,7 @@ public class ReadArticleList
 			startcheck = false;
 		}else {
 			startcheck = true;
+			articleIndex = 0;
 		}
 		int aa = 1;
 		if (file.exists()) {
