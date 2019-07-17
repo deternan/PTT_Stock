@@ -3,7 +3,7 @@ package GUI.Tagging;
 /*
  * Get values (Main)
  * version: July 06, 2019 15:03 PM
- * Last revision: July 15, 2019 11:26 PM
+ * Last revision: July 17, 2019 00:26 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -17,6 +17,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -73,6 +74,8 @@ public class Tagging_Main {
 	// Regular expression
 	Pattern pattern;
 	Matcher matcher;
+	// ActionListener (count)
+		int articleIndex = 0;
 	// display
 	Vector companyIdDisplay = new Vector();
 	Vector companyNameDisplay = new Vector();
@@ -91,10 +94,8 @@ public class Tagging_Main {
 	
 	public Tagging_Main() throws Exception {
 
-// article list
-//		writerarticlelist = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Units.sourceFolder + Units.alllist), "utf-8"));
-//		ReadAllArticlesList();
-//		writerarticlelist.close();
+		// article list
+		//Createarticlelist();
 		
 // automatic tagging
 		// Company info.
@@ -114,7 +115,8 @@ public class Tagging_Main {
 		String TWDateAdd;
 		String addtwpday;
 		// Get article content and filtering
-		for (int i = 0; i < articleIdVec.size(); i++) {
+		for (int i = 0; i < articleIdVec.size(); i++) 
+		{
 			articleId = "";
 			author = "";
 			title = "";
@@ -162,12 +164,29 @@ public class Tagging_Main {
 					getValueAverageByarticleId(inputarticleId, TWDate, TWDateAdd);
 				}
 			}
-			System.out.println(TWDate+"	"+filenameVec.get(i)+"	"+articleIdVec.get(i)+"	"+onemonthAverage+"	"+twomonthAverage+"	"+threemonthAverage);
+			String companyIdTag = "";
+			if(companyIdDisplay.size() == 0) {
+				companyIdTag = "null";
+			}else if(companyIdDisplay.size() == 1) {
+				companyIdTag = "single";
+			}else {
+				companyIdTag = "multiple";
+			}
+			//System.out.println(TWDate+"	"+filenameVec.get(i)+"	"+articleIdVec.get(i)+"	"+onemonthAverage+"	"+twomonthAverage+"	"+threemonthAverage);
+			
+			// Save tagging result
+			//manualTagging(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString(), radiochoice, companyIdTag);
 		}
 
-		// Save history
-		// StoragedHistory(aa, bb);
 	}
+	
+	private void Createarticlelist() throws Exception
+	{
+		writerarticlelist = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Units.sourceFolder + Units.alllist), "utf-8"));
+		ReadAllArticlesList();
+		writerarticlelist.close();
+	}
+	
 // Read History
 
 	private void ReadHistory() throws Exception 
@@ -464,7 +483,9 @@ public class Tagging_Main {
 		}
 	}
 
-	private void ReadAllArticlesList() throws Exception {
+	
+	private void ReadAllArticlesList() throws Exception 
+	{
 		boolean checkResponse;
 		File folder = new File(Units.articleFolder);
 		File[] listOfFiles = folder.listFiles();
@@ -473,6 +494,9 @@ public class Tagging_Main {
 		String articlenameTmp;
 		String idTmp = "";
 		String strTmp = "";
+		String authorTmp = "";
+			int authorTagIndex;
+		
 		String Line = "";
 		for (File file : listOfFiles) {
 			strTmp = "";
@@ -490,16 +514,25 @@ public class Tagging_Main {
 					bfr.close();
 					
 					if (isJSONValid(strTmp)) {
+						idTmp = "";
+						authorTmp = "";
 						JSONObject obj = new JSONObject(strTmp);
 						if (obj.has("articles")) {
 							JSONArray jsonarray = new JSONArray(obj.get("articles").toString());
 							for (int i = 0; i < jsonarray.length(); i++) {
 								JSONObject articleobj = new JSONObject(jsonarray.get(i).toString());
 								if (articleobj.has("article_id")) {
-									idTmp = articleobj.getString("article_id");							
+									idTmp = articleobj.get("article_id").toString();							
+								}
+								if (articleobj.has("author")) {
+									authorTmp = articleobj.get("author").toString();
+									if(authorTmp.indexOf("(")>0) {
+										authorTagIndex = authorTmp.indexOf("(");
+										authorTmp = authorTmp.substring(0, authorTagIndex).trim();
+									}
 								}
 								//System.out.println(articlenameTmp+"	"+idTmp);
-								writerarticlelist.write(articlenameTmp+"	"+idTmp+"\n");
+								writerarticlelist.write(articlenameTmp+"	"+idTmp+"	"+authorTmp+"\n");
 							}
 						}
 					}
@@ -709,7 +742,7 @@ public class Tagging_Main {
 		//return cal.getTime();
 	}
 	
-	private void manualTagging(String articleFileName, String articleId, String tagging, String category) throws Exception
+	private void manualTagging(String articleFileName, String articleId, String author, String tagging, String category) throws Exception
 	{
 		writerTagging = new FileOutputStream(Units.taggingFolder + Units.taggingName, true);
 
