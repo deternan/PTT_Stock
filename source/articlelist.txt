@@ -449,7 +449,7 @@ Stock_0024.json	M.1442197839.A.EC7	gk1329
 Stock_0024.json	M.1442198300.A.141	somebaby
 Stock_0024.json	M.1442198394.A.BE5	Rigaudon
 Stock_0024.json	M.1442198683.A.A73	whoamiqq
-Stock_0024.json	M.1442200870.A.A1F	
+Stock_0024.json	M.1442200870.A.A1F	null
 Stock_0024.json	M.1442203533.A.192	Blackrice
 Stock_0024.json	M.1442203982.A.699	chofan
 Stock_0024.json	M.1442203995.A.E58	tagso
@@ -526,7 +526,7 @@ Stock_0028.json	M.1442292823.A.DAA	Bokolo
 Stock_0028.json	M.1442296803.A.CBB	wickwolf
 Stock_0028.json	M.1442297723.A.03A	ray2501
 Stock_0028.json	M.1442300269.A.4F9	Merman
-Stock_0028.json	M.1442300963.A.4C2	
+Stock_0028.json	M.1442300963.A.4C2	null
 Stock_0028.json	M.1442301447.A.E7F	coconing
 Stock_0028.json	M.1442301919.A.1D1	rorosmile
 Stock_0028.json	M.1442302403.A.9F7	KINMENKING
@@ -787,7 +787,7 @@ Stock_0041.json	M.1442720365.A.70C	Psliao
 Stock_0041.json	M.1442721209.A.074	IEhacker
 Stock_0041.json	M.1442722094.A.205	IAN48
 Stock_0041.json	M.1442723823.A.6C8	mike8406
-Stock_0041.json	M.1442723870.A.D1F	
+Stock_0041.json	M.1442723870.A.D1F	null
 Stock_0041.json	M.1442724943.A.14C	vcbxnzm
 Stock_0041.json	M.1442729685.A.25E	WANG122122
 Stock_0041.json	M.1442733255.A.578	reterk
@@ -866,7 +866,7 @@ Stock_0045.json	M.1442850928.A.989	neo5277
 Stock_0045.json	M.1442851296.A.ABF	WaKao5566
 Stock_0045.json	M.1442851473.A.3BD	fantasy14
 Stock_0045.json	M.1442853004.A.A2E	Anjou
-Stock_0045.json	M.1442853667.A.36B	
+Stock_0045.json	M.1442853667.A.36B	null
 Stock_0045.json	M.1442880030.A.A98	WANG122122
 Stock_0045.json	M.1442880165.A.32D	WANG122122
 Stock_0045.json	M.1442880301.A.DF5	QQron
@@ -1044,7 +1044,7 @@ Stock_0054.json	M.1443104025.A.779	tagso
 Stock_0054.json	M.1443104149.A.F23	gk1329
 Stock_0054.json	M.1443105244.A.165	ich2
 Stock_0054.json	M.1443105922.A.7C7	goliathplus
-Stock_0054.json	M.1443106533.A.9AB	
+Stock_0054.json	M.1443106533.A.9AB	null
 Stock_0054.json	M.1443106611.A.88C	jackred
 Stock_0054.json	M.1443106674.A.FD3	KevinGet
 Stock_0054.json	M.1443108768.A.72B	dearevan
@@ -1391,7 +1391,7 @@ Stock_0071.json	M.1443752615.A.0E2	littlex
 Stock_0071.json	M.1443753986.A.271	MissRipley
 Stock_0071.json	M.1443754132.A.1CD	Sirius1812
 Stock_0071.json	M.1443756880.A.432	KevinGet
-Stock_0071.json	M.1443757173.A.64B	
+Stock_0071.json	M.1443757173.A.64B	null
 Stock_0071.json	M.1443757505.A.524	KevinGet
 Stock_0071.json	M.1443757539.A.583	wickwolf
 Stock_0071.json	M.1443759105.A.87B	benny0125
@@ -1433,7 +1433,7 @@ Stock_0073.json	M.1443800461.A.F1E	Destery
 Stock_0073.json	M.1443800793.A.CD9	sinple
 Stock_0073.json	M.1443802059.A.754	wickwolf
 Stock_0073.json	M.1443802292.A.3E3	moobmoob
-Stock_0073.json	M.1443806876.A.D03	
+Stock_0073.json	M.1443806876.A.D03	null
 Stock_0073.json	M.1443808602.A.FDE	mk2
 Stock_0073.json	M.1443808621.A.7C2	qscxz
 Stock_0073.json	M.1443824594.A.55C	ArgusX
@@ -1708,7 +1708,7 @@ Stock_0087.json	M.1444449191.A.4FD	coolgigi
 Stock_0087.json	M.1444449831.A.337	dichotomyptt
 Stock_0087.json	M.1444459922.A.419	moobmoob
 Stock_0087.json	M.1444461431.A.413	maniaque
-Stock_0087.json	M.1444464733.A.6D8	
+Stock_0087.json	M.1444464733.A.6D8	null
 Stock_0087.json	M.1444468398.A.549	amm123
 Stock_0087.json	M.1444468533.A.134	QQMMWA
 Stock_0087.json	M.1444475274.A.0B3	POWERSERIES
@@ -1760,7 +1760,7 @@ Stock_0089.json	M.1444613411.A.0B6	Galedo
 Stock_0089.json	M.1444614416.A.714	Sirius1812
 Stock_0090.json	M.1444614553.A.DE8	leoking
 Stock_0090.json	M.1444617631.A.E0F	luckysmallsu
-Stock_0090.json	M.1444619605.A.D87	
+Stock_0090.json	M.1444619605.A.D87	null
 Stock_0090.json	M.1444620785.A.F91	aitt
 Stock_0090.json	M.1444620926.A.184	a8223328
 Stock_0090.json	M.1444624107.A.B26	a000000000
@@ -1917,8 +1917,8 @@ Stock_0097.json	M.1444847260.A.4D2	roseritter
 Stock_0097.json	M.1444862833.A.861	ted5566
 Stock_0097.json	M.1444864684.A.9D6	kid014028
 Stock_0097.json	M.1444869004.A.1AB	borry6299
-Stock_0097.json	M.1444872381.A.C0A	
-Stock_0098.json	M.1444873237.A.14B	
+Stock_0097.json	M.1444872381.A.C0A	null
+Stock_0098.json	M.1444873237.A.14B	null
 Stock_0098.json	M.1444878724.A.144	ji32k7a8u8
 Stock_0098.json	M.1444879395.A.6F1	arains
 Stock_0098.json	M.1444880833.A.417	f204137
@@ -1931,7 +1931,7 @@ Stock_0098.json	M.1444888698.A.472	arains
 Stock_0098.json	M.1444888803.A.B13	wickwolf
 Stock_0098.json	M.1444889246.A.3C6	kornai
 Stock_0098.json	M.1444890293.A.328	GSPing
-Stock_0098.json	M.1444891265.A.731	
+Stock_0098.json	M.1444891265.A.731	null
 Stock_0098.json	M.1444892368.A.ED2	coconing
 Stock_0098.json	M.1444894147.A.0C6	s6307
 Stock_0098.json	M.1444894355.A.DA9	CTC0115
@@ -2655,7 +2655,7 @@ Stock_0134.json	M.1446555386.A.0FF	Sirius1812
 Stock_0134.json	M.1446555785.A.96A	Lloyds
 Stock_0134.json	M.1446560277.A.CE0	iebonso
 Stock_0134.json	M.1446560881.A.E7F	kachy
-Stock_0134.json	M.1446562025.A.801	
+Stock_0134.json	M.1446562025.A.801	null
 Stock_0135.json	M.1446562944.A.429	STAV72
 Stock_0135.json	M.1446563617.A.08D	comjj45
 Stock_0135.json	M.1446564070.A.201	borry6299
@@ -2949,7 +2949,7 @@ Stock_0149.json	M.1447117186.A.E32	Sirius1812
 Stock_0149.json	M.1447119603.A.33A	qihau
 Stock_0149.json	M.1447120798.A.6F3	jerrylin
 Stock_0149.json	M.1447125441.A.532	richdanny
-Stock_0149.json	M.1447133771.A.E1D	
+Stock_0149.json	M.1447133771.A.E1D	null
 Stock_0149.json	M.1447135083.A.D10	Jikk
 Stock_0149.json	M.1447135228.A.006	jganet
 Stock_0149.json	M.1447136875.A.4DA	arains
@@ -2975,7 +2975,7 @@ Stock_0150.json	M.1447160986.A.784	azt
 Stock_0150.json	M.1447164114.A.B09	adhere
 Stock_0150.json	M.1447164152.A.084	emily15
 Stock_0150.json	M.1447165196.A.C01	yulun1984
-Stock_0150.json	M.1447165214.A.136	
+Stock_0150.json	M.1447165214.A.136	null
 Stock_0151.json	M.1447167637.A.5AE	deathcustom
 Stock_0151.json	M.1447168495.A.F1A	comjj45
 Stock_0151.json	M.1447168559.A.869	tiku123
@@ -3038,7 +3038,7 @@ Stock_0153.json	M.1447251948.A.818	au4au4j3fu4
 Stock_0153.json	M.1447252263.A.A02	bota
 Stock_0154.json	M.1447252521.A.5FC	brad0000
 Stock_0154.json	M.1447253994.A.193	kid014028
-Stock_0154.json	M.1447254016.A.4D0	
+Stock_0154.json	M.1447254016.A.4D0	null
 Stock_0154.json	M.1447254974.A.522	jimgene
 Stock_0154.json	M.1447255061.A.A7E	jrkb1986
 Stock_0154.json	M.1447261348.A.B17	aitt
@@ -3167,7 +3167,7 @@ Stock_0160.json	M.1447498395.A.6A2	Blackrice
 Stock_0160.json	M.1447505795.A.6C5	kkamn
 Stock_0160.json	M.1447506423.A.72F	rorosmile
 Stock_0160.json	M.1447507436.A.8AD	hijacker
-Stock_0160.json	M.1447510303.A.A2F	
+Stock_0160.json	M.1447510303.A.A2F	null
 Stock_0160.json	M.1447518825.A.622	kooluo
 Stock_0160.json	M.1447523373.A.7E1	fjack
 Stock_0160.json	M.1447525785.A.7A0	ppippi
@@ -3462,7 +3462,7 @@ Stock_0175.json	M.1448189895.A.23F	powergogo
 Stock_0175.json	M.1448195594.A.E61	cpy5740
 Stock_0175.json	M.1448196165.A.626	Daniel
 Stock_0175.json	M.1448197640.A.0E6	borry6299
-Stock_0175.json	M.1448198699.A.B1B	
+Stock_0175.json	M.1448198699.A.B1B	null
 Stock_0175.json	M.1448199445.A.45D	rain888
 Stock_0175.json	M.1448200432.A.323	b8514032
 Stock_0175.json	M.1448205785.A.4F5	Lottery
@@ -3477,7 +3477,7 @@ Stock_0175.json	M.1448238602.A.9BD	wickwolf
 Stock_0175.json	M.1448239297.A.4EB	kof70380
 Stock_0175.json	M.1448239407.A.566	OriginStar
 Stock_0176.json	M.1448241869.A.EB9	CTC0115
-Stock_0176.json	M.1448243708.A.B7A	
+Stock_0176.json	M.1448243708.A.B7A	null
 Stock_0176.json	M.1448243925.A.097	koei888
 Stock_0176.json	M.1448244612.A.451	a123544714
 Stock_0176.json	M.1448246174.A.4EA	Sirius1812
@@ -3694,7 +3694,7 @@ Stock_0186.json	M.1448682394.A.C45	IanLi
 Stock_0186.json	M.1448682775.A.231	chocoball
 Stock_0186.json	M.1448684719.A.794	MWMWMWMWMW
 Stock_0186.json	M.1448686282.A.621	a8223328
-Stock_0186.json	M.1448687276.A.4DF	
+Stock_0186.json	M.1448687276.A.4DF	null
 Stock_0186.json	M.1448688010.A.254	wuowuo
 Stock_0187.json	M.1448688022.A.B75	a8223328
 Stock_0187.json	M.1448689829.A.09D	alanasd
@@ -3958,7 +3958,7 @@ Stock_0199.json	M.1449366353.A.1D4	onok
 Stock_0199.json	M.1449368079.A.6D8	Sirius1812
 Stock_0200.json	M.1449382147.A.248	leon99
 Stock_0200.json	M.1449382170.A.27E	BoyPlunger
-Stock_0200.json	M.1449382712.A.3ED	
+Stock_0200.json	M.1449382712.A.3ED	null
 Stock_0200.json	M.1449382948.A.6BB	BoyPlunger
 Stock_0200.json	M.1449385130.A.CA7	futureq
 Stock_0200.json	M.1449385462.A.133	yanki826
@@ -4536,7 +4536,7 @@ Stock_0228.json	M.1450409901.A.B06	BoyPlunger
 Stock_0228.json	M.1450412510.A.DD8	pipi1983
 Stock_0229.json	M.1450415261.A.150	aitt
 Stock_0229.json	M.1450416389.A.3C8	On10n
-Stock_0229.json	M.1450418190.A.2F8	
+Stock_0229.json	M.1450418190.A.2F8	null
 Stock_0229.json	M.1450418402.A.D20	wickwolf
 Stock_0229.json	M.1450418402.A.269	Sirius1812
 Stock_0229.json	M.1450418926.A.809	KrisNYC
@@ -5251,7 +5251,7 @@ Stock_0264.json	M.1452231771.A.AE2	F15
 Stock_0264.json	M.1452232538.A.67C	leejy0224
 Stock_0264.json	M.1452232666.A.CFC	KevinGet
 Stock_0264.json	M.1452232807.A.D7C	sorryandbye
-Stock_0264.json	M.1452233576.A.800	
+Stock_0264.json	M.1452233576.A.800	null
 Stock_0264.json	M.1452234123.A.4D5	BoyPlunger
 Stock_0264.json	M.1452236713.A.34E	coconing
 Stock_0265.json	M.1452236869.A.8FB	douglasjs
@@ -5274,7 +5274,7 @@ Stock_0265.json	M.1452255767.A.E5B	whoamiqq
 Stock_0265.json	M.1452256865.A.9E0	deangod99
 Stock_0265.json	M.1452259816.A.274	krumpkris
 Stock_0265.json	M.1452261561.A.433	OriginStar
-Stock_0266.json	M.1452263129.A.87E	
+Stock_0266.json	M.1452263129.A.87E	null
 Stock_0266.json	M.1452263223.A.558	cacheee
 Stock_0266.json	M.1452265563.A.A89	comjj45
 Stock_0266.json	M.1452266036.A.CAF	comjj45
@@ -6516,7 +6516,7 @@ Stock_0328.json	M.1455885827.A.88E	qqqq
 Stock_0328.json	M.1455887213.A.0DA	sad010
 Stock_0328.json	M.1455887445.A.3FC	Duncan2
 Stock_0328.json	M.1455891316.A.518	qqqq
-Stock_0328.json	M.1455891568.A.65D	
+Stock_0328.json	M.1455891568.A.65D	null
 Stock_0328.json	M.1455893010.A.006	comjj45
 Stock_0328.json	M.1455893153.A.29F	THINKTAIWAN
 Stock_0328.json	M.1455893810.A.A43	mjsp99
@@ -6586,7 +6586,7 @@ Stock_0331.json	M.1456068356.A.D71	bravejared
 Stock_0331.json	M.1456079161.A.6C3	markban
 Stock_0331.json	M.1456080929.A.BDE	mutanttoad46
 Stock_0331.json	M.1456083583.A.4BB	u9003096
-Stock_0331.json	M.1456096992.A.647	
+Stock_0331.json	M.1456096992.A.647	null
 Stock_0331.json	M.1456097739.A.0EC	WANG122122
 Stock_0331.json	M.1456101008.A.4BF	jj314257
 Stock_0331.json	M.1456103060.A.F8B	Sirius1812
@@ -7072,7 +7072,7 @@ Stock_0355.json	M.1457259036.A.717	drt0422
 Stock_0355.json	M.1457259437.A.0CC	KevinGet
 Stock_0355.json	M.1457266774.A.124	anti87
 Stock_0356.json	M.1457279585.A.40E	chelseayin
-Stock_0356.json	M.1457284146.A.EEA	
+Stock_0356.json	M.1457284146.A.EEA	null
 Stock_0356.json	M.1457310712.A.798	WANG122122
 Stock_0356.json	M.1457312243.A.F65	UCDaLanJiao
 Stock_0356.json	M.1457314930.A.434	twelvethflor
@@ -7102,7 +7102,7 @@ Stock_0357.json	M.1457356784.A.26A	IanLi
 Stock_0357.json	M.1457358263.A.831	bbs3379
 Stock_0357.json	M.1457358998.A.7E6	au4au4j3fu4
 Stock_0357.json	M.1457360773.A.7AF	virgolibra
-Stock_0357.json	M.1457363626.A.E82	
+Stock_0357.json	M.1457363626.A.E82	null
 Stock_0357.json	M.1457363748.A.424	anti87
 Stock_0357.json	M.1457364488.A.1F5	finalpoint
 Stock_0357.json	M.1457367135.A.E36	Galvus
@@ -7597,7 +7597,7 @@ Stock_0382.json	M.1458274443.A.B39	kurapica1106
 Stock_0382.json	M.1458275578.A.201	jackred
 Stock_0382.json	M.1458279698.A.088	BigMidDay
 Stock_0382.json	M.1458280803.A.E62	wickwolf
-Stock_0382.json	M.1458281537.A.A58	
+Stock_0382.json	M.1458281537.A.A58	null
 Stock_0382.json	M.1458281812.A.BFF	hjgx
 Stock_0382.json	M.1458284751.A.BC9	dubliuers
 Stock_0382.json	M.1458285614.A.F05	coconing
@@ -8005,7 +8005,7 @@ Stock_0402.json	M.1459178324.A.F99	crocus
 Stock_0402.json	M.1459178928.A.0C1	lupefan4eva
 Stock_0402.json	M.1459179732.A.635	aaeeopqo
 Stock_0402.json	M.1459183080.A.7EA	davislin
-Stock_0402.json	M.1459190668.A.297	
+Stock_0402.json	M.1459190668.A.297	null
 Stock_0402.json	M.1459207982.A.C35	leopord
 Stock_0402.json	M.1459209746.A.A0C	jack00002100
 Stock_0402.json	M.1459210366.A.808	sadegg
@@ -8604,7 +8604,7 @@ Stock_0432.json	M.1460712130.A.2C5	tazac
 Stock_0432.json	M.1460720078.A.7A0	yhchih
 Stock_0432.json	M.1460723126.A.3EB	fred2691
 Stock_0432.json	M.1460723690.A.DA4	deangod99
-Stock_0432.json	M.1460723914.A.AAA	
+Stock_0432.json	M.1460723914.A.AAA	null
 Stock_0432.json	M.1460724082.A.35C	cutmygg
 Stock_0432.json	M.1460725362.A.ACE	myandydesk
 Stock_0432.json	M.1460726181.A.CF2	STAV72
@@ -8763,7 +8763,7 @@ Stock_0440.json	M.1461079066.A.F00	comjj45
 Stock_0440.json	M.1461079138.A.AC4	IanLi
 Stock_0440.json	M.1461079466.A.415	comjj45
 Stock_0440.json	M.1461079833.A.5A5	comjj45
-Stock_0440.json	M.1461080371.A.3AB	
+Stock_0440.json	M.1461080371.A.3AB	null
 Stock_0440.json	M.1461080708.A.135	a123544714
 Stock_0440.json	M.1461081235.A.B4D	OECD
 Stock_0440.json	M.1461084258.A.2A0	kbcc
@@ -8777,7 +8777,7 @@ Stock_0441.json	M.1461107118.A.FF9	rgx
 Stock_0441.json	M.1461111200.A.AE9	RuRu5566
 Stock_0441.json	M.1461112202.A.100	wickwolf
 Stock_0441.json	M.1461112354.A.4C1	schizophrena
-Stock_0441.json	M.1461113102.A.E88	
+Stock_0441.json	M.1461113102.A.E88	null
 Stock_0441.json	M.1461113892.A.447	批踢踢實業坊
 Stock_0441.json	M.1461117334.A.7C6	chengwaye
 Stock_0441.json	M.1461117971.A.742	F7
@@ -9053,7 +9053,7 @@ Stock_0454.json	M.1461717002.A.8C8	wickwolf
 Stock_0454.json	M.1461719364.A.6DA	weron
 Stock_0455.json	M.1461721101.A.5C4	ljsnonocat2
 Stock_0455.json	M.1461723144.A.E14	Ax0101
-Stock_0455.json	M.1461723383.A.39A	
+Stock_0455.json	M.1461723383.A.39A	null
 Stock_0455.json	M.1461723595.A.479	chengwaye
 Stock_0455.json	M.1461724066.A.F16	ichitakajoe
 Stock_0455.json	M.1461724531.A.078	axddunt
@@ -9305,7 +9305,7 @@ Stock_0467.json	M.1462353381.A.CA1	tsmc1
 Stock_0467.json	M.1462354682.A.5BC	HuHuAnn
 Stock_0467.json	M.1462358292.A.713	URUZ1
 Stock_0467.json	M.1462359340.A.E4E	longreen
-Stock_0467.json	M.1462363177.A.9FE	
+Stock_0467.json	M.1462363177.A.9FE	null
 Stock_0467.json	M.1462364701.A.3B7	a01030202
 Stock_0467.json	M.1462365053.A.021	coastlinee
 Stock_0467.json	M.1462365158.A.1E5	yata4547
@@ -9725,7 +9725,7 @@ Stock_0488.json	M.1463149616.A.72B	lupefan4eva
 Stock_0488.json	M.1463150542.A.2FF	abcqq2323
 Stock_0488.json	M.1463151566.A.C5B	wickwolf
 Stock_0488.json	M.1463152949.A.7B0	m4vu0
-Stock_0488.json	M.1463154537.A.F82	
+Stock_0488.json	M.1463154537.A.F82	null
 Stock_0488.json	M.1463157052.A.347	deepdish
 Stock_0488.json	M.1463158069.A.7D6	Lloyds
 Stock_0488.json	M.1463168427.A.38D	drt0422
@@ -10091,7 +10091,7 @@ Stock_0506.json	M.1463149616.A.72B	lupefan4eva
 Stock_0506.json	M.1463150542.A.2FF	abcqq2323
 Stock_0506.json	M.1463151566.A.C5B	wickwolf
 Stock_0507.json	M.1463152949.A.7B0	m4vu0
-Stock_0507.json	M.1463154537.A.F82	
+Stock_0507.json	M.1463154537.A.F82	null
 Stock_0507.json	M.1463157052.A.347	deepdish
 Stock_0507.json	M.1463158069.A.7D6	Lloyds
 Stock_0507.json	M.1463168427.A.38D	drt0422
@@ -10458,11 +10458,11 @@ Stock_0525.json	M.1464059796.A.3C7	cp296633
 Stock_0525.json	M.1464060547.A.A9E	BingDo
 Stock_0525.json	M.1464060900.A.A6F	kksis
 Stock_0525.json	M.1464069602.A.007	wickwolf
-Stock_0525.json	M.1464071070.A.EC7	
+Stock_0525.json	M.1464071070.A.EC7	null
 Stock_0525.json	M.1464071861.A.3BC	Ax0101
 Stock_0525.json	M.1464072194.A.E82	coconing
 Stock_0525.json	M.1464077067.A.385	nemies
-Stock_0525.json	M.1464078517.A.67E	
+Stock_0525.json	M.1464078517.A.67E	null
 Stock_0525.json	M.1464088938.A.9DE	bigstudent
 Stock_0525.json	M.1464089052.A.80B	cfppo
 Stock_0525.json	M.1464090875.A.BF9	allenyalun
@@ -10833,7 +10833,7 @@ Stock_0544.json	M.1465061907.A.1C3	bbs3379
 Stock_0544.json	M.1465069656.A.284	f204137
 Stock_0544.json	M.1465087511.A.32A	d878303
 Stock_0544.json	M.1465089046.A.1A6	jason860129
-Stock_0544.json	M.1465094873.A.B96	
+Stock_0544.json	M.1465094873.A.B96	null
 Stock_0544.json	M.1465095971.A.AB1	IMISSYOI
 Stock_0544.json	M.1465096926.A.688	redmi2
 Stock_0544.json	M.1465102184.A.C0B	SP4B
@@ -11124,7 +11124,7 @@ Stock_0558.json	M.1465911136.A.E04	cs520
 Stock_0558.json	M.1465916394.A.062	IanLi
 Stock_0558.json	M.1465917444.A.631	Skyglasses
 Stock_0558.json	M.1465922720.A.2BD	lupefan4eva
-Stock_0558.json	M.1465923150.A.5A5	
+Stock_0558.json	M.1465923150.A.5A5	null
 Stock_0558.json	M.1465923293.A.069	zxcvxx
 Stock_0558.json	M.1465925258.A.79A	kerkers
 Stock_0558.json	M.1465947412.A.2F7	a29976137
@@ -11358,7 +11358,7 @@ Stock_0570.json	M.1466567947.A.221	cheinshin
 Stock_0570.json	M.1466570188.A.C1E	loveponpon
 Stock_0570.json	M.1466572062.A.B02	OriginStar
 Stock_0570.json	M.1466573540.A.EEC	hijacker
-Stock_0570.json	M.1466574328.A.C93	
+Stock_0570.json	M.1466574328.A.C93	null
 Stock_0570.json	M.1466574547.A.2DC	s10330076
 Stock_0570.json	M.1466575030.A.449	yilanism
 Stock_0570.json	M.1466575268.A.3A5	whitedeath
@@ -11486,7 +11486,7 @@ Stock_0576.json	M.1466779228.A.BBF	tonku
 Stock_0576.json	M.1466780129.A.F23	comjj45
 Stock_0576.json	M.1466780635.A.571	comjj45
 Stock_0576.json	M.1466780847.A.7AC	mepowerlmay
-Stock_0576.json	M.1466780956.A.6FA	
+Stock_0576.json	M.1466780956.A.6FA	null
 Stock_0576.json	M.1466781457.A.1E1	comjj45
 Stock_0576.json	M.1466781955.A.89A	comjj45
 Stock_0577.json	M.1466783205.A.AB2	zxcvxx
@@ -11929,7 +11929,7 @@ Stock_0598.json	M.1467780380.A.AE2	tvfan
 Stock_0598.json	M.1467780616.A.D8C	fish19831012
 Stock_0598.json	M.1467782128.A.F77	andelll
 Stock_0599.json	M.1467782206.A.AD0	Sirius1812
-Stock_0599.json	M.1467782261.A.DAD	
+Stock_0599.json	M.1467782261.A.DAD	null
 Stock_0599.json	M.1467783519.A.411	jimyang0422
 Stock_0599.json	M.1467784802.A.ED5	wickwolf
 Stock_0599.json	M.1467785515.A.BFB	kof70380
@@ -12425,7 +12425,7 @@ Stock_0623.json	M.1468996772.A.C1E	apo100
 Stock_0623.json	M.1468997229.A.C91	coconing
 Stock_0623.json	M.1468998453.A.BE9	fish19831012
 Stock_0623.json	M.1469000425.A.5A2	largebra
-Stock_0623.json	M.1469001286.A.651	
+Stock_0623.json	M.1469001286.A.651	null
 Stock_0623.json	M.1469006054.A.167	gn01948540
 Stock_0623.json	M.1469007268.A.EE7	cheinshin
 Stock_0624.json	M.1469009160.A.D5E	leosee
@@ -13323,7 +13323,7 @@ Stock_0668.json	M.1471421027.A.45B	Lineage5415
 Stock_0668.json	M.1471424552.A.EBA	floraflora
 Stock_0668.json	M.1471425441.A.043	Ax0101
 Stock_0668.json	M.1471427515.A.0B2	schizophrena
-Stock_0668.json	M.1471431057.A.154	
+Stock_0668.json	M.1471431057.A.154	null
 Stock_0668.json	M.1471431414.A.8EA	t288850
 Stock_0668.json	M.1471431565.A.CB1	Searchingfor
 Stock_0668.json	M.1471432286.A.C8F	johnps
@@ -13994,7 +13994,7 @@ Stock_0702.json	M.1472779872.A.BF5	RainCityBoy
 Stock_0702.json	M.1472780336.A.E56	neo5277
 Stock_0702.json	M.1472780518.A.B71	tgyhuj01
 Stock_0702.json	M.1472780972.A.416	chengwaye
-Stock_0702.json	M.1472781163.A.356	
+Stock_0702.json	M.1472781163.A.356	null
 Stock_0702.json	M.1472782217.A.092	Vonix
 Stock_0702.json	M.1472782342.A.4B4	hyde7015
 Stock_0702.json	M.1472782424.A.8E2	legend2k
@@ -14229,7 +14229,7 @@ Stock_0713.json	M.1473232774.A.E14	aalluubbaa
 Stock_0714.json	M.1473234878.A.4BD	gn01948540
 Stock_0714.json	M.1473235556.A.C61	xylinum
 Stock_0714.json	M.1473235822.A.0A8	cheinshin
-Stock_0714.json	M.1473236623.A.578	
+Stock_0714.json	M.1473236623.A.578	null
 Stock_0714.json	M.1473243864.A.883	adam7148
 Stock_0714.json	M.1473244540.A.049	alfiema
 Stock_0714.json	M.1473245391.A.D6B	femlro
@@ -14302,7 +14302,7 @@ Stock_0717.json	M.1473337394.A.946	kkamn
 Stock_0717.json	M.1473338279.A.6CA	deangod99
 Stock_0717.json	M.1473339736.A.B10	[彩券]
 Stock_0717.json	M.1473339946.A.FC3	justadog
-Stock_0717.json	M.1473340187.A.38B	
+Stock_0717.json	M.1473340187.A.38B	null
 Stock_0717.json	M.1473340377.A.205	IanLi
 Stock_0717.json	M.1473340474.A.80D	kksis
 Stock_0717.json	M.1473340613.A.7EB	cheinshin
@@ -14340,7 +14340,7 @@ Stock_0719.json	M.1473408976.A.CB7	nightwing
 Stock_0719.json	M.1473409891.A.582	ECB
 Stock_0719.json	M.1473414887.A.151	Ax0101
 Stock_0719.json	M.1473418687.A.20F	justadog
-Stock_0719.json	M.1473418778.A.732	
+Stock_0719.json	M.1473418778.A.732	null
 Stock_0719.json	M.1473420879.A.E89	neo5277
 Stock_0719.json	M.1473423200.A.378	Lloyds
 Stock_0719.json	M.1473426266.A.07A	deangod99
@@ -14382,8 +14382,8 @@ Stock_0721.json	M.1473510404.A.D9A	zesonpso
 Stock_0721.json	M.1473511393.A.489	deangod99
 Stock_0721.json	M.1473511700.A.9B9	q1w2e3r4t5
 Stock_0721.json	M.1473512083.A.B01	cheinshin
-Stock_0721.json	M.1473512156.A.2B4	
-Stock_0721.json	M.1473512380.A.0E1	
+Stock_0721.json	M.1473512156.A.2B4	null
+Stock_0721.json	M.1473512380.A.0E1	null
 Stock_0721.json	M.1473512540.A.CFA	kvjo
 Stock_0721.json	M.1473517149.A.8A7	enail5566
 Stock_0722.json	M.1473517312.A.932	april79
@@ -14427,7 +14427,7 @@ Stock_0723.json	M.1473667617.A.225	anti87
 Stock_0723.json	M.1473668880.A.E4C	atmpopo
 Stock_0723.json	M.1473670594.A.321	DUNHILL112
 Stock_0724.json	M.1473670849.A.5CD	anti87
-Stock_0724.json	M.1473679186.A.6AE	
+Stock_0724.json	M.1473679186.A.6AE	null
 Stock_0724.json	M.1473684574.A.26F	deangod99
 Stock_0724.json	M.1473685114.A.3DB	ghostly
 Stock_0724.json	M.1473686731.A.1CF	IanLi
@@ -14837,7 +14837,7 @@ Stock_0744.json	M.1474982752.A.7BD	Snoopy
 Stock_0744.json	M.1474987417.A.35B	reflow
 Stock_0744.json	M.1474990982.A.6F3	nightwing
 Stock_0744.json	M.1474997059.A.0E2	Sirius1812
-Stock_0744.json	M.1475007917.A.19B	
+Stock_0744.json	M.1475007917.A.19B	null
 Stock_0744.json	M.1475011425.A.D74	Snoopy
 Stock_0744.json	M.1475013819.A.960	catwalk456
 Stock_0744.json	M.1475023844.A.5F5	wwwww
@@ -16399,7 +16399,7 @@ Stock_0822.json	M.1479392990.A.A2D	wqsaxz
 Stock_0822.json	M.1479393258.A.55A	lasaka01
 Stock_0822.json	M.1479394477.A.6D6	justadog
 Stock_0822.json	M.1479394805.A.0FB	Mikuni
-Stock_0822.json	M.1479397949.A.AEF	
+Stock_0822.json	M.1479397949.A.AEF	null
 Stock_0822.json	M.1479423858.A.83F	wwf1310
 Stock_0822.json	M.1479429003.A.DED	wickwolf
 Stock_0822.json	M.1479432436.A.6A5	chengwaye
@@ -16407,7 +16407,7 @@ Stock_0822.json	M.1479432467.A.7C8	zakijudelo
 Stock_0822.json	M.1479433854.A.874	Sirius1812
 Stock_0823.json	M.1479434166.A.C5E	ba90011
 Stock_0823.json	M.1479437556.A.1DE	melvin1234
-Stock_0823.json	M.1479438391.A.3EC	
+Stock_0823.json	M.1479438391.A.3EC	null
 Stock_0823.json	M.1479439036.A.583	Sirius1812
 Stock_0823.json	M.1479439622.A.886	whoamiqq
 Stock_0823.json	M.1479443957.A.184	somebaby
@@ -16826,7 +16826,7 @@ Stock_0843.json	M.1480501050.A.CE7	dog9527
 Stock_0843.json	M.1480502434.A.3A9	kgbb
 Stock_0843.json	M.1480505362.A.E6C	vanillav
 Stock_0844.json	M.1480509159.A.1EE	IanLi
-Stock_0844.json	M.1480509963.A.2A6	
+Stock_0844.json	M.1480509963.A.2A6	null
 Stock_0844.json	M.1480510010.A.A50	deangod99
 Stock_0844.json	M.1480510372.A.D49	GG88
 Stock_0844.json	M.1480510967.A.A8F	[彩券]
@@ -17668,7 +17668,7 @@ Stock_0885.json	M.1483070189.A.D39	Sirius1812
 Stock_0886.json	M.1483071595.A.77D	Anonynous
 Stock_0886.json	M.1483073143.A.E5E	CTC0115
 Stock_0886.json	M.1483073666.A.AC0	Snoopy
-Stock_0886.json	M.1483074398.A.FB5	
+Stock_0886.json	M.1483074398.A.FB5	null
 Stock_0886.json	M.1483077884.A.2FF	Sirius1812
 Stock_0886.json	M.1483077941.A.A72	ohjok
 Stock_0886.json	M.1483078854.A.394	charles0939
@@ -18079,7 +18079,7 @@ Stock_0906.json	M.1484310816.A.623	justadog
 Stock_0906.json	M.1484311192.A.FE0	LiFePO4
 Stock_0906.json	M.1484311590.A.4CF	justadog
 Stock_0906.json	M.1484311972.A.893	deangod99
-Stock_0906.json	M.1484312299.A.303	
+Stock_0906.json	M.1484312299.A.303	null
 Stock_0906.json	M.1484313182.A.604	shawold
 Stock_0906.json	M.1484318501.A.CBB	miw
 Stock_0906.json	M.1484321677.A.4F2	heavenbeyond
@@ -18292,7 +18292,7 @@ Stock_0917.json	M.1484914553.A.A88	Noemen
 Stock_0917.json	M.1484914945.A.D33	justadog
 Stock_0917.json	M.1484915854.A.F22	justadog
 Stock_0917.json	M.1484916289.A.A80	deangod99
-Stock_0917.json	M.1484916468.A.A1A	
+Stock_0917.json	M.1484916468.A.A1A	null
 Stock_0917.json	M.1484917039.A.B8C	primotore
 Stock_0917.json	M.1484919252.A.790	lotung
 Stock_0917.json	M.1484920352.A.5E9	fish19831012
@@ -18718,7 +18718,7 @@ Stock_0938.json	M.1486537881.A.96B	kvjo
 Stock_0938.json	M.1486537970.A.AC4	orangeex
 Stock_0938.json	M.1486538149.A.93F	Sirius1812
 Stock_0938.json	M.1486538582.A.7DD	s9503669
-Stock_0938.json	M.1486538954.A.DB6	
+Stock_0938.json	M.1486538954.A.DB6	null
 Stock_0938.json	M.1486542687.A.44A	ianlai
 Stock_0938.json	M.1486547224.A.F43	alex710707
 Stock_0938.json	M.1486555318.A.D3D	justadog
@@ -20505,7 +20505,7 @@ Stock_1027.json	M.1490366733.A.238	kerkers
 Stock_1027.json	M.1490367262.A.8E1	comjj45
 Stock_1027.json	M.1490367737.A.487	endoxans
 Stock_1027.json	M.1490368448.A.EF6	cccs
-Stock_1028.json	M.1490371434.A.D1B	
+Stock_1028.json	M.1490371434.A.D1B	null
 Stock_1028.json	M.1490373380.A.A37	BMW220i
 Stock_1028.json	M.1490378295.A.A79	ohya111326
 Stock_1028.json	M.1490389757.A.94C	lockread
@@ -20626,7 +20626,7 @@ Stock_1033.json	M.1490613346.A.1AD	IzumiKonata
 Stock_1033.json	M.1490613824.A.834	redspeed
 Stock_1033.json	M.1490614458.A.C68	kiesoIFRS
 Stock_1034.json	M.1490614601.A.2EE	ericlin0940
-Stock_1034.json	M.1490616221.A.0B7	
+Stock_1034.json	M.1490616221.A.0B7	null
 Stock_1034.json	M.1490618234.A.039	ninaman
 Stock_1034.json	M.1490618702.A.B46	deangod99
 Stock_1034.json	M.1490619880.A.A31	Matt2
@@ -20749,7 +20749,7 @@ Stock_1040.json	M.1490795267.A.925	nemies
 Stock_1040.json	M.1490795314.A.4DB	yungszu
 Stock_1040.json	M.1490796483.A.E51	yhchih
 Stock_1040.json	M.1490797597.A.024	ORK
-Stock_1040.json	M.1490797886.A.448	
+Stock_1040.json	M.1490797886.A.448	null
 Stock_1040.json	M.1490799449.A.E05	joshman
 Stock_1040.json	M.1490799872.A.D38	answermangtr
 Stock_1040.json	M.1490800564.A.3FE	PPLong889
@@ -20990,7 +20990,7 @@ Stock_1052.json	M.1491401141.A.ED2	PPLong889
 Stock_1052.json	M.1491401589.A.BCF	IanLi
 Stock_1052.json	M.1491402602.A.6E1	[彩券]
 Stock_1052.json	M.1491403731.A.FE7	IanLi
-Stock_1052.json	M.1491404706.A.64E	
+Stock_1052.json	M.1491404706.A.64E	null
 Stock_1052.json	M.1491407031.A.AE4	acbwanatha
 Stock_1052.json	M.1491411774.A.57D	k996
 Stock_1052.json	M.1491413043.A.EE7	ljsnonocat2
@@ -21026,7 +21026,7 @@ Stock_1053.json	M.1491466731.A.745	Sirius1812
 Stock_1053.json	M.1491472043.A.607	MrKing
 Stock_1053.json	M.1491472850.A.169	ester770815
 Stock_1054.json	M.1491475000.A.037	beaprayguy
-Stock_1054.json	M.1491476039.A.B23	
+Stock_1054.json	M.1491476039.A.B23	null
 Stock_1054.json	M.1491476281.A.DA4	polyarchy
 Stock_1054.json	M.1491478593.A.4E6	oscar0322
 Stock_1054.json	M.1491479035.A.161	ckcck
@@ -21056,7 +21056,7 @@ Stock_1055.json	M.1491535035.A.48E	kkboa
 Stock_1055.json	M.1491535408.A.70F	cjol
 Stock_1055.json	M.1491537590.A.CB2	shehrevar
 Stock_1055.json	M.1491537631.A.9EC	kennethnono
-Stock_1055.json	M.1491537941.A.F20	
+Stock_1055.json	M.1491537941.A.F20	null
 Stock_1055.json	M.1491538578.A.746	easonred
 Stock_1055.json	M.1491538993.A.8BF	tangolosss
 Stock_1055.json	M.1491539387.A.AC7	lockread
@@ -21254,7 +21254,7 @@ Stock_1065.json	M.1491960833.A.95A	redmi2
 Stock_1065.json	M.1491968169.A.B9D	onlyuuuu
 Stock_1065.json	M.1491973073.A.F38	rexlnpi
 Stock_1065.json	M.1491973323.A.12A	leokuang
-Stock_1065.json	M.1491973753.A.FBC	
+Stock_1065.json	M.1491973753.A.FBC	null
 Stock_1065.json	M.1491976052.A.459	rorosmile
 Stock_1065.json	M.1491976735.A.F0E	shigenogoro
 Stock_1065.json	M.1491976803.A.068	wickwolf
@@ -21885,7 +21885,7 @@ Stock_1096.json	M.1493262803.A.891	ichitakajoe
 Stock_1096.json	M.1493263847.A.E82	Edward
 Stock_1096.json	M.1493265309.A.DCA	a125567365
 Stock_1096.json	M.1493269091.A.EBA	aajimmy
-Stock_1097.json	M.1493269313.A.71E	
+Stock_1097.json	M.1493269313.A.71E	null
 Stock_1097.json	M.1493270159.A.630	Trybeer
 Stock_1097.json	M.1493271431.A.278	YanQ
 Stock_1097.json	M.1493271898.A.41A	phcebus
@@ -22067,7 +22067,7 @@ Stock_1105.json	M.1493725617.A.709	IanLi
 Stock_1105.json	M.1493726039.A.D9C	miw
 Stock_1106.json	M.1493726265.A.438	fish19831012
 Stock_1106.json	M.1493726378.A.A13	[彩券]
-Stock_1106.json	M.1493726423.A.978	
+Stock_1106.json	M.1493726423.A.978	null
 Stock_1106.json	M.1493726794.A.2BE	fantasywing
 Stock_1106.json	M.1493727931.A.43F	a3300552
 Stock_1106.json	M.1493728672.A.9FB	deangod99
@@ -22520,7 +22520,7 @@ Stock_1128.json	M.1494727756.A.339	a828203
 Stock_1128.json	M.1494730246.A.282	lovdkkkk
 Stock_1128.json	M.1494735923.A.7FB	shortfish
 Stock_1128.json	M.1494738742.A.2A5	f204137
-Stock_1128.json	M.1494744267.A.513	
+Stock_1128.json	M.1494744267.A.513	null
 Stock_1128.json	M.1494746373.A.A94	Yaz
 Stock_1128.json	M.1494759677.A.7ED	twobosu
 Stock_1128.json	M.1494761769.A.55D	pkchu
@@ -22668,7 +22668,7 @@ Stock_1135.json	M.1495019517.A.C5E	redspeed
 Stock_1136.json	M.1495021911.A.ECA	forptt
 Stock_1136.json	M.1495025032.A.008	deangod99
 Stock_1136.json	M.1495026515.A.408	change77
-Stock_1136.json	M.1495029133.A.C94	
+Stock_1136.json	M.1495029133.A.C94	null
 Stock_1136.json	M.1495029150.A.639	ichitakajoe
 Stock_1136.json	M.1495032675.A.F1A	ss910126
 Stock_1136.json	M.1495033950.A.5DA	a875979
@@ -23595,7 +23595,7 @@ Stock_1182.json	M.1497373910.A.78C	a10141013
 Stock_1182.json	M.1497375199.A.51B	a10141013
 Stock_1182.json	M.1497375909.A.48C	Ranger5566
 Stock_1182.json	M.1497400205.A.E26	jj314257
-Stock_1182.json	M.1497400774.A.594	
+Stock_1182.json	M.1497400774.A.594	null
 Stock_1182.json	M.1497401555.A.611	dreambreaken
 Stock_1182.json	M.1497406257.A.0CE	andelll
 Stock_1182.json	M.1497406744.A.58A	YOTO0282
@@ -24197,7 +24197,7 @@ Stock_1212.json	M.1498750698.A.A4C	cbdg
 Stock_1212.json	M.1498754544.A.11F	steward135
 Stock_1212.json	M.1498754979.A.82D	test520
 Stock_1212.json	M.1498756443.A.C6D	bbs3379
-Stock_1212.json	M.1498776805.A.CC5	
+Stock_1212.json	M.1498776805.A.CC5	null
 Stock_1212.json	M.1498782603.A.A16	LoVeUu5566
 Stock_1212.json	M.1498784642.A.D2D	GGMu
 Stock_1212.json	M.1498785414.A.366	Reewalker
@@ -24420,7 +24420,7 @@ Stock_1223.json	M.1499409220.A.A47	cindy033
 Stock_1223.json	M.1499410403.A.26C	coconing
 Stock_1223.json	M.1499412325.A.183	yensuli
 Stock_1223.json	M.1499414051.A.097	iampoya
-Stock_1223.json	M.1499414301.A.0A3	
+Stock_1223.json	M.1499414301.A.0A3	null
 Stock_1223.json	M.1499415659.A.09A	kof70380
 Stock_1223.json	M.1499415835.A.FE5	peter308
 Stock_1223.json	M.1499417277.A.9E7	superwings
@@ -25580,7 +25580,7 @@ Stock_1281.json	M.1502284740.A.BE2	puppyvivi
 Stock_1281.json	M.1502285240.A.A96	Mellrince
 Stock_1281.json	M.1502286361.A.6C6	s5869157
 Stock_1281.json	M.1502290861.A.AD7	Laleh
-Stock_1281.json	M.1502292243.A.8CF	
+Stock_1281.json	M.1502292243.A.8CF	null
 Stock_1281.json	M.1502292327.A.448	surfeit
 Stock_1281.json	M.1502293086.A.6C1	season2011
 Stock_1281.json	M.1502293969.A.D5D	UltraSeven
@@ -25626,7 +25626,7 @@ Stock_1283.json	M.1502365883.A.755	linjoe
 Stock_1283.json	M.1502366188.A.64B	Reewalker
 Stock_1284.json	M.1502368789.A.B4F	Bonjwa
 Stock_1284.json	M.1502369033.A.EB4	deangod99
-Stock_1284.json	M.1502370197.A.C41	
+Stock_1284.json	M.1502370197.A.C41	null
 Stock_1284.json	M.1502371924.A.63A	ted5566
 Stock_1284.json	M.1502372418.A.B2F	season2011
 Stock_1284.json	M.1502373139.A.F20	bbs3379
@@ -25826,7 +25826,7 @@ Stock_1293.json	M.1502791992.A.DE7	Sirius1812
 Stock_1293.json	M.1502795125.A.56A	sousan
 Stock_1294.json	M.1502798710.A.772	vbn22
 Stock_1294.json	M.1502798798.A.B75	prompter
-Stock_1294.json	M.1502800714.A.964	
+Stock_1294.json	M.1502800714.A.964	null
 Stock_1294.json	M.1502800930.A.EA0	a125567365
 Stock_1294.json	M.1502801578.A.8A3	Vett
 Stock_1294.json	M.1502801701.A.4ED	IanLi
@@ -26602,7 +26602,7 @@ Stock_1332.json	M.1504593813.A.9B8	coconing
 Stock_1332.json	M.1504595837.A.53C	Desperando
 Stock_1332.json	M.1504599651.A.C39	b96612005
 Stock_1332.json	M.1504601386.A.68E	wsws4566
-Stock_1332.json	M.1504601826.A.9CC	
+Stock_1332.json	M.1504601826.A.9CC	null
 Stock_1332.json	M.1504602159.A.4DE	c98765432c
 Stock_1333.json	M.1504602348.A.9DC	hlkevin81925
 Stock_1333.json	M.1504603956.A.E95	qooisgood
@@ -27326,7 +27326,7 @@ Stock_1368.json	M.1505962784.A.F0E	zxcvxx
 Stock_1368.json	M.1505963220.A.FDC	MaInNine
 Stock_1369.json	M.1505964843.A.B44	natyshow
 Stock_1369.json	M.1505965084.A.178	ESunBoy
-Stock_1369.json	M.1505966089.A.939	
+Stock_1369.json	M.1505966089.A.939	null
 Stock_1369.json	M.1505972447.A.343	maimss
 Stock_1369.json	M.1505973603.A.9B4	wickwolf
 Stock_1369.json	M.1505975026.A.0B6	win82109
@@ -27358,7 +27358,7 @@ Stock_1370.json	M.1506037869.A.72D	okah
 Stock_1370.json	M.1506038201.A.844	chris1018
 Stock_1370.json	M.1506038607.A.D1E	oldEn15
 Stock_1370.json	M.1506040340.A.028	francishsu
-Stock_1370.json	M.1506044571.A.998	
+Stock_1370.json	M.1506044571.A.998	null
 Stock_1370.json	M.1506044884.A.F61	zxcvxx
 Stock_1370.json	M.1506046122.A.0C2	Sirius1812
 Stock_1370.json	M.1506046214.A.B02	charles0939
@@ -27792,7 +27792,7 @@ Stock_1392.json	M.1506953497.A.932	bmdcloud1314
 Stock_1392.json	M.1506954131.A.71E	ssaw5166
 Stock_1392.json	M.1506957929.A.B32	MaligB
 Stock_1392.json	M.1506959890.A.A10	wegoliving
-Stock_1392.json	M.1506982706.A.5E7	
+Stock_1392.json	M.1506982706.A.5E7	null
 Stock_1392.json	M.1506986089.A.C73	noldorelf
 Stock_1392.json	M.1506988604.A.A7B	Ejaculation
 Stock_1392.json	M.1506990521.A.6B0	unclefucka
@@ -28288,7 +28288,7 @@ Stock_1417.json	M.1508130247.A.CBC	qxxrbull
 Stock_1417.json	M.1508130855.A.A37	ESunBoy
 Stock_1417.json	M.1508132758.A.EB1	sharkpops
 Stock_1417.json	M.1508133006.A.E67	a0956997566
-Stock_1417.json	M.1508133293.A.26C	
+Stock_1417.json	M.1508133293.A.26C	null
 Stock_1417.json	M.1508133433.A.8CE	kof70380
 Stock_1417.json	M.1508133680.A.7D0	qxxrbull
 Stock_1417.json	M.1508134439.A.366	redspeed
@@ -29285,7 +29285,7 @@ Stock_1467.json	M.1510224165.A.D30	Yginger1
 Stock_1467.json	M.1510224320.A.9D5	ESunBoy
 Stock_1467.json	M.1510224487.A.2B6	tensionship
 Stock_1467.json	M.1510226017.A.21A	Reewalker
-Stock_1467.json	M.1510226710.A.AB8	
+Stock_1467.json	M.1510226710.A.AB8	null
 Stock_1467.json	M.1510227977.A.CF3	Noemen
 Stock_1467.json	M.1510227984.A.012	anti87
 Stock_1467.json	M.1510230329.A.58F	hlkevin81925
@@ -29862,7 +29862,7 @@ Stock_1495.json	M.1511228925.A.300	cht3000
 Stock_1495.json	M.1511230127.A.D41	alice137651
 Stock_1496.json	M.1511233658.A.9DB	WuSmaLLnEw
 Stock_1496.json	M.1511233753.A.92A	ESunBoy
-Stock_1496.json	M.1511234341.A.239	
+Stock_1496.json	M.1511234341.A.239	null
 Stock_1496.json	M.1511236117.A.DC0	Luismth
 Stock_1496.json	M.1511236961.A.19F	tailop
 Stock_1496.json	M.1511239344.A.ECF	hnyvqc
@@ -30109,7 +30109,7 @@ Stock_1508.json	M.1498750698.A.A4C	cbdg
 Stock_1508.json	M.1498754544.A.11F	steward135
 Stock_1508.json	M.1498754979.A.82D	test520
 Stock_1508.json	M.1498756443.A.C6D	bbs3379
-Stock_1508.json	M.1498776805.A.CC5	
+Stock_1508.json	M.1498776805.A.CC5	null
 Stock_1508.json	M.1498782603.A.A16	LoVeUu5566
 Stock_1508.json	M.1498784642.A.D2D	GGMu
 Stock_1508.json	M.1498785414.A.366	Reewalker
@@ -30336,7 +30336,7 @@ Stock_1519.json	M.1499409220.A.A47	cindy033
 Stock_1519.json	M.1499410403.A.26C	coconing
 Stock_1519.json	M.1499412325.A.183	yensuli
 Stock_1519.json	M.1499414051.A.097	iampoya
-Stock_1519.json	M.1499414301.A.0A3	
+Stock_1519.json	M.1499414301.A.0A3	null
 Stock_1519.json	M.1499415659.A.09A	kof70380
 Stock_1519.json	M.1499415835.A.FE5	peter308
 Stock_1519.json	M.1499416642.A.4E1	WUC99
@@ -32192,7 +32192,7 @@ Stock_1613.json	M.1515404865.A.121	alan80620
 Stock_1613.json	M.1515406483.A.526	Olivia5566
 Stock_1613.json	M.1515407270.A.1D0	ebee
 Stock_1613.json	M.1515407709.A.7CB	ESunBoy
-Stock_1613.json	M.1515408213.A.DD1	
+Stock_1613.json	M.1515408213.A.DD1	null
 Stock_1613.json	M.1515408324.A.D60	j2708180
 Stock_1613.json	M.1515408727.A.B05	chienshih
 Stock_1613.json	M.1515410316.A.2D5	lineik
@@ -33243,7 +33243,7 @@ Stock_1666.json	M.1517232118.A.558	a777starmy
 Stock_1666.json	M.1517232499.A.4A1	x123y321x
 Stock_1666.json	M.1517233059.A.C89	deangod99
 Stock_1667.json	M.1517235158.A.C42	cjol
-Stock_1667.json	M.1517235630.A.14B	
+Stock_1667.json	M.1517235630.A.14B	null
 Stock_1667.json	M.1517235742.A.0C4	nemies
 Stock_1667.json	M.1517238177.A.7A1	fill8800541
 Stock_1667.json	M.1517238325.A.1A1	virgil00
@@ -33429,7 +33429,7 @@ Stock_1676.json	M.1517540241.A.FC9	CHIYAO100
 Stock_1676.json	M.1517541422.A.83C	Stanton
 Stock_1676.json	M.1517541595.A.F67	Zyldr
 Stock_1676.json	M.1517543715.A.AE1	huanglove
-Stock_1676.json	M.1517544441.A.D42	
+Stock_1676.json	M.1517544441.A.D42	null
 Stock_1676.json	M.1517545238.A.BB0	rgx
 Stock_1676.json	M.1517545868.A.E2E	dhn
 Stock_1676.json	M.1517546411.A.312	d8917936
@@ -33785,7 +33785,7 @@ Stock_1694.json	M.1517988147.A.E7B	MrKing
 Stock_1694.json	M.1517989712.A.04D	ESunBoy
 Stock_1694.json	M.1517991378.A.702	MarHew
 Stock_1694.json	M.1517991613.A.249	stasis
-Stock_1694.json	M.1517991774.A.911	
+Stock_1694.json	M.1517991774.A.911	null
 Stock_1694.json	M.1517992242.A.A5A	sunsand
 Stock_1694.json	M.1517992333.A.B80	weapon0427
 Stock_1694.json	M.1517992408.A.783	chungrew
@@ -34093,7 +34093,7 @@ Stock_1710.json	M.1518483939.A.ECF	wavek
 Stock_1710.json	M.1518485077.A.571	oblivionion
 Stock_1710.json	M.1518485487.A.C0E	eyespot
 Stock_1710.json	M.1518490783.A.CE4	halu0915
-Stock_1710.json	M.1518492324.A.B0A	
+Stock_1710.json	M.1518492324.A.B0A	null
 Stock_1710.json	M.1518497693.A.D92	ESunBoy
 Stock_1711.json	M.1518505806.A.D31	Brenda0918
 Stock_1711.json	M.1518507392.A.E8E	ESunBoy
@@ -34239,7 +34239,7 @@ Stock_1718.json	M.1519043856.A.CE7	alihue
 Stock_1718.json	M.1519044564.A.214	adfn
 Stock_1718.json	M.1519046096.A.34B	jdkcupid
 Stock_1718.json	M.1519046496.A.ED1	tensionship
-Stock_1718.json	M.1519048452.A.678	
+Stock_1718.json	M.1519048452.A.678	null
 Stock_1718.json	M.1519050539.A.FEF	gg28cm
 Stock_1718.json	M.1519050909.A.885	bbs3379
 Stock_1718.json	M.1519057127.A.3C5	zakijudelo
@@ -34346,7 +34346,7 @@ Stock_1723.json	M.1519304711.A.D55	adhere
 Stock_1723.json	M.1519304973.A.837	deangod99
 Stock_1723.json	M.1519305392.A.DC3	sexwithyuma
 Stock_1723.json	M.1519310204.A.B1A	huanglove
-Stock_1723.json	M.1519310537.A.225	
+Stock_1723.json	M.1519310537.A.225	null
 Stock_1723.json	M.1519311407.A.900	alangkiss
 Stock_1723.json	M.1519312082.A.263	striveptt
 Stock_1724.json	M.1519313263.A.31C	MTK5566
@@ -34519,7 +34519,7 @@ Stock_1732.json	M.1519645585.A.436	soaringwings
 Stock_1732.json	M.1519649085.A.994	redspeed
 Stock_1732.json	M.1519649308.A.0B0	lelena
 Stock_1732.json	M.1519649821.A.D79	deangod99
-Stock_1732.json	M.1519650076.A.68C	
+Stock_1732.json	M.1519650076.A.68C	null
 Stock_1732.json	M.1519650171.A.80A	zxcvb7700
 Stock_1732.json	M.1519651290.A.CD1	WaKao5566
 Stock_1732.json	M.1519652630.A.57F	jizz56
@@ -34864,7 +34864,7 @@ Stock_1750.json	M.1520388689.A.374	soufon
 Stock_1750.json	M.1520389385.A.B6C	hugh509
 Stock_1750.json	M.1520390962.A.8BF	goodjeff
 Stock_1750.json	M.1520392483.A.7A8	Paws
-Stock_1750.json	M.1520393538.A.CB4	
+Stock_1750.json	M.1520393538.A.CB4	null
 Stock_1750.json	M.1520393815.A.3FC	aimo325
 Stock_1750.json	M.1520397000.A.8A4	Stealer
 Stock_1750.json	M.1520397044.A.F68	qooisgood
@@ -35255,7 +35255,7 @@ Stock_1771.json	M.1520950761.A.405	WaKao5566
 Stock_1771.json	M.1520951748.A.FEA	Reewalker
 Stock_1771.json	M.1520952802.A.6F6	ESunBoy
 Stock_1771.json	M.1520953211.A.0C6	ypeter
-Stock_1771.json	M.1520953221.A.519	
+Stock_1771.json	M.1520953221.A.519	null
 Stock_1771.json	M.1520953225.A.A4E	HanGongJu
 Stock_1771.json	M.1520953453.A.049	howard172
 Stock_1771.json	M.1520955874.A.3EB	Cactusman
@@ -35379,7 +35379,7 @@ Stock_1777.json	M.1521129142.A.FF0	YU0121
 Stock_1777.json	M.1521129693.A.95C	gungygy
 Stock_1777.json	M.1521129737.A.02E	Noemen
 Stock_1778.json	M.1521131699.A.93F	LienPig
-Stock_1778.json	M.1521133371.A.24B	
+Stock_1778.json	M.1521133371.A.24B	null
 Stock_1778.json	M.1521159295.A.246	howard172
 Stock_1778.json	M.1521161677.A.B6C	fantazy00077
 Stock_1778.json	M.1521162260.A.F7C	popo123456
@@ -35484,7 +35484,7 @@ Stock_1783.json	M.1521339983.A.611	LienPig
 Stock_1783.json	M.1521343577.A.198	lelena
 Stock_1783.json	M.1521345637.A.998	GoOdGaMe
 Stock_1783.json	M.1521346928.A.757	x111222333
-Stock_1783.json	M.1521346956.A.B8E	
+Stock_1783.json	M.1521346956.A.B8E	null
 Stock_1783.json	M.1521347066.A.8D8	ayau
 Stock_1784.json	M.1521350382.A.298	win82109
 Stock_1784.json	M.1521353076.A.E06	howard172
@@ -36023,7 +36023,7 @@ Stock_1810.json	M.1522120523.A.2D9	MaInNine
 Stock_1810.json	M.1522122570.A.BBB	tagso
 Stock_1810.json	M.1522123131.A.81C	eiw123
 Stock_1810.json	M.1522123240.A.B20	sharkpops
-Stock_1810.json	M.1522123405.A.761	
+Stock_1810.json	M.1522123405.A.761	null
 Stock_1810.json	M.1522123474.A.3C5	opthr1215
 Stock_1810.json	M.1522124147.A.1F7	GoOdGaMe
 Stock_1811.json	M.1522124570.A.0E8	cosmos2017
@@ -36288,7 +36288,7 @@ Stock_1823.json	M.1522427611.A.35A	a29976137
 Stock_1823.json	M.1522428895.A.463	MacBookAir12
 Stock_1824.json	M.1522429246.A.29B	fliesa
 Stock_1824.json	M.1522430588.A.3A9	lovdkkkk
-Stock_1824.json	M.1522449670.A.CD1	
+Stock_1824.json	M.1522449670.A.CD1	null
 Stock_1824.json	M.1522452826.A.AFD	Reewalker
 Stock_1824.json	M.1522453609.A.5EF	howard172
 Stock_1824.json	M.1522456219.A.182	vendan5566
@@ -36367,7 +36367,7 @@ Stock_1827.json	M.1522547652.A.020	indoman
 Stock_1827.json	M.1522548382.A.FC0	hiball
 Stock_1827.json	M.1522548769.A.94E	stockking123
 Stock_1828.json	M.1522550339.A.82B	yesu219
-Stock_1828.json	M.1522552140.A.5CB	
+Stock_1828.json	M.1522552140.A.5CB	null
 Stock_1828.json	M.1522555798.A.200	cocoyi
 Stock_1828.json	M.1522556032.A.19F	batista1980
 Stock_1828.json	M.1522557042.A.51B	fantazy00077
@@ -36477,7 +36477,7 @@ Stock_1833.json	M.1522715953.A.705	roxiang
 Stock_1833.json	M.1522718007.A.BFE	chengwaye
 Stock_1833.json	M.1522718038.A.154	toby4848
 Stock_1833.json	M.1522718070.A.A00	cjol
-Stock_1833.json	M.1522718646.A.49B	
+Stock_1833.json	M.1522718646.A.49B	null
 Stock_1833.json	M.1522718876.A.8C6	bluejade1234
 Stock_1833.json	M.1522719202.A.AAE	IDfor2010
 Stock_1833.json	M.1522722741.A.0BE	joshman
@@ -37008,7 +37008,7 @@ Stock_1859.json	M.1523586819.A.721	zwxyzxxx
 Stock_1860.json	M.1523589322.A.2FC	GoOdGaMe
 Stock_1860.json	M.1523589372.A.D3F	alan80620
 Stock_1860.json	M.1523589551.A.F03	tazac
-Stock_1860.json	M.1523590779.A.316	
+Stock_1860.json	M.1523590779.A.316	null
 Stock_1860.json	M.1523591340.A.62F	s86047777
 Stock_1860.json	M.1523594440.A.B7D	netjedi
 Stock_1860.json	M.1523594740.A.40B	ilw4e
@@ -37368,7 +37368,7 @@ Stock_1877.json	M.1524189024.A.CA4	gerychen
 Stock_1878.json	M.1524189528.A.CC5	MaInNine
 Stock_1878.json	M.1524190665.A.81D	investG
 Stock_1878.json	M.1524190804.A.557	alan80620
-Stock_1878.json	M.1524190946.A.1C8	
+Stock_1878.json	M.1524190946.A.1C8	null
 Stock_1878.json	M.1524190976.A.B8D	IKA
 Stock_1878.json	M.1524192427.A.C7D	nelson20229
 Stock_1878.json	M.1524193523.A.B39	GoOdGaMe
@@ -37545,7 +37545,7 @@ Stock_1886.json	M.1524458033.A.197	OKEplus
 Stock_1886.json	M.1524458783.A.CAF	sven1130
 Stock_1886.json	M.1524459554.A.7D7	ichitakajoe
 Stock_1886.json	M.1524460432.A.1F1	cabama
-Stock_1887.json	M.1524462375.A.002	
+Stock_1887.json	M.1524462375.A.002	null
 Stock_1887.json	M.1524463203.A.F7C	fill8800541
 Stock_1887.json	M.1524464583.A.5F5	GoOdGaMe
 Stock_1887.json	M.1524464852.A.3A0	ichitakajoe
@@ -37691,7 +37691,7 @@ Stock_1894.json	M.1524640378.A.571	allenyalun
 Stock_1894.json	M.1524640844.A.2BC	kgb2938
 Stock_1894.json	M.1524640993.A.6A6	asmama
 Stock_1894.json	M.1524643054.A.D08	ghostfi
-Stock_1894.json	M.1524643412.A.0C0	
+Stock_1894.json	M.1524643412.A.0C0	null
 Stock_1894.json	M.1524644914.A.08E	ghostfi
 Stock_1894.json	M.1524645200.A.080	VANNN
 Stock_1894.json	M.1524649570.A.EB1	stiphie
@@ -37767,7 +37767,7 @@ Stock_1897.json	M.1524724956.A.70D	zxcvb7700
 Stock_1897.json	M.1524725189.A.13B	maplehao
 Stock_1898.json	M.1524725218.A.EB5	ImLoki
 Stock_1898.json	M.1524726588.A.440	coconing
-Stock_1898.json	M.1524727206.A.04A	
+Stock_1898.json	M.1524727206.A.04A	null
 Stock_1898.json	M.1524727230.A.542	GoOdGaMe
 Stock_1898.json	M.1524728583.A.D93	winglove
 Stock_1898.json	M.1524729867.A.A15	GoOdGaMe
@@ -38507,7 +38507,7 @@ Stock_1934.json	M.1525800113.A.DBC	s523698
 Stock_1935.json	M.1525803296.A.252	roberchu
 Stock_1935.json	M.1525806298.A.B19	adsl12367
 Stock_1935.json	M.1525806455.A.E04	hhhutwtw
-Stock_1935.json	M.1525806631.A.B55	
+Stock_1935.json	M.1525806631.A.B55	null
 Stock_1935.json	M.1525816975.A.CEA	Lex4193
 Stock_1935.json	M.1525818022.A.091	ilovebuffett
 Stock_1935.json	M.1525825841.A.B21	vendan5566
@@ -38681,7 +38681,7 @@ Stock_1943.json	M.1525999986.A.61F	kiske011
 Stock_1943.json	M.1526001279.A.B86	nbarepeat
 Stock_1943.json	M.1526001991.A.C42	findfu
 Stock_1943.json	M.1526002011.A.CB9	kurapica1021
-Stock_1943.json	M.1526002324.A.21D	
+Stock_1943.json	M.1526002324.A.21D	null
 Stock_1943.json	M.1526005386.A.80E	realsiway
 Stock_1943.json	M.1526005671.A.A4C	b10485762000
 Stock_1944.json	M.1526006276.A.8EF	taxuan
@@ -39150,7 +39150,7 @@ Stock_1967.json	M.1526657124.A.A7B	aquarian
 Stock_1967.json	M.1526658566.A.8DB	Su22
 Stock_1967.json	M.1526662255.A.90B	goodjeff
 Stock_1967.json	M.1526663249.A.D3D	popgsct
-Stock_1967.json	M.1526669817.A.F18	
+Stock_1967.json	M.1526669817.A.F18	null
 Stock_1967.json	M.1526681424.A.2F1	cabama
 Stock_1967.json	M.1526690876.A.B38	Zoanthropy
 Stock_1967.json	M.1526697054.A.460	tooth9
@@ -39955,7 +39955,7 @@ Stock_2008.json	M.1528016314.A.13B	logate
 Stock_2008.json	M.1528018965.A.C6C	cjol
 Stock_2008.json	M.1528019548.A.04D	NowQmmmmmmmm
 Stock_2008.json	M.1528022196.A.0DD	bubu26
-Stock_2008.json	M.1528025777.A.B00	
+Stock_2008.json	M.1528025777.A.B00	null
 Stock_2008.json	M.1528026198.A.D83	bitlife
 Stock_2008.json	M.1528029117.A.6FB	fish19831012
 Stock_2008.json	M.1528029617.A.C23	ryanworld
@@ -40186,7 +40186,7 @@ Stock_2020.json	M.1528298753.A.64C	kkkkk9
 Stock_2020.json	M.1528299098.A.C4B	eyespot
 Stock_2020.json	M.1528299363.A.E9B	NowQmmmmmmmm
 Stock_2020.json	M.1528299434.A.644	eiw123
-Stock_2020.json	M.1528300236.A.EC2	
+Stock_2020.json	M.1528300236.A.EC2	null
 Stock_2020.json	M.1528301509.A.03E	nemies
 Stock_2020.json	M.1528302389.A.08D	coobee1985
 Stock_2020.json	M.1528302955.A.986	Lawleit
@@ -40244,7 +40244,7 @@ Stock_2023.json	M.1528358155.A.903	stockdog
 Stock_2023.json	M.1528358760.A.D8C	sowhynot
 Stock_2023.json	M.1528359123.A.545	adsl12367
 Stock_2023.json	M.1528359687.A.B1A	LongLiveROC
-Stock_2023.json	M.1528361578.A.F93	
+Stock_2023.json	M.1528361578.A.F93	null
 Stock_2023.json	M.1528361981.A.80B	loat
 Stock_2023.json	M.1528362064.A.2A9	Joseph5566
 Stock_2023.json	M.1528362068.A.EEF	wendy150
@@ -40310,7 +40310,7 @@ Stock_2026.json	M.1528439608.A.BA2	kellenabc
 Stock_2026.json	M.1528439837.A.F58	MrDiao
 Stock_2027.json	M.1528440943.A.4CE	bmwg8
 Stock_2027.json	M.1528441035.A.4BC	coconing
-Stock_2027.json	M.1528441795.A.FA4	
+Stock_2027.json	M.1528441795.A.FA4	null
 Stock_2027.json	M.1528443526.A.7BA	simonle
 Stock_2027.json	M.1528443528.A.BF1	peace304
 Stock_2027.json	M.1528445409.A.5A5	dream2007
@@ -41285,7 +41285,7 @@ Stock_2076.json	M.1529800672.A.43E	andy199113
 Stock_2076.json	M.1529804598.A.1A3	cjol
 Stock_2076.json	M.1529807759.A.FF5	moodyblue
 Stock_2076.json	M.1529810258.A.431	a10141013
-Stock_2076.json	M.1529811321.A.525	
+Stock_2076.json	M.1529811321.A.525	null
 Stock_2076.json	M.1529811346.A.1C4	jumbotest
 Stock_2076.json	M.1529811415.A.42C	ryanworld
 Stock_2076.json	M.1529813437.A.9DC	stockdog
@@ -42731,7 +42731,7 @@ Stock_2151.json	M.1532163795.A.DE0	eyespot
 Stock_2151.json	M.1532163869.A.247	howard172
 Stock_2151.json	M.1532164177.A.719	eyespot
 Stock_2151.json	M.1532164441.A.F25	eyespot
-Stock_2151.json	M.1532164743.A.F54	
+Stock_2151.json	M.1532164743.A.F54	null
 Stock_2151.json	M.1532164985.A.210	eyespot
 Stock_2151.json	M.1532165265.A.F66	tagso
 Stock_2151.json	M.1532167342.A.7D4	killCHina
@@ -42788,7 +42788,7 @@ Stock_2153.json	M.1532263606.A.C0E	opthr1215
 Stock_2154.json	M.1532265017.A.DE3	loken0408
 Stock_2154.json	M.1532269348.A.5EE	dharma
 Stock_2154.json	M.1532271145.A.FAE	loken0408
-Stock_2154.json	M.1532275077.A.110	
+Stock_2154.json	M.1532275077.A.110	null
 Stock_2154.json	M.1532275201.A.9AF	Nokia6233
 Stock_2154.json	M.1532275285.A.26F	eyespot
 Stock_2154.json	M.1532275699.A.4DE	eyespot
@@ -43120,7 +43120,7 @@ Stock_2170.json	M.1532683790.A.1AA	a828203
 Stock_2170.json	M.1532685417.A.87D	DuGG
 Stock_2170.json	M.1532686391.A.E62	lio226
 Stock_2170.json	M.1532686948.A.849	a65745322
-Stock_2171.json	M.1532687876.A.C84	
+Stock_2171.json	M.1532687876.A.C84	null
 Stock_2171.json	M.1532689788.A.F35	lsisbl
 Stock_2171.json	M.1532693000.A.8A2	Reewalker
 Stock_2171.json	M.1532695674.A.3B3	alberchi
@@ -44640,7 +44640,7 @@ Stock_2247.json	M.1534731107.A.5A0	nightwing
 Stock_2247.json	M.1534733179.A.AD2	Kennen56
 Stock_2247.json	M.1534735392.A.0A5	Stefanstefan
 Stock_2247.json	M.1534735644.A.ACF	jmegak
-Stock_2247.json	M.1534735854.A.3C3	
+Stock_2247.json	M.1534735854.A.3C3	null
 Stock_2247.json	M.1534737752.A.91D	kamikazilol
 Stock_2247.json	M.1534739080.A.98A	g7c
 Stock_2247.json	M.1534741212.A.FB0	ching396
@@ -45202,7 +45202,7 @@ Stock_2275.json	M.1535599102.A.2A3	d8917936
 Stock_2275.json	M.1535604086.A.F48	DogT
 Stock_2275.json	M.1535605447.A.F66	hnyvqc
 Stock_2275.json	M.1535606952.A.CFE	xdarkness
-Stock_2275.json	M.1535608432.A.53A	
+Stock_2275.json	M.1535608432.A.53A	null
 Stock_2275.json	M.1535608803.A.A5A	vendan5566
 Stock_2275.json	M.1535608969.A.FEB	Fujiwarano
 Stock_2275.json	M.1535610573.A.7DA	The5F
@@ -45366,7 +45366,7 @@ Stock_2283.json	M.1535915292.A.83F	kaube
 Stock_2283.json	M.1535930480.A.447	uilmas1
 Stock_2283.json	M.1535933048.A.0A3	Reewalker
 Stock_2283.json	M.1535933451.A.03D	justforsing
-Stock_2283.json	M.1535933515.A.CDD	
+Stock_2283.json	M.1535933515.A.CDD	null
 Stock_2283.json	M.1535933580.A.BE9	ianlai
 Stock_2283.json	M.1535934616.A.48D	vendan5566
 Stock_2283.json	M.1535936239.A.A00	mayingnine
@@ -45662,7 +45662,7 @@ Stock_2298.json	M.1536249398.A.206	Su22
 Stock_2298.json	M.1536250888.A.4A5	goodjeff
 Stock_2298.json	M.1536252814.A.DD5	lofan
 Stock_2298.json	M.1536261216.A.283	kaube
-Stock_2298.json	M.1536272552.A.49B	
+Stock_2298.json	M.1536272552.A.49B	null
 Stock_2298.json	M.1536274499.A.B45	pipiboygay
 Stock_2298.json	M.1536279247.A.BE6	Iamking5566
 Stock_2298.json	M.1536280202.A.090	vendan5566
@@ -45990,7 +45990,7 @@ Stock_2314.json	M.1536635295.A.BE9	T3T
 Stock_2314.json	M.1536636006.A.412	cuttleufish
 Stock_2315.json	M.1536636429.A.E34	pipiboygay
 Stock_2315.json	M.1536638327.A.BF1	finchtw
-Stock_2315.json	M.1536638469.A.34D	
+Stock_2315.json	M.1536638469.A.34D	null
 Stock_2315.json	M.1536639261.A.2A5	steroidsbbs
 Stock_2315.json	M.1536640909.A.8C7	chanjay
 Stock_2315.json	M.1536641836.A.2FE	kaube
@@ -46323,7 +46323,7 @@ Stock_2331.json	M.1537093241.A.C29	CLV518
 Stock_2331.json	M.1537093907.A.678	d19900214
 Stock_2331.json	M.1537098681.A.80D	CYL770106
 Stock_2331.json	M.1537102016.A.658	a10156023
-Stock_2331.json	M.1537103084.A.815	
+Stock_2331.json	M.1537103084.A.815	null
 Stock_2331.json	M.1537105451.A.05F	Reewalker
 Stock_2331.json	M.1537105467.A.3EA	anti87
 Stock_2331.json	M.1537108597.A.077	jack52124812
@@ -47253,7 +47253,7 @@ Stock_2378.json	M.1538401715.A.1B3	comjj45
 Stock_2378.json	M.1538402242.A.228	anti87
 Stock_2378.json	M.1538403220.A.46F	roberchu
 Stock_2378.json	M.1538403783.A.C42	a875979
-Stock_2378.json	M.1538403825.A.AF1	
+Stock_2378.json	M.1538403825.A.AF1	null
 Stock_2378.json	M.1538405082.A.664	anti87
 Stock_2378.json	M.1538408116.A.EF2	tvfan
 Stock_2378.json	M.1538408496.A.4FA	roberchu
@@ -47291,7 +47291,7 @@ Stock_2380.json	M.1538461569.A.BA1	gsjh21307
 Stock_2380.json	M.1538462619.A.40C	freevid
 Stock_2380.json	M.1538462784.A.9A3	luv2pac
 Stock_2380.json	M.1538463419.A.E06	coconing
-Stock_2380.json	M.1538463679.A.3FE	
+Stock_2380.json	M.1538463679.A.3FE	null
 Stock_2380.json	M.1538463944.A.595	adsl12367
 Stock_2380.json	M.1538464338.A.87B	HKtoyz5566
 Stock_2380.json	M.1538466062.A.1AE	CLV518
@@ -47332,7 +47332,7 @@ Stock_2382.json	M.1538526962.A.D8E	ikj
 Stock_2382.json	M.1538527606.A.966	howard172
 Stock_2382.json	M.1538528039.A.59E	Conector
 Stock_2382.json	M.1538528522.A.6D6	Conector
-Stock_2382.json	M.1538529142.A.C23	
+Stock_2382.json	M.1538529142.A.C23	null
 Stock_2382.json	M.1538529984.A.5DA	Helen
 Stock_2382.json	M.1538530334.A.362	Joseph5306
 Stock_2382.json	M.1538530705.A.C39	telogood
@@ -47943,7 +47943,7 @@ Stock_2412.json	M.1539235083.A.08E	talk5566
 Stock_2412.json	M.1539235094.A.9B2	nightwing
 Stock_2412.json	M.1539235216.A.434	CTC0115
 Stock_2412.json	M.1539235276.A.319	photonic
-Stock_2412.json	M.1539236273.A.CA5	
+Stock_2412.json	M.1539236273.A.CA5	null
 Stock_2412.json	M.1539237604.A.7A1	fill8800541
 Stock_2412.json	M.1539239471.A.415	zxc445567
 Stock_2412.json	M.1539240073.A.D0B	a2379928
@@ -49694,7 +49694,7 @@ Stock_2500.json	M.1541249380.A.2A6	eyespot
 Stock_2500.json	M.1541249511.A.5CE	mafuone5566
 Stock_2500.json	M.1541250580.A.272	eyespot
 Stock_2500.json	M.1541252073.A.995	johnny9667
-Stock_2500.json	M.1541252211.A.8BE	
+Stock_2500.json	M.1541252211.A.8BE	null
 Stock_2500.json	M.1541252520.A.6AD	than09138
 Stock_2500.json	M.1541253200.A.1AB	DDHOWDA
 Stock_2500.json	M.1541253222.A.348	hrma
@@ -50039,7 +50039,7 @@ Stock_2517.json	M.1541643641.A.384	tu11252007
 Stock_2517.json	M.1541643996.A.FEA	Conector
 Stock_2517.json	M.1541644552.A.6AC	j2708180
 Stock_2517.json	M.1541644647.A.CF4	BreezeCat
-Stock_2517.json	M.1541645516.A.38F	
+Stock_2517.json	M.1541645516.A.38F	null
 Stock_2517.json	M.1541646985.A.09B	CLV518
 Stock_2517.json	M.1541647439.A.DF8	Zyldr
 Stock_2517.json	M.1541648290.A.18F	caserchen
@@ -50636,7 +50636,7 @@ Stock_2547.json	M.1542411722.A.8E0	nightwing
 Stock_2547.json	M.1542412001.A.A65	sleepyuan
 Stock_2547.json	M.1542415713.A.398	mafuone5566
 Stock_2547.json	M.1542416477.A.740	mayingnine
-Stock_2547.json	M.1542417147.A.9FF	
+Stock_2547.json	M.1542417147.A.9FF	null
 Stock_2547.json	M.1542418283.A.FF6	kaube
 Stock_2547.json	M.1542422061.A.684	CLV518
 Stock_2547.json	M.1542422237.A.96B	tooth9
@@ -50900,7 +50900,7 @@ Stock_2560.json	M.1542802032.A.EBC	CLV518
 Stock_2560.json	M.1542802641.A.BF9	ppp123
 Stock_2560.json	M.1542802644.A.7C2	qboyq
 Stock_2560.json	M.1542803016.A.C3E	ChineseKing
-Stock_2560.json	M.1542803138.A.287	
+Stock_2560.json	M.1542803138.A.287	null
 Stock_2560.json	M.1542804439.A.09D	DDHOWDA
 Stock_2560.json	M.1542804443.A.782	EDFR
 Stock_2560.json	M.1542804604.A.F02	slutboy104
@@ -52452,7 +52452,7 @@ Stock_2638.json	M.1544858033.A.C9E	einzeln
 Stock_2638.json	M.1544858071.A.268	deepdish
 Stock_2638.json	M.1544859972.A.4DC	RapeKing168
 Stock_2638.json	M.1544864463.A.5CE	Noemen
-Stock_2638.json	M.1544867996.A.D94	
+Stock_2638.json	M.1544867996.A.D94	null
 Stock_2638.json	M.1544869935.A.DB4	jongam
 Stock_2638.json	M.1544873155.A.C23	meetcer
 Stock_2638.json	M.1544874244.A.8AB	CLV518
@@ -53681,7 +53681,7 @@ Stock_2699.json	M.1546596783.A.E84	johnps
 Stock_2699.json	M.1546600866.A.66D	SP500StrongB
 Stock_2699.json	M.1546605499.A.9E9	BreezeCat
 Stock_2699.json	M.1546605614.A.17C	hrma
-Stock_2699.json	M.1546607990.A.6DB	
+Stock_2699.json	M.1546607990.A.6DB	null
 Stock_2699.json	M.1546608510.A.914	l75cm
 Stock_2699.json	M.1546608543.A.681	l75cm
 Stock_2700.json	M.1546609524.A.6CE	hvariables
@@ -54464,7 +54464,7 @@ Stock_2738.json	M.1547730301.A.13F	ilovehere
 Stock_2738.json	M.1547730302.A.B49	gogoking
 Stock_2738.json	M.1547731078.A.516	WESTONE
 Stock_2738.json	M.1547731214.A.0CE	kaiming7955
-Stock_2739.json	M.1547731322.A.21F	
+Stock_2739.json	M.1547731322.A.21F	null
 Stock_2739.json	M.1547733109.A.5A5	Illyacow
 Stock_2739.json	M.1547734863.A.181	BreezeCat
 Stock_2739.json	M.1547736063.A.C80	annz
@@ -54639,7 +54639,7 @@ Stock_2747.json	M.1548068055.A.AFD	ikaros5566
 Stock_2747.json	M.1548069895.A.2A9	cat886688
 Stock_2747.json	M.1548069904.A.BF9	johnny9667
 Stock_2747.json	M.1548072625.A.798	PigIsBignana
-Stock_2747.json	M.1548073885.A.E19	
+Stock_2747.json	M.1548073885.A.E19	null
 Stock_2747.json	M.1548075029.A.378	l75cm
 Stock_2747.json	M.1548075066.A.1BA	l75cm
 Stock_2747.json	M.1548076649.A.BBD	EDFR
@@ -54764,7 +54764,7 @@ Stock_2753.json	M.1548268893.A.1E7	ChinaDogman
 Stock_2753.json	M.1548277762.A.47C	dubliuers
 Stock_2753.json	M.1548278655.A.305	eachen
 Stock_2753.json	M.1548281379.A.EFC	sleepyuan
-Stock_2754.json	M.1548282791.A.2EA	
+Stock_2754.json	M.1548282791.A.2EA	null
 Stock_2754.json	M.1548283490.A.1C8	kaube
 Stock_2754.json	M.1548284125.A.036	zkow
 Stock_2754.json	M.1548288276.A.423	nightwing
@@ -54798,7 +54798,7 @@ Stock_2755.json	M.1548319947.A.A54	memory168
 Stock_2755.json	M.1548320117.A.31B	bruwer666
 Stock_2755.json	M.1548321608.A.AC7	aaaccccc1
 Stock_2755.json	M.1548321902.A.3E4	hvariables
-Stock_2755.json	M.1548323535.A.9B1	
+Stock_2755.json	M.1548323535.A.9B1	null
 Stock_2755.json	M.1548324151.A.8AD	jeromeshih
 Stock_2755.json	M.1548324743.A.DB1	OberynMartel
 Stock_2755.json	M.1548324972.A.66E	nightwing
@@ -55481,7 +55481,7 @@ Stock_2789.json	M.1549893874.A.B83	memory168
 Stock_2789.json	M.1549894063.A.E1F	Su22
 Stock_2789.json	M.1549895672.A.47E	tenfu
 Stock_2789.json	M.1549898450.A.716	ckstar85
-Stock_2789.json	M.1549899680.A.E6C	
+Stock_2789.json	M.1549899680.A.E6C	null
 Stock_2789.json	M.1549899941.A.610	F16V
 Stock_2789.json	M.1549900555.A.C29	minifat
 Stock_2790.json	M.1549901163.A.398	loken0408
@@ -56049,7 +56049,7 @@ Stock_2818.json	M.1550757195.A.BB2	EDFR
 Stock_2818.json	M.1550758130.A.113	slutboy104
 Stock_2818.json	M.1550760698.A.E33	threeSecGun
 Stock_2818.json	M.1550761017.A.372	threeSecGun
-Stock_2818.json	M.1550764300.A.1FC	
+Stock_2818.json	M.1550764300.A.1FC	null
 Stock_2818.json	M.1550766810.A.926	df870035
 Stock_2818.json	M.1550767625.A.95E	americ
 Stock_2818.json	M.1550771120.A.5D9	HappyGoodDay
@@ -56090,7 +56090,7 @@ Stock_2820.json	M.1550818249.A.571	zkow
 Stock_2820.json	M.1550818515.A.279	zkow
 Stock_2820.json	M.1550819042.A.238	coconing
 Stock_2820.json	M.1550820090.A.32B	j2708180
-Stock_2820.json	M.1550821175.A.A4F	
+Stock_2820.json	M.1550821175.A.A4F	null
 Stock_2820.json	M.1550821577.A.CAF	Chopin
 Stock_2820.json	M.1550822484.A.9D7	maxxis4735
 Stock_2820.json	M.1550822720.A.C06	s3z15a3z15a
@@ -56628,7 +56628,7 @@ Stock_2847.json	M.1551782758.A.6AE	season2011
 Stock_2847.json	M.1551783322.A.E8B	idunhav1
 Stock_2847.json	M.1551784926.A.953	am711206
 Stock_2847.json	M.1551786115.A.291	goinmary
-Stock_2847.json	M.1551788268.A.06A	
+Stock_2847.json	M.1551788268.A.06A	null
 Stock_2847.json	M.1551788693.A.07F	CLV518
 Stock_2847.json	M.1551789050.A.D82	rathunter
 Stock_2847.json	M.1551789530.A.1E7	ilovehere
@@ -56687,7 +56687,7 @@ Stock_2849.json	M.1551873821.A.1DF	CLV518
 Stock_2850.json	M.1551875807.A.50E	dharma
 Stock_2850.json	M.1551878048.A.015	SilentestLam
 Stock_2850.json	M.1551878355.A.4EC	k29571159
-Stock_2850.json	M.1551878378.A.4B1	
+Stock_2850.json	M.1551878378.A.4B1	null
 Stock_2850.json	M.1551878967.A.3AE	Jerome18
 Stock_2850.json	M.1551879009.A.0FC	yipi1357
 Stock_2850.json	M.1551879158.A.78F	Su22
@@ -56764,7 +56764,7 @@ Stock_2853.json	M.1551951233.A.6D1	teras
 Stock_2853.json	M.1551957990.A.A3B	AirJordan45
 Stock_2853.json	M.1551958325.A.AF5	nbarepeat
 Stock_2853.json	M.1551958785.A.22C	bota
-Stock_2854.json	M.1551959718.A.36B	
+Stock_2854.json	M.1551959718.A.36B	null
 Stock_2854.json	M.1551960263.A.E98	psa654
 Stock_2854.json	M.1551962264.A.68A	rtwodtwo
 Stock_2854.json	M.1551962603.A.147	slutboy104
@@ -56963,7 +56963,7 @@ Stock_2863.json	M.1552290357.A.87B	tools190
 Stock_2863.json	M.1552292984.A.7D7	roser
 Stock_2863.json	M.1552293044.A.368	q111175
 Stock_2863.json	M.1552294298.A.3DE	promptly
-Stock_2863.json	M.1552295581.A.591	
+Stock_2863.json	M.1552295581.A.591	null
 Stock_2864.json	M.1552295916.A.0EB	cococo
 Stock_2864.json	M.1552296778.A.772	CLV518
 Stock_2864.json	M.1552297764.A.364	hrma
@@ -57254,7 +57254,7 @@ Stock_2878.json	M.1552659907.A.0B4	anti87
 Stock_2878.json	M.1552660821.A.DA1	CLV518
 Stock_2878.json	M.1552661579.A.D71	kaiming7955
 Stock_2878.json	M.1552662164.A.AF9	cjol
-Stock_2878.json	M.1552662954.A.595	
+Stock_2878.json	M.1552662954.A.595	null
 Stock_2878.json	M.1552663490.A.AEF	sun099001
 Stock_2878.json	M.1552665918.A.E29	Su22
 Stock_2878.json	M.1552670842.A.0A2	koil
@@ -57330,7 +57330,7 @@ Stock_2882.json	M.1552833476.A.F7B	CLV518
 Stock_2882.json	M.1552836949.A.084	j547
 Stock_2882.json	M.1552837047.A.C6C	sean12345678
 Stock_2882.json	M.1552837597.A.F4A	MrChen
-Stock_2882.json	M.1552840109.A.A82	
+Stock_2882.json	M.1552840109.A.A82	null
 Stock_2882.json	M.1552867105.A.562	kaube
 Stock_2882.json	M.1552869109.A.CB8	justforsing
 Stock_2882.json	M.1552869854.A.637	sleepyuan
@@ -57485,7 +57485,7 @@ Stock_2889.json	M.1553065717.A.4C3	coconing
 Stock_2889.json	M.1553065768.A.F47	Kjisk
 Stock_2889.json	M.1553066976.A.F38	heavenbeyond
 Stock_2890.json	M.1553067356.A.059	SakuraYui
-Stock_2890.json	M.1553067803.A.4C4	
+Stock_2890.json	M.1553067803.A.4C4	null
 Stock_2890.json	M.1553068297.A.FE2	cococo
 Stock_2890.json	M.1553068711.A.583	organize222
 Stock_2890.json	M.1553070045.A.713	CLV518
@@ -57666,7 +57666,7 @@ Stock_2898.json	M.1553245665.A.248	thedarioko
 Stock_2898.json	M.1553246716.A.CDC	wts4832
 Stock_2899.json	M.1553247029.A.9DC	book1999
 Stock_2899.json	M.1553247660.A.14A	chen0625
-Stock_2899.json	M.1553250093.A.EC9	
+Stock_2899.json	M.1553250093.A.EC9	null
 Stock_2899.json	M.1553250332.A.1D0	cindycincia
 Stock_2899.json	M.1553250812.A.C7A	sinpact
 Stock_2899.json	M.1553251233.A.141	hrma
@@ -57892,7 +57892,7 @@ Stock_2910.json	M.1553594406.A.3B1	zxc445567
 Stock_2910.json	M.1553594524.A.D4D	y1896547
 Stock_2910.json	M.1553595448.A.7DD	ddshu
 Stock_2910.json	M.1553595825.A.842	ckshchen
-Stock_2910.json	M.1553597463.A.AFB	
+Stock_2910.json	M.1553597463.A.AFB	null
 Stock_2910.json	M.1553598939.A.75C	jeromeshih
 Stock_2910.json	M.1553600128.A.974	a0956997566
 Stock_2910.json	M.1553600308.A.F2B	tranquilest
@@ -58004,7 +58004,7 @@ Stock_2915.json	M.1553757528.A.7F6	WaKao5566
 Stock_2915.json	M.1553757637.A.BA5	vamsimba
 Stock_2915.json	M.1553759652.A.F3F	zesonpso
 Stock_2915.json	M.1553760905.A.2E9	zxcvxx
-Stock_2916.json	M.1553761573.A.9F1	
+Stock_2916.json	M.1553761573.A.9F1	null
 Stock_2916.json	M.1553764108.A.3DF	lonelysam
 Stock_2916.json	M.1553765022.A.188	Kayusumi
 Stock_2916.json	M.1553768881.A.180	tabo810411
@@ -58151,7 +58151,7 @@ Stock_2923.json	M.1554027328.A.293	morningleee
 Stock_2923.json	M.1554027441.A.E2F	x111222333
 Stock_2923.json	M.1554029308.A.724	taiwanheygo
 Stock_2923.json	M.1554030241.A.5E0	zeroxod
-Stock_2923.json	M.1554034388.A.32E	
+Stock_2923.json	M.1554034388.A.32E	null
 Stock_2923.json	M.1554036398.A.BE1	ESunBoy
 Stock_2923.json	M.1554043702.A.3CD	cjol
 Stock_2923.json	M.1554043818.A.A21	l2ujiuggl
@@ -58261,7 +58261,7 @@ Stock_2928.json	M.1554194618.A.965	deepdish
 Stock_2928.json	M.1554196451.A.F71	ck326
 Stock_2928.json	M.1554197143.A.6E2	ck326
 Stock_2928.json	M.1554198059.A.73D	mayingnine
-Stock_2928.json	M.1554199207.A.E8B	
+Stock_2928.json	M.1554199207.A.E8B	null
 Stock_2928.json	M.1554199978.A.B04	rtwodtwo
 Stock_2929.json	M.1554200972.A.54A	x111222333
 Stock_2929.json	M.1554201665.A.96C	koko147
@@ -58951,7 +58951,7 @@ Stock_2963.json	M.1555340700.A.1E0	qw5526259
 Stock_2963.json	M.1555341462.A.75C	SeaForest
 Stock_2963.json	M.1555342301.A.90A	youngfu
 Stock_2963.json	M.1555343090.A.6C1	jess09121
-Stock_2963.json	M.1555343449.A.05B	
+Stock_2963.json	M.1555343449.A.05B	null
 Stock_2963.json	M.1555344036.A.1C7	eiitt
 Stock_2963.json	M.1555346962.A.4F8	ckshchen
 Stock_2963.json	M.1555348112.A.797	ProTrader
@@ -59515,7 +59515,7 @@ Stock_2992.json	M.1556192622.A.06A	xuane
 Stock_2992.json	M.1556192919.A.6CE	loken0408
 Stock_2992.json	M.1556193125.A.60B	PigIsBignana
 Stock_2992.json	M.1556193144.A.971	pttmans
-Stock_2992.json	M.1556193545.A.CA2	
+Stock_2992.json	M.1556193545.A.CA2	null
 Stock_2992.json	M.1556193629.A.20F	OfficeGL
 Stock_2992.json	M.1556193838.A.D81	CLV518
 Stock_2992.json	M.1556194873.A.EE8	awss1971
@@ -59781,7 +59781,7 @@ Stock_3007.json	M.1556624587.A.2E0	qazdrfv
 Stock_3007.json	M.1556624779.A.5DA	UltraSeven
 Stock_3007.json	M.1556625041.A.E78	ckshchen
 Stock_3007.json	M.1556626604.A.A3D	fuica
-Stock_3007.json	M.1556627006.A.783	
+Stock_3007.json	M.1556627006.A.783	null
 Stock_3007.json	M.1556627080.A.6A0	obrag
 Stock_3007.json	M.1556627302.A.766	CLV518
 Stock_3007.json	M.1556627351.A.ABF	fuica
@@ -59894,7 +59894,7 @@ Stock_3012.json	M.1557275025.A.E54	ANDORLESS
 Stock_3013.json	M.1557275305.A.991	ichitakajoe
 Stock_3013.json	M.1557275446.A.8DC	justforsing
 Stock_3013.json	M.1557275992.A.DB7	NewYorkers
-Stock_3013.json	M.1557276265.A.8E1	
+Stock_3013.json	M.1557276265.A.8E1	null
 Stock_3013.json	M.1557276466.A.C74	djviva
 Stock_3013.json	M.1557276622.A.A4B	charles0939
 Stock_3013.json	M.1557278610.A.BC2	CLV518
@@ -59986,7 +59986,7 @@ Stock_3017.json	M.1557351201.A.A0A	opthr1215
 Stock_3017.json	M.1557352131.A.263	Jarrar
 Stock_3017.json	M.1557352205.A.579	nightwing
 Stock_3017.json	M.1422199105.A.84E	IanLi
-Stock_3017.json	M.1541252211.A.8BE	
+Stock_3017.json	M.1541252211.A.8BE	null
 Stock_3017.json	M.1553431036.A.E95	eyespot
 Stock_3017.json	M.1557295223.A.551	tim0259
 Stock_3018.json	M.1557467918.A.BB4	Inland
@@ -60433,7 +60433,7 @@ Stock_3019.json	M.1557828356.A.60E	weiweibo
 Stock_3019.json	M.1557828503.A.603	pttmans
 Stock_3019.json	M.1557829123.A.FE8	pttmans
 Stock_3019.json	M.1557829578.A.86B	zesonpso
-Stock_3019.json	M.1557830215.A.250	
+Stock_3019.json	M.1557830215.A.250	null
 Stock_3019.json	M.1557833055.A.F6F	anti87
 Stock_3019.json	M.1557833253.A.9C1	Reewalker
 Stock_3019.json	M.1557833386.A.02D	anti87
@@ -60647,7 +60647,7 @@ Stock_3019.json	M.1558076517.A.725	czqs2000
 Stock_3019.json	M.1558078014.A.0CD	abcdeffg
 Stock_3019.json	M.1558078466.A.D72	gn01874474
 Stock_3019.json	M.1558078523.A.7EE	roser
-Stock_3019.json	M.1558079001.A.6CF	
+Stock_3019.json	M.1558079001.A.6CF	null
 Stock_3019.json	M.1558080448.A.3FC	x22434231
 Stock_3019.json	M.1558082005.A.691	STAV72
 Stock_3019.json	M.1558082948.A.7A6	ESunBoy
@@ -61470,7 +61470,7 @@ Stock_3019.json	M.1559040061.A.8B8	nightwing
 Stock_3019.json	M.1559040901.A.C2B	fish19831012
 Stock_3019.json	M.1559043865.A.965	Reewalker
 Stock_3019.json	M.1559046246.A.DDB	withoutw
-Stock_3019.json	M.1559047270.A.783	
+Stock_3019.json	M.1559047270.A.783	null
 Stock_3019.json	M.1559050045.A.036	lynos
 Stock_3019.json	M.1559050425.A.470	heavygauge
 Stock_3019.json	M.1559051239.A.E64	ESunBoy
@@ -61509,7 +61509,7 @@ Stock_3019.json	M.1559092832.A.ED4	humbler
 Stock_3019.json	M.1559093229.A.1AF	lin911179
 Stock_3019.json	M.1559094052.A.96C	ysc55555
 Stock_3019.json	M.1559094138.A.EAD	CLV518
-Stock_3019.json	M.1559095697.A.B49	
+Stock_3019.json	M.1559095697.A.B49	null
 Stock_3019.json	M.1559095733.A.48D	SakuraYui
 Stock_3019.json	M.1559097513.A.5E9	zyquan1207
 Stock_3019.json	M.1559101598.A.B2B	deepdish
@@ -61600,7 +61600,7 @@ Stock_3019.json	M.1559189452.A.267	abcde78555
 Stock_3019.json	M.1559189557.A.0CA	humbler
 Stock_3019.json	M.1559191113.A.BEA	chipher
 Stock_3019.json	M.1559191334.A.39D	cuttleufish
-Stock_3019.json	M.1559192140.A.391	
+Stock_3019.json	M.1559192140.A.391	null
 Stock_3019.json	M.1559193050.A.ABB	deann
 Stock_3019.json	M.1559193813.A.C64	zithromax
 Stock_3019.json	M.1559194427.A.D2A	gethappiness
@@ -61631,7 +61631,7 @@ Stock_3019.json	M.1559212317.A.A16	gametheory
 Stock_3019.json	M.1559212822.A.131	tu11252007
 Stock_3019.json	M.1559214067.A.81A	TWCFP
 Stock_3019.json	M.1559214264.A.E2D	SP500StrongB
-Stock_3019.json	M.1559214424.A.4E6	
+Stock_3019.json	M.1559214424.A.4E6	null
 Stock_3019.json	M.1559216896.A.44D	Reewalker
 Stock_3019.json	M.1559220548.A.FFF	kaiming7955
 Stock_3019.json	M.1559220698.A.B57	pttmans
@@ -61711,7 +61711,7 @@ Stock_3019.json	M.1559313392.A.2C4	dragonjj
 Stock_3019.json	M.1559313640.A.663	Su22
 Stock_3019.json	M.1559315445.A.890	cayman2009
 Stock_3019.json	M.1559316068.A.4B8	freeclouds
-Stock_3019.json	M.1559317632.A.138	
+Stock_3019.json	M.1559317632.A.138	null
 Stock_3019.json	M.1559319894.A.5CD	dragonjj
 Stock_3019.json	M.1559321261.A.1CF	harry8123
 Stock_3019.json	M.1559321378.A.879	Nitrogenital
@@ -61770,7 +61770,7 @@ Stock_3019.json	M.1559402918.A.117	eyespot
 Stock_3019.json	M.1559404204.A.A15	Refauth
 Stock_3019.json	M.1559405776.A.9D9	rolyshow
 Stock_3019.json	M.1559405964.A.AE1	freeclouds
-Stock_3019.json	M.1559409665.A.122	
+Stock_3019.json	M.1559409665.A.122	null
 Stock_3019.json	M.1559414865.A.AD2	cayman2009
 Stock_3019.json	M.1559417561.A.C02	applebg
 Stock_3019.json	M.1559422197.A.521	nightwing
@@ -61859,7 +61859,7 @@ Stock_3019.json	M.1559551578.A.441	OfficeGL
 Stock_3019.json	M.1559553020.A.7DE	a9202507
 Stock_3019.json	M.1559554542.A.7C0	charles0939
 Stock_3019.json	M.1559555865.A.AC7	Palindrome
-Stock_3019.json	M.1559557372.A.91A	
+Stock_3019.json	M.1559557372.A.91A	null
 Stock_3019.json	M.1559557550.A.444	jeromeshih
 Stock_3019.json	M.1559558578.A.600	Reewalker
 Stock_3019.json	M.1559559123.A.D78	epson5566
@@ -62033,7 +62033,7 @@ Stock_3019.json	M.1559751323.A.95E	heavenbeyond
 Stock_3019.json	M.1559760758.A.F77	bluebugi
 Stock_3019.json	M.1559774400.A.D9B	nightwing
 Stock_3019.json	M.1559775706.A.18C	logicerror
-Stock_3019.json	M.1559775967.A.39D	
+Stock_3019.json	M.1559775967.A.39D	null
 Stock_3019.json	M.1559778955.A.3E8	nightwing
 Stock_3019.json	M.1559779889.A.316	sunkd
 Stock_3019.json	M.1559779957.A.C36	kaube
@@ -62267,7 +62267,7 @@ Stock_3019.json	M.1560166587.A.21F	cjol
 Stock_3019.json	M.1560166956.A.537	ESunBoy
 Stock_3019.json	M.1560167676.A.F95	pikakami
 Stock_3019.json	M.1560167693.A.7D5	harry8123
-Stock_3019.json	M.1560168452.A.834	
+Stock_3019.json	M.1560168452.A.834	null
 Stock_3019.json	M.1560169632.A.B82	hito21
 Stock_3019.json	M.1560170620.A.A9C	kaiming7955
 Stock_3019.json	M.1560172366.A.B63	LansingAltec
@@ -62741,7 +62741,7 @@ Stock_3019.json	M.1560917426.A.45F	yasaq
 Stock_3019.json	M.1560923570.A.187	charles0939
 Stock_3019.json	M.1560924002.A.C06	vendan5566
 Stock_3019.json	M.1560924659.A.99A	DowJones
-Stock_3019.json	M.1560925606.A.E8D	
+Stock_3019.json	M.1560925606.A.E8D	null
 Stock_3019.json	M.1560926137.A.101	hjgx
 Stock_3019.json	M.1560927484.A.049	coconing
 Stock_3019.json	M.1560928064.A.687	CLV518
@@ -63003,7 +63003,7 @@ Stock_3019.json	M.1561459624.A.6C5	Lawleit
 Stock_3019.json	M.1561460917.A.50A	tournamen
 Stock_3019.json	M.1561461371.A.E1D	rochis
 Stock_3019.json	M.1561462231.A.3A6	mayingnine
-Stock_3019.json	M.1561464506.A.595	
+Stock_3019.json	M.1561464506.A.595	null
 Stock_3019.json	M.1561466756.A.493	Skydier
 Stock_3019.json	M.1561469136.A.C77	horo
 Stock_3019.json	M.1561469366.A.5BA	withoutw
@@ -63330,7 +63330,7 @@ Stock_3019.json	M.1562075687.A.537	piece601
 Stock_3019.json	M.1562077008.A.57E	Su22
 Stock_3019.json	M.1562077928.A.499	qw5526259
 Stock_3019.json	M.1422199105.A.84E	IanLi
-Stock_3019.json	M.1541252211.A.8BE	
+Stock_3019.json	M.1541252211.A.8BE	null
 Stock_3019.json	M.1561021008.A.160	eyespot
 Stock_3019.json	M.1562047211.A.A77	tim0259
 Stock_3020.json	M.1557476159.A.BD8	spirit119
@@ -63737,7 +63737,7 @@ Stock_3040.json	M.1557828356.A.60E	weiweibo
 Stock_3040.json	M.1557828503.A.603	pttmans
 Stock_3040.json	M.1557829123.A.FE8	pttmans
 Stock_3040.json	M.1557829578.A.86B	zesonpso
-Stock_3040.json	M.1557830215.A.250	
+Stock_3040.json	M.1557830215.A.250	null
 Stock_3040.json	M.1557833055.A.F6F	anti87
 Stock_3040.json	M.1557833253.A.9C1	Reewalker
 Stock_3040.json	M.1557833386.A.02D	anti87
@@ -63951,7 +63951,7 @@ Stock_3050.json	M.1558076517.A.725	czqs2000
 Stock_3050.json	M.1558078014.A.0CD	abcdeffg
 Stock_3050.json	M.1558078466.A.D72	gn01874474
 Stock_3050.json	M.1558078523.A.7EE	roser
-Stock_3050.json	M.1558079001.A.6CF	
+Stock_3050.json	M.1558079001.A.6CF	null
 Stock_3050.json	M.1558080448.A.3FC	x22434231
 Stock_3051.json	M.1558082005.A.691	STAV72
 Stock_3051.json	M.1558082948.A.7A6	ESunBoy
@@ -64774,7 +64774,7 @@ Stock_3091.json	M.1559040061.A.8B8	nightwing
 Stock_3091.json	M.1559040901.A.C2B	fish19831012
 Stock_3091.json	M.1559043865.A.965	Reewalker
 Stock_3092.json	M.1559046246.A.DDB	withoutw
-Stock_3092.json	M.1559047270.A.783	
+Stock_3092.json	M.1559047270.A.783	null
 Stock_3092.json	M.1559050045.A.036	lynos
 Stock_3092.json	M.1559050425.A.470	heavygauge
 Stock_3092.json	M.1559051239.A.E64	ESunBoy
@@ -64813,7 +64813,7 @@ Stock_3093.json	M.1559092832.A.ED4	humbler
 Stock_3093.json	M.1559093229.A.1AF	lin911179
 Stock_3093.json	M.1559094052.A.96C	ysc55555
 Stock_3093.json	M.1559094138.A.EAD	CLV518
-Stock_3094.json	M.1559095697.A.B49	
+Stock_3094.json	M.1559095697.A.B49	null
 Stock_3094.json	M.1559095733.A.48D	SakuraYui
 Stock_3094.json	M.1559097513.A.5E9	zyquan1207
 Stock_3094.json	M.1559101598.A.B2B	deepdish
@@ -64904,7 +64904,7 @@ Stock_3098.json	M.1559189452.A.267	abcde78555
 Stock_3098.json	M.1559189557.A.0CA	humbler
 Stock_3098.json	M.1559191113.A.BEA	chipher
 Stock_3098.json	M.1559191334.A.39D	cuttleufish
-Stock_3098.json	M.1559192140.A.391	
+Stock_3098.json	M.1559192140.A.391	null
 Stock_3098.json	M.1559193050.A.ABB	deann
 Stock_3098.json	M.1559193813.A.C64	zithromax
 Stock_3098.json	M.1559194427.A.D2A	gethappiness
@@ -64935,7 +64935,7 @@ Stock_3099.json	M.1559212317.A.A16	gametheory
 Stock_3099.json	M.1559212822.A.131	tu11252007
 Stock_3100.json	M.1559214067.A.81A	TWCFP
 Stock_3100.json	M.1559214264.A.E2D	SP500StrongB
-Stock_3100.json	M.1559214424.A.4E6	
+Stock_3100.json	M.1559214424.A.4E6	null
 Stock_3100.json	M.1559216896.A.44D	Reewalker
 Stock_3100.json	M.1559220548.A.FFF	kaiming7955
 Stock_3100.json	M.1559220698.A.B57	pttmans
@@ -65015,7 +65015,7 @@ Stock_3103.json	M.1559313392.A.2C4	dragonjj
 Stock_3103.json	M.1559313640.A.663	Su22
 Stock_3104.json	M.1559315445.A.890	cayman2009
 Stock_3104.json	M.1559316068.A.4B8	freeclouds
-Stock_3104.json	M.1559317632.A.138	
+Stock_3104.json	M.1559317632.A.138	null
 Stock_3104.json	M.1559319894.A.5CD	dragonjj
 Stock_3104.json	M.1559321261.A.1CF	harry8123
 Stock_3104.json	M.1559321378.A.879	Nitrogenital
@@ -65074,7 +65074,7 @@ Stock_3106.json	M.1559402918.A.117	eyespot
 Stock_3106.json	M.1559404204.A.A15	Refauth
 Stock_3106.json	M.1559405776.A.9D9	rolyshow
 Stock_3107.json	M.1559405964.A.AE1	freeclouds
-Stock_3107.json	M.1559409665.A.122	
+Stock_3107.json	M.1559409665.A.122	null
 Stock_3107.json	M.1559414865.A.AD2	cayman2009
 Stock_3107.json	M.1559417561.A.C02	applebg
 Stock_3107.json	M.1559422197.A.521	nightwing
@@ -65163,7 +65163,7 @@ Stock_3111.json	M.1559551578.A.441	OfficeGL
 Stock_3111.json	M.1559553020.A.7DE	a9202507
 Stock_3111.json	M.1559554542.A.7C0	charles0939
 Stock_3111.json	M.1559555865.A.AC7	Palindrome
-Stock_3111.json	M.1559557372.A.91A	
+Stock_3111.json	M.1559557372.A.91A	null
 Stock_3111.json	M.1559557550.A.444	jeromeshih
 Stock_3111.json	M.1559558578.A.600	Reewalker
 Stock_3111.json	M.1559559123.A.D78	epson5566
@@ -65337,7 +65337,7 @@ Stock_3120.json	M.1559751323.A.95E	heavenbeyond
 Stock_3120.json	M.1559760758.A.F77	bluebugi
 Stock_3120.json	M.1559774400.A.D9B	nightwing
 Stock_3120.json	M.1559775706.A.18C	logicerror
-Stock_3120.json	M.1559775967.A.39D	
+Stock_3120.json	M.1559775967.A.39D	null
 Stock_3120.json	M.1559778955.A.3E8	nightwing
 Stock_3120.json	M.1559779889.A.316	sunkd
 Stock_3120.json	M.1559779957.A.C36	kaube
@@ -65571,7 +65571,7 @@ Stock_3131.json	M.1560166587.A.21F	cjol
 Stock_3131.json	M.1560166956.A.537	ESunBoy
 Stock_3131.json	M.1560167676.A.F95	pikakami
 Stock_3131.json	M.1560167693.A.7D5	harry8123
-Stock_3131.json	M.1560168452.A.834	
+Stock_3131.json	M.1560168452.A.834	null
 Stock_3132.json	M.1560169632.A.B82	hito21
 Stock_3132.json	M.1560170620.A.A9C	kaiming7955
 Stock_3132.json	M.1560172366.A.B63	LansingAltec
@@ -66044,7 +66044,7 @@ Stock_3155.json	M.1560917426.A.45F	yasaq
 Stock_3155.json	M.1560923570.A.187	charles0939
 Stock_3155.json	M.1560924002.A.C06	vendan5566
 Stock_3155.json	M.1560924659.A.99A	DowJones
-Stock_3155.json	M.1560925606.A.E8D	
+Stock_3155.json	M.1560925606.A.E8D	null
 Stock_3155.json	M.1560926137.A.101	hjgx
 Stock_3155.json	M.1560927484.A.049	coconing
 Stock_3155.json	M.1560928064.A.687	CLV518
@@ -66306,7 +66306,7 @@ Stock_3168.json	M.1561459624.A.6C5	Lawleit
 Stock_3168.json	M.1561460917.A.50A	tournamen
 Stock_3168.json	M.1561461371.A.E1D	rochis
 Stock_3168.json	M.1561462231.A.3A6	mayingnine
-Stock_3168.json	M.1561464506.A.595	
+Stock_3168.json	M.1561464506.A.595	null
 Stock_3168.json	M.1561466756.A.493	Skydier
 Stock_3168.json	M.1561469136.A.C77	horo
 Stock_3168.json	M.1561469366.A.5BA	withoutw
@@ -66637,6 +66637,6 @@ Stock_3186.json	M.1562078556.A.D70	CYL770106
 Stock_3186.json	M.1562079320.A.824	Su22
 Stock_3186.json	M.1562079596.A.C8D	goodjeff
 Stock_3186.json	M.1422199105.A.84E	IanLi
-Stock_3186.json	M.1541252211.A.8BE	
+Stock_3186.json	M.1541252211.A.8BE	null
 Stock_3186.json	M.1561021008.A.160	eyespot
 Stock_3186.json	M.1562047211.A.A77	tim0259
