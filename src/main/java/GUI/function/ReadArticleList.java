@@ -3,7 +3,7 @@ package GUI.function;
 /*
  * Data tagging GUI (article list)
  * version: July 13, 2019 02:10 PM
- * Last revision: July 16, 2019 11:56 PM
+ * Last revision: July 18, 2019 00:16 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -24,13 +24,18 @@ public class ReadArticleList
 	private Vector articleIdVec = new Vector();
 	private Vector articleAuthorVec = new Vector();
 	private int articleIndex;
-
-	public ReadArticleList(String historyarticleId) throws Exception
+	
+	public ReadArticleList(String historyarticleId, boolean nullTag) throws Exception
 	{
 		File file = new File(Units.sourceFolder + Units.alllist);
 		BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 		
-		boolean startcheck = false;
+		boolean startcheck;
+		if(nullTag == true) {
+			startcheck = false;
+		}else {
+			startcheck = true;
+		}
 		int aa = 1;
 		if (file.exists()) {
 			String Line;

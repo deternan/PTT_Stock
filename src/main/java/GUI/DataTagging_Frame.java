@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: July 16, 2019 09:02 PM
+ * Last revision: July 17, 2019 00:16 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -218,7 +218,13 @@ public class DataTagging_Frame {
 						artileID_index = rh.returnartileID();
 						
 						// Loading article list
-						ReadArticleList ra = new ReadArticleList(artileID_index);
+						ReadArticleList ra;
+						if(artileID_index.trim().length() == 0) {
+							ra = new ReadArticleList(artileID_index, false);
+						}else {
+							ra = new ReadArticleList(artileID_index, true);
+						}
+						
 						filenameVec = ra.returnfilename();
 						articleIdVec = ra.returnarticleId();
 						articleAuthorVec = ra.returnarticleAuthorVec();
