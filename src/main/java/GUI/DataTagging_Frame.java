@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: July 17, 2019 00:40 AM
+ * Last revision: July 18, 2019 09:06 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -16,8 +16,6 @@ import javax.swing.JFrame;
 import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
@@ -346,10 +344,14 @@ public class DataTagging_Frame {
 		scrollPane1.setBounds(172, 171, 102, 152);
 		frame.getContentPane().add(scrollPane1);
 		
-		// content panel
+		// Content panel
 		textPane_2 = new JTextPane();
-		textPane_2.setBounds(389, 97, 536, 226);
-		frame.getContentPane().add(textPane_2);
+		//textPane_2.setBounds(389, 97, 536, 226);
+		//frame.getContentPane().add(textPane_2);
+		JScrollPane scrollPaneContent = new JScrollPane(textPane_2);
+		scrollPaneContent.setBounds(389, 97, 536, 226);
+		scrollPaneContent.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		frame.getContentPane().add(scrollPaneContent);
 		
 		// article title
 		lblNewLabel_6 = new JLabel("Title");
@@ -530,7 +532,7 @@ public class DataTagging_Frame {
 					radiochoice = rdbtnUndefined.getText();
 				}
 				
-				System.out.println(radiochoice);
+				
 				if(radiochoice.trim().length() == 0) {
 					radiochoice = "null";
 				}
