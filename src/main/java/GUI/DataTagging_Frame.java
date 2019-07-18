@@ -1,9 +1,9 @@
 package GUI;
 
 /*
- * PTT Data tagging GUI
+ * PTT Data manually tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: July 18, 2019 09:06 PM
+ * Last revision: July 18, 2019 09:56 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -104,7 +104,7 @@ public class DataTagging_Frame {
 	// Regular expression
 	Pattern pattern;
 	Matcher matcher;
-	String regexTitle = Units.regexTitle;	
+	//String regexTitle = Units.regexTitle;	
 		
 	// ActionListener (count)
 	int articleIndex = 0;
@@ -141,7 +141,8 @@ public class DataTagging_Frame {
 	
 	// Running Tag
 	int indexNum;
-		
+	// title pattern check
+	boolean titlecheck;
 	
 	/**
 	 * Launch the application.
@@ -205,6 +206,7 @@ public class DataTagging_Frame {
 					}
 					
 					btnSaveExit.setEnabled(true);
+					titlecheck = false;
 					
 				    // file dialog
 					File selectedFile = fileChooser.getSelectedFile();
@@ -230,12 +232,12 @@ public class DataTagging_Frame {
 												
 						// start to load article content by articleIndex 
 						GetContentByArticleId(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString());
-						pattern = Pattern.compile(regexTitle, Pattern.MULTILINE);
+						pattern = Pattern.compile(Units.regexTitle, Pattern.MULTILINE);
 						matcher = pattern.matcher(title);
 						if (matcher.find()) {
 							// Pattern check
 							PatternCheck(content);
-							
+							titlecheck = true;
 							// Display on the Frame
 							lblNewLabel_2.setText(date);
 							lblNewLabel_3.setText(author);
@@ -267,6 +269,7 @@ public class DataTagging_Frame {
 							label_3.setText(String.valueOf(articleIdVec.size()));
 							label_4.setText(String.valueOf(indexNum));
 							label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
+							btnNewButton.setEnabled(true);
 							DisplayAndClean();
 						}
 						indexNum++;
@@ -347,10 +350,9 @@ public class DataTagging_Frame {
 		// Content panel
 		textPane_2 = new JTextPane();
 		//textPane_2.setBounds(389, 97, 536, 226);
-		//frame.getContentPane().add(textPane_2);
 		JScrollPane scrollPaneContent = new JScrollPane(textPane_2);
 		scrollPaneContent.setBounds(389, 97, 536, 226);
-		scrollPaneContent.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		//scrollPaneContent.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		frame.getContentPane().add(scrollPaneContent);
 		
 		// article title
@@ -437,6 +439,8 @@ public class DataTagging_Frame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
+				titlecheck = false;
+				
 				try {
 					GetContentByArticleId(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString());
 				} catch (Exception e1) {
@@ -444,18 +448,19 @@ public class DataTagging_Frame {
 					e1.printStackTrace();
 				}
 				
-				pattern = Pattern.compile(regexTitle, Pattern.MULTILINE);
+				pattern = Pattern.compile(Units.regexTitle, Pattern.MULTILINE);
 				matcher = pattern.matcher(title);
 				if (matcher.find()) {
 					// Pattern check
 					PatternCheck(content);
-					
+					titlecheck = true;
 					// display on board
 					lblNewLabel_2.setText(date);
 					lblNewLabel_3.setText(author);
 					lblNewLabel_6.setEnabled(true);
 					lblNewLabel_6.setText(title);
 					textPane_2.setText(content);
+					System.out.println(content);
 					mclabel.setText(String.valueOf(messagesCount));
 					labArticleIdStr.setText(articleId);
 					
@@ -511,9 +516,11 @@ public class DataTagging_Frame {
 					}
 					
 				}else {
+					// title is not meet the pattern
 					label_3.setText(String.valueOf(articleIdVec.size()));
 					label_4.setText(String.valueOf(indexNum));
 					label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
+					
 					DisplayAndClean();
 				}
 				
@@ -521,6 +528,7 @@ public class DataTagging_Frame {
 				label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
 				indexNum++;
 				articleIndex++;
+				
 				
 				// radio group
 				String radiochoice = "";
@@ -545,6 +553,10 @@ public class DataTagging_Frame {
 					companyIdTag = "multiple";
 				}
 				
+				if(titlecheck == false) {
+					radiochoice = "ignore";
+				}
+				
 				// Save tagging result
 				try {
 					manualTagging(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString(), articleAuthorVec.get(articleIndex).toString(), radiochoice, companyIdTag);
@@ -555,7 +567,12 @@ public class DataTagging_Frame {
 				
 				// Remove radioButton
 				radiogroup.clearSelection();
-				btnNewButton.setEnabled(false);
+				if(titlecheck == false) {
+					btnNewButton.setEnabled(true);
+				}else {
+					btnNewButton.setEnabled(false);
+				}
+				
 			}
 		});
 		frame.getContentPane().add(btnNewButton);
@@ -568,7 +585,16 @@ public class DataTagging_Frame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					StoragedHistory(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString());
+					if("Save".equals(e.getActionCommand())){
+						int result = JOptionPane.showConfirmDialog(frame, "確定要儲存?", "確認訊息",
+					               JOptionPane.YES_NO_OPTION,
+					               JOptionPane.WARNING_MESSAGE);
+					    if (result==JOptionPane.YES_OPTION) {
+					    	StoragedHistory(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString());
+					    }
+					}
+					
+					
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
