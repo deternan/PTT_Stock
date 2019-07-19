@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data manually tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: July 18, 2019 09:56 PM
+ * Last revision: July 20, 2019 00:16 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -460,7 +460,6 @@ public class DataTagging_Frame {
 					lblNewLabel_6.setEnabled(true);
 					lblNewLabel_6.setText(title);
 					textPane_2.setText(content);
-					System.out.println(content);
 					mclabel.setText(String.valueOf(messagesCount));
 					labArticleIdStr.setText(articleId);
 					
@@ -703,7 +702,6 @@ public class DataTagging_Frame {
 							}
 							// message
 							if (articleobj.has("messages")) {
-								// System.out.println(articleobj.getJSONArray("messages"));
 								JSONArray mesarray = new JSONArray(articleobj.getJSONArray("messages").toString());
 								messagesCount = mesarray.length();
 							}
