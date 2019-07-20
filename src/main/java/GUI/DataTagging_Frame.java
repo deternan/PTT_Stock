@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data manually tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: July 20, 2019 00:16 AM
+ * Last revision: July 20, 2019 12:56 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -143,6 +143,8 @@ public class DataTagging_Frame {
 	int indexNum;
 	// title pattern check
 	boolean titlecheck;
+	String titleCompany = "";
+	String titleCompanyId = "";
 	
 	/**
 	 * Launch the application.
@@ -265,11 +267,59 @@ public class DataTagging_Frame {
 								companyvalueStr += valueDisplay.get(i).toString() + "\n";
 							}
 							textPane_3.setText(companyvalueStr);
+							
+							
+							// functions
+							if(companyIdDisplay.size() > 0) {
+								
+								// Title detection
+								boolean titleContentcheck;
+								titleContentcheck = TitleContentDetection(title);
+								if(titleContentcheck) {
+									inputarticleId = titleCompanyId;
+								}else {
+									inputarticleId = companyIdDisplay.get(0).toString();
+								}
+								
+								// date 
+								date = replaceSpace(date);
+								try {
+									formatdate = ISODateParser(date);
+								} catch (Exception e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								TWDate = convertTWDate(formatdate);
+								
+								try {
+									// add day
+									addtwpday = addTwoDate(formatdate);
+									formatdateAdd = ISODateParserZone(addtwpday);
+									TWDateAdd = convertTWDate(formatdateAdd);
+									
+									// values average
+									getValueAverageByarticleId(inputarticleId, TWDate, TWDateAdd);
+								} catch (Exception e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								
+								lblMonth1.setText(String.valueOf(onemonthAverage));
+								lblMonth2.setText(String.valueOf(twomonthAverage));
+								lblMonth3.setText(String.valueOf(threemonthAverage));
+							}else {
+								lblMonth1.setText("");
+								lblMonth2.setText("");
+								lblMonth3.setText("");
+							}
+							
 						}else {
+							// title is not meet the pattern
 							label_3.setText(String.valueOf(articleIdVec.size()));
 							label_4.setText(String.valueOf(indexNum));
 							label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
 							btnNewButton.setEnabled(true);
+							
 							DisplayAndClean();
 						}
 						indexNum++;
@@ -481,7 +531,16 @@ public class DataTagging_Frame {
 					
 					// functions
 					if(companyIdDisplay.size() > 0) {
-						inputarticleId = companyIdDisplay.get(0).toString();
+						
+						// Title detection
+						boolean titleContentcheck;
+						titleContentcheck = TitleContentDetection(title);
+						if(titleContentcheck) {
+							inputarticleId = titleCompanyId;
+						}else {
+							inputarticleId = companyIdDisplay.get(0).toString();
+						}
+						
 						// date 
 						date = replaceSpace(date);
 						try {
@@ -650,6 +709,7 @@ public class DataTagging_Frame {
 		
 	}
 	
+	
 	private boolean isJSONValid(String jsonInString) {
 		
 		JsonParser parser = new JsonParser();
@@ -756,6 +816,7 @@ public class DataTagging_Frame {
 		}
 	}
 	
+	
 	private void getValueAverageByarticleId(String articleId, String dateStr, String addtwoday) throws Exception 
 	{
 		File file = new File(Units.value_folder + articleId + Units.extension);
@@ -834,7 +895,9 @@ public class DataTagging_Frame {
 		return value;
 	}
 	
-	private void ReadCompany() throws Exception {
+
+	private void ReadCompany() throws Exception 
+	{
 		// TWSE
 		ReadCompany(Units.sourceFolder, Units.twsefile);
 		// TPEX
@@ -873,7 +936,8 @@ public class DataTagging_Frame {
 		return dateTime.toString().replaceAll("-", "");
 	}	
 
- 	private String ISODateParserZone(String dateStr) throws Exception {
+ 	
+	private String ISODateParserZone(String dateStr) throws Exception {
 		boolean chinesecheck;
 		chinesecheck = isChinese(dateStr);
 		DateTimeFormatter formatter;
@@ -942,6 +1006,7 @@ public class DataTagging_Frame {
 		//return cal.getTime();
 	}
 	
+	
 	private void DisplayAndClean()
 	{
 		lblNewLabel_2.setText(date);
@@ -974,6 +1039,8 @@ public class DataTagging_Frame {
 		formatdateAdd = "";
 		TWDateAdd = "";
 		addtwpday = "";
+		titleCompany = "";
+		titleCompanyId = "";
 		lblMonth1.setText("");
 		lblMonth2.setText("");
 		lblMonth3.setText("");
@@ -1000,5 +1067,45 @@ public class DataTagging_Frame {
 		psTagging.close();
 	}
 	
+	private boolean TitleContentDetection(String inputTitle)
+	{
+		boolean titleContentcheck = false;
+		// titleCompany
+		String regexName = "";
+		String regexId = "";
+		String tmpName;
+		String patternName;
+		String patternId;
+		
+		for (int i = 0; i < companyId.size(); i++) {
+			patternName = "";
+			patternId = "";
+
+			// Name
+			tmpName = companyName.get(i).toString().replace("-KY", "");
+			tmpName = tmpName.replace("-DR", "");
+			regexName = "(" + tmpName + ")+";
+			pattern = Pattern.compile(regexName, Pattern.MULTILINE);
+			matcher = pattern.matcher(inputTitle);
+			if (matcher.find()) {
+				patternName = matcher.group();
+				//companyNameDisplay.add(patternName);
+				titleCompany = patternName;
+				titleCompanyId = companyId.get(i).toString();
+				titleContentcheck = true;
+				break;
+			}
+			// Id
+//			regexId = companyId.get(i).toString();
+//			pattern = Pattern.compile(regexId, Pattern.MULTILINE);
+//			matcher = pattern.matcher(inputTitle);
+//			if (matcher.find()) {
+//				patternId = matcher.group();
+//				//companyIdDisplay.add(patternId);
+//			}
+		}
+		
+		return titleContentcheck;
+	}
 	
 }
