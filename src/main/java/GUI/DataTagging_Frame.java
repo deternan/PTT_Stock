@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data manually tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: July 21, 2019 00:32 AM
+ * Last revision: July 21, 2019 12:24 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -498,6 +498,7 @@ public class DataTagging_Frame {
 		nextButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				if (startArticle) {
 					radiochoice = "";
 					if (rdbtnNewRadioButtonPositive.isSelected()) {
@@ -509,7 +510,6 @@ public class DataTagging_Frame {
 					}
 
 					if (radiochoice.trim().length() == 0) {
-						//radiochoice = "null";
 						radiochoice = "ignore";
 					}
 					companyIdTag = "";
@@ -533,169 +533,15 @@ public class DataTagging_Frame {
 						e1.printStackTrace();
 					}
 					
-					startArticle = false;
 					articleIndex++;
+					startArticle = false;
 					
 				}else {
-				
-					contentcheck = false;
-
-					try {
-						GetContentByArticleId(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString());
-						articleNameStr = filenameVec.get(articleIndex).toString();
-						articleIdStr = articleIdVec.get(articleIndex).toString();
-						authorNameStr = articleAuthorVec.get(articleIndex).toString();
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-
-					pattern = Pattern.compile(Units.regexTitle, Pattern.MULTILINE);
-					matcher = pattern.matcher(title);
-					if (matcher.find()) {
-						// Pattern check
-						PatternCheck(content);
-						contentcheck = true;
-						// display on board
-						lblNewLabel_2.setText(date);
-						lblNewLabel_3.setText(author);
-						lblNewLabel_6.setEnabled(true);
-						lblNewLabel_6.setText(title);
-						textPane_2.setText(content);
-						mclabel.setText(String.valueOf(messagesCount));
-						labArticleIdStr.setText(articleId);
-
-						String companynameStr = "";
-						String companyidStr = "";
-						String companyvalueStr = "";
-						// Title detection
-						boolean titleContentcheck;
-						titleContentcheck = TitleContentDetection(title);
-						if (titleContentcheck) {
-							companynameStr = titleCompany;
-							companyidStr = titleCompanyId;
-						}
-
-						// functions
-						if (companyIdDisplay.size() > 0) {
-
-							for (int i = 0; i < companyNameDisplay.size(); i++) {
-								companynameStr += companyNameDisplay.get(i).toString() + "\n";
-							}
-							for (int i = 0; i < companyIdDisplay.size(); i++) {
-								companyidStr += companyIdDisplay.get(i).toString() + "\n";
-							}
-							for (int i = 0; i < valueDisplay.size(); i++) {
-								companyvalueStr += valueDisplay.get(i).toString() + "\n";
-							}
-
-							// Title detection
-							if (titleContentcheck) {
-								inputarticleId = titleCompanyId;
-							} else {
-								inputarticleId = companyIdDisplay.get(0).toString();
-							}
-
-							// date
-							date = replaceSpace(date);
-							try {
-								formatdate = ISODateParser(date);
-							} catch (Exception e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-							TWDate = convertTWDate(formatdate);
-
-							try {
-								// add day
-								addtwpday = addTwoDate(formatdate);
-								formatdateAdd = ISODateParserZone(addtwpday);
-								TWDateAdd = convertTWDate(formatdateAdd);
-
-								// values average
-								getValueAverageByarticleId(inputarticleId, TWDate, TWDateAdd);
-							} catch (Exception e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-
-							lblMonth1.setText(String.valueOf(onemonthAverage));
-							lblMonth2.setText(String.valueOf(twomonthAverage));
-							lblMonth3.setText(String.valueOf(threemonthAverage));
-						} else {
-							lblMonth1.setText("");
-							lblMonth2.setText("");
-							lblMonth3.setText("");
-						}
-
-						textPane.setText(companynameStr);
-						textPane_1.setText(companyidStr);
-						textPane_3.setText(companyvalueStr);
-
-					} else {
-						// title is not meet the pattern
-						label_3.setText(String.valueOf(articleIdVec.size()));
-						label_4.setText(String.valueOf(indexNum));
-						label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
-
-						DisplayAndClean();
-					}
-
-					label_4.setText(String.valueOf(indexNum + 1));
-					label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
-
-					// radio group
-					radiochoice = "";
-					if (rdbtnNewRadioButtonPositive.isSelected()) {
-						radiochoice = rdbtnNewRadioButtonPositive.getText();
-					} else if (rdbtnNewRadioButtonNegative.isSelected()) {
-						radiochoice = rdbtnNewRadioButtonNegative.getText();
-					} else if (rdbtnUndefined.isSelected()) {
-						radiochoice = rdbtnUndefined.getText();
-					}
-
-					if (radiochoice.trim().length() == 0) {
-						//radiochoice = "null";
-						radiochoice = "ignore";
-					}
-					companyIdTag = "";
-					if (companyIdDisplay.size() == 0) {
-						companyIdTag = "null";
-					} else if (companyIdDisplay.size() == 1) {
-						companyIdTag = "single";
-					} else {
-						companyIdTag = "multiple";
-					}
-
-					if (contentcheck == false) {
-						radiochoice = "ignore";
-					}
-
-					// Save tagging result
-					System.out.println(articleIndex+"	next	"+filenameVec.get(articleIndex).toString()+"	"+articleIdVec.get(articleIndex).toString()+"	"+articleAuthorVec.get(articleIndex).toString());
-					try {
-						manualTagging(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString(), articleAuthorVec.get(articleIndex).toString(), radiochoice, companyIdTag);
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					
-					
-					// Remove radioButton
-					radiogroup.clearSelection();
-					
-					if (contentcheck == false) {
-						nextButton.setEnabled(true);
-					} else {
-						nextButton.setEnabled(false);
-					}
-
-					indexNum++;
+					Updtaed();
 					articleIndex++;
-					
 				}
 				
-				
+				Display();
 			}
 		});
 		frame.getContentPane().add(nextButton);
@@ -712,12 +558,7 @@ public class DataTagging_Frame {
 						int result = JOptionPane.showConfirmDialog(frame, "確定要儲存?", "確認訊息", JOptionPane.YES_NO_OPTION,
 								JOptionPane.WARNING_MESSAGE);
 						if (result == JOptionPane.YES_OPTION) {
-							// if(filenameVec.size() > 1) {
-							// articleIndex--;
-							// articleIndex--;
-							// }
-							StoragedHistory(filenameVec.get(articleIndex - 1).toString(),
-									articleIdVec.get(articleIndex - 1).toString());
+							StoragedHistory(filenameVec.get(articleIndex - 1).toString(), articleIdVec.get(articleIndex - 1).toString());
 						}
 					}
 
@@ -840,7 +681,6 @@ public class DataTagging_Frame {
 	}
 
 	// Regular Expression
-	
 	private void PatternCheck(String strTmp) {
 		// Company Name and ID
 		String regexName = "";
@@ -1150,17 +990,317 @@ public class DataTagging_Frame {
 				titleContentcheck = true;
 				break;
 			}
-			// Id
-			// regexId = companyId.get(i).toString();
-			// pattern = Pattern.compile(regexId, Pattern.MULTILINE);
-			// matcher = pattern.matcher(inputTitle);
-			// if (matcher.find()) {
-			// patternId = matcher.group();
-			// //companyIdDisplay.add(patternId);
-			// }
 		}
 
 		return titleContentcheck;
 	}
 
+	// updated
+	private void Updtaed()
+	{
+		contentcheck = false;
+
+		try {
+			GetContentByArticleId(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString());
+			articleNameStr = filenameVec.get(articleIndex).toString();
+			articleIdStr = articleIdVec.get(articleIndex).toString();
+			authorNameStr = articleAuthorVec.get(articleIndex).toString();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		pattern = Pattern.compile(Units.regexTitle, Pattern.MULTILINE);
+		matcher = pattern.matcher(title);
+		if (matcher.find()) {
+			// Pattern check
+			PatternCheck(content);
+			contentcheck = true;
+			// display on board
+			lblNewLabel_2.setText(date);
+			lblNewLabel_3.setText(author);
+			lblNewLabel_6.setEnabled(true);
+			lblNewLabel_6.setText(title);
+			textPane_2.setText(content);
+			mclabel.setText(String.valueOf(messagesCount));
+			labArticleIdStr.setText(articleId);
+
+			String companynameStr = "";
+			String companyidStr = "";
+			String companyvalueStr = "";
+			// Title detection
+			boolean titleContentcheck;
+			titleContentcheck = TitleContentDetection(title);
+			if (titleContentcheck) {
+				companynameStr = titleCompany;
+				companyidStr = titleCompanyId;
+			}
+
+			// functions
+			if (companyIdDisplay.size() > 0) {
+
+				for (int i = 0; i < companyNameDisplay.size(); i++) {
+					companynameStr += companyNameDisplay.get(i).toString() + "\n";
+				}
+				for (int i = 0; i < companyIdDisplay.size(); i++) {
+					companyidStr += companyIdDisplay.get(i).toString() + "\n";
+				}
+				for (int i = 0; i < valueDisplay.size(); i++) {
+					companyvalueStr += valueDisplay.get(i).toString() + "\n";
+				}
+
+				// Title detection
+				if (titleContentcheck) {
+					inputarticleId = titleCompanyId;
+				} else {
+					inputarticleId = companyIdDisplay.get(0).toString();
+				}
+
+				// date
+				date = replaceSpace(date);
+				try {
+					formatdate = ISODateParser(date);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				TWDate = convertTWDate(formatdate);
+
+				try {
+					// add day
+					addtwpday = addTwoDate(formatdate);
+					formatdateAdd = ISODateParserZone(addtwpday);
+					TWDateAdd = convertTWDate(formatdateAdd);
+
+					// values average
+					getValueAverageByarticleId(inputarticleId, TWDate, TWDateAdd);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				lblMonth1.setText(String.valueOf(onemonthAverage));
+				lblMonth2.setText(String.valueOf(twomonthAverage));
+				lblMonth3.setText(String.valueOf(threemonthAverage));
+			} else {
+				lblMonth1.setText("");
+				lblMonth2.setText("");
+				lblMonth3.setText("");
+			}
+
+			textPane.setText(companynameStr);
+			textPane_1.setText(companyidStr);
+			textPane_3.setText(companyvalueStr);
+
+		} else {
+			// title is not meet the pattern
+			label_3.setText(String.valueOf(articleIdVec.size()));
+			label_4.setText(String.valueOf(indexNum));
+			label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
+
+			DisplayAndClean();
+		}
+
+		label_4.setText(String.valueOf(indexNum + 1));
+		label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
+
+		// radio group
+		radiochoice = "";
+		if (rdbtnNewRadioButtonPositive.isSelected()) {
+			radiochoice = rdbtnNewRadioButtonPositive.getText();
+		} else if (rdbtnNewRadioButtonNegative.isSelected()) {
+			radiochoice = rdbtnNewRadioButtonNegative.getText();
+		} else if (rdbtnUndefined.isSelected()) {
+			radiochoice = rdbtnUndefined.getText();
+		}
+
+		if (radiochoice.trim().length() == 0) {
+			//radiochoice = "null";
+			radiochoice = "ignore";
+		}
+		companyIdTag = "";
+		if (companyIdDisplay.size() == 0) {
+			companyIdTag = "null";
+		} else if (companyIdDisplay.size() == 1) {
+			companyIdTag = "single";
+		} else {
+			companyIdTag = "multiple";
+		}
+
+		if (contentcheck == false) {
+			radiochoice = "ignore";
+		}
+
+		// Save tagging result
+		System.out.println(articleIndex+"	next	"+filenameVec.get(articleIndex).toString()+"	"+articleIdVec.get(articleIndex).toString()+"	"+articleAuthorVec.get(articleIndex).toString());
+		try {
+			manualTagging(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString(), articleAuthorVec.get(articleIndex).toString(), radiochoice, companyIdTag);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		// Remove radioButton
+		radiogroup.clearSelection();
+		
+		if (contentcheck == false) {
+			nextButton.setEnabled(true);
+		} else {
+			nextButton.setEnabled(false);
+		}
+
+		indexNum++;
+		//articleIndex++;
+	}
+	
+	private void Display()
+	{
+		contentcheck = false;
+
+		try {
+			GetContentByArticleId(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString());
+			articleNameStr = filenameVec.get(articleIndex).toString();
+			articleIdStr = articleIdVec.get(articleIndex).toString();
+			authorNameStr = articleAuthorVec.get(articleIndex).toString();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		pattern = Pattern.compile(Units.regexTitle, Pattern.MULTILINE);
+		matcher = pattern.matcher(title);
+		if (matcher.find()) {
+			// Pattern check
+			PatternCheck(content);
+			contentcheck = true;
+			// display on board
+			lblNewLabel_2.setText(date);
+			lblNewLabel_3.setText(author);
+			lblNewLabel_6.setEnabled(true);
+			lblNewLabel_6.setText(title);
+			textPane_2.setText(content);
+			mclabel.setText(String.valueOf(messagesCount));
+			labArticleIdStr.setText(articleId);
+
+			String companynameStr = "";
+			String companyidStr = "";
+			String companyvalueStr = "";
+			// Title detection
+			boolean titleContentcheck;
+			titleContentcheck = TitleContentDetection(title);
+			if (titleContentcheck) {
+				companynameStr = titleCompany;
+				companyidStr = titleCompanyId;
+			}
+
+			// functions
+			if (companyIdDisplay.size() > 0) {
+
+				for (int i = 0; i < companyNameDisplay.size(); i++) {
+					companynameStr += companyNameDisplay.get(i).toString() + "\n";
+				}
+				for (int i = 0; i < companyIdDisplay.size(); i++) {
+					companyidStr += companyIdDisplay.get(i).toString() + "\n";
+				}
+				for (int i = 0; i < valueDisplay.size(); i++) {
+					companyvalueStr += valueDisplay.get(i).toString() + "\n";
+				}
+
+				// Title detection
+				if (titleContentcheck) {
+					inputarticleId = titleCompanyId;
+				} else {
+					inputarticleId = companyIdDisplay.get(0).toString();
+				}
+
+				// date
+				date = replaceSpace(date);
+				try {
+					formatdate = ISODateParser(date);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				TWDate = convertTWDate(formatdate);
+
+				try {
+					// add day
+					addtwpday = addTwoDate(formatdate);
+					formatdateAdd = ISODateParserZone(addtwpday);
+					TWDateAdd = convertTWDate(formatdateAdd);
+
+					// values average
+					getValueAverageByarticleId(inputarticleId, TWDate, TWDateAdd);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				lblMonth1.setText(String.valueOf(onemonthAverage));
+				lblMonth2.setText(String.valueOf(twomonthAverage));
+				lblMonth3.setText(String.valueOf(threemonthAverage));
+			} else {
+				lblMonth1.setText("");
+				lblMonth2.setText("");
+				lblMonth3.setText("");
+			}
+
+			textPane.setText(companynameStr);
+			textPane_1.setText(companyidStr);
+			textPane_3.setText(companyvalueStr);
+
+		} else {
+			// title is not meet the pattern
+			label_3.setText(String.valueOf(articleIdVec.size()));
+			label_4.setText(String.valueOf(indexNum));
+			label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
+
+			DisplayAndClean();
+		}
+
+		label_4.setText(String.valueOf(indexNum + 1));
+		label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
+
+		// radio group
+		radiochoice = "";
+		if (rdbtnNewRadioButtonPositive.isSelected()) {
+			radiochoice = rdbtnNewRadioButtonPositive.getText();
+		} else if (rdbtnNewRadioButtonNegative.isSelected()) {
+			radiochoice = rdbtnNewRadioButtonNegative.getText();
+		} else if (rdbtnUndefined.isSelected()) {
+			radiochoice = rdbtnUndefined.getText();
+		}
+
+		if (radiochoice.trim().length() == 0) {
+			//radiochoice = "null";
+			radiochoice = "ignore";
+		}
+		companyIdTag = "";
+		if (companyIdDisplay.size() == 0) {
+			companyIdTag = "null";
+		} else if (companyIdDisplay.size() == 1) {
+			companyIdTag = "single";
+		} else {
+			companyIdTag = "multiple";
+		}
+
+		if (contentcheck == false) {
+			radiochoice = "ignore";
+		}
+	
+		
+		// Remove radioButton
+		radiogroup.clearSelection();
+		
+		if (contentcheck == false) {
+			nextButton.setEnabled(true);
+		} else {
+			nextButton.setEnabled(false);
+		}
+
+		//indexNum++;
+		//articleIndex++;
+	}
+	
 }
