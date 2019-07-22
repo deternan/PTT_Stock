@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data manually tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: July 21, 2019 12:24 PM
+ * Last revision: July 22, 2019 09:37 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -419,9 +419,8 @@ public class DataTagging_Frame {
 
 		// Content panel
 		textPane_2 = new JTextPane();
-		// textPane_2.setBounds(389, 97, 536, 226);
 		JScrollPane scrollPaneContent = new JScrollPane(textPane_2);
-		scrollPaneContent.setBounds(389, 97, 536, 226);
+		scrollPaneContent.setBounds(389, 97, 536, 330);
 		frame.getContentPane().add(scrollPaneContent);
 
 		// article title
@@ -454,7 +453,7 @@ public class DataTagging_Frame {
 
 		rdbtnNewRadioButtonPositive = new JRadioButton("Positive");
 		rdbtnNewRadioButtonPositive.setText("positive");
-		rdbtnNewRadioButtonPositive.setBounds(403, 398, 141, 23);
+		rdbtnNewRadioButtonPositive.setBounds(403, 469, 141, 23);
 		frame.getContentPane().add(rdbtnNewRadioButtonPositive);
 		rdbtnNewRadioButtonPositive.addActionListener(new ActionListener() {
 			@Override
@@ -466,7 +465,7 @@ public class DataTagging_Frame {
 		rdbtnNewRadioButtonNegative = new JRadioButton("Negative");
 		rdbtnNewRadioButtonNegative.setText("negative");
 		// rdbtnNewRadioButtonNegative.setActionCommand("negative");
-		rdbtnNewRadioButtonNegative.setBounds(403, 435, 141, 23);
+		rdbtnNewRadioButtonNegative.setBounds(403, 505, 141, 23);
 		frame.getContentPane().add(rdbtnNewRadioButtonNegative);
 		rdbtnNewRadioButtonNegative.addActionListener(new ActionListener() {
 			@Override
@@ -476,7 +475,7 @@ public class DataTagging_Frame {
 		});
 
 		rdbtnUndefined = new JRadioButton("undefined");
-		rdbtnUndefined.setBounds(403, 473, 141, 23);
+		rdbtnUndefined.setBounds(403, 540, 141, 23);
 		rdbtnUndefined.setText("undefined");
 		frame.getContentPane().add(rdbtnUndefined);
 		rdbtnUndefined.addActionListener(new ActionListener() {
@@ -493,7 +492,7 @@ public class DataTagging_Frame {
 
 		// Next article button
 		nextButton = new JButton("Next");
-		nextButton.setBounds(403, 530, 117, 29);
+		nextButton.setBounds(410, 608, 117, 29);
 		nextButton.setEnabled(false);
 		nextButton.addActionListener(new ActionListener() {
 			@Override
@@ -548,7 +547,7 @@ public class DataTagging_Frame {
 
 		// save button
 		btnSaveExit = new JButton("Save");
-		btnSaveExit.setBounds(532, 530, 117, 29);
+		btnSaveExit.setBounds(532, 608, 117, 29);
 		btnSaveExit.setEnabled(false);
 		btnSaveExit.addActionListener(new ActionListener() {
 			@Override
@@ -589,30 +588,30 @@ public class DataTagging_Frame {
 		frame.getContentPane().add(labArticleIdStr);
 
 		label = new JLabel("總數");
-		label.setBounds(704, 398, 78, 16);
+		label.setBounds(704, 491, 78, 16);
 		frame.getContentPane().add(label);
 
 		label_1 = new JLabel("已完成");
-		label_1.setBounds(704, 435, 78, 16);
+		label_1.setBounds(704, 535, 78, 16);
 		frame.getContentPane().add(label_1);
 
 		label_2 = new JLabel("剩餘");
-		label_2.setBounds(704, 473, 78, 16);
+		label_2.setBounds(704, 575, 78, 16);
 		frame.getContentPane().add(label_2);
 
 		// article total number
 		label_3 = new JLabel("");
-		label_3.setBounds(794, 398, 78, 16);
+		label_3.setBounds(794, 491, 78, 16);
 		frame.getContentPane().add(label_3);
 
 		// finished number
 		label_4 = new JLabel("");
-		label_4.setBounds(794, 435, 78, 16);
+		label_4.setBounds(794, 535, 78, 16);
 		frame.getContentPane().add(label_4);
 
 		// remind number
 		label_5 = new JLabel("");
-		label_5.setBounds(794, 477, 78, 16);
+		label_5.setBounds(794, 575, 78, 16);
 		frame.getContentPane().add(label_5);
 
 	}
