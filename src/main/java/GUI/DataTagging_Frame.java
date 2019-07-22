@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data manually tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: July 22, 2019 09:37 PM
+ * Last revision: July 22, 2019 10:12 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -38,16 +38,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-
 import GUI.function.ReadArticleList;
 import GUI.function.ReadHistory;
-
 import javax.swing.JMenu;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
@@ -73,6 +69,7 @@ public class DataTagging_Frame {
 	JLabel lblMonth3;
 	JLabel mclabel;
 	JLabel labArticleIdStr;
+	JLabel labArticleFileStr;
 	JButton btnSaveExit;
 	ButtonGroup radiogroup;
 	JRadioButton rdbtnNewRadioButtonPositive;
@@ -111,6 +108,7 @@ public class DataTagging_Frame {
 	String articleIdStr = "";
 	String authorNameStr = "";
 	// article content
+	private String articleFile;
 	private String articleId;
 	private String author;
 	private String title;
@@ -149,6 +147,7 @@ public class DataTagging_Frame {
 	boolean contentcheck;
 	String titleCompany = "";
 	String titleCompanyId = "";	boolean startArticle = true;
+	
 
 	/**
 	 * Launch the application.
@@ -222,7 +221,7 @@ public class DataTagging_Frame {
 						ReadHistory rh = new ReadHistory(selectedFile.getAbsolutePath());
 						fileName_index = rh.returnfileName();
 						artileID_index = rh.returnartileID();
-
+							articleFile = fileName_index.substring(0, fileName_index.indexOf(".json"));
 						// Loading article list
 						ReadArticleList ra;
 						if (artileID_index.trim().length() == 0) {
@@ -255,6 +254,7 @@ public class DataTagging_Frame {
 							textPane_2.setText(content);
 							mclabel.setText(String.valueOf(messagesCount));
 							labArticleIdStr.setText(articleId);
+							labArticleFileStr.setText(articleFile);
 							label_3.setText(String.valueOf(articleIdVec.size()));
 							label_4.setText(String.valueOf(indexNum));
 							label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
@@ -384,37 +384,34 @@ public class DataTagging_Frame {
 
 		// article author
 		lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setBounds(139, 62, 202, 16);
+		lblNewLabel_3.setBounds(159, 62, 202, 16);
 		// lblNewLabel_3.setVisible(false);
 		frame.getContentPane().add(lblNewLabel_3);
 
 		JLabel lblNewLabel_4 = new JLabel("公司名稱");
-		lblNewLabel_4.setBounds(35, 143, 61, 16);
+		lblNewLabel_4.setBounds(34, 167, 61, 16);
 		frame.getContentPane().add(lblNewLabel_4);
 
 		JLabel lblNewLabel_5 = new JLabel("公司編號");
-		lblNewLabel_5.setBounds(176, 143, 61, 16);
+		lblNewLabel_5.setBounds(172, 167, 61, 16);
 		frame.getContentPane().add(lblNewLabel_5);
 
 		// Company name
 		textPane = new JTextPane();
-		// textPane.setBounds(35, 171, 102, 152);
 		JScrollPane scrollPane = new JScrollPane(textPane);
-		scrollPane.setBounds(35, 171, 102, 152);
+		scrollPane.setBounds(35, 195, 102, 152);
 		frame.getContentPane().add(scrollPane);
 
 		// Company ID
 		textPane_1 = new JTextPane();
 		JScrollPane scrollPane1 = new JScrollPane(textPane_1);
-		// textPane_1.setBounds(172, 171, 102, 152);
-		scrollPane1.setBounds(172, 171, 102, 152);
+		scrollPane1.setBounds(172, 195, 102, 152);
 		frame.getContentPane().add(scrollPane1);
 
 		// article values
 		textPane_3 = new JTextPane();
 		JScrollPane scrollPane2 = new JScrollPane(textPane_3);
-		// textPane_3.setBounds(35, 398, 78, 117);
-		scrollPane2.setBounds(35, 398, 78, 117);
+		scrollPane2.setBounds(35, 398, 102, 117);
 		frame.getContentPane().add(scrollPane2);
 
 		// Content panel
@@ -580,11 +577,15 @@ public class DataTagging_Frame {
 		frame.getContentPane().add(mclabel);
 
 		JLabel lblArticleId = new JLabel("article id");
-		lblArticleId.setBounds(34, 90, 61, 16);
+		lblArticleId.setBounds(34, 117, 91, 16);
 		frame.getContentPane().add(lblArticleId);
 
+		labArticleFileStr = new JLabel("");
+		labArticleFileStr.setBounds(159, 90, 202, 16);
+		frame.getContentPane().add(labArticleFileStr);
+		
 		labArticleIdStr = new JLabel("");
-		labArticleIdStr.setBounds(139, 90, 202, 16);
+		labArticleIdStr.setBounds(159, 117, 202, 16);
 		frame.getContentPane().add(labArticleIdStr);
 
 		label = new JLabel("總數");
@@ -613,7 +614,12 @@ public class DataTagging_Frame {
 		label_5 = new JLabel("");
 		label_5.setBounds(794, 575, 78, 16);
 		frame.getContentPane().add(label_5);
-
+		
+		JLabel lblArticleFile = new JLabel("article file");
+		lblArticleFile.setBounds(34, 90, 91, 16);
+		frame.getContentPane().add(lblArticleFile);
+		
+		
 	}
 
 	private boolean isJSONValid(String jsonInString) {
@@ -908,6 +914,7 @@ public class DataTagging_Frame {
 		lblNewLabel_3.setText(author);
 		lblNewLabel_6.setText(title);
 		mclabel.setText(String.valueOf(messagesCount));
+		labArticleFileStr.setText(articleFile);
 		labArticleIdStr.setText(articleId);
 		textPane_1.setText("");
 		textPane_2.setText("");
@@ -1022,6 +1029,7 @@ public class DataTagging_Frame {
 			lblNewLabel_6.setText(title);
 			textPane_2.setText(content);
 			mclabel.setText(String.valueOf(messagesCount));
+			labArticleFileStr.setText(articleFile);
 			labArticleIdStr.setText(articleId);
 
 			String companynameStr = "";
@@ -1180,6 +1188,7 @@ public class DataTagging_Frame {
 			lblNewLabel_6.setText(title);
 			textPane_2.setText(content);
 			mclabel.setText(String.valueOf(messagesCount));
+			labArticleFileStr.setText(articleFile);
 			labArticleIdStr.setText(articleId);
 
 			String companynameStr = "";
