@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data manually tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: July 22, 2019 10:12 PM
+ * Last revision: July 23, 2019 10:59 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -75,12 +75,13 @@ public class DataTagging_Frame {
 	JRadioButton rdbtnNewRadioButtonPositive;
 	JRadioButton rdbtnNewRadioButtonNegative;
 	JRadioButton rdbtnUndefined;
-	private JLabel label;
-	private JLabel label_1;
-	private JLabel label_2;
-	private JLabel label_3;
-	private JLabel label_4;
-	private JLabel label_5;
+	JLabel label;
+	JLabel label_1;
+	JLabel label_2;
+	JLabel label_3;
+	JLabel label_4;
+	JLabel label_5;
+	JLabel label_6;
 
 	// Company info.
 	Vector companyId = new Vector();
@@ -126,6 +127,8 @@ public class DataTagging_Frame {
 	String companyIdTag = "";
 	// values
 	Vector allvalueVec = new Vector();
+	// Tagging record;
+	private int validCount = 0;
 	// Date
 	DateFormat df = new SimpleDateFormat(Units.basic_pattern, Locale.getDefault());
 	private double onemonthAverage;
@@ -205,6 +208,15 @@ public class DataTagging_Frame {
 					// Loading Company info.
 					try {
 						ReadCompany();
+					} catch (Exception e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+					
+					// valid taggging count
+					try {
+						validTaggingCount();
+						label_6.setText(String.valueOf(validCount));
 					} catch (Exception e2) {
 						// TODO Auto-generated catch block
 						e2.printStackTrace();
@@ -499,8 +511,12 @@ public class DataTagging_Frame {
 					radiochoice = "";
 					if (rdbtnNewRadioButtonPositive.isSelected()) {
 						radiochoice = rdbtnNewRadioButtonPositive.getText();
+						validCount++;
+						label_6.setText(String.valueOf(validCount));
 					} else if (rdbtnNewRadioButtonNegative.isSelected()) {
 						radiochoice = rdbtnNewRadioButtonNegative.getText();
+						validCount++;
+						label_6.setText(String.valueOf(validCount));
 					} else if (rdbtnUndefined.isSelected()) {
 						radiochoice = rdbtnUndefined.getText();
 					}
@@ -508,6 +524,8 @@ public class DataTagging_Frame {
 					if (radiochoice.trim().length() == 0) {
 						radiochoice = "ignore";
 					}
+					
+					
 					companyIdTag = "";
 					if (companyIdDisplay.size() == 0) {
 						companyIdTag = "null";
@@ -618,6 +636,14 @@ public class DataTagging_Frame {
 		JLabel lblArticleFile = new JLabel("article file");
 		lblArticleFile.setBounds(34, 90, 91, 16);
 		frame.getContentPane().add(lblArticleFile);
+		
+		JLabel lblValideCount = new JLabel("Valid Tagging Count");
+		lblValideCount.setBounds(188, 563, 138, 16);
+		frame.getContentPane().add(lblValideCount);
+		
+		label_6 = new JLabel("");
+		label_6.setBounds(198, 591, 102, 16);
+		frame.getContentPane().add(label_6);
 		
 		
 	}
@@ -958,9 +984,7 @@ public class DataTagging_Frame {
 	}
 
 	// Tagging
-	private void manualTagging(String articleFileName, String articleId, String articleauthor, String tagging,
-			String category) throws Exception {
-		// System.out.println(articleFileName+" "+articleId+" "+articleauthor);
+	private void manualTagging(String articleFileName, String articleId, String articleauthor, String tagging, String category) throws Exception {
 		writerTagging = new FileOutputStream(Units.taggingFolder + Units.taggingName, true);
 
 		psTagging = new PrintStream(writerTagging);
@@ -1001,6 +1025,29 @@ public class DataTagging_Frame {
 		return titleContentcheck;
 	}
 
+	private void validTaggingCount() throws Exception {
+		
+		File file = new File(Units.taggingFolder + Units.taggingName);
+		BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+		
+		//
+		String tmpStr;
+		if (file.exists()) {
+			String Line;
+			String temp[];
+			while ((Line = bfr.readLine()) != null) {
+				temp = Line.split("\\t");
+				tmpStr = temp[3].trim();
+				if(tmpStr.equalsIgnoreCase("positive")) {
+					validCount++;
+				}else if(tmpStr.equalsIgnoreCase("negative")) {
+					validCount++;
+				}
+			}
+		}
+		bfr.close();
+	}
+	
 	// updated
 	private void Updtaed()
 	{
@@ -1115,8 +1162,12 @@ public class DataTagging_Frame {
 		radiochoice = "";
 		if (rdbtnNewRadioButtonPositive.isSelected()) {
 			radiochoice = rdbtnNewRadioButtonPositive.getText();
+			validCount++;
+			label_6.setText(String.valueOf(validCount));
 		} else if (rdbtnNewRadioButtonNegative.isSelected()) {
 			radiochoice = rdbtnNewRadioButtonNegative.getText();
+			validCount++;
+			label_6.setText(String.valueOf(validCount));
 		} else if (rdbtnUndefined.isSelected()) {
 			radiochoice = rdbtnUndefined.getText();
 		}
@@ -1310,5 +1361,5 @@ public class DataTagging_Frame {
 		//indexNum++;
 		//articleIndex++;
 	}
-	
+
 }
