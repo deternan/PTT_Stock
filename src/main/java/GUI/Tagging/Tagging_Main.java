@@ -3,7 +3,7 @@ package GUI.Tagging;
 /*
  * Get values (Main)
  * version: July 06, 2019 15:03 PM
- * Last revision: July 17, 2019 00:26 AM
+ * Last revision: July 23, 2019 10:30 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.InputStreamReader;
@@ -71,6 +72,8 @@ public class Tagging_Main {
 	// Company info.
 	Vector companyId = new Vector();
 	Vector companyName = new Vector();
+	// Tagging record;
+	private int validCount = 0;
 	// Regular expression
 	Pattern pattern;
 	Matcher matcher;
@@ -191,7 +194,12 @@ public class Tagging_Main {
 			// Save tagging result
 			// manualTagging(filenameVec.get(articleIndex).toString(),
 			// articleIdVec.get(articleIndex).toString(), radiochoice, companyIdTag);
+			
 		}
+		
+		// Read valid tagging record
+		validTaggingCount();
+		
 	}
 	
 // Read History
@@ -215,7 +223,6 @@ public class Tagging_Main {
 		}
 	}
 
-	
 	private void ReadAllArticles(String historyfileName, String historyarticleId) throws Exception 
 	{
 		File folder = new File(Units.articleFolder);
@@ -239,7 +246,6 @@ public class Tagging_Main {
 		}
 	}
 	
-
 	private void ReadAllArticles_v2(String historyfileName, String historyarticleId) throws Exception
 	{
 		File file = new File(Units.sourceFolder + Units.alllist);
@@ -258,7 +264,6 @@ public class Tagging_Main {
 				
 				if(historyarticleId.equalsIgnoreCase(temp[1])) {
 					startcheck = true;
-					//System.out.println(temp[0]+"	"+temp[1]);
 				}
 			}
 		}
@@ -304,8 +309,6 @@ public class Tagging_Main {
 		}
 	}
 
-	
-	
 	private void StartCoolection(String currentFileName) throws Exception 
 	{
 		String Line = "";
@@ -394,7 +397,6 @@ public class Tagging_Main {
 		}
 	}
 
-	
 	private void StoragedHistory(String articleFileName, String articleId) throws Exception {
 		writerHistory = new FileOutputStream(Units.historyFolder + Units.historyName, true);
 
@@ -490,7 +492,6 @@ public class Tagging_Main {
 		}
 	}
 
-	
 	private void ReadAllArticlesList() throws Exception 
 	{
 		boolean checkResponse;
@@ -706,7 +707,6 @@ public class Tagging_Main {
 		return true;
 	}
 	
-	
 	private String replaceSpace(String dateStr) {
 		String dategap = "0";
 		String front = dateStr.substring(0, 8);
@@ -720,7 +720,6 @@ public class Tagging_Main {
 		
 		return newdateStr;
 	}
-	
 	
 	private String convertTWDate(String AD) {
 	    SimpleDateFormat df4 = new SimpleDateFormat("yyyyMMdd");
@@ -759,6 +758,31 @@ public class Tagging_Main {
 		psTagging = new PrintStream(writerTagging);
 		psTagging.print(articleFileName + "	" + articleId + "	" + tagging + "	"+category+"\n");
 		psTagging.close();
+	}
+	
+	private void validTaggingCount() throws Exception {
+	
+		File file = new File(Units.taggingFolder + Units.taggingName);
+		BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+		
+		//
+		String tmpStr;
+		if (file.exists()) {
+			String Line;
+			String temp[];
+			while ((Line = bfr.readLine()) != null) {
+				temp = Line.split("\\t");
+				tmpStr = temp[3].trim();
+				if(tmpStr.equalsIgnoreCase("positive")) {
+					validCount++;
+				}else if(tmpStr.equalsIgnoreCase("negative")) {
+					validCount++;
+				}
+				
+			}
+		}
+		bfr.close();
+		System.out.println("Valid Count	"+validCount);
 	}
 	
 }
