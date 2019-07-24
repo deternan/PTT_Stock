@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data manually tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: July 23, 2019 10:59 PM
+ * Last revision: July 25, 2019 00:04 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -248,9 +248,6 @@ public class DataTagging_Frame {
 						indexNum = ra.returnarticleIndex();
 						// start to load article content by articleIndex
 						GetContentByArticleId(filenameVec.get(articleIndex).toString(),	articleIdVec.get(articleIndex).toString());
-//						articleNameStr = filenameVec.get(articleIndex).toString();
-//						articleIdStr = articleIdVec.get(articleIndex).toString();
-//						authorNameStr = articleAuthorVec.get(articleIndex).toString();
 						
 						pattern = Pattern.compile(Units.regexTitle, Pattern.MULTILINE);
 						matcher = pattern.matcher(title);
@@ -337,6 +334,11 @@ public class DataTagging_Frame {
 							textPane.setText(companynameStr);
 							textPane_1.setText(companyidStr);
 							textPane_3.setText(companyvalueStr);
+							
+							if(content.trim().length() == 0) {
+								contentcheck = true;
+								nextButton.setEnabled(true);
+							}
 
 						} else {
 							// title is not meet the pattern
@@ -1155,7 +1157,11 @@ public class DataTagging_Frame {
 			DisplayAndClean();
 		}
 
-		label_4.setText(String.valueOf(indexNum + 1));
+		if(content.trim().length() == 0) {
+			contentcheck = false;
+		}
+		
+		label_4.setText(String.valueOf(indexNum));
 		label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
 
 		// radio group
@@ -1318,7 +1324,11 @@ public class DataTagging_Frame {
 			DisplayAndClean();
 		}
 
-		label_4.setText(String.valueOf(indexNum + 1));
+		if(content.trim().length() == 0) {
+			contentcheck = false;
+		}
+		
+		label_4.setText(String.valueOf(indexNum));
 		label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
 
 		// radio group
@@ -1357,9 +1367,7 @@ public class DataTagging_Frame {
 		} else {
 			nextButton.setEnabled(false);
 		}
-
-		//indexNum++;
-		//articleIndex++;
+		
 	}
 
 }
