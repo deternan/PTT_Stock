@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data manually tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: July 25, 2019 00:04 AM
+ * Last revision: July 30, 2019 07:40 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -267,7 +267,7 @@ public class DataTagging_Frame {
 							label_3.setText(String.valueOf(articleIdVec.size()));
 							label_4.setText(String.valueOf(indexNum));
 							label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
-
+							
 							String companynameStr = "";
 							String companyidStr = "";
 							String companyvalueStr = "";
@@ -399,7 +399,6 @@ public class DataTagging_Frame {
 		// article author
 		lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setBounds(159, 62, 202, 16);
-		// lblNewLabel_3.setVisible(false);
 		frame.getContentPane().add(lblNewLabel_3);
 
 		JLabel lblNewLabel_4 = new JLabel("公司名稱");
@@ -949,7 +948,7 @@ public class DataTagging_Frame {
 		textPane_3.setText("");
 		textPane.setText("");
 		lblNewLabel_6.setEnabled(false);
-
+		
 		messagesCount = 0;
 		companyIdDisplay.clear();
 		companyNameDisplay.clear();
@@ -974,6 +973,8 @@ public class DataTagging_Frame {
 		lblMonth1.setText("");
 		lblMonth2.setText("");
 		lblMonth3.setText("");
+		mclabel.setText("");
+		
 	}
 
 	// Storage
@@ -1196,7 +1197,7 @@ public class DataTagging_Frame {
 		}
 
 		// Save tagging result
-		System.out.println(articleIndex+"	next	"+filenameVec.get(articleIndex).toString()+"	"+articleIdVec.get(articleIndex).toString()+"	"+articleAuthorVec.get(articleIndex).toString());
+		System.out.println(articleIndex+"	"+filenameVec.get(articleIndex).toString()+"	"+articleIdVec.get(articleIndex).toString()+"	"+articleAuthorVec.get(articleIndex).toString());
 		try {
 			manualTagging(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString(), articleAuthorVec.get(articleIndex).toString(), radiochoice, companyIdTag);
 		} catch (Exception e1) {
@@ -1342,7 +1343,6 @@ public class DataTagging_Frame {
 		}
 
 		if (radiochoice.trim().length() == 0) {
-			//radiochoice = "null";
 			radiochoice = "ignore";
 		}
 		companyIdTag = "";
