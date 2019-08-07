@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data manually tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: July 30, 2019 07:40 AM
+ * Last revision: August 07, 2019 06:20 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -335,8 +335,14 @@ public class DataTagging_Frame {
 							textPane_1.setText(companyidStr);
 							textPane_3.setText(companyvalueStr);
 							
+							// title filter
+							contentFilter();
+							if(!contentcheck) {
+								nextButton.setEnabled(true);
+							}
+							
 							if(content.trim().length() == 0) {
-								contentcheck = true;
+								//contentcheck = true;
 								nextButton.setEnabled(true);
 							}
 
@@ -1325,6 +1331,9 @@ public class DataTagging_Frame {
 			DisplayAndClean();
 		}
 
+		// title filter
+		contentFilter();
+		
 		if(content.trim().length() == 0) {
 			contentcheck = false;
 		}
@@ -1370,4 +1379,17 @@ public class DataTagging_Frame {
 		
 	}
 
+	private void contentFilter()
+	{
+		if(title.contains("盤中")) {
+			contentcheck = false;
+		}else if(title.contains("盤後")) {
+			contentcheck = false;
+		}else if(title.contains("交易統計")) {
+			contentcheck = false;
+		}else if(title.contains("統計表")) {
+			contentcheck = false;
+		}
+	}
+	
 }
