@@ -1391,6 +1391,10 @@ public class DataTagging_Frame {
 			contentcheck = false;
 		}else if(title.contains("閒聊")) {
 			contentcheck = false;
+		}else if(title.contains("閒聊")) {
+			contentcheck = false;
+		}else if(title.contains("大盤")) {
+			contentcheck = false;
 		}
 	}
 	
