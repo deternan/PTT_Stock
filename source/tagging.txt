@@ -3452,3 +3452,6 @@ Stock_0175.json	M.1448199445.A.45D	rain888	undefined	null
 Stock_0175.json	M.1448200432.A.323	b8514032	undefined	null
 Stock_0175.json	M.1448205785.A.4F5	Lottery	ignore	null
 Stock_0175.json	M.1448205828.A.8EA	kkkkk9	undefined	null
+Stock_0175.json	M.1448209324.A.D2C	George	ignore	null
+Stock_0175.json	M.1448209602.A.0E4	bidet	ignore	null
+Stock_0175.json	M.1448215095.A.870	Anjou	undefined	multiple
