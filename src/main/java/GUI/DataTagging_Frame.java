@@ -1389,6 +1389,8 @@ public class DataTagging_Frame {
 			contentcheck = false;
 		}else if(title.contains("統計表")) {
 			contentcheck = false;
+		}else if(title.contains("閒聊")) {
+			contentcheck = false;
 		}
 	}
 	
