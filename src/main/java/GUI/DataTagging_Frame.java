@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data manually tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: August 07, 2019 06:20 PM
+ * Last revision: August 10, 2019 00:24 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -151,7 +151,10 @@ public class DataTagging_Frame {
 	String titleCompany = "";
 	String titleCompanyId = "";	boolean startArticle = true;
 	
-
+	// Temp (debug)
+	private String currentDate;
+	private String currentValue;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -547,7 +550,7 @@ public class DataTagging_Frame {
 					}
 					
 					try {
-						System.out.println((articleIndex)+"	load	"+filenameVec.get(0).toString()+"	"+articleIdVec.get(0).toString()+"	"+articleAuthorVec.get(0).toString());
+						System.out.println((articleIndex)+"	load	"+filenameVec.get(0).toString()+"	"+articleIdVec.get(0).toString()+"	"+inputarticleId+"	"+articleAuthorVec.get(0).toString());
 						manualTagging(filenameVec.get(0).toString(), articleIdVec.get(0).toString(), articleAuthorVec.get(0).toString(), radiochoice, companyIdTag);
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
@@ -761,6 +764,7 @@ public class DataTagging_Frame {
 	}
 
 	private void getValueAverageByarticleId(String articleId, String dateStr, String addtwoday) throws Exception {
+		
 		File file = new File(Units.value_folder + articleId + Units.extension);
 		if (file.exists()) {
 			BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
@@ -769,15 +773,17 @@ public class DataTagging_Frame {
 			int dateindexTag = 0;
 			int dateindextwoTag = 0;
 			int index = 0;
+			String valueTemp = "";
 			allvalueVec.clear();
 			while ((Line = bfr.readLine()) != null) {
 				temp = Line.split("	");
 				if (dateStr.equalsIgnoreCase(temp[0])) {
 					dateindexTag = index;
-					// break;
+					valueTemp = temp[1];
 				}
 				if (addtwoday.equalsIgnoreCase(temp[0])) {
 					dateindextwoTag = index;
+					valueTemp = temp[1];
 				}
 				allvalueVec.add(temp[1]);
 				index++;
@@ -787,8 +793,12 @@ public class DataTagging_Frame {
 			int nextIndex;
 			if (dateindexTag > dateindextwoTag) {
 				nextIndex = dateindexTag;
+				currentDate = dateStr;
+				currentValue = valueTemp;
 			} else {
 				nextIndex = dateindextwoTag;
+				currentDate = addtwoday;
+				currentValue = valueTemp;
 			}
 
 			// values average
@@ -1203,7 +1213,7 @@ public class DataTagging_Frame {
 		}
 
 		// Save tagging result
-		System.out.println(articleIndex+"	"+filenameVec.get(articleIndex).toString()+"	"+articleIdVec.get(articleIndex).toString()+"	"+articleAuthorVec.get(articleIndex).toString());
+		System.out.println(articleIndex+"	"+filenameVec.get(articleIndex).toString()+"	"+articleIdVec.get(articleIndex).toString()+"	"+inputarticleId+"	"+articleAuthorVec.get(articleIndex).toString()+"	"+currentDate+"	"+currentValue);
 		try {
 			manualTagging(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString(), articleAuthorVec.get(articleIndex).toString(), radiochoice, companyIdTag);
 		} catch (Exception e1) {
