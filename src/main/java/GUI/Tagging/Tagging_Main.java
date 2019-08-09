@@ -3,7 +3,7 @@ package GUI.Tagging;
 /*
  * Get values (Main)
  * version: July 06, 2019 15:03 PM
- * Last revision: July 23, 2019 10:30 PM
+ * Last revision: August 10, 2019 00:01 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -39,7 +39,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 import GUI.Units;
-
 
 public class Tagging_Main {
 	// articlelist
@@ -579,15 +578,6 @@ public class Tagging_Main {
         return extension;
     }
 	
-	public static void main(String args[]) {
-		try {
-			Tagging_Main tagging = new Tagging_Main();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 	private void getValueAverageByarticleId(String articleId, String dateStr, String addtwoday) throws Exception 
 	{
 		File file = new File(Units.value_folder + articleId + Units.extension);
@@ -603,7 +593,6 @@ public class Tagging_Main {
 				temp = Line.split("	");
 				if(dateStr.equalsIgnoreCase(temp[0])) {
 					dateindexTag = index;
-					//break;
 				}
 				if(addtwoday.equalsIgnoreCase(temp[0])) {
 					dateindextwoTag = index;
@@ -783,6 +772,15 @@ public class Tagging_Main {
 		}
 		bfr.close();
 		System.out.println("Valid Count	"+validCount);
+	}
+	
+	public static void main(String args[]) {
+		try {
+			Tagging_Main tagging = new Tagging_Main();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }
