@@ -1405,6 +1405,10 @@ public class DataTagging_Frame {
 			contentcheck = false;
 		}else if(title.contains("大盤")) {
 			contentcheck = false;
+		}else if(title.contains("加權")) {
+			contentcheck = false;
+		}else if(title.contains("市場")) {
+			contentcheck = false;
 		}
 	}
 	
