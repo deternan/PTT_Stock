@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data manually tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: August 10, 2019 00:24 AM
+ * Last revision: August 12, 2019 11:16 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -1408,6 +1408,8 @@ public class DataTagging_Frame {
 		}else if(title.contains("加權")) {
 			contentcheck = false;
 		}else if(title.contains("市場")) {
+			contentcheck = false;
+		}else if(title.contains("警告")) {
 			contentcheck = false;
 		}
 	}
