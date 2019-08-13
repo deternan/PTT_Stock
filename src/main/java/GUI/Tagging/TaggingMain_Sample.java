@@ -3,7 +3,7 @@ package GUI.Tagging;
 /*
  * Get values (Main)
  * version: August 10, 2019 00:01 AM
- * Last revision: August 12, 2019 11:00 PM
+ * Last revision: August 12, 2019 11:56 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -41,7 +41,13 @@ public class TaggingMain_Sample {
 		String extension_Json = "json";
 	// articlelist
 		BufferedWriter writerarticlelist;
-		
+		// article content
+		private String articleId;
+		private String author;
+		private String title;
+		private String content;
+		private String date;	
+		private int messagesCount;
 		
 	public TaggingMain_Sample() throws Exception
 	{
@@ -50,7 +56,7 @@ public class TaggingMain_Sample {
 		ReadAllArticlesList();
 		writerarticlelist.close();
 		
-		//ReadAllArticles();
+		ReadAllArticles();
 	}
 	
 	private void ReadAllArticlesList() throws Exception 
@@ -128,10 +134,64 @@ public class TaggingMain_Sample {
 					filenameVec.add(temp[0]);
 					articleIdVec.add(temp[1]);
 				}
-				
 			}
 		}
 		bfr.close();
+	}
+	
+	private void GetContentByArticleId(String filenameIndex, String articleIdIndex) throws Exception {
+		String Line = "";
+		FileReader fr = new FileReader(Units.articleFolder + filenameIndex);
+		BufferedReader bfr = new BufferedReader(fr);
+
+		String strTmp = "";
+		while ((Line = bfr.readLine()) != null) {
+			strTmp += Line;
+		}
+		fr.close();
+		bfr.close();
+
+		String idTmp;
+		if (isJSONValid(strTmp)) {
+			JSONObject obj = new JSONObject(strTmp);
+			if (obj.has("articles")) {
+				JSONArray jsonarray = new JSONArray(obj.get("articles").toString());
+				for (int i = 0; i < jsonarray.length(); i++) {
+					JSONObject articleobj = new JSONObject(jsonarray.get(i).toString());
+					if (articleobj.has("article_id")) {
+						idTmp = articleobj.getString("article_id");
+						articleId = idTmp;
+						if (idTmp.equalsIgnoreCase(articleIdIndex)) {
+
+							// author
+							if (articleobj.has("author")) {
+								author = articleobj.getString("author");
+							}
+							// title
+							if (articleobj.has("article_title")) {
+								title = articleobj.getString("article_title");
+							}
+							// content
+							if (articleobj.has("content")) {
+								content = articleobj.getString("content");
+							}
+							// date
+							if (articleobj.has("date")) {
+								date = articleobj.getString("date");
+							}
+							// message
+							if (articleobj.has("messages")) {
+								// System.out.println(articleobj.getJSONArray("messages"));
+								JSONArray mesarray = new JSONArray(articleobj.getJSONArray("messages").toString());
+								messagesCount = mesarray.length();
+							}
+
+							break;
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	private boolean ExtensionCheck(String path) {
