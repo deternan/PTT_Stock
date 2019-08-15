@@ -3,7 +3,7 @@ package ptt.statistics;
 /*
  * Authors Statistical
  * version: May 02, 2019 07:00 PM
- * Last revision: August 15, 2019 11:32 PM
+ * Last revision: August 15, 2019 11:45 PM
  * 
  * Author : Chao-Hsuan Ke
  * 
@@ -216,7 +216,7 @@ public class Statistical_AuthorsList {
 		duplicates.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
 				.forEachOrdered(x -> reverseSortedMap.put(x.getKey(), x.getValue()));
 
-		// Display
+		// Save
 		for (Map.Entry<String, Integer> entry : reverseSortedMap.entrySet()) {
 			allAuthor_array.add(entry.getKey());
 			allAuthorStastic_array.add(entry.getValue());
