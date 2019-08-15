@@ -3,7 +3,7 @@ package ptt.statistics;
 /*
  * Message (Push) Statistical
  * version: May 08, 2019 05:56 AM
- * Last revision: May 20, 2019 08:47 PM
+ * Last revision: August 16, 2019 07:31 PM
  * 
  * Author : Chao-Hsuan Ke
  * 
@@ -27,7 +27,6 @@ import org.json.simple.parser.JSONParser;
 public class Statistical_articlePush {
 	
 	// Read source
-	//private String folder_source = "/Users/phelps/temp/";
 	private String folder_source = "/data/git/DataSet/ptt/Stock data/";
 	private BufferedReader bfr;
 	// Output files
@@ -82,17 +81,13 @@ public class Statistical_articlePush {
 		        if(checkResponse) {
 		        	 // Read files
 			        ReadFile(folder_source + file.getName());
-			        
-			        //System.out.println(file.getName()+"	"+outputBase);
 		        }
 		    }
 		}
 		
 		// Sort
 		BubbleSort();
-//		for(int i=0;i<author_Array.size();i++) {
-//			System.out.println(articleId_Array.get(i)+"	"+author_Array.get(i)+"	"+messageCount_Array.get(i));
-//		}
+
 		writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(folder_output + outputMessageStatistical+"_"+outputBase+".txt"), "utf-8"));
 		for(int i=0;i<author_Array.size();i++)  {
 			writer.write(articleId_Array.get(i)+"	"+author_Array.get(i)+"	"+messageCount_Array.get(i)+"	"+title_Array.get(i)+"	"+date_Array.get(i)+"\n");
@@ -104,11 +99,12 @@ public class Statistical_articlePush {
 	{
 		boolean checkResponse = false;
 		        		        
-		        String Getextension = getFileExtension(new File(path));
-		        String extension = Getextension.substring(1, Getextension.length());
-		        if(extension.equalsIgnoreCase(extension_Json)) {
-		        	checkResponse = true;
-		        }
+		String Getextension = getFileExtension(new File(path));
+		String extension = Getextension.substring(1, Getextension.length());
+		if (extension.equalsIgnoreCase(extension_Json)) {
+			checkResponse = true;
+		}
+		        
 		return checkResponse;
 	}
 	
@@ -125,7 +121,6 @@ public class Statistical_articlePush {
         }
  
         return extension;
- 
     }
 
 	private void ReadFile(String path) throws Exception
@@ -134,8 +129,7 @@ public class Statistical_articlePush {
 		bfr = new BufferedReader(fr);
 		String Line;
 		String allText = "";
-		while((Line = bfr.readLine())!=null)
-		{								
+		while((Line = bfr.readLine())!=null){								
 			allText += Line;
 		}
 		fr.close();
@@ -172,7 +166,6 @@ public class Statistical_articlePush {
 			}else {
 				articleId = "";
 			}
-			//System.out.println(i+"	"+articlejson.get("article_id"));
 			
 			// author
 			if(articlejson.containsKey("author")) {
@@ -196,13 +189,9 @@ public class Statistical_articlePush {
 			}
 			
 			
-			// content
-			//System.out.println(i+"	"+articlejson.get("content"));
-			
-			// Message (Push)
+			// Message (Push count)
 			if(articlejson.containsKey("message_count")) {
 				if(articlejson.get("message_count") != null) {
-					//System.out.println(articlejson.get("message_count"));
 					JSONObject messagejson = (JSONObject) parser.parse(articlejson.get("message_count").toString());
 					messageCount = Integer.parseInt(messagejson.get("all").toString().trim());
 				}
@@ -230,8 +219,6 @@ public class Statistical_articlePush {
 			
 			all_array_temp.add(listArray);
 			
-//			System.out.println(i+"	"+countIndex+"	"+articleId+"	"+messageCount+"	"+author+"	"+title+"	"+listArray.size()+"	"+all_array_temp.get(countIndex));
-			
 			listArray.clear();
 			countIndex++;
 		}
@@ -239,7 +226,6 @@ public class Statistical_articlePush {
 	
 	private void Date_Split(String dateStr)
 	{
-		//"date":"Tue Aug 30 13:38:20 2016",
 		String temp[];
 		String monthStr;
 		String dayStr;
@@ -255,7 +241,6 @@ public class Statistical_articlePush {
 			}
 			year = temp[5];
 
-			//outputBase = String.valueOf(year)+"_"+String.valueOf(month)+"_"+String.valueOf(day);
 			outputBase = String.valueOf(year)+monthStr+dayStr;
 		}
 	}
@@ -300,33 +285,7 @@ public class Statistical_articlePush {
 		    date_Array.set(i, date_Array.get(j));
 		    date_Array.set(j, datetmp);
 		}
-	
     }
-	
-	private void CountDuplicatedList() {
-		
-		//Map<String, Integer> duplicates = new HashMap<String, Integer>();
-		String str;
-		for(int i=0; i<all_array_temp.size(); i++) {
-			ArrayList aa = all_array_temp.get(i);
-			str = aa.get(1).toString();
-			
-		}
-//		
-//		for (String str : all_array_temp) {
-//			if (duplicates.containsKey(str)) {
-//				duplicates.put(str, duplicates.get(str) + 1);
-//			} else {
-//				duplicates.put(str, 1);
-//			}
-//		}
-		
-//		for (Map.Entry<String, Integer> entry : duplicates.entrySet()) {
-//			//System.out.println(entry.getKey() + " = " + entry.getValue());
-//			allAuthor_array.add(entry.getKey());
-//			allAuthorStastic_array.add(entry.getValue());
-//		}		
-	}
 	
 	private String MonthTranslation(String inputStr) {
 		
