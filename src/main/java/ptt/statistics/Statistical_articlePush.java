@@ -3,7 +3,7 @@ package ptt.statistics;
 /*
  * Message (Push) Statistical
  * version: May 08, 2019 05:56 AM
- * Last revision: August 16, 2019 07:31 PM
+ * Last revision: August 16, 2019 07:35 PM
  * 
  * Author : Chao-Hsuan Ke
  * 
@@ -37,21 +37,19 @@ public class Statistical_articlePush {
 	// ArrayList
 	int countIndex = 0;
 		// Data Storage
-		// Type 1
-	ArrayList<String> articleId_Array = new ArrayList<String>(); 
-	ArrayList<Integer> messageCount_Array = new ArrayList<Integer>(); 
-	ArrayList<String> author_Array = new ArrayList<String>();
-	ArrayList<String> title_Array = new ArrayList<String>();
-	ArrayList<String> date_Array = new ArrayList<String>();
-		// Type 2
-		ArrayList<ArrayList> all_array_temp = new ArrayList<ArrayList>();
+		ArrayList<String> articleId_Array = new ArrayList<String>(); 
+		ArrayList<Integer> messageCount_Array = new ArrayList<Integer>(); 
+		ArrayList<String> author_Array = new ArrayList<String>();
+		ArrayList<String> title_Array = new ArrayList<String>();
+		ArrayList<String> date_Array = new ArrayList<String>();
+
 		// Map
 		Map<String, Integer> duplicates = new HashMap<String, Integer>();
 	
 	// attribute
 	private String articleId;
-	private String author;
 	private String title;
+	private String author;
 	private int messageCount;
 	private String Date;
 	// File Check
@@ -146,19 +144,18 @@ public class Statistical_articlePush {
 	private void Parsing(String lineStr) throws Exception
 	{
 		JSONObject json = (JSONObject) parser.parse(lineStr);
-		JSONArray msg = (JSONArray) json.get("articles");
+		JSONArray articlesArray = (JSONArray) json.get("articles");
 		
-		ArrayList listArray = new ArrayList();
-		
-		for(int i=0; i<msg.size(); i++) 
+		for(int i=0; i<articlesArray.size(); i++) 
 		{
 			articleId = "";
-			author = "";
 			title = "";
+			author = "";
 			messageCount = 0;
 			outputBase= "";
+			Date = "";
 			
-			JSONObject articlejson = (JSONObject) parser.parse(msg.get(i).toString());
+			JSONObject articlejson = (JSONObject) parser.parse(articlesArray.get(i).toString());
 			
 			// article_id
 			if(articlejson.containsKey("article_id") && articlejson.get("article_id")!=null) {
@@ -179,14 +176,6 @@ public class Statistical_articlePush {
 			}else {
 				author = "";
 			}
-				
-			
-			// title
-			if(articlejson.containsKey("article_title") && articlejson.get("article_title")!= null) {
-				title = articlejson.get("article_title").toString();
-			}else {
-				title = "";
-			}
 			
 			
 			// Message (Push count)
@@ -199,6 +188,13 @@ public class Statistical_articlePush {
 				messageCount = 0;
 			}
 			
+			// title
+			if (articlejson.containsKey("article_title") && articlejson.get("article_title") != null) {
+				title = articlejson.get("article_title").toString();
+			} else {
+				title = "";
+			}
+			
 			// Date
 			if(articlejson.containsKey("date")) {
 				Date_Split(articlejson.get("date").toString());
@@ -206,20 +202,12 @@ public class Statistical_articlePush {
 			}
 			
 			
-			// Type 1
 			articleId_Array.add(articleId);
+			title_Array.add(title);
 			author_Array.add(author);
 			messageCount_Array.add(messageCount);
-			title_Array.add(title);
 			date_Array.add(Date);
-			// Type 2
-			listArray.add(articleId);						// 0
-			listArray.add(author);							// 1
-			listArray.add(String.valueOf(messageCount));	// 2
-			
-			all_array_temp.add(listArray);
-			
-			listArray.clear();
+
 			countIndex++;
 		}
 	}
