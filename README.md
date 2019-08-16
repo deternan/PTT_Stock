@@ -43,8 +43,8 @@
 
 1) [發表過文章的作者 ID](https://github.com/deternan/PTT_Stock/blob/master/src/main/java/ptt/statistics/Statistical_AuthorsList.java) <br>
 2) [文章被推文的數量](https://github.com/deternan/PTT_Stock/blob/master/src/main/java/ptt/statistics/Statistical_articlePush.java) <br>
-3) [每個user發表後被推文的數量](https://github.com/deternan/PTT_Stock/blob/master/src/main/java/ptt/statistics/Statistical_AuthorsPushedNumber.java) <br>
-4) [每個user推文的數量](https://github.com/deternan/PTT_Stock/blob/master/src/main/java/ptt/statistics/Statistical_NumofPushByAllAuthor.java) <br>
+3) [每個user發表後被推文的數量](https://github.com/deternan/PTT_Stock/blob/master/src/main/java/ptt/statistics/Statistical_NumofPushByAllAuthor.java) <br>
+4) [每個user推文的數量](https://github.com/deternan/PTT_Stock/blob/master/src/main/java/ptt/statistics/Statistical_AuthorsPushedNumber.java) <br>
 
 
 
