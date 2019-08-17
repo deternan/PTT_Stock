@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data manually tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: August 12, 2019 11:16 PM
+ * Last revision: August 17, 2019 06:16 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -789,16 +789,15 @@ public class DataTagging_Frame {
 				index++;
 			}
 			bfr.close();
-
+			
 			int nextIndex;
+			currentValue = valueTemp;
 			if (dateindexTag > dateindextwoTag) {
 				nextIndex = dateindexTag;
 				currentDate = dateStr;
-				currentValue = valueTemp;
 			} else {
 				nextIndex = dateindextwoTag;
 				currentDate = addtwoday;
-				currentValue = valueTemp;
 			}
 
 			// values average
@@ -1213,7 +1212,8 @@ public class DataTagging_Frame {
 		}
 
 		// Save tagging result
-		System.out.println(articleIndex+"	"+filenameVec.get(articleIndex).toString()+"	"+articleIdVec.get(articleIndex).toString()+"	"+inputarticleId+"	"+articleAuthorVec.get(articleIndex).toString()+"	"+currentDate+"	"+currentValue);
+		//System.out.println(articleIndex+"	"+filenameVec.get(articleIndex).toString()+"	"+articleIdVec.get(articleIndex).toString()+"	"+inputarticleId+"	"+articleAuthorVec.get(articleIndex).toString()+"	"+currentDate+"	"+currentValue);
+		System.out.println(articleIndex+"	"+filenameVec.get(articleIndex).toString()+"	"+articleIdVec.get(articleIndex).toString()+"	"+inputarticleId+"	"+articleAuthorVec.get(articleIndex).toString());
 		try {
 			manualTagging(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString(), articleAuthorVec.get(articleIndex).toString(), radiochoice, companyIdTag);
 		} catch (Exception e1) {
