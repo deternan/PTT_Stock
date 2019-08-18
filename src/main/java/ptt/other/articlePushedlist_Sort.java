@@ -1,4 +1,4 @@
-package ptt.statistics;
+package ptt.other;
 
 /*
  * Message (Push) Statistical
@@ -24,7 +24,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-public class Statistical_articlePush {
+public class articlePushedlist_Sort {
 	
 	// Read source
 	private String folder_source = "/data/git/DataSet/ptt/Stock data/";
@@ -63,7 +63,7 @@ public class Statistical_articlePush {
 	// Statistical
 		private String outputMessageStatistical = "MessageStatistical";
 	
-	public Statistical_articlePush() throws Exception {
+	public articlePushedlist_Sort() throws Exception {
 		
 		boolean checkResponse;
 		File folder = new File(folder_source);
@@ -323,7 +323,7 @@ public class Statistical_articlePush {
 	
 	public static void main(String args[]) {
 		try {
-			Statistical_articlePush sap = new Statistical_articlePush();
+			articlePushedlist_Sort sap = new articlePushedlist_Sort();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
