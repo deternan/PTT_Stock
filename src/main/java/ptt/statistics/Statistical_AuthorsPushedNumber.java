@@ -3,7 +3,7 @@ package ptt.statistics;
 /*
  * Published number in article by Authors
  * version: May 20, 2019 08:40 PM
- * Last revision: May 22, 2019 11:06 PM
+ * Last revision: August 18, 2019 02:47 AM
  * 
  * Author : Chao-Hsuan Ke
  * 
@@ -26,7 +26,6 @@ public class Statistical_AuthorsPushedNumber
 {
 	// Read source
 	private String folder_source = "/data/git/DataSet/ptt/Stock data/";
-//	private String folder_source  = "/Users/phelps/Desktop/temp/";
 	private BufferedReader bfr;
 	private String output_source = "/Users/phelps/Documents/github/PTT_Stock/output/";
 	// output
@@ -64,7 +63,6 @@ public class Statistical_AuthorsPushedNumber
 		for (File file : listOfFiles) {
 		    if (file.isFile()) {
 		    	outputBase = "";
-		        //System.out.println(file.getName());
 		        		        
 		        // Check extension file name
 		        checkResponse = ExtensionCheck(folder_source + file.getName());
@@ -80,16 +78,9 @@ public class Statistical_AuthorsPushedNumber
 		// Sort
 		BubbleSort();
 		
-		// Display
-//		for(int i=0; i<allAuthor_array.size(); i++) {
-//			System.out.println(i+"	"+allAuthor_array.get(i)+"	"+allAuthorPushedCount_array.get(i));
-//		}
-		
 		// output
 		writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(folder_output + outputAuthorPushedNumber+"_"+outputBase+".txt"), "utf-8"));
-		//System.out.println(allAuthor_array.size()+"	"+allAuthorPushedNum_array.size());
 		for(int i=0; i<allAuthor_array.size(); i++) {
-			//System.out.println(allAuthor_array.get(i)+"	"+allAuthorPushedNum_array.get(i));
 			writer.write(allAuthor_array.get(i)+"	"+allAuthorPushedCount_array.get(i)+"\n");
 		}
 		writer.close();
@@ -111,7 +102,6 @@ public class Statistical_AuthorsPushedNumber
 		for (File file : listOfFiles) {
 
 			if (file.getName().indexOf(outputAuthorList) == 0) {
-				//System.out.println(file);
 				finalFile = file.getName();
 				// Check Latest file
 				finalFileName = LatestFileCheck(outputAuthorList, finalFile);
@@ -122,7 +112,6 @@ public class Statistical_AuthorsPushedNumber
 
 		// Import
 		ImportAuthorList(output_source + finalFileName);
-		//System.out.println(allAuthor_array.size());
 	}
 	
 	private void ImportAuthorList(String path) throws Exception {
@@ -197,9 +186,6 @@ public class Statistical_AuthorsPushedNumber
 		for(int i=0; i<msg.size(); i++) {
 			JSONObject articlejson = (JSONObject) parser.parse(msg.get(i).toString());
 			
-			// article_id
-			//System.out.println(i+"	"+articlejson.get("article_id"));
-			
 			// author
 			if(articlejson.containsKey("author")) 
 			{
@@ -209,10 +195,6 @@ public class Statistical_AuthorsPushedNumber
 					}else {
 						author = articlejson.get("author").toString();
 					}			
-
-					// Vector
-//					allAuthor_temp.add(author.trim());
-					
 				}				
 			}			
 				
@@ -227,7 +209,6 @@ public class Statistical_AuthorsPushedNumber
 				if (articlejson.get("message_count") != null) {
 					//JSONObject messagejson = (JSONObject) parser.parse(articlejson.get("message_count").toString());
 					JSONArray jsonarray = (JSONArray) parser.parse(articlejson.get("messages").toString());
-					//System.out.println(jsonarray.size());
 					
 					Message_Parsing(jsonarray);
 				}
@@ -237,8 +218,6 @@ public class Statistical_AuthorsPushedNumber
 			if(articlejson.containsKey("date")) {
 				Date_Split(articlejson.get("date").toString());
 			}
-			
-			//System.out.println(i+"	"+articlejson.get("article_id")+"	"+articlejson.get("article_title"));
 		}
 		
 	}
@@ -249,7 +228,6 @@ public class Statistical_AuthorsPushedNumber
 		for(int i=0; i<jsonarray.size(); i++) {
 			JSONObject messagejson = (JSONObject) parser.parse(jsonarray.get(i).toString());
 			pushAuthor = messagejson.get("push_userid").toString();
-			//System.out.println(pushAuthor);
 			Statistical(pushAuthor);
 		}
 	}
