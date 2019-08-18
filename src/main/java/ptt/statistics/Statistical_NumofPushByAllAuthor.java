@@ -29,7 +29,7 @@ public class Statistical_NumofPushByAllAuthor
 	// Statistical
 	private String outputAuthorList = "AuthorList";
 	private String outputMessageStatistical = "MessageStatistical";
-	private String outputAuthorMessageStatistical = "AuthorPushNumber";
+	private String outputAuthorMessageStatistical = "AuthorPushedNumber";
 	// check latest file
 	int checkNum;
 	// Author List
