@@ -53,6 +53,7 @@ public class Statistical_AuthorsPushedNumber
 		
 	public Statistical_AuthorsPushedNumber() throws Exception
 	{
+		// Import  author list
 		AllAuthorList();
 		
 		boolean checkResponse;
@@ -197,17 +198,10 @@ public class Statistical_AuthorsPushedNumber
 					}			
 				}				
 			}			
-				
-			// title
-			//System.out.println(i+"	"+articlejson.get("title"));
-			
-			// content
-			//System.out.println(i+"	"+articlejson.get("content"));
 			
 			// Message (Push)
 			if (articlejson.containsKey("message_count")) {
 				if (articlejson.get("message_count") != null) {
-					//JSONObject messagejson = (JSONObject) parser.parse(articlejson.get("message_count").toString());
 					JSONArray jsonarray = (JSONArray) parser.parse(articlejson.get("messages").toString());
 					
 					Message_Parsing(jsonarray);
