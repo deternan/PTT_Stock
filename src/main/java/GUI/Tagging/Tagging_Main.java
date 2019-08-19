@@ -440,7 +440,7 @@ public class Tagging_Main {
 	}
 
 	// Regular Expression
-	
+	// Company name and Id check
 	private void PatternCheck(String strTmp) {
 		// Company Name and ID
 		String regexName = "";
@@ -448,36 +448,29 @@ public class Tagging_Main {
 		String tmpName;
 		String patternName;
 		String patternId;
-		boolean namecheck = false;
-		boolean idcheck = false;
 
 		for (int i = 0; i < companyId.size(); i++) {
 			patternName = "";
 			patternId = "";
 
-			// Name
+			// Company Name
 			tmpName = companyName.get(i).toString().replace("-KY", "");
 			tmpName = tmpName.replace("-DR", "");
 			regexName = "(" + tmpName + ")+";
 			pattern = Pattern.compile(regexName, Pattern.MULTILINE);
 			matcher = pattern.matcher(strTmp);
 			if (matcher.find()) {
-				// System.out.println(companyId.get(i)+" "+companyName.get(i)+"
-				// "+matcher.group());
 				patternName = matcher.group();
 				companyNameDisplay.add(patternName);
-				namecheck = true;
 			}
-			// Id
+			// Company Id
 			regexId = companyId.get(i).toString();
 			pattern = Pattern.compile(regexId, Pattern.MULTILINE);
 			matcher = pattern.matcher(strTmp);
 			if (matcher.find()) {
 				patternId = matcher.group();
-				idcheck = true;
 				companyIdDisplay.add(patternId);
 			}
-
 		}
 
 		// Values
@@ -485,7 +478,6 @@ public class Tagging_Main {
 		pattern = Pattern.compile(regexValue, Pattern.MULTILINE);
 		matcher = pattern.matcher(strTmp);
 		while (matcher.find()) {
-			// System.out.println(matcher.group(0));
 			valueDisplay.add(matcher.group(0));
 		}
 	}
