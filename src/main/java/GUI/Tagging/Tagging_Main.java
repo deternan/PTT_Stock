@@ -3,7 +3,7 @@ package GUI.Tagging;
 /*
  * Get values (Main)
  * version: July 06, 2019 15:03 PM
- * Last revision: August 10, 2019 00:01 AM
+ * Last revision: August 20, 2019 06:26 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -23,10 +23,15 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -91,7 +96,10 @@ public class Tagging_Main {
 	private String dateremindTag;
 	// Testing
 	//private String contentTmp = "1. 標的：6558興能高 2. 分類：短、中多 3. 分析/正文： 貿易戰暫告一段落，行動裝置鋰電池應會再度回到熱門市場中。貿易戰之前這支已經拉了 一波，前高75。隨著貿易戰進行，穿戴裝置市場保守，掉到50底，後轉強。 昨天貿易戰中場嘉年華，這支獲得跳空缺口（66.5跳69），60ma強勢上揚，搭配之前就已 擺好的5ma、10ma、20ma，均線皆已上揚且依序排列。 K值雖已達87.5，但高檔鈍化可能性高。 4. 進退場機制：(非長期投資者，必須有停損機制) 今早洗盤68已進 分段停利：73起 加碼區：66.568.5 停損：55";
-	private String contentTmp = "1. 標的：2325 矽品 2. 分類：空 3. 分析/正文： 繼昨天大買1.5萬張矽品後，今天明教再度出手 15 萬張 http://tinyurl.com/jssx42s 不過看那成交金額，每股53.21元，很明顯不是在市場上買 從其它新聞來看，應該是跟特定法人盤後買的吧 今天已經取得30.44%的股權，粗略算一算，應該再買7萬張左右就33%了吧 今年矽品股東會應該很精彩 矽品今天收52.7，明教收購價55元，約4%的差距 收購案要一年後才能提，合併也還沒通過公平會審查 從明教說要收購開始，矽品最高大概就是53左右 而現在收購要拖一年，怎樣看這個價位都是高點，所以可以空空看 下週開盤後可以看看矽品沖多高，然後空個幾張來玩玩(沒券空期貨也行) 反正最高就漲到55元，風險也不會太高(除非阿伯突然有錢可以搶股)， 4. 進退場機制：(停損價位/出場條件/長期投資) 進場：下週一抓高點空，53元以上大概都可以吧 出場：我覺得跌回50元都是很有可能的，不然就是小賺就出場 停損：如果沒人提出高於55元的收購價，應該是沒必要停損，除非遇到強制回補 "; 
+	//private String contentTmp = "1. 標的：2325 矽品 2. 分類：空 3. 分析/正文： 繼昨天大買1.5萬張矽品後，今天明教再度出手 15 萬張 http://tinyurl.com/jssx42s 不過看那成交金額，每股53.21元，很明顯不是在市場上買 從其它新聞來看，應該是跟特定法人盤後買的吧 今天已經取得30.44%的股權，粗略算一算，應該再買7萬張左右就33%了吧 今年矽品股東會應該很精彩 矽品今天收52.7，明教收購價55元，約4%的差距 收購案要一年後才能提，合併也還沒通過公平會審查 從明教說要收購開始，矽品最高大概就是53左右 而現在收購要拖一年，怎樣看這個價位都是高點，所以可以空空看 下週開盤後可以看看矽品沖多高，然後空個幾張來玩玩(沒券空期貨也行) 反正最高就漲到55元，風險也不會太高(除非阿伯突然有錢可以搶股)， 4. 進退場機制：(停損價位/出場條件/長期投資) 進場：下週一抓高點空，53元以上大概都可以吧 出場：我覺得跌回50元都是很有可能的，不然就是小賺就出場 停損：如果沒人提出高於55元的收購價，應該是沒必要停損，除非遇到強制回補 "; 
+	
+	String ouputCompanyStr = "";
+	String outputIdStr = "";
 	
 	public Tagging_Main() throws Exception {
 
@@ -121,7 +129,7 @@ public class Tagging_Main {
 		ReadAllArticles_v2(fileName_index, artileID_index);
 		// All list
 
-		String inputarticleId;
+		String valueId;
 		String formatdate;
 		String TWDate;
 		String formatdateAdd;
@@ -138,7 +146,7 @@ public class Tagging_Main {
 			companyIdDisplay.clear();
 			companyNameDisplay.clear();
 			valueDisplay.clear();
-			inputarticleId = "";
+			valueId = "";
 			formatdate = "";
 			TWDate = "";
 			onemonthAverage = 0;
@@ -151,19 +159,21 @@ public class Tagging_Main {
 
 			// Get article content
 			GetContentByArticleId(filenameVec.get(i).toString(), articleIdVec.get(i).toString());
+			// company andm & id check
+			MapSort();
+			
 			// Filter
 			pattern = Pattern.compile(Units.regexTitle, Pattern.MULTILINE);
 			matcher = pattern.matcher(title);
-			if (matcher.find()) {
+			if (matcher.find()) 
+			{
 				// Pattern Recognition
 				PatternCheck(content);
-				// System.out.println(filenameVec.get(i) + " " + articleId + " " + date + " " +
-				// title + " " + author + " "
-				// + companyIdDisplay.size() + " " + companyNameDisplay.size() + " "+
-				// valueDisplay.size());
 
-				if (companyIdDisplay.size() > 0) {
-					inputarticleId = companyIdDisplay.get(0).toString();
+//				if (companyIdDisplay.size() > 0) 
+				{
+					//valueId = companyIdDisplay.get(0).toString();
+					valueId = outputIdStr;
 					// date
 					date = replaceSpace(date);
 					formatdate = ISODateParser(date);
@@ -175,7 +185,7 @@ public class Tagging_Main {
 
 					// System.out.println(TWDate+" "+TWDateAdd);
 					// values average
-					getValueAverageByarticleId(inputarticleId, TWDate, TWDateAdd);
+					getValueAverageByarticleId(valueId, TWDate, TWDateAdd);
 				}
 			}
 			String companyIdTag = "";
@@ -570,9 +580,9 @@ public class Tagging_Main {
         return extension;
     }
 	
-	private void getValueAverageByarticleId(String articleId, String dateStr, String addtwoday) throws Exception 
+	private void getValueAverageByarticleId(String valueId, String dateStr, String addtwoday) throws Exception 
 	{
-		File file = new File(Units.value_folder + articleId + Units.extension);
+		File file = new File(Units.value_folder + valueId + Units.extension);
 		if (file.exists()) {
 			BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 			String Line;
@@ -764,6 +774,85 @@ public class Tagging_Main {
 		}
 		bfr.close();
 		System.out.println("Valid Count	"+validCount);
+	}
+	
+	private void MapSort()
+	{
+		// company name
+		String indexnameStr = "";
+		int indexnameValue = 0;
+		List<String> companylist = new ArrayList<String>();
+		for(int i=0; i<companyNameDisplay.size(); i++) {
+			companylist.add(companyNameDisplay.get(i).toString());
+		}
+
+		Map<String, Integer> Nameduplicates = new HashMap<String, Integer>();
+		for (String str : companylist) {
+			if (Nameduplicates.containsKey(str)) {
+				Nameduplicates.put(str, Nameduplicates.get(str) + 1);
+			} else {
+				Nameduplicates.put(str, 1);
+			}
+		}
+		
+		// Sort (company name)
+		LinkedHashMap<String, Integer> sortednameMap = new LinkedHashMap<>();
+		Nameduplicates.entrySet().stream().sorted(Map.Entry.comparingByValue())
+				.forEachOrdered(x -> sortednameMap.put(x.getKey(), x.getValue()));
+
+		for (Map.Entry<String, Integer> nameentry : sortednameMap.entrySet()) {
+			//System.out.println(nameentry.getKey() + " = " + nameentry.getValue());
+			indexnameStr = nameentry.getKey();
+			indexnameValue = nameentry.getValue();
+		}
+		
+		// company id
+		String indexidStr = "";
+		int indexidValue = 0;
+		List<String> idlist = new ArrayList<String>();
+		for(int i=0; i<companyIdDisplay.size(); i++) {
+			idlist.add(companyIdDisplay.get(i).toString());
+		}
+		
+		Map<String, Integer> idduplicates = new HashMap<String, Integer>();
+		for (String str : idlist) {
+			if (idduplicates.containsKey(str)) {
+				idduplicates.put(str, idduplicates.get(str) + 1);
+			} else {
+				idduplicates.put(str, 1);
+			}
+		}
+		// sort (company id)
+		LinkedHashMap<String, Integer> sortedidMap = new LinkedHashMap<>();
+		idduplicates.entrySet().stream().sorted(Map.Entry.comparingByValue())
+		.forEachOrdered(x -> sortedidMap.put(x.getKey(), x.getValue()));
+		
+		for (Map.Entry<String, Integer> identry : sortedidMap.entrySet()) {
+			//System.out.println(identry.getKey() + " = " + identry.getValue());
+			indexidStr = identry.getKey();
+			indexidValue = identry.getValue();
+		}
+		
+		// final output
+		if(indexnameValue > indexidValue) {
+			for (int i=0; i<companyName.size(); i++)
+			{
+				if(indexnameStr.trim().equalsIgnoreCase(companyName.get(i).toString())) {
+					ouputCompanyStr = companyName.get(i).toString();
+					outputIdStr = companyId.get(i).toString();
+					break;
+				}
+			}
+		}else if(indexidValue > indexnameValue) {
+			for (int i=0; i<companyId.size(); i++)
+			{
+				if(indexidStr.trim().equalsIgnoreCase(companyId.get(i).toString())) {
+					ouputCompanyStr = companyName.get(i).toString();
+					outputIdStr = companyId.get(i).toString();
+					break;
+				}
+			}
+		}
 	}
 	
 	public static void main(String args[]) {
