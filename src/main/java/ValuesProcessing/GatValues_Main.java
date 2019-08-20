@@ -21,11 +21,16 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Vector;
 
-import GUI.Units;
-
 public class GatValues_Main
 {
-	DateFormat df = new SimpleDateFormat(Units.basic_pattern, Locale.getDefault());
+	String sourceFolder = "/Users/phelps/Documents/github/PTT_Stock/source/";
+	
+	String basic_pattern = "yyyyMMdd";
+	String TWSE_outputTag = "TWSE";
+	String TPEX_outputTag = "TPEX";
+	String extension = ".txt";
+	
+	DateFormat df = new SimpleDateFormat(basic_pattern, Locale.getDefault());
 	private String todayStr = "";
 
 	// 
@@ -38,7 +43,7 @@ public class GatValues_Main
 		Today();
 		
 		// TWSE
-		String twseStr = Units.sourceFolder + Units.TWSE_outputTag +"_" + todayStr + Units.extension;
+		String twseStr = sourceFolder + TWSE_outputTag +"_" + todayStr + extension;
 		ReadCompany(twseStr);
 		for(int i=0; i<companyId.size(); i++)
 		{
@@ -47,7 +52,7 @@ public class GatValues_Main
 		
 		// TPEX
 		companyId.clear();
-		String tpexStr = Units.sourceFolder + Units.TPEX_outputTag +"_" + todayStr + Units.extension;
+		String tpexStr = sourceFolder + TPEX_outputTag +"_" + todayStr + extension;
 		ReadCompany(tpexStr);
 		for(int i=0; i<companyId.size(); i++)
 		{
