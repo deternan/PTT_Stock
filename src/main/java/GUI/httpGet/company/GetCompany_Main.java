@@ -36,36 +36,10 @@ public class GetCompany_Main {
 		
 		// TWSE
 		GerCompanyList(Units.twselisrUrl, "twse");
-		System.out.println("TWSE");
+		System.out.println("TWSE finised");
 		// TPEX
 		GerCompanyList(Units.tpexlisrUrl, "tpex");
-		System.out.println("TPEX");
-		
-		
-		// https
-//		HttpsReader https = new HttpsReader();
-//		https.charSet = "utf-8";
-//        https.root = url;
-//        
-////        http.referer = "";//從哪一頁來
-////        http.subUrl = "/ray00000test/blog/63561879";//網站domain後面的子網址
-//        String cookie = "";				//cookie字串
-//        boolean isPost =  false;		//true表示用post送資料，false:get方式傳送
-//
-//        /*
-//        //若有需要用post方式傳送data，只要以key-value方式put即可，
-//        //執行readyBuffer()會幫您送出，在url後面?是get方式，也可使用put方式，不需要串在網址後面很長
-//        http.putQueryString("key1", "value1");
-//        http.putQueryString("key2", "value2");
-//        http.putQueryString("key3", "value3");
-//         */
-//
-//        BufferedReader buf = https.readyBuffer(cookie, isPost);
-//        
-//        String line = null;
-//        while((line = buf.readLine()) != null){//每次讀取一行
-//            System.out.println(line);
-//        }
+		System.out.println("TPEX finised");
     }
 	
 	private void GerCompanyList(String url, String tag) throws Exception
@@ -93,7 +67,6 @@ public class GetCompany_Main {
 	{
 		Date today = Calendar.getInstance().getTime();
 		todayStr = df.format(today.getTime());
-		//System.out.println(todayStr);
 	}
 	
 	public static void main(String[] args) {

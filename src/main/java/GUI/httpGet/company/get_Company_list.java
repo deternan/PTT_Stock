@@ -59,7 +59,6 @@ public class get_Company_list {
 				if(temp[0].trim().length() == 4) {
 					companyId.add(temp[0].trim());
 					companyName.add(temp[1].trim());
-					//System.out.println(temp[0]+"	"+temp[1]);
 				}
 			}						
 		}
