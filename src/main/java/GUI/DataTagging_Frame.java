@@ -315,8 +315,8 @@ public class DataTagging_Frame {
 								
 								MapSort();
 								inputarticleId = outputIdStr;
-								System.out.println("ii	"+ouputCompanyStr);
-								System.out.println("ii	"+outputIdStr);
+								//System.out.println("ii	"+ouputCompanyStr);
+								//System.out.println("ii	"+outputIdStr);
 
 								// date
 								date = replaceSpace(date);
@@ -1145,8 +1145,8 @@ public class DataTagging_Frame {
 				
 				MapSort();
 				inputarticleId = outputIdStr;
-				System.out.println("uu	"+ouputCompanyStr);
-				System.out.println("uu	"+outputIdStr);
+				//System.out.println("uu	"+ouputCompanyStr);
+				//System.out.println("uu	"+outputIdStr);
 
 				// date
 				date = replaceSpace(date);

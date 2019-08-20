@@ -611,7 +611,6 @@ public class Tagging_Main {
 				nextIndex = dateindextwoTag;
 			}
 			
-			//System.out.println(nextIndex+"	"+dateStr+"	"+addtwoday);
 			// values average
 			onemonthAverage = monthAverage(1, nextIndex, allvalueVec);
 			twomonthAverage = monthAverage(2, nextIndex, allvalueVec);
