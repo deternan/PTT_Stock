@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data manually tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: August 17, 2019 06:16 PM
+ * Last revision: August 20, 2019 07:02 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -28,9 +28,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -154,6 +159,11 @@ public class DataTagging_Frame {
 	// Temp (debug)
 	private String currentDate;
 	private String currentValue;
+	
+	// final company name & id
+	// final output
+//	private String ouputCompanyStr = "";
+	private String outputIdStr = "";
 	
 	/**
 	 * Launch the application.
@@ -296,11 +306,14 @@ public class DataTagging_Frame {
 								}
 
 								// Title detection
-								if (titleContentcheck) {
-									inputarticleId = titleCompanyId;
-								} else {
-									inputarticleId = companyIdDisplay.get(0).toString();
-								}
+//								if (titleContentcheck) {
+//									inputarticleId = titleCompanyId;
+//								} else {
+//									inputarticleId = companyIdDisplay.get(0).toString();
+//								}
+								
+								MapSort();
+								inputarticleId = outputIdStr;
 
 								// date
 								date = replaceSpace(date);
@@ -990,6 +1003,7 @@ public class DataTagging_Frame {
 		lblMonth3.setText("");
 		mclabel.setText("");
 		
+		outputIdStr = "";
 	}
 
 	// Storage
@@ -1015,14 +1029,11 @@ public class DataTagging_Frame {
 		boolean titleContentcheck = false;
 		// titleCompany
 		String regexName = "";
-		String regexId = "";
 		String tmpName;
 		String patternName;
-		String patternId;
 
 		for (int i = 0; i < companyId.size(); i++) {
 			patternName = "";
-			patternId = "";
 
 			// Name
 			tmpName = companyName.get(i).toString().replace("-KY", "");
@@ -1122,11 +1133,14 @@ public class DataTagging_Frame {
 				}
 
 				// Title detection
-				if (titleContentcheck) {
-					inputarticleId = titleCompanyId;
-				} else {
-					inputarticleId = companyIdDisplay.get(0).toString();
-				}
+//				if (titleContentcheck) {
+//					inputarticleId = titleCompanyId;
+//				} else {
+//					inputarticleId = companyIdDisplay.get(0).toString();
+//				}
+				
+				MapSort();
+				inputarticleId = outputIdStr;
 
 				// date
 				date = replaceSpace(date);
@@ -1290,11 +1304,14 @@ public class DataTagging_Frame {
 				}
 
 				// Title detection
-				if (titleContentcheck) {
-					inputarticleId = titleCompanyId;
-				} else {
-					inputarticleId = companyIdDisplay.get(0).toString();
-				}
+//				if (titleContentcheck) {
+//					inputarticleId = titleCompanyId;
+//				} else {
+//					inputarticleId = companyIdDisplay.get(0).toString();
+//				}
+				
+				MapSort();
+				inputarticleId = outputIdStr;
 
 				// date
 				date = replaceSpace(date);
@@ -1411,6 +1428,85 @@ public class DataTagging_Frame {
 			contentcheck = false;
 		}else if(title.contains("警告")) {
 			contentcheck = false;
+		}
+	}
+	
+	private void MapSort()
+	{
+		// company name
+		String indexnameStr = "";
+		int indexnameValue = 0;
+		List<String> companylist = new ArrayList<String>();
+		for(int i=0; i<companyNameDisplay.size(); i++) {
+			companylist.add(companyNameDisplay.get(i).toString());
+		}
+
+		Map<String, Integer> Nameduplicates = new HashMap<String, Integer>();
+		for (String str : companylist) {
+			if (Nameduplicates.containsKey(str)) {
+				Nameduplicates.put(str, Nameduplicates.get(str) + 1);
+			} else {
+				Nameduplicates.put(str, 1);
+			}
+		}
+		
+		// Sort (company name)
+		LinkedHashMap<String, Integer> sortednameMap = new LinkedHashMap<>();
+		Nameduplicates.entrySet().stream().sorted(Map.Entry.comparingByValue())
+				.forEachOrdered(x -> sortednameMap.put(x.getKey(), x.getValue()));
+
+		for (Map.Entry<String, Integer> nameentry : sortednameMap.entrySet()) {
+			//System.out.println(nameentry.getKey() + " = " + nameentry.getValue());
+			indexnameStr = nameentry.getKey();
+			indexnameValue = nameentry.getValue();
+		}
+		
+		// company id
+		String indexidStr = "";
+		int indexidValue = 0;
+		List<String> idlist = new ArrayList<String>();
+		for(int i=0; i<companyIdDisplay.size(); i++) {
+			idlist.add(companyIdDisplay.get(i).toString());
+		}
+		
+		Map<String, Integer> idduplicates = new HashMap<String, Integer>();
+		for (String str : idlist) {
+			if (idduplicates.containsKey(str)) {
+				idduplicates.put(str, idduplicates.get(str) + 1);
+			} else {
+				idduplicates.put(str, 1);
+			}
+		}
+		// sort (company id)
+		LinkedHashMap<String, Integer> sortedidMap = new LinkedHashMap<>();
+		idduplicates.entrySet().stream().sorted(Map.Entry.comparingByValue())
+		.forEachOrdered(x -> sortedidMap.put(x.getKey(), x.getValue()));
+		
+		for (Map.Entry<String, Integer> identry : sortedidMap.entrySet()) {
+			//System.out.println(identry.getKey() + " = " + identry.getValue());
+			indexidStr = identry.getKey();
+			indexidValue = identry.getValue();
+		}
+		
+		// final output
+		if(indexnameValue > indexidValue) {
+			for (int i=0; i<companyName.size(); i++)
+			{
+				if(indexnameStr.trim().equalsIgnoreCase(companyName.get(i).toString())) {
+					//ouputCompanyStr = companyName.get(i).toString();
+					outputIdStr = companyId.get(i).toString();
+					break;
+				}
+			}
+		}else if(indexidValue > indexnameValue) {
+			for (int i=0; i<companyId.size(); i++)
+			{
+				if(indexidStr.trim().equalsIgnoreCase(companyId.get(i).toString())) {
+					//ouputCompanyStr = companyName.get(i).toString();
+					outputIdStr = companyId.get(i).toString();
+					break;
+				}
+			}
 		}
 	}
 	
