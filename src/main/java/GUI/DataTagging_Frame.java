@@ -162,7 +162,7 @@ public class DataTagging_Frame {
 	
 	// final company name & id
 	// final output
-//	private String ouputCompanyStr = "";
+	private String ouputCompanyStr = "";
 	private String outputIdStr = "";
 	
 	/**
@@ -192,6 +192,7 @@ public class DataTagging_Frame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 950, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -226,7 +227,7 @@ public class DataTagging_Frame {
 						e2.printStackTrace();
 					}
 					
-					// valid taggging count
+					// valid tagging count
 					try {
 						validTaggingCount();
 						label_6.setText(String.valueOf(validCount));
@@ -246,7 +247,7 @@ public class DataTagging_Frame {
 						ReadHistory rh = new ReadHistory(selectedFile.getAbsolutePath());
 						fileName_index = rh.returnfileName();
 						artileID_index = rh.returnartileID();
-							articleFile = fileName_index.substring(0, fileName_index.indexOf(".json"));
+						articleFile = fileName_index.substring(0, fileName_index.indexOf(".json"));
 						// Loading article list
 						ReadArticleList ra;
 						if (artileID_index.trim().length() == 0) {
@@ -288,8 +289,8 @@ public class DataTagging_Frame {
 							boolean titleContentcheck;
 							titleContentcheck = TitleContentDetection(title);
 							if (titleContentcheck) {
-								companynameStr = titleCompany;
-								companyidStr = titleCompanyId;
+								companynameStr = titleCompany +"\n";
+								companyidStr = titleCompanyId + "\n";
 							}
 
 							// functions
@@ -314,6 +315,8 @@ public class DataTagging_Frame {
 								
 								MapSort();
 								inputarticleId = outputIdStr;
+								System.out.println("ii	"+ouputCompanyStr);
+								System.out.println("ii	"+outputIdStr);
 
 								// date
 								date = replaceSpace(date);
@@ -753,7 +756,7 @@ public class DataTagging_Frame {
 			regexName = "(" + tmpName + ")+";
 			pattern = Pattern.compile(regexName, Pattern.MULTILINE);
 			matcher = pattern.matcher(strTmp);
-			if (matcher.find()) {
+			while (matcher.find()) {
 				patternName = matcher.group();
 				companyNameDisplay.add(patternName);
 			}
@@ -761,7 +764,7 @@ public class DataTagging_Frame {
 			regexId = companyId.get(i).toString();
 			pattern = Pattern.compile(regexId, Pattern.MULTILINE);
 			matcher = pattern.matcher(strTmp);
-			if (matcher.find()) {
+			while (matcher.find()) {
 				patternId = matcher.group();
 				companyIdDisplay.add(patternId);
 			}
@@ -965,6 +968,7 @@ public class DataTagging_Frame {
 	}
 
 	private void DisplayAndClean() {
+		
 		lblNewLabel_2.setText(date);
 		lblNewLabel_3.setText(author);
 		lblNewLabel_6.setText(title);
@@ -1115,8 +1119,8 @@ public class DataTagging_Frame {
 			boolean titleContentcheck;
 			titleContentcheck = TitleContentDetection(title);
 			if (titleContentcheck) {
-				companynameStr = titleCompany;
-				companyidStr = titleCompanyId;
+				companynameStr = titleCompany + "\n";
+				companyidStr = titleCompanyId + "\n";
 			}
 
 			// functions
@@ -1141,6 +1145,8 @@ public class DataTagging_Frame {
 				
 				MapSort();
 				inputarticleId = outputIdStr;
+				System.out.println("uu	"+ouputCompanyStr);
+				System.out.println("uu	"+outputIdStr);
 
 				// date
 				date = replaceSpace(date);
@@ -1246,7 +1252,6 @@ public class DataTagging_Frame {
 		}
 
 		indexNum++;
-		//articleIndex++;
 	}
 	
 	private void Display()
@@ -1286,8 +1291,8 @@ public class DataTagging_Frame {
 			boolean titleContentcheck;
 			titleContentcheck = TitleContentDetection(title);
 			if (titleContentcheck) {
-				companynameStr = titleCompany;
-				companyidStr = titleCompanyId;
+				companynameStr = titleCompany +"\n";
+				companyidStr = titleCompanyId +"\n";
 			}
 
 			// functions
@@ -1310,8 +1315,10 @@ public class DataTagging_Frame {
 //					inputarticleId = companyIdDisplay.get(0).toString();
 //				}
 				
-				MapSort();
-				inputarticleId = outputIdStr;
+//				MapSort();
+//				inputarticleId = outputIdStr;
+//				System.out.println("dd	"+ouputCompanyStr);
+//				System.out.println("dd	"+outputIdStr);
 
 				// date
 				date = replaceSpace(date);
@@ -1456,7 +1463,6 @@ public class DataTagging_Frame {
 				.forEachOrdered(x -> sortednameMap.put(x.getKey(), x.getValue()));
 
 		for (Map.Entry<String, Integer> nameentry : sortednameMap.entrySet()) {
-			//System.out.println(nameentry.getKey() + " = " + nameentry.getValue());
 			indexnameStr = nameentry.getKey();
 			indexnameValue = nameentry.getValue();
 		}
@@ -1483,7 +1489,6 @@ public class DataTagging_Frame {
 		.forEachOrdered(x -> sortedidMap.put(x.getKey(), x.getValue()));
 		
 		for (Map.Entry<String, Integer> identry : sortedidMap.entrySet()) {
-			//System.out.println(identry.getKey() + " = " + identry.getValue());
 			indexidStr = identry.getKey();
 			indexidValue = identry.getValue();
 		}
@@ -1493,7 +1498,7 @@ public class DataTagging_Frame {
 			for (int i=0; i<companyName.size(); i++)
 			{
 				if(indexnameStr.trim().equalsIgnoreCase(companyName.get(i).toString())) {
-					//ouputCompanyStr = companyName.get(i).toString();
+					ouputCompanyStr = companyName.get(i).toString();
 					outputIdStr = companyId.get(i).toString();
 					break;
 				}
@@ -1502,12 +1507,20 @@ public class DataTagging_Frame {
 			for (int i=0; i<companyId.size(); i++)
 			{
 				if(indexidStr.trim().equalsIgnoreCase(companyId.get(i).toString())) {
-					//ouputCompanyStr = companyName.get(i).toString();
+					ouputCompanyStr = companyName.get(i).toString();
 					outputIdStr = companyId.get(i).toString();
 					break;
 				}
 			}
+		}else if((indexnameValue == indexidValue) && (indexnameValue>0) && (indexidValue>0)){
+			ouputCompanyStr = companyName.get(0).toString();
+			outputIdStr = companyId.get(0).toString();
 		}
+		
+//		System.out.println("-----------------------------------");
+//		System.out.println(indexidValue+"	"+indexnameValue);
+//		System.out.println("ourput company	"+ouputCompanyStr);
+//		System.out.println("output id	"+outputIdStr);
 	}
 	
 }

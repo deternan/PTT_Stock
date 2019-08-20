@@ -3,7 +3,7 @@ package Testing;
 /*
  * Title pattern testing
  * version: August 19, 2019 11:30 PM
- * Last revision: August 20, 2019 07:20 AM
+ * Last revision: August 20, 2019 08:22 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -105,7 +105,6 @@ public class Title_Company_Pattern
 			pattern = Pattern.compile(regexName, Pattern.MULTILINE);
 			matcher = pattern.matcher(strTmp);
 			
-			//if (matcher.find()) {
 			while(matcher.find()) {
 				patternName = matcher.group();
 				companyNameDisplay.add(patternName);
@@ -116,7 +115,6 @@ public class Title_Company_Pattern
 			pattern = Pattern.compile(regexId, Pattern.MULTILINE);
 			matcher = pattern.matcher(strTmp);
 			
-			//if (matcher.find()) 
 			while(matcher.find()){
 				patternId = matcher.group();
 				companyIdDisplay.add(patternId);
@@ -214,11 +212,14 @@ public class Title_Company_Pattern
 					break;
 				}
 			}
+		}else if((indexnameValue == indexidValue) && (indexnameValue>0) && (indexidValue>0)){
+			ouputCompanyStr = companyName.get(0).toString();
+			outputIdStr = companyId.get(0).toString();
 		}
+		
 		System.out.println("-----------------------------------");
 		System.out.println("ourput company	"+ouputCompanyStr);
 		System.out.println("output id	"+outputIdStr);
-		
 	}
 	
 	public static void main(String args[]) {

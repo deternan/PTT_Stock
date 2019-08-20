@@ -3,7 +3,7 @@ package GUI.Tagging;
 /*
  * Get values (Main)
  * version: July 06, 2019 15:03 PM
- * Last revision: August 20, 2019 06:26 PM
+ * Last revision: August 20, 2019 08:22 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -469,7 +469,7 @@ public class Tagging_Main {
 			regexName = "(" + tmpName + ")+";
 			pattern = Pattern.compile(regexName, Pattern.MULTILINE);
 			matcher = pattern.matcher(strTmp);
-			if (matcher.find()) {
+			while (matcher.find()) {
 				patternName = matcher.group();
 				companyNameDisplay.add(patternName);
 			}
@@ -477,7 +477,7 @@ public class Tagging_Main {
 			regexId = companyId.get(i).toString();
 			pattern = Pattern.compile(regexId, Pattern.MULTILINE);
 			matcher = pattern.matcher(strTmp);
-			if (matcher.find()) {
+			while (matcher.find()) {
 				patternId = matcher.group();
 				companyIdDisplay.add(patternId);
 			}
@@ -852,7 +852,11 @@ public class Tagging_Main {
 					break;
 				}
 			}
+		}else if((indexnameValue == indexidValue) && (indexnameValue>0) && (indexidValue>0)){
+			ouputCompanyStr = companyName.get(0).toString();
+			outputIdStr = companyId.get(0).toString();
 		}
+		
 	}
 	
 	public static void main(String args[]) {
