@@ -19,13 +19,15 @@ import java.util.Date;
 import java.util.Locale;
 
 import GUI.httpGet.company.get_Company_list;
-import GUI.Units;
 import GUI.httpGet.HttpsReader;
 
 public class GetCompany_Main {
 
-	//private String basic_pattern = Units.basic_pattern;
-	DateFormat df = new SimpleDateFormat(Units.basic_pattern, Locale.getDefault());
+	String twselisrUrl = "https://isin.twse.com.tw/isin/C_public.jsp?strMode=2";	// TWSE
+	String tpexlisrUrl = "https://isin.twse.com.tw/isin/C_public.jsp?strMode=4";	// TPEX
+	String basic_pattern = "yyyyMMdd";
+	
+	DateFormat df = new SimpleDateFormat(basic_pattern, Locale.getDefault());
 	private String todayStr = "";
 	
 	public GetCompany_Main() throws Exception
@@ -35,10 +37,10 @@ public class GetCompany_Main {
 		Today();
 		
 		// TWSE
-		GerCompanyList(Units.twselisrUrl, "twse");
+		GerCompanyList(twselisrUrl, "twse");
 		System.out.println("TWSE finised");
 		// TPEX
-		GerCompanyList(Units.tpexlisrUrl, "tpex");
+		GerCompanyList(tpexlisrUrl, "tpex");
 		System.out.println("TPEX finised");
     }
 	
@@ -48,7 +50,7 @@ public class GetCompany_Main {
 		//https.charSet = "UTF-8";
 		https.charSet = "BIG5";			// Taiwanese
         https.root = url;
-        
+     
         String cookie = "";				//cookie字串
         boolean isPost =  false;		//true表示用post送資料，false:get方式傳送
 

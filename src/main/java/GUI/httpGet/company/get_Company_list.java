@@ -1,8 +1,7 @@
 package GUI.httpGet.company;
 
 /*
- * 
- * Get TAIWAN stock list (TWSE)
+ * Get TAIWAN shares list (TWSE)
  * Copyright (C) 2019 Chao-Hsuan Ke, phelpske.dev at gmail dot com
  * 
  * Last revision: June 30, 2019 12:20 PM
@@ -21,9 +20,14 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import GUI.Units;
-
 public class get_Company_list {
+	
+	// output folder
+	private String sourceFolder = "/Users/phelps/Documents/github/PTT_Stock/source/";
+	
+	String TWSE_outputTag = "TWSE";
+	String TPEX_outputTag = "TPEX";
+	String extension = ".txt";
 	
 	String todayStr;
 	
@@ -39,36 +43,24 @@ public class get_Company_list {
 		
 		Document doc = Jsoup.parse(UTF_8_str);
 		Elements trs = doc.select("tr");
-			
-		/*
-		 * <tr> <td bgcolor="#FAFAD2">034071 台苯國票88購01</td> <td
-		 * bgcolor="#FAFAD2">TW19Z0340719</td> <td bgcolor="#FAFAD2">2019/01/04</td> <td
-		 * bgcolor="#FAFAD2">上市</td> <td bgcolor="#FAFAD2"></td> <td
-		 * bgcolor="#FAFAD2">RWSCCA</td> <td bgcolor="#FAFAD2"></td> </tr>
-		 * 
-		 */
 		
 		String temp[];
 		for(int i=0; i<trs.size(); i++) {
-			//System.out.println(trs.get(i));
 			Elements tds = trs.get(i).select("td");
 			if(tds.size() == 7) {
-				//System.out.println(tds.get(0).text());
 				temp = tds.get(0).text().split("　");
-				//System.out.println(temp[0].trim());
 				if(temp[0].trim().length() == 4) {
 					companyId.add(temp[0].trim());
 					companyName.add(temp[1].trim());
 				}
 			}						
-		}
-		
+		}		
 		
 		// output		
 		if(tag.equals("twse")) {
-			output(Units.TWSE_outputTag);
+			output(TWSE_outputTag);
 		}else if(tag.equals("tpex")) {
-			output(Units.TPEX_outputTag);
+			output(TPEX_outputTag);
 		}
 		
 	}
@@ -77,7 +69,7 @@ public class get_Company_list {
 	{
 		BufferedWriter writer;
 		try {
-			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Units.sourceFolder + tag +"_" + todayStr + Units.extension), "utf-8"));
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(sourceFolder + tag +"_" + todayStr + extension), "utf-8"));
 			
 			for(int i=0; i<companyId.size(); i++) {
 				writer.write(companyId.get(i)+"	"+companyName.get(i)+"\n");
