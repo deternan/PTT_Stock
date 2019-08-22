@@ -44,6 +44,6 @@ public class Units {
 	public static String isotime_pattern = "EEE MMM dd HH:mm:ss yyyy"; 
 	public static String isotime_patternZone = "EEE MMM dd HH:mm:ss zzz yyyy"; 
 	// Frame
-	public static final String regexTitle = "(標的)|(心得)|(閒聊)|(其他)";	
+	public static final String regexTitle = "(標的)|(心得)|(閒聊)|(其他)|()";	
 	
 }
