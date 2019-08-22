@@ -52,6 +52,9 @@ import GUI.Units;
 
 public class GetValueandProcessing 
 {
+	String value_folder = "/Users/phelps/Documents/github/PTT_Stock/output/Values/";
+	String extension = ".txt";
+	
 	// Temp (Parameter)
 	private String ID;
 	private String tag;
@@ -66,8 +69,6 @@ public class GetValueandProcessing
 		boolean filecheck;
 	// Storage
 	BufferedWriter writer;
-//	FileOutputStream writer;
-//	PrintStream ps;
 	
 	// check
 	boolean dataData_check;
@@ -84,14 +85,13 @@ public class GetValueandProcessing
 		filecheck = false;
 		
 		dataData_check = true;
-		file = new File(Units.value_folder + this.ID + Units.extension);
+		file = new File(value_folder + this.ID + extension);
 		if(file.exists() == false) {
 			filecheck = true;
 			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"));
 		}else {
 			FileOutputStream fos = new FileOutputStream(Units.value_folder + this.ID + Units.extension, true);
 		}
-//		writer = new FileOutputStream(Units.value_folder + this.ID + Units.extension, true);
 		
 		// Date
 		Date today = Calendar.getInstance().getTime();
@@ -112,7 +112,6 @@ public class GetValueandProcessing
 			existDate = existDate.substring(0, existDate.length()-2);
 			// check whether data is exist ?
 			checkExistDate(existDate, bfr);
-			//System.out.println(monthList.get(i)+"	"+existDate+"	"+dataData_check);
 			
 			// Save new values to file
 			if(dataData_check == true) {
@@ -143,7 +142,6 @@ public class GetValueandProcessing
 		if(filecheck == true) {
 			writer.close();
 		}
-//		writer.close();
 		
 		// Message
 		System.out.println(this.ID+"	Finished");

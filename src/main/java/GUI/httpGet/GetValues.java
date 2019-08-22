@@ -18,7 +18,6 @@ import org.json.JSONObject;
 public class GetValues 
 {
 	// source URL
-		// http://www.twse.com.tw/exchangeReport/BFT41U?response=csv&date=20190621&selectType=ALL
 	private String baseurl = "https://www.twse.com.tw/exchangeReport/BFT41U?response=csv&date=";
 	private String endurl = "&selectType=ALL";
 	
