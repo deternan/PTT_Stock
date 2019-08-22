@@ -335,8 +335,8 @@ public class DataTagging_Frame {
 									formatdateAdd = ISODateParserZone(addtwpday);
 									TWDateAdd = convertTWDate(formatdateAdd);
 
-									// values average
-									getValueAverageByarticleId(inputarticleId, TWDate, TWDateAdd);
+									// values average by company id
+									getValueAverageBycompanyId(inputarticleId, TWDate, TWDateAdd);
 								} catch (Exception e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
@@ -780,8 +780,8 @@ public class DataTagging_Frame {
 		}
 	}
 
-	private void getValueAverageByarticleId(String companyIdStr, String dateStr, String addtwoday) throws Exception {
-		System.out.println("company id	"+companyIdStr);
+	private void getValueAverageBycompanyId(String companyIdStr, String dateStr, String addtwoday) throws Exception {
+		//System.out.println("company id	"+companyIdStr);
 		File file = new File(Units.value_folder + companyIdStr + Units.extension);
 		if (file.exists()) {
 			BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
@@ -1165,8 +1165,8 @@ public class DataTagging_Frame {
 					formatdateAdd = ISODateParserZone(addtwpday);
 					TWDateAdd = convertTWDate(formatdateAdd);
 
-					// values average
-					getValueAverageByarticleId(inputarticleId, TWDate, TWDateAdd);
+					// values average by company id
+					getValueAverageBycompanyId(inputarticleId, TWDate, TWDateAdd);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1316,8 +1316,8 @@ public class DataTagging_Frame {
 //					inputarticleId = companyIdDisplay.get(0).toString();
 //				}
 				
-//				MapSort();
-//				inputarticleId = outputIdStr;
+				MapSort();
+				inputarticleId = outputIdStr;
 //				System.out.println("dd	"+ouputCompanyStr);
 //				System.out.println("dd	"+outputIdStr);
 
@@ -1338,7 +1338,7 @@ public class DataTagging_Frame {
 					TWDateAdd = convertTWDate(formatdateAdd);
 
 					// values average
-					getValueAverageByarticleId(inputarticleId, TWDate, TWDateAdd);
+					getValueAverageBycompanyId(inputarticleId, TWDate, TWDateAdd);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
