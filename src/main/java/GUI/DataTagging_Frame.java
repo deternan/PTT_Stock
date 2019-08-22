@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data manually tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: August 20, 2019 07:02 PM
+ * Last revision: August 22, 2019 11:18 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -317,7 +317,8 @@ public class DataTagging_Frame {
 								inputarticleId = outputIdStr;
 								//System.out.println("ii	"+ouputCompanyStr);
 								//System.out.println("ii	"+outputIdStr);
-
+								//System.out.println("L	"+inputarticleId);
+								
 								// date
 								date = replaceSpace(date);
 								try {
@@ -779,9 +780,9 @@ public class DataTagging_Frame {
 		}
 	}
 
-	private void getValueAverageByarticleId(String articleId, String dateStr, String addtwoday) throws Exception {
-		
-		File file = new File(Units.value_folder + articleId + Units.extension);
+	private void getValueAverageByarticleId(String companyIdStr, String dateStr, String addtwoday) throws Exception {
+		System.out.println("company id	"+companyIdStr);
+		File file = new File(Units.value_folder + companyIdStr + Units.extension);
 		if (file.exists()) {
 			BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 			String Line;
@@ -1513,11 +1514,12 @@ public class DataTagging_Frame {
 				}
 			}
 		}else if((indexnameValue == indexidValue) && (indexnameValue>0) && (indexidValue>0)){
-			ouputCompanyStr = companyName.get(0).toString();
-			outputIdStr = companyId.get(0).toString();
+			ouputCompanyStr = indexnameStr;
+			outputIdStr = indexidStr;
 		}
 		
 //		System.out.println("-----------------------------------");
+//		System.out.println(indexnameStr+"	"+indexidStr);
 //		System.out.println(indexidValue+"	"+indexnameValue);
 //		System.out.println("ourput company	"+ouputCompanyStr);
 //		System.out.println("output id	"+outputIdStr);
