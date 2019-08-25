@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data manually tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: August 22, 2019 09:35 PM
+ * Last revision: August 26, 2019 00:36 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -124,7 +124,8 @@ public class DataTagging_Frame {
 	private String date;
 	private int messagesCount;
 
-	String inputarticleId;
+	String inputcompanyId;
+	
 	String formatdate;
 	String TWDate;
 	String formatdateAdd;
@@ -159,7 +160,7 @@ public class DataTagging_Frame {
 	String titleCompanyId = "";	boolean startArticle = true;
 	
 	// Temp (debug)
-	private String currentDate;
+//	private String currentDate;
 	private String currentValue;
 	
 	// final company name & id
@@ -266,6 +267,14 @@ public class DataTagging_Frame {
 						// start to load article content by articleIndex
 						GetContentByArticleId(filenameVec.get(articleIndex).toString(),	articleIdVec.get(articleIndex).toString());
 						
+						// Title detection
+						boolean titleContentcheck;
+						titleContentcheck = TitleContentDetection(title);
+						if (titleContentcheck) {
+							companyNameDisplay.add(titleCompany);
+							companyIdDisplay.add(titleCompanyId);	
+						} 
+						
 						pattern = Pattern.compile(Units.regexTitle, Pattern.MULTILINE);
 						matcher = pattern.matcher(title);
 						if (matcher.find()) {
@@ -288,13 +297,7 @@ public class DataTagging_Frame {
 							String companynameStr = "";
 							String companyidStr = "";
 							String companyvalueStr = "";
-							// Title detection
-							boolean titleContentcheck;
-							titleContentcheck = TitleContentDetection(title);
-//							if (titleContentcheck) {
-//								companynameStr = titleCompany +"\n";
-//								companyidStr = titleCompanyId + "\n";
-//							}
+							
 							
 							// functions
 							if ((companyIdDisplay.size() > 0) || (companyNameDisplay.size() > 0)) {
@@ -309,15 +312,16 @@ public class DataTagging_Frame {
 									companyvalueStr += valueDisplay.get(i).toString() + "\n";
 								}
 
-								// Title detection
-//								if (titleContentcheck) {
-//									inputarticleId = titleCompanyId;
-//								} else {
-//									inputarticleId = companyIdDisplay.get(0).toString();
-//								}
 								
 								MapSort();
-								inputarticleId = outputIdStr;
+								inputcompanyId = outputIdStr;
+								// Title detection
+								
+								if (titleContentcheck) {
+									//companynameStr = titleCompany +"\n";
+									//companyidStr = titleCompanyId + "\n";
+									inputcompanyId = titleCompanyId;
+								}
 								
 								// date
 								date = replaceSpace(date);
@@ -336,7 +340,7 @@ public class DataTagging_Frame {
 									TWDateAdd = convertTWDate(formatdateAdd);
 									
 									// values average by company id
-									getValueAverageBycompanyId(inputarticleId, TWDate, TWDateAdd);
+									getValueAverageBycompanyId(inputcompanyId, TWDate, TWDateAdd);
 								} catch (Exception e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
@@ -376,7 +380,7 @@ public class DataTagging_Frame {
 							label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
 							nextButton.setEnabled(true);
 
-							DisplayAndClean();
+							TitleisNull();
 						}
 						indexNum++;
 
@@ -681,7 +685,6 @@ public class DataTagging_Frame {
 		thisCompanylabel.setBounds(172, 411, 61, 16);
 		frame.getContentPane().add(thisCompanylabel);
 		
-		
 	}
 
 	private boolean isJSONValid(String jsonInString) {
@@ -791,6 +794,7 @@ public class DataTagging_Frame {
 	}
 
 	private void getValueAverageBycompanyId(String companyIdStr, String dateStr, String addtwoday) throws Exception {
+		System.out.println(indexNum+"	"+companyIdStr+"	"+dateStr+"	"+ouputCompanyStr+"	"+outputIdStr);
 		
 		File file = new File(Units.value_folder + companyIdStr + Units.extension);
 		if (file.exists()) {
@@ -826,14 +830,14 @@ public class DataTagging_Frame {
 			
 			int nextIndex;
 			currentValue = valueTemp;
-			System.out.println(companyIdStr+"	"+dateStr+"	"+currentValue);
+			//System.out.println(indexNum+"	"+companyIdStr+"	"+dateStr+"	"+currentValue);
 			if(currentValue.trim().length() >0) {
 				if (dateindexTag > dateindextwoTag) {
 					nextIndex = dateindexTag;
-					currentDate = dateStr;
+					//currentDate = dateStr;
 				} else {
 					nextIndex = dateindextwoTag;
-					currentDate = addtwoday;
+					//currentDate = addtwoday;
 				}
 				
 				// values average
@@ -993,7 +997,7 @@ public class DataTagging_Frame {
 		// return cal.getTime();
 	}
 
-	private void DisplayAndClean() {
+	private void TitleisNull() {
 		
 		lblNewLabel_2.setText(date);
 		lblNewLabel_3.setText(author);
@@ -1001,6 +1005,10 @@ public class DataTagging_Frame {
 		mclabel.setText(String.valueOf(messagesCount));
 		labArticleFileStr.setText(articleFile);
 		labArticleIdStr.setText(articleId);
+	}
+
+	private void CleanData()
+	{
 		textPane_1.setText("");
 		textPane_2.setText("");
 		textPane_3.setText("");
@@ -1016,7 +1024,7 @@ public class DataTagging_Frame {
 		title = "";
 		content = "";
 		date = "";
-		inputarticleId = "";
+		inputcompanyId = "";
 		formatdate = "";
 		TWDate = "";
 		onemonthAverage = 0;
@@ -1035,9 +1043,10 @@ public class DataTagging_Frame {
 		thisValuelabel.setText("");
 		
 		outputIdStr = "";
+		currentValue = "";
 		ouputCompanyStr = "";
 	}
-
+	
 	// Storage
 	private void StoragedHistory(String articleFileName, String articleId) throws Exception {
 		writer = new FileOutputStream(Units.historyFolder + Units.historyName, true);
@@ -1075,7 +1084,7 @@ public class DataTagging_Frame {
 			matcher = pattern.matcher(inputTitle);
 			if (matcher.find()) {
 				patternName = matcher.group();
-				// companyNameDisplay.add(patternName);
+				companyNameDisplay.add(patternName);
 				titleCompany = patternName;
 				titleCompanyId = companyId.get(i).toString();
 				titleContentcheck = true;
@@ -1112,6 +1121,8 @@ public class DataTagging_Frame {
 	// updated
 	private void Updated()
 	{
+		CleanData();
+		
 		contentcheck = false;
 
 		try {
@@ -1122,6 +1133,15 @@ public class DataTagging_Frame {
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		}
+		
+		
+		// Title detection
+		boolean titleContentcheck;
+		titleContentcheck = TitleContentDetection(title);
+		if (titleContentcheck) {
+			companyNameDisplay.add(titleCompany);
+			companyIdDisplay.add(titleCompanyId);	
 		}
 
 		pattern = Pattern.compile(Units.regexTitle, Pattern.MULTILINE);
@@ -1143,13 +1163,8 @@ public class DataTagging_Frame {
 			String companynameStr = "";
 			String companyidStr = "";
 			String companyvalueStr = "";
-			// Title detection
-			boolean titleContentcheck;
-			titleContentcheck = TitleContentDetection(title);
-//			if (titleContentcheck) {
-//				companynameStr = titleCompany + "\n";
-//				companyidStr = titleCompanyId + "\n";
-//			}
+			
+			
 
 			// functions
 			if ((companyIdDisplay.size() > 0) || (companyNameDisplay.size() > 0)) {
@@ -1172,9 +1187,13 @@ public class DataTagging_Frame {
 //				}
 				
 				MapSort();
-				inputarticleId = outputIdStr;
-				//System.out.println("uu	"+ouputCompanyStr);
-				//System.out.println("uu	"+outputIdStr);
+				inputcompanyId = outputIdStr;
+				if (titleContentcheck) {
+					//companynameStr = titleCompany + "\n";
+					//companyidStr = titleCompanyId + "\n";
+					inputcompanyId = titleCompanyId;
+				}
+				
 
 				// date
 				date = replaceSpace(date);
@@ -1193,7 +1212,7 @@ public class DataTagging_Frame {
 					TWDateAdd = convertTWDate(formatdateAdd);
 
 					// values average by company id
-					getValueAverageBycompanyId(inputarticleId, TWDate, TWDateAdd);
+					getValueAverageBycompanyId(inputcompanyId, TWDate, TWDateAdd);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1222,7 +1241,7 @@ public class DataTagging_Frame {
 			label_4.setText(String.valueOf(indexNum));
 			label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
 
-			DisplayAndClean();
+			TitleisNull();
 		}
 
 		if(content.trim().length() == 0) {
@@ -1263,8 +1282,7 @@ public class DataTagging_Frame {
 		}
 
 		// Save tagging result
-		//System.out.println(articleIndex+"	"+filenameVec.get(articleIndex).toString()+"	"+articleIdVec.get(articleIndex).toString()+"	"+inputarticleId+"	"+articleAuthorVec.get(articleIndex).toString()+"	"+currentDate+"	"+currentValue);
-		System.out.println(articleIndex+"	"+filenameVec.get(articleIndex).toString()+"	"+articleIdVec.get(articleIndex).toString()+"	"+inputarticleId+"	"+articleAuthorVec.get(articleIndex).toString());
+//		System.out.println(articleIndex+"	"+filenameVec.get(articleIndex).toString()+"	"+articleIdVec.get(articleIndex).toString()+"	"+inputcompanyId+"	"+articleAuthorVec.get(articleIndex).toString());
 		try {
 			manualTagging(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString(), articleAuthorVec.get(articleIndex).toString(), radiochoice, companyIdTag);
 		} catch (Exception e1) {
@@ -1287,6 +1305,8 @@ public class DataTagging_Frame {
 	
 	private void Display()
 	{
+		CleanData();
+		
 		contentcheck = false;
 
 		try {
@@ -1321,10 +1341,10 @@ public class DataTagging_Frame {
 			// Title detection
 			boolean titleContentcheck;
 			titleContentcheck = TitleContentDetection(title);
-			if (titleContentcheck) {
-				companynameStr = titleCompany +"\n";
-				companyidStr = titleCompanyId +"\n";
-			}
+//			if (titleContentcheck) {
+//				companynameStr = titleCompany +"\n";
+//				companyidStr = titleCompanyId +"\n";
+//			}
 
 			// functions
 			if ((companyIdDisplay.size() > 0) || (companyNameDisplay.size() > 0)) {
@@ -1339,17 +1359,14 @@ public class DataTagging_Frame {
 					companyvalueStr += valueDisplay.get(i).toString() + "\n";
 				}
 
-				// Title detection
-//				if (titleContentcheck) {
-//					inputarticleId = titleCompanyId;
-//				} else {
-//					inputarticleId = companyIdDisplay.get(0).toString();
-//				}
 				
 				MapSort();
-				inputarticleId = outputIdStr;
-//				System.out.println("dd	"+ouputCompanyStr);
-//				System.out.println("dd	"+outputIdStr);
+				inputcompanyId = outputIdStr;
+				if (titleContentcheck) {
+//					companynameStr = titleCompany +"\n";
+//					companyidStr = titleCompanyId +"\n";
+					inputcompanyId = titleCompanyId;
+				}
 
 				// date
 				date = replaceSpace(date);
@@ -1368,7 +1385,7 @@ public class DataTagging_Frame {
 					TWDateAdd = convertTWDate(formatdateAdd);
 
 					// values average
-					getValueAverageBycompanyId(inputarticleId, TWDate, TWDateAdd);
+					getValueAverageBycompanyId(inputcompanyId, TWDate, TWDateAdd);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1396,7 +1413,7 @@ public class DataTagging_Frame {
 			label_4.setText(String.valueOf(indexNum));
 			label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
 
-			DisplayAndClean();
+			TitleisNull();
 		}
 
 		// title filter
@@ -1444,7 +1461,7 @@ public class DataTagging_Frame {
 		} else {
 			nextButton.setEnabled(false);
 		}
-		
+
 	}
 
 	private void contentFilter()
@@ -1481,7 +1498,6 @@ public class DataTagging_Frame {
 		outputIdStr = "";
 		List<String> companylist = new ArrayList<String>();
 		for(int i=0; i<companyNameDisplay.size(); i++) {
-			System.out.println(companyNameDisplay.get(i).toString().trim());
 			companylist.add(companyNameDisplay.get(i).toString().trim());
 		}
 
@@ -1554,10 +1570,12 @@ public class DataTagging_Frame {
 			outputIdStr = indexidStr;
 		}
 		
+		companyIdDisplay.clear();
+		companyNameDisplay.clear();
 //		System.out.println("-----------------------------------");
 //		System.out.println(indexnameStr+"	"+indexidStr);
 //		System.out.println(indexidValue+"	"+indexnameValue);
-//		System.out.println("ourput company	"+ouputCompanyStr);
+//		System.out.println("output company	"+ouputCompanyStr);
 //		System.out.println("output id	"+outputIdStr);
 	}
 
