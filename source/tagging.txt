@@ -31,3 +31,6 @@ Stock_1601.json	M.1514944768.A.5AF	lio226	ignore	null
 Stock_1601.json	M.1514944803.A.BEB	zxcvxx	undefined	multiple
 Stock_1601.json	M.1514945606.A.10E	yichung29	undefined	multiple
 Stock_1601.json	M.1514945617.A.954	logate	undefined	multiple
+Stock_1601.json	M.1514947807.A.658	zxcvb7700	undefined	multiple
+Stock_1601.json	M.1514949031.A.2C3	relax60265	undefined	multiple
+Stock_1601.json	M.1514949152.A.52C	Ejaculation	undefined	multiple
