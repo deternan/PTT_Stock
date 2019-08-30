@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data manually tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: August 30, 2019 11:36 PM
+ * Last revision: August 31, 2019 00:14 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -797,7 +797,8 @@ public class DataTagging_Frame {
 	}
 
 	private void getValueAverageBycompanyId(String companyIdStr, String dateStr, String addtwoday) throws Exception {
-		System.out.println(indexNum+"	"+companyIdStr+"	"+dateStr+"	"+ouputCompanyStr+"	"+outputIdStr);
+		
+		System.out.println(indexNum+"	"+companyIdStr+"	"+dateStr+"	"+ouputCompanyStr+"	"+outputIdStr+"	"+titleCompanyId);
 		
 		File file = new File(Units.value_folder + companyIdStr + Units.extension);
 		if (file.exists()) {
@@ -1079,8 +1080,9 @@ public class DataTagging_Frame {
 		String tmpName;
 		String patternName;
 
-		
-		for (int i=0; i<companyId.size(); i++) {
+		int indexTag;
+		for (int i=0; i<companyId.size(); i++) 
+		{
 			patternName = "";
 
 			// Name
@@ -1089,22 +1091,16 @@ public class DataTagging_Frame {
 			regexName = "(" + tmpName + ")+";
 			pattern = Pattern.compile(regexName, Pattern.MULTILINE);
 			matcher = pattern.matcher(inputTitle);
-			
+			indexTag = i;
 			while(matcher.find()) {
+				
 				patternName = matcher.group();
 				companyNameDisplay.add(patternName);
-				companyIdDisplay.add(companyId.get(i));
+				companyIdDisplay.add(companyId.get(indexTag));
+				//System.out.println(patternName+"	"+companyId.get(indexTag));
 				titleContentcheck = true;
 			}
 			
-//			if (matcher.find()) {
-//				patternName = matcher.group();
-//				companyNameDisplay.add(patternName);
-//				titleCompany = patternName;
-//				titleCompanyId = companyId.get(i).toString();
-//				titleContentcheck = true;
-//				break;
-//			}
 		}
 		
 		double score;
@@ -1114,13 +1110,13 @@ public class DataTagging_Frame {
 				score = sim(companyNameDisplay.get(i).toString(), inputTitle);
 				if(score > nameScoreTmp) {
 					titleCompany = companyNameDisplay.get(i).toString();
-					titleCompanyId = companyId.get(i).toString();
+					titleCompanyId = companyIdDisplay.get(i).toString();
 					nameScoreTmp = score;
 				}
 			}
 		}else if(companyNameDisplay.size() == 1) {
 			titleCompany = companyNameDisplay.get(0).toString();
-			titleCompanyId = companyId.get(0).toString();
+			titleCompanyId = companyIdDisplay.get(0).toString();
 		}
 		
 
