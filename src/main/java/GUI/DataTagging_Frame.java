@@ -696,6 +696,7 @@ public class DataTagging_Frame {
 		JsonElement jsonele = parser.parse(jsonInString);
 		boolean check;
 		check = jsonele.isJsonObject();
+		
 		return check;
 	}
 
