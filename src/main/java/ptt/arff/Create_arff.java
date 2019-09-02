@@ -4,7 +4,7 @@ package ptt.arff;
  * create arff file
  * 
  * version: September 01, 2019 09:54 PM
- * Last revision: September 01, 2019 09:54 PM
+ * Last revision: September 02, 2019 10:14 PM
  * 
  * Author : Chao-Hsuan Ke 
  * E-mail : phelpske.dev at gmail dot com
@@ -13,6 +13,10 @@ package ptt.arff;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 import java.util.Vector;
 
 import org.json.JSONArray;
@@ -20,8 +24,14 @@ import org.json.JSONObject;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.spreada.utils.chinese.ZHConverter;
 
 import GUI.Units;
+import edu.stanford.nlp.ie.crf.CRFClassifier;
+import edu.stanford.nlp.ling.CoreLabel;
+
+import com.mayabot.mynlp.fasttext.FastText;
+//import com.mayabot.blas.Vector;
 
 public class Create_arff 
 {
@@ -38,10 +48,33 @@ public class Create_arff
 		private String content;
 		private String date;
 		private int messagesCount;
-	Vector titlecontentVec = new Vector();
+		private String allTitleContent = "";
+	
+	// BIG5 to GB
+	ZHConverter simconverter = ZHConverter.getInstance(ZHConverter.SIMPLIFIED);
+	// Segmentation
+	private static final String basedir = "/Users/phelps/Documents/github/Light-tools/data/stanford-word-segmenter/data/";	// data path
+	
+	static List<String> segmented;
+	CRFClassifier<CoreLabel> segmenter;
+	// Segmented Terms
+	Vector segTerms = new Vector();
+	
+	// fasttext (word embedding)
+	
+	private int wordim = 300;
+	private String sourcebinPath = "/Users/phelps/Downloads/wiki/";		// should be revised
+	private String modelFolder_zh = "wiki.simple.zh.Chinese.model";
+	FastText fastText_zh;
+	private ArrayList averageValue = new ArrayList();
+	double[] averageValueTmp = new double[wordim];
 	
 	public Create_arff() throws Exception
 	{
+		// Chinese segmentation initialize
+		Chinese_Seg_Initialize();
+		fastText_zh = FastText.loadModel(sourcebinPath + modelFolder_zh, true);
+		
 		// Read tagging txt
 		String Line = "";
 		FileReader fr = new FileReader(sourceFolder + file);
@@ -57,13 +90,26 @@ public class Create_arff
 			// content
 			ReadSourceFile(temp[0], temp[1]);
 			
-			if(index == 1) 
+			if(index == 0) 
 			{
-				SentenceSplit(title, content);
-				for(int i=0; i<titlecontentVec.size(); i++)
+				allTitleContent += title + " " + content;
+				System.out.println(allTitleContent);
+				//for(int i=0; i<titlecontentVec.size(); i++)
 				{
-					ChineseWordParser(titlecontentVec.get(i).toString());
+					String tmpStr = ChineseWordParser(allTitleContent);
+					// BIG5 to GB
+					String simStr = BIG5GB_converter(tmpStr);
+					// Chinese words Segmentation
+					//System.out.println(simStr);
+					Chinese_Segmentation(simStr);
+					
+					//System.out.println(segTerms.size());
+				    for(int k=0; k<segTerms.size(); k++) {
+				    	//System.out.println(segTerms.get(k));
+				    	fasttext(segTerms.get(k).toString());
+				    } 
 				}
+				average();
 			}
 			
 			index++;
@@ -137,31 +183,7 @@ public class Create_arff
 		return check;
 	}
 	
-	private void SentenceSplit(String titleStr, String contentStr)
-	{
-		System.out.println(contentStr);
-		String titletmpStr[];
-		String contenttmpStr[];
-		if(titleStr.contains("，")) {
-			titletmpStr = titleStr.split("，");
-		}else {
-			titlecontentVec.add(titleStr);
-		}
-		
-//		if(contentStr.contains("，"))
-		if(contentStr.trim().length() > 0)
-		{
-			contenttmpStr = contentStr.split("，");
-			if(contenttmpStr.length > 0) {
-				for(int i=0; i<contenttmpStr.length; i++) {
-					titlecontentVec.add(contenttmpStr[i]);
-					//System.out.println(contenttmpStr[i]);
-				}
-			}
-		}
-	}
-	
-	private void ChineseWordParser(String input_str) 
+	private String ChineseWordParser(String input_str) 
 	{
 		String sentence = "";
 		for(int i=0; i<input_str.length();i++)
@@ -174,9 +196,20 @@ public class Create_arff
 		      
 		}
 		
-		if(sentence.length() > 0){
-			System.out.println(sentence);
-		}
+//		if(sentence.length() > 0){
+//			System.out.println(sentence);
+//		}
+		
+		return sentence;
+	}
+	
+	private String BIG5GB_converter(String traStr)
+	{
+		// BIG5 to GB
+		String simStrResult = simconverter.convert(traStr);
+		//System.out.println(simStrResult);
+		
+		return simStrResult;
 	}
 	
 	private void Clean()
@@ -188,7 +221,67 @@ public class Create_arff
 		content = "";
 		date = "";
 		messagesCount = 0;
-		titlecontentVec.clear();
+		allTitleContent = "";
+		//titlecontentVec.clear();
+		segTerms.clear();
+		averageValue.clear();
+		//saveWords.clear();
+	}
+	
+	private void Chinese_Seg_Initialize() throws Exception
+	{
+		System.setOut(new PrintStream(System.out, true, "utf-8"));
+
+	    Properties props = new Properties();
+	    props.setProperty("sighanCorporaDict", basedir);
+	    // props.setProperty("NormalizationTable", "data/norm.simp.utf8");
+	    // props.setProperty("normTableEncoding", "UTF-8");
+	    
+	    props.setProperty("serDictionary", basedir + "dict-chris6.ser.gz");
+	    props.setProperty("inputEncoding", "UTF-8");
+	    props.setProperty("sighanPostProcessing", "true");
+
+	    segmenter = new CRFClassifier<>(props);
+	    segmenter.loadClassifierNoExceptions(basedir + "ctb.gz", props);
+	}
+	
+	private void Chinese_Segmentation(String inputStr)
+	{
+	    segmented = segmenter.segmentString(inputStr);
+	    
+	    Terms_Split(segmented);
+	}
+	
+	private void Terms_Split(List<String> listStr)
+	{
+		for(int i=0; i<listStr.size(); i++) {
+			// Filter (length>1)
+			if(listStr.get(i).toString().trim().length() > 1) {
+				segTerms.add(listStr.get(i));
+			}			
+		}		
+	}
+	
+	private void fasttext(String inputStr)
+	{
+		//for(int i=0; i<segTerms.size(); i++)
+		{
+			com.mayabot.blas.Vector vecTmpzh = fastText_zh.getWordVector(inputStr);
+			System.out.println(inputStr+"	"+vecTmpzh);
+			for(int j=0; j<wordim; j++) {
+				averageValueTmp[j] += vecTmpzh.get(j);
+			}
+		}
+	}
+	
+	private void average()
+	{
+		System.out.println("----------- average -----------");
+		for(int j=0; j<wordim; j++) {
+			averageValue.add(averageValueTmp[j]/segTerms.size());
+			//System.out.println(j+"	"+averageValueTmp[j]+"	"+averageValue.get(j));
+			System.out.print(averageValue.get(j)+",");
+		}
 	}
 	
 	public static void main(String args[]) 
