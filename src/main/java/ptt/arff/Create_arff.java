@@ -209,10 +209,6 @@ public class Create_arff
 		      
 		}
 		
-//		if(sentence.length() > 0){
-//			System.out.println(sentence);
-//		}
-		
 		return sentence;
 	}
 	
