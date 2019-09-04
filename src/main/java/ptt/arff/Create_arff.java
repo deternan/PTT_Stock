@@ -4,7 +4,7 @@ package ptt.arff;
  * create arff file
  * 
  * version: September 01, 2019 09:54 PM
- * Last revision: September 02, 2019 10:14 PM
+ * Last revision: September 04, 2019 06:26 PM
  * 
  * Author : Chao-Hsuan Ke 
  * E-mail : phelpske.dev at gmail dot com
@@ -12,7 +12,10 @@ package ptt.arff;
  */
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +34,6 @@ import edu.stanford.nlp.ie.crf.CRFClassifier;
 import edu.stanford.nlp.ling.CoreLabel;
 
 import com.mayabot.mynlp.fasttext.FastText;
-//import com.mayabot.blas.Vector;
 
 public class Create_arff 
 {
@@ -47,9 +49,11 @@ public class Create_arff
 		private String title;
 		private String content;
 		private String date;
-		private int messagesCount;
 		private String allTitleContent = "";
-	
+	// file index
+	String fileNameStr;
+	String articleIdStr;	
+	String tagCategoryStr;
 	// BIG5 to GB
 	ZHConverter simconverter = ZHConverter.getInstance(ZHConverter.SIMPLIFIED);
 	// Segmentation
@@ -61,13 +65,17 @@ public class Create_arff
 	Vector segTerms = new Vector();
 	
 	// fasttext (word embedding)
-	
 	private int wordim = 300;
 	private String sourcebinPath = "/Users/phelps/Downloads/wiki/";		// should be revised
 	private String modelFolder_zh = "wiki.simple.zh.Chinese.model";
 	FastText fastText_zh;
 	private ArrayList averageValue = new ArrayList();
 	double[] averageValueTmp = new double[wordim];
+	// output
+	private BufferedWriter writer;
+	private String arfffolder = sourceFolder;
+	private String arfffilename = "tagging.arff";
+	
 	
 	public Create_arff() throws Exception
 	{
@@ -79,44 +87,47 @@ public class Create_arff
 		String Line = "";
 		FileReader fr = new FileReader(sourceFolder + file);
 		BufferedReader bfr = new BufferedReader(fr);
-				
+		// output arff
+		writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(arfffolder + arfffilename), "utf-8"));
+		
 		int index = 0;
 		String temp[];
 		while((Line = bfr.readLine())!=null)
 		{					
 			temp = Line.split("	");
-			//System.out.println(temp[0]+"	"+temp[1]);
-			
+			fileNameStr = temp[0];
+			articleIdStr = temp[1];
+			tagCategoryStr = temp[3];
 			// content
 			ReadSourceFile(temp[0], temp[1]);
 			
-			if(index == 0) 
+			if(index < 5) 
 			{
 				allTitleContent += title + " " + content;
-				System.out.println(allTitleContent);
-				//for(int i=0; i<titlecontentVec.size(); i++)
-				{
-					String tmpStr = ChineseWordParser(allTitleContent);
-					// BIG5 to GB
-					String simStr = BIG5GB_converter(tmpStr);
-					// Chinese words Segmentation
-					//System.out.println(simStr);
-					Chinese_Segmentation(simStr);
-					
-					//System.out.println(segTerms.size());
-				    for(int k=0; k<segTerms.size(); k++) {
-				    	//System.out.println(segTerms.get(k));
-				    	fasttext(segTerms.get(k).toString());
-				    } 
+				
+				String tmpStr = ChineseWordParser(allTitleContent);
+				// BIG5 to GB
+				String simStr = BIG5GB_converter(tmpStr);
+				// Chinese words Segmentation
+				// System.out.println(simStr);
+				Chinese_Segmentation(simStr);
+
+				for (int k = 0; k < segTerms.size(); k++) {
+					// System.out.println(segTerms.get(k));
+					fasttext(segTerms.get(k).toString());
 				}
+				// average
 				average();
+				System.out.println(fileNameStr+"	"+articleIdStr+"	"+tagCategoryStr);
 			}
 			
 			index++;
 			Clean();
 		}
+		
 		fr.close();
 		bfr.close();
+		writer.close();
 	}
 
 	private void ReadSourceFile(String filenameIndex, String articleIdIndex) throws Exception
@@ -143,7 +154,6 @@ public class Create_arff
 						idTmp = articleobj.getString("article_id");
 						articleId = idTmp;
 						if (idTmp.equalsIgnoreCase(articleIdIndex)) {
-
 							// author
 							if (articleobj.has("author")) {
 								author = articleobj.getString("author");
@@ -160,11 +170,7 @@ public class Create_arff
 							if (articleobj.has("date")) {
 								date = articleobj.getString("date");
 							}
-							// message
-							if (articleobj.has("messages")) {
-								JSONArray mesarray = new JSONArray(articleobj.getJSONArray("messages").toString());
-								messagesCount = mesarray.length();
-							}
+							
 							break;
 						}
 					}
@@ -220,12 +226,12 @@ public class Create_arff
 		title = "";
 		content = "";
 		date = "";
-		messagesCount = 0;
 		allTitleContent = "";
-		//titlecontentVec.clear();
+		fileNameStr = "";
+		articleIdStr = "";
+		tagCategoryStr = "";
 		segTerms.clear();
 		averageValue.clear();
-		//saveWords.clear();
 	}
 	
 	private void Chinese_Seg_Initialize() throws Exception
@@ -267,7 +273,7 @@ public class Create_arff
 		//for(int i=0; i<segTerms.size(); i++)
 		{
 			com.mayabot.blas.Vector vecTmpzh = fastText_zh.getWordVector(inputStr);
-			System.out.println(inputStr+"	"+vecTmpzh);
+//			System.out.println(inputStr+"	"+vecTmpzh);
 			for(int j=0; j<wordim; j++) {
 				averageValueTmp[j] += vecTmpzh.get(j);
 			}
@@ -276,13 +282,16 @@ public class Create_arff
 	
 	private void average()
 	{
-		System.out.println("----------- average -----------");
+//		System.out.println("----------- average -----------");
 		for(int j=0; j<wordim; j++) {
 			averageValue.add(averageValueTmp[j]/segTerms.size());
 			//System.out.println(j+"	"+averageValueTmp[j]+"	"+averageValue.get(j));
-			System.out.print(averageValue.get(j)+",");
+			//System.out.print(averageValue.get(j)+",");
 		}
+		//System.out.println(fileNameStr+"	"+articleIdStr+"	"+tagCategoryStr+"	"+averageValue.size());
 	}
+	
+	
 	
 	public static void main(String args[]) 
 	{
