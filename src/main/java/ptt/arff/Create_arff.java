@@ -13,10 +13,12 @@ package ptt.arff;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -75,7 +77,7 @@ public class Create_arff
 	private BufferedWriter writer;
 	private String arfffolder = sourceFolder;
 	private String arfffilename = "tagging.arff";
-	
+	private String allweValueStr = "";
 	
 	public Create_arff() throws Exception
 	{
@@ -88,7 +90,7 @@ public class Create_arff
 		FileReader fr = new FileReader(sourceFolder + file);
 		BufferedReader bfr = new BufferedReader(fr);
 		// output arff
-		writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(arfffolder + arfffilename), "utf-8"));
+		output_Initialize();
 		
 		int index = 0;
 		String temp[];
@@ -101,7 +103,7 @@ public class Create_arff
 			// content
 			ReadSourceFile(temp[0], temp[1]);
 			
-			if(index < 5) 
+			//if(index < 5) 
 			{
 				allTitleContent += title + " " + content;
 				
@@ -118,6 +120,10 @@ public class Create_arff
 				}
 				// average
 				average();
+				// output
+				if((tagCategoryStr.trim().equalsIgnoreCase("positive")) || (tagCategoryStr.trim().equalsIgnoreCase("negative"))) {
+					writer.write(allweValueStr+"\n");
+				}
 				System.out.println(fileNameStr+"	"+articleIdStr+"	"+tagCategoryStr);
 			}
 			
@@ -127,6 +133,7 @@ public class Create_arff
 		
 		fr.close();
 		bfr.close();
+		
 		writer.close();
 	}
 
@@ -232,6 +239,7 @@ public class Create_arff
 		tagCategoryStr = "";
 		segTerms.clear();
 		averageValue.clear();
+		allweValueStr = "";
 	}
 	
 	private void Chinese_Seg_Initialize() throws Exception
@@ -282,16 +290,30 @@ public class Create_arff
 	
 	private void average()
 	{
+		
 //		System.out.println("----------- average -----------");
 		for(int j=0; j<wordim; j++) {
 			averageValue.add(averageValueTmp[j]/segTerms.size());
 			//System.out.println(j+"	"+averageValueTmp[j]+"	"+averageValue.get(j));
 			//System.out.print(averageValue.get(j)+",");
+			allweValueStr += averageValue.get(j)+",";
 		}
+		allweValueStr += tagCategoryStr;
 		//System.out.println(fileNameStr+"	"+articleIdStr+"	"+tagCategoryStr+"	"+averageValue.size());
 	}
 	
-	
+	private void output_Initialize() throws Exception
+	{
+		writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(arfffolder + arfffilename), "utf-8"));
+		
+		writer.write("@RELATION ptttagging"+"\n");
+		for(int i=0; i<wordim; i++) {
+			writer.write("@ATTRIBUTE article  NUMERIC"+"\n");
+		}
+		
+		writer.write("@ATTRIBUTE class        {positive,negative}"+"\n");
+		writer.write("@DATA"+"\n");
+	}
 	
 	public static void main(String args[]) 
 	{
