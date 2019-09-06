@@ -50,7 +50,8 @@ public class FastText_Sample
 	public FastText_Sample() throws Exception
 	{
 		Chinese_Seg_Initialize();
-		String simStr = BIG5GB_converter(inputStr);
+		String tmpStr = ChineseWordParser(inputStr);
+		String simStr = BIG5GB_converter(tmpStr);
 		Chinese_Segmentation(simStr);
 		
 		// Save as model
@@ -78,6 +79,21 @@ public class FastText_Sample
 	    segmenter.loadClassifierNoExceptions(basedir + "ctb.gz", props);
 	}
 	
+	private String ChineseWordParser(String input_str) 
+	{
+		String sentence = "";
+		for(int i=0; i<input_str.length();i++)
+		{  
+		    String test = input_str.substring(i, i+1);  
+		    if(test.matches("[\\u4E00-\\u9FA5]+")){  
+		        //System.out.printf("\t[Info] %s -> 中文!\n", test);
+		    	sentence += test;
+		    }  
+		      
+		}
+		
+		return sentence;
+	}
 	
 	private String BIG5GB_converter(String traStr)
 	{
