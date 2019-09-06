@@ -16,12 +16,13 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Vector;
 
+import com.mayabot.mynlp.fasttext.FastText;
+
 import edu.stanford.nlp.ie.crf.CRFClassifier;
 import edu.stanford.nlp.ling.CoreLabel;
 
 public class FastText_Sample 
 {
-
 	// Segmentation
 	private static final String basedir = "/Users/phelps/Documents/github/Light-tools/data/stanford-word-segmenter/data/";	// data path
 	static List<String> segmented;
@@ -31,11 +32,25 @@ public class FastText_Sample
 	// Segmented Terms
 	Vector segTerms = new Vector();
 	
+	// FastText
+	private int wordim = 300;					
+	private String sourcebinPath = "/Users/phelps/Downloads/wiki/";		// 放置 bin 
+	private String sourcebinName = "wiki.simple.zh.Chinese.model";		// 讀取的 bin 
+	// Model
+	private String modelFolder_zh = "wiki.simple.zh.Chinese.model";	// 輸出的 model 檔
+	FastText fastText_zh;
+	
+	
 	public FastText_Sample() throws Exception
 	{
 		Chinese_Seg_Initialize();
 		Chinese_Segmentation(inputStr);
 		
+		// Save as model
+//		SaveAsModel();
+		// word to vector
+		fastText_zh = FastText.loadModel(sourcebinPath + modelFolder_zh, true);
+		fasttext();
 	}
 	
 	private void Chinese_Seg_Initialize() throws Exception
@@ -69,6 +84,25 @@ public class FastText_Sample
 				System.out.println(listStr.get(i));
 			}			
 		}		
+	}
+	
+	private void SaveAsModel() throws Exception
+	{
+		// Save as model		
+		FastText fastText = FastText.loadFasttextBinModel(sourcebinPath + sourcebinName);
+		fastText.saveModel(sourcebinPath + modelFolder_zh);
+	}
+	
+	private void fasttext()
+	{
+		for(int i=0; i<segTerms.size(); i++)
+		{
+			com.mayabot.blas.Vector vecTmpzh = fastText_zh.getWordVector(segTerms.get(i).toString());
+			System.out.println(segTerms.get(i)+"	"+vecTmpzh);
+//			for(int j=0; j<wordim; j++) {
+//				averageValueTmp[j] += vecTmpzh.get(j);
+//			}
+		}
 	}
 	
 	public static void main(String args[])
