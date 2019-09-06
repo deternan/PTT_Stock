@@ -18,6 +18,7 @@ import java.util.Properties;
 import java.util.Vector;
 
 import com.mayabot.mynlp.fasttext.FastText;
+import com.spreada.utils.chinese.ZHConverter;
 
 import edu.stanford.nlp.ie.crf.CRFClassifier;
 import edu.stanford.nlp.ling.CoreLabel;
@@ -28,8 +29,8 @@ public class FastText_Sample
 	private static final String basedir = "/Users/phelps/Documents/github/Light-tools/data/stanford-word-segmenter/data/";	// data path
 	static List<String> segmented;
 	CRFClassifier<CoreLabel> segmenter;
-	
-	private String inputStr = "内资仍是目前撑盘主力，主要靠政府表明政策作多台股，营造明年总统大选行情，寿险资金活水也开始进场卡位；中实户持续当冲中小型股；自营商因应季底作帐，乘势回补持股赶绩效。";
+	// BIG5 to GB
+	ZHConverter simconverter = ZHConverter.getInstance(ZHConverter.SIMPLIFIED);
 	// Segmented Terms
 	Vector segTerms = new Vector();
 	
@@ -44,10 +45,13 @@ public class FastText_Sample
 	private ArrayList averageValue = new ArrayList();
 	double[] averageValueTmp = new double[wordim];
 	
+	private String inputStr = "這檔今天有趣了，成交量4900多張，外資買超3050張，盤中一直有壓盤，但買盤似乎小贏 ，下禮拜5/15財報公布後，多空方向應該會明朗。 籌碼面，外資連續買超31天，一共76000張。 技術面，高檔震盪，加上買盤比較強，應該是要拉根長紅表態。 實際面，向右。 下禮拜繼續看怎麼演";
+	
 	public FastText_Sample() throws Exception
 	{
 		Chinese_Seg_Initialize();
-		Chinese_Segmentation(inputStr);
+		String simStr = BIG5GB_converter(inputStr);
+		Chinese_Segmentation(simStr);
 		
 		// Save as model
 //		SaveAsModel();
@@ -74,6 +78,14 @@ public class FastText_Sample
 	    segmenter.loadClassifierNoExceptions(basedir + "ctb.gz", props);
 	}
 	
+	
+	private String BIG5GB_converter(String traStr)
+	{
+		// BIG5 to GB
+		String simStrResult = simconverter.convert(traStr);
+		
+		return simStrResult;
+	}
 	private void Chinese_Segmentation(String inputStr)
 	{
 	    segmented = segmenter.segmentString(inputStr);
