@@ -4,7 +4,7 @@ package ptt.arff;
  * FastText sample
  * 
  * version: September 03, 2019 11:18 PM
- * Last revision: September 05, 2019 06:18 AM
+ * Last revision: September 06, 2019 05:57 AM
  * 
  * Author : Chao-Hsuan Ke 
  * E-mail : phelpske.dev at gmail dot com
@@ -12,6 +12,7 @@ package ptt.arff;
  */
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Vector;
@@ -39,7 +40,9 @@ public class FastText_Sample
 	// Model
 	private String modelFolder_zh = "wiki.simple.zh.Chinese.model";	// 輸出的 model 檔
 	FastText fastText_zh;
-	
+	// average value
+	private ArrayList averageValue = new ArrayList();
+	double[] averageValueTmp = new double[wordim];
 	
 	public FastText_Sample() throws Exception
 	{
@@ -51,6 +54,9 @@ public class FastText_Sample
 		// word to vector
 		fastText_zh = FastText.loadModel(sourcebinPath + modelFolder_zh, true);
 		fasttext();
+		
+		// Average
+		average();
 	}
 	
 	private void Chinese_Seg_Initialize() throws Exception
@@ -81,7 +87,7 @@ public class FastText_Sample
 			// Filter (length>1)
 			if(listStr.get(i).toString().trim().length() > 1) {
 				segTerms.add(listStr.get(i));
-				System.out.println(listStr.get(i));
+				//System.out.println(listStr.get(i));
 			}			
 		}		
 	}
@@ -99,9 +105,19 @@ public class FastText_Sample
 		{
 			com.mayabot.blas.Vector vecTmpzh = fastText_zh.getWordVector(segTerms.get(i).toString());
 			System.out.println(segTerms.get(i)+"	"+vecTmpzh);
-//			for(int j=0; j<wordim; j++) {
-//				averageValueTmp[j] += vecTmpzh.get(j);
-//			}
+			
+			// average
+			for(int j=0; j<wordim; j++) {
+				averageValueTmp[j] += vecTmpzh.get(j);
+			}
+		}
+	}
+	
+	private void average()
+	{
+		for(int j=0; j<wordim; j++) {
+			averageValue.add(averageValueTmp[j]/segTerms.size());
+			System.out.print(averageValue.get(j)+",");
 		}
 	}
 	
