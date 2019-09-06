@@ -115,7 +115,6 @@ public class Create_arff
 				Chinese_Segmentation(simStr);
 
 				for (int k = 0; k < segTerms.size(); k++) {
-					// System.out.println(segTerms.get(k));
 					fasttext(segTerms.get(k).toString());
 				}
 				// average
@@ -124,7 +123,7 @@ public class Create_arff
 				if((tagCategoryStr.trim().equalsIgnoreCase("positive")) || (tagCategoryStr.trim().equalsIgnoreCase("negative"))) {
 					writer.write(allweValueStr+"\n");
 				}
-				System.out.println(fileNameStr+"	"+articleIdStr+"	"+tagCategoryStr);
+//				System.out.println(fileNameStr+"	"+articleIdStr+"	"+tagCategoryStr);
 			}
 			
 			index++;
@@ -277,7 +276,7 @@ public class Create_arff
 		//for(int i=0; i<segTerms.size(); i++)
 		{
 			com.mayabot.blas.Vector vecTmpzh = fastText_zh.getWordVector(inputStr);
-//			System.out.println(inputStr+"	"+vecTmpzh);
+			System.out.println(inputStr+"	"+vecTmpzh);
 			for(int j=0; j<wordim; j++) {
 				averageValueTmp[j] += vecTmpzh.get(j);
 			}
