@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data manually tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: August 31, 2019 00:14 AM
+ * Last revision: September 18, 2019 06:18 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -97,6 +97,7 @@ public class DataTagging_Frame {
 	private Vector filenameVec = new Vector();
 	private Vector articleIdVec = new Vector();
 	private Vector articleAuthorVec = new Vector();
+	private int allarticleNum;
 	// display
 	Vector companyIdDisplay = new Vector();
 	Vector companyNameDisplay = new Vector();
@@ -265,6 +266,7 @@ public class DataTagging_Frame {
 						articleIdVec = ra.returnarticleId();
 						articleAuthorVec = ra.returnarticleAuthorVec();
 						indexNum = ra.returnarticleIndex();
+						allarticleNum = ra.returnallarticleNum();
 						// start to load article content by articleIndex
 						GetContentByArticleId(filenameVec.get(articleIndex).toString(),	articleIdVec.get(articleIndex).toString());
 						
@@ -290,9 +292,9 @@ public class DataTagging_Frame {
 							mclabel.setText(String.valueOf(messagesCount));
 							labArticleIdStr.setText(articleId);
 							labArticleFileStr.setText(articleFile);
-							label_3.setText(String.valueOf(articleIdVec.size()));
+							label_3.setText(String.valueOf(allarticleNum));	
 							label_4.setText(String.valueOf(indexNum));
-							label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
+							label_5.setText(String.valueOf(allarticleNum - indexNum));
 							
 							String companynameStr = "";
 							String companyidStr = "";
@@ -372,9 +374,9 @@ public class DataTagging_Frame {
 
 						} else {
 							// title is not meet the pattern
-							label_3.setText(String.valueOf(articleIdVec.size()));
+							label_3.setText(String.valueOf(allarticleNum));
 							label_4.setText(String.valueOf(indexNum));
-							label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
+							label_5.setText(String.valueOf(allarticleNum - indexNum));
 							nextButton.setEnabled(true);
 
 							lblMonth1.setText("");
