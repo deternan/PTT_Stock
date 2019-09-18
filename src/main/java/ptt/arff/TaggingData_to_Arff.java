@@ -160,6 +160,7 @@ public class TaggingData_to_Arff
 						idTmp = articleobj.getString("article_id");
 						articleId = idTmp;
 						if (idTmp.equalsIgnoreCase(articleIdIndex)) {
+							
 							// author
 							if (articleobj.has("author")) {
 								if(articleobj.get("author") instanceof String) {
@@ -300,11 +301,12 @@ public class TaggingData_to_Arff
 		writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(arfffolder + arfffilename), "utf-8"));
 		
 		writer.write("@RELATION ptttagging"+"\n");
+		writer.write("\n");
 		for(int i=0; i<wordim; i++) {
-			writer.write("@ATTRIBUTE article  NUMERIC"+"\n");
+			writer.write("@ATTRIBUTE "+ String.valueOf(i+1)  +"_feature NUMERIC"+"\n");
 		}
 		
-		writer.write("@ATTRIBUTE class        {positive,negative}"+"\n");
+		writer.write("@ATTRIBUTE class	{positive,negative}"+"\n");
 		writer.write("@DATA"+"\n");
 	}
 	
