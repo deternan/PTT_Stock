@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data manually tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: September 18, 2019 06:18 AM
+ * Last revision: September 19, 2019 00:00 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -1005,7 +1005,6 @@ public class DataTagging_Frame {
 	}
 
 	private void TitleisNull() {
-		
 		lblNewLabel_2.setText(date);
 		lblNewLabel_3.setText(author);
 		lblNewLabel_6.setText(title);
@@ -1268,9 +1267,9 @@ public class DataTagging_Frame {
 
 		} else {
 			// title is not meet the pattern
-			label_3.setText(String.valueOf(articleIdVec.size()));
+			label_3.setText(String.valueOf(allarticleNum));
 			label_4.setText(String.valueOf(indexNum));
-			label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
+			label_5.setText(String.valueOf(allarticleNum - indexNum));
 
 			lblMonth1.setText("");
 			lblMonth2.setText("");
@@ -1446,9 +1445,9 @@ public class DataTagging_Frame {
 
 		} else {
 			// title is not meet the pattern
-			label_3.setText(String.valueOf(articleIdVec.size()));
+			label_3.setText(String.valueOf(allarticleNum));
 			label_4.setText(String.valueOf(indexNum));
-			label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
+			label_5.setText(String.valueOf(allarticleNum - indexNum));
 
 			lblMonth1.setText("");
 			lblMonth2.setText("");
