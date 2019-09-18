@@ -92,7 +92,7 @@ public class Create_arff
 		// output arff
 		output_Initialize();
 		
-		int index = 0;
+		//int index = 0;
 		String temp[];
 		while((Line = bfr.readLine())!=null)
 		{					
@@ -126,7 +126,7 @@ public class Create_arff
 //				System.out.println(fileNameStr+"	"+articleIdStr+"	"+tagCategoryStr);
 			}
 			
-			index++;
+			//index++;
 			Clean();
 		}
 		
