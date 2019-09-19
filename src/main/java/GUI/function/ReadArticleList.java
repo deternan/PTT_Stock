@@ -3,7 +3,7 @@ package GUI.function;
 /*
  * Data tagging GUI (article list)
  * version: July 13, 2019 02:10 PM
- * Last revision: September 18, 2019 00:56 AM
+ * Last revision: September 19, 2019 06:56 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -51,23 +51,18 @@ public class ReadArticleList
 			{
 				TmpStr.add(Line);
 				temp = Line.split("\\t");
-//				//System.out.println(Line+"	"+temp.length);
+
 				if(temp.length == 3) {
-//					if(startcheck) {
-//						fileNameVec.add(temp[0]);
-//						articleIdVec.add(temp[1]);
-//						articleAuthorVec.add(temp[2]);
-//					}
-//					
+					
 					if(historyarticleId.equalsIgnoreCase(temp[1])) {
 						startcheck = true;
 						articleIndex = aa;
+						//System.out.println(articleIndex+"	"+Line);
 					}
 					
-					aa++;
-					allarticleNum++;
 				}
-				
+				aa++;
+				allarticleNum++;
 			}
 		}
 		bfr.close();
