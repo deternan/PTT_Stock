@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data manually tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: September 19, 2019 00:00 AM
+ * Last revision: September 20, 2019 00:22 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -254,6 +254,7 @@ public class DataTagging_Frame {
 						fileName_index = rh.returnfileName();
 						artileID_index = rh.returnartileID();
 						articleFile = fileName_index.substring(0, fileName_index.indexOf(".json"));
+						//System.out.println(articleFile);
 						// Loading article list
 						ReadArticleList ra;
 						if (artileID_index.trim().length() == 0) {
@@ -1285,7 +1286,7 @@ public class DataTagging_Frame {
 		}
 		
 		label_4.setText(String.valueOf(indexNum));
-		label_5.setText(String.valueOf(articleIdVec.size() - indexNum));
+		label_5.setText(String.valueOf(allarticleNum - indexNum));
 		
 		// radio group
 		radiochoice = "";
