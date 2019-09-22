@@ -1,11 +1,11 @@
 package ptt.arff;
 
 /*
- * create arff file
- * tagging to arff
+ * create arff file based on fasttxt
+ * tagging to arff 
  * 
  * version: September 01, 2019 09:54 PM
- * Last revision: September 18, 2019 10:32 PM
+ * Last revision: September 23, 2019 00:30 AM
  * 
  * Author : Chao-Hsuan Ke 
  * E-mail : phelpske.dev at gmail dot com
@@ -36,11 +36,10 @@ import edu.stanford.nlp.ling.CoreLabel;
 
 import com.mayabot.mynlp.fasttext.FastText;
 
-public class TaggingData_to_Arff 
+public class TaggingData_to_Arff_Fasttxt 
 {
 	// tagging record
 	private String sourceFolder = "/Users/phelps/Documents/github/PTT_Stock/source/";
-	//private String file = "tagging_tmp.txt";
 	private String file = "tagging.txt";
 	// Articles
 	private String articleFolder = "/data/git/DataSet/ptt/Stock data/";
@@ -76,10 +75,10 @@ public class TaggingData_to_Arff
 	// output
 	private BufferedWriter writer;
 	private String arfffolder = sourceFolder;
-	private String arfffilename = "tagging.arff";
+	private String arfffilename = "tagging_fasttxt.arff";
 	private String allweValueStr = "";
 	
-	public TaggingData_to_Arff() throws Exception
+	public TaggingData_to_Arff_Fasttxt() throws Exception
 	{
 		// Chinese segmentation initialize
 		Chinese_Seg_Initialize();
@@ -313,7 +312,7 @@ public class TaggingData_to_Arff
 	public static void main(String args[]) 
 	{
 		try {
-			TaggingData_to_Arff ca = new TaggingData_to_Arff();
+			TaggingData_to_Arff_Fasttxt ca = new TaggingData_to_Arff_Fasttxt();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
