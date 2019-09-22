@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data manually tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: September 22, 2019 12:01 PM
+ * Last revision: September 22, 2019 03:16 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -59,8 +59,7 @@ import javax.swing.JButton;
 
 public class DataTagging_Frame {
 
-	private JFrame frame;
-	// public parameter
+	JFrame frame;
 	JButton nextButton;
 	JLabel lblNewLabel_2;
 	JLabel lblNewLabel_3;
@@ -113,8 +112,8 @@ public class DataTagging_Frame {
 
 	// ActionListener (count)
 	int articleIndex = 0;
-	String articleNameStr = "";
-	String articleIdStr = "";
+//	String articleNameStr = "";
+//	String articleIdStr = "";
 	String authorNameStr = "";
 	// article content
 	private String articleFile;
@@ -292,8 +291,8 @@ public class DataTagging_Frame {
 							lblNewLabel_6.setText(title);
 							textPane_2.setText(content);
 							mclabel.setText(String.valueOf(messagesCount));
-							labArticleIdStr.setText(articleIdStr);
-							labArticleFileStr.setText(articleNameStr);
+							labArticleIdStr.setText(articleId);
+							labArticleFileStr.setText(articleFile);
 							label_3.setText(String.valueOf(allarticleNum));	
 							label_4.setText(String.valueOf(indexNum));
 							label_5.setText(String.valueOf(allarticleNum - indexNum));
@@ -376,8 +375,9 @@ public class DataTagging_Frame {
 
 						} else {
 							// title is not meet the pattern
-							labArticleIdStr.setText(articleIdStr);
-							labArticleFileStr.setText(articleNameStr);
+							labArticleIdStr.setText(articleId);
+							labArticleFileStr.setText(articleFile);
+							textPane_2.setText(content);
 							label_3.setText(String.valueOf(allarticleNum));
 							label_4.setText(String.valueOf(indexNum));
 							label_5.setText(String.valueOf(allarticleNum - indexNum));
@@ -1010,8 +1010,9 @@ public class DataTagging_Frame {
 
 	private void TitleisNull() 
 	{
-		labArticleIdStr.setText(articleIdStr);
-		labArticleFileStr.setText(articleNameStr);
+		labArticleIdStr.setText(articleId);
+		labArticleFileStr.setText(articleFile);
+		textPane_2.setText(content);
 		lblNewLabel_2.setText(date);
 		lblNewLabel_3.setText(author);
 		lblNewLabel_6.setText(title);
@@ -1162,8 +1163,8 @@ public class DataTagging_Frame {
 
 		try {
 			GetContentByArticleId(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString());
-			articleNameStr = filenameVec.get(articleIndex).toString();
-			articleIdStr = articleIdVec.get(articleIndex).toString();
+			articleFile = filenameVec.get(articleIndex).toString();
+			articleId = articleIdVec.get(articleIndex).toString();
 			authorNameStr = articleAuthorVec.get(articleIndex).toString();
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
@@ -1192,8 +1193,8 @@ public class DataTagging_Frame {
 			lblNewLabel_6.setText(title);
 			textPane_2.setText(content);
 			mclabel.setText(String.valueOf(messagesCount));
-			labArticleIdStr.setText(articleIdStr);
-			labArticleFileStr.setText(articleNameStr);
+			labArticleIdStr.setText(articleId);
+			labArticleFileStr.setText(articleFile);
 			 
 			String companynameStr = "";
 			String companyidStr = "";
@@ -1275,8 +1276,9 @@ public class DataTagging_Frame {
 			label_3.setText(String.valueOf(allarticleNum));
 			label_4.setText(String.valueOf(indexNum));
 			label_5.setText(String.valueOf(allarticleNum - indexNum));
-			labArticleIdStr.setText(articleIdStr);
-			labArticleFileStr.setText(articleNameStr);
+			labArticleIdStr.setText(articleId);
+			labArticleFileStr.setText(articleFile);
+			textPane_2.setText(content);
 			
 			lblMonth1.setText("");
 			lblMonth2.setText("");
@@ -1354,8 +1356,8 @@ public class DataTagging_Frame {
 
 		try {
 			GetContentByArticleId(filenameVec.get(articleIndex).toString(), articleIdVec.get(articleIndex).toString());
-			articleNameStr = filenameVec.get(articleIndex).toString();
-			articleIdStr = articleIdVec.get(articleIndex).toString();
+			articleFile = filenameVec.get(articleIndex).toString();
+			articleId = articleIdVec.get(articleIndex).toString();
 			authorNameStr = articleAuthorVec.get(articleIndex).toString();
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
@@ -1375,8 +1377,9 @@ public class DataTagging_Frame {
 			lblNewLabel_6.setText(title);
 			textPane_2.setText(content);
 			mclabel.setText(String.valueOf(messagesCount));
-			labArticleIdStr.setText(articleIdStr);
-			labArticleFileStr.setText(articleNameStr);
+			labArticleIdStr.setText(articleId);
+			labArticleFileStr.setText(articleFile);
+			textPane_2.setText(content);
 
 			String companynameStr = "";
 			String companyidStr = "";
@@ -1455,8 +1458,9 @@ public class DataTagging_Frame {
 			label_3.setText(String.valueOf(allarticleNum));
 			label_4.setText(String.valueOf(indexNum));
 			label_5.setText(String.valueOf(allarticleNum - indexNum));
-			labArticleIdStr.setText(articleIdStr);
-			labArticleFileStr.setText(articleNameStr);
+			labArticleIdStr.setText(articleId);
+			labArticleFileStr.setText(articleFile);
+			textPane_2.setText(content);
 			
 			lblMonth1.setText("");
 			lblMonth2.setText("");
