@@ -3,7 +3,7 @@ package GUI;
 /*
  * PTT Data manually tagging GUI
  * version: July 08, 2019 07:40 PM
- * Last revision: September 20, 2019 00:25 AM
+ * Last revision: September 22, 2019 11:43 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -375,6 +375,8 @@ public class DataTagging_Frame {
 
 						} else {
 							// title is not meet the pattern
+							labArticleIdStr.setText(articleId);
+							labArticleFileStr.setText(articleFile);
 							label_3.setText(String.valueOf(allarticleNum));
 							label_4.setText(String.valueOf(indexNum));
 							label_5.setText(String.valueOf(allarticleNum - indexNum));
@@ -993,7 +995,8 @@ public class DataTagging_Frame {
 		return TWDate;
 	}
 
-	private String addTwoDate(String dateStr) throws Exception {
+	private String addTwoDate(String dateStr) throws Exception 
+	{
 		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 		Date inputDate = dateFormat.parse(dateStr);
 		Calendar cal = Calendar.getInstance();
@@ -1002,16 +1005,16 @@ public class DataTagging_Frame {
 		cal.set(Calendar.DAY_OF_YEAR, inputDayOfYear + 2);
 
 		return cal.getTime().toString();
-		// return cal.getTime();
 	}
 
-	private void TitleisNull() {
+	private void TitleisNull() 
+	{
+		labArticleIdStr.setText(articleId);
+		labArticleFileStr.setText(articleFile);
 		lblNewLabel_2.setText(date);
 		lblNewLabel_3.setText(author);
 		lblNewLabel_6.setText(title);
 		mclabel.setText(String.valueOf(messagesCount));
-		labArticleFileStr.setText(articleFile);
-		labArticleIdStr.setText(articleId);
 	}
 
 	private void CleanData()
@@ -1271,7 +1274,9 @@ public class DataTagging_Frame {
 			label_3.setText(String.valueOf(allarticleNum));
 			label_4.setText(String.valueOf(indexNum));
 			label_5.setText(String.valueOf(allarticleNum - indexNum));
-
+			labArticleIdStr.setText(articleId);
+			labArticleFileStr.setText(articleFile);
+			
 			lblMonth1.setText("");
 			lblMonth2.setText("");
 			lblMonth3.setText("");
@@ -1449,7 +1454,9 @@ public class DataTagging_Frame {
 			label_3.setText(String.valueOf(allarticleNum));
 			label_4.setText(String.valueOf(indexNum));
 			label_5.setText(String.valueOf(allarticleNum - indexNum));
-
+			labArticleIdStr.setText(articleId);
+			labArticleFileStr.setText(articleFile);
+			
 			lblMonth1.setText("");
 			lblMonth2.setText("");
 			lblMonth3.setText("");
