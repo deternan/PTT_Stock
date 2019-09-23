@@ -8,7 +8,7 @@ import java.io.BufferedWriter;
  * tagging to arff 
  * 
  * version: September 23, 2019 00:02 AM
- * Last revision: September 23, 2019 00:12 AM
+ * Last revision: September 23, 2019 08:40 PM
  * 
  * Author : Chao-Hsuan Ke 
  * E-mail : phelpske.dev at gmail dot com
@@ -28,18 +28,24 @@ import java.util.Vector;
 
 import org.deeplearning4j.models.embeddings.loader.WordVectorSerializer;
 import org.deeplearning4j.models.embeddings.wordvectors.WordVectors;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.spreada.utils.chinese.ZHConverter;
 
+import GUI.Units;
 import edu.stanford.nlp.ie.crf.CRFClassifier;
 import edu.stanford.nlp.ling.CoreLabel;
 
 public class TaggingData_to_Arff_Word2Vec 
 {
 	
-	private String modelPath = "";						// path
-	private String modelgzName = "GoogleNews-vectors-negative300.bin.gz";		// Google News
-	private String modeltxtName = "zh_wiki_word2vec_300.txt";					// Wiki
+	private String modelPath = "/Users/phelps/Downloads/";		// model folder
+//	private String modelPath_Type = "wiki/cc.zh.Chinese.model/";
+	private String modelgzName = "GoogleNews-vectors-negative300.bin.gz";				// Google News
+	private String modeltxtName = "zh_wiki_word2vec_300.txt";							// Wiki
 	
 	// tagging record
 	private String sourceFolder = "/Users/phelps/Documents/github/PTT_Stock/source/";
@@ -47,12 +53,8 @@ public class TaggingData_to_Arff_Word2Vec
 	// Articles
 	private String articleFolder = "/data/git/DataSet/ptt/Stock data/";
 	// article content
-	private String articleFile;
-	private String articleId;
-	private String author;
 	private String title;
 	private String content;
-	private String date;
 	private String allTitleContent = "";
 	// file index
 	String fileNameStr;
@@ -62,7 +64,7 @@ public class TaggingData_to_Arff_Word2Vec
 	ZHConverter simconverter = ZHConverter.getInstance(ZHConverter.SIMPLIFIED);
 	// Segmentation
 	private static final String basedir = "/Users/phelps/Documents/github/Light-tools/data/stanford-word-segmenter/data/"; // data
-																															// path
+																															
 
 	static List<String> segmented;
 	CRFClassifier<CoreLabel> segmenter;
@@ -73,25 +75,23 @@ public class TaggingData_to_Arff_Word2Vec
 	File gModel;
 	WordVectors word2Vec;
 	//Word2Vec
-	
-//	String inputStr = "西元前";
-	String inputStr = "apple";
 	double[] wordVectorDouble = {};	
 	
 	private int wordim = 300;
 	private ArrayList averageValue = new ArrayList();
 	double[] averageValueTmp = new double[wordim];
+	double wordCount = 0;
 	// output
 	private BufferedWriter writer;
 	private String arfffolder = sourceFolder;
-	private String arfffilename = "tagging_word2vec.arff";
+	private String arfffilename = "tagging_word2vec_simple.arff";
 	private String allweValueStr = "";
 	
 
 	public TaggingData_to_Arff_Word2Vec() throws Exception
 	{
-		//ReadBin();
-		ReadTXT();
+		//ReadBin();	// English
+		ReadTXT();		// Chinese		
 		
 		// Chinese segmentation initialize
 		Chinese_Seg_Initialize();
@@ -105,8 +105,40 @@ public class TaggingData_to_Arff_Word2Vec
 
 		// int index = 0;
 		String temp[];
-		while ((Line = bfr.readLine()) != null) {
+		while ((Line = bfr.readLine()) != null) 
+		{
+			temp = Line.split("	");
+			fileNameStr = temp[0];
+			articleIdStr = temp[1];
+			tagCategoryStr = temp[3];
+			System.out.println(fileNameStr+"	"+articleIdStr);
+			// content
+			ReadSourceFile(temp[0], temp[1]);
+			
+			allTitleContent += title + " " + content;
 
+			String tmpStr = ChineseWordParser(allTitleContent);
+			// BIG5 to GB
+			String simStr = BIG5GB_converter(tmpStr);
+			// Chinese words Segmentation
+			// System.out.println(simStr);
+			Chinese_Segmentation(simStr);
+			
+			//System.out.println(segTerms.size());
+			for (int k = 0; k < segTerms.size(); k++) {
+				word2vec_wordembedding(segTerms.get(k).toString());
+			}
+			// average
+			average();
+			// output
+			if ((tagCategoryStr.trim().equalsIgnoreCase("positive"))
+					|| (tagCategoryStr.trim().equalsIgnoreCase("negative"))) {
+				writer.write(allweValueStr + "\n");
+			}
+			
+			//System.out.println(fileNameStr+" "+articleIdStr+" "+tagCategoryStr);
+			
+			Clean();
 		}
 		
 		fr.close();
@@ -128,6 +160,33 @@ public class TaggingData_to_Arff_Word2Vec
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	private void word2vec_wordembedding(String inputStr)
+	{
+		// list word dim value
+		if (word2Vec.hasWord(inputStr)) {
+			wordVectorDouble = word2Vec.getWordVector(inputStr);
+			// System.out.println("dim length "+wordVectorDouble.length);
+			for (int i = 0; i<wordVectorDouble.length; i++) {
+				//System.out.println(wordVectorDouble[i]);
+				averageValueTmp[i] += wordVectorDouble[i];
+			}
+			wordCount++;
+		} else {
+			//System.out.println("no term in the model");
+		}
+	}
+	
+	private void average()
+	{		
+//		System.out.println("----------- average -----------");
+		for(int j=0; j<wordim; j++) {
+			//averageValue.add(averageValueTmp[j]/segTerms.size());
+			averageValue.add(averageValueTmp[j] / wordCount);
+			allweValueStr += averageValue.get(j)+",";
+		}
+		allweValueStr += tagCategoryStr;
 	}
 	
 	private void Chinese_Seg_Initialize() throws Exception{
@@ -159,6 +218,113 @@ public class TaggingData_to_Arff_Word2Vec
 		
 		writer.write("@ATTRIBUTE class	{positive,negative}"+"\n");
 		writer.write("@DATA"+"\n");
+	}
+	
+	private void ReadSourceFile(String filenameIndex, String articleIdIndex) throws Exception
+	{
+		String Line = "";
+		FileReader fr = new FileReader(Units.articleFolder + filenameIndex);
+		BufferedReader bfr = new BufferedReader(fr);
+
+		String strTmp = "";
+		while ((Line = bfr.readLine()) != null) 
+		{
+			strTmp += Line;
+		}
+		fr.close();
+		bfr.close();
+
+		String idTmp;
+		if (isJSONValid(strTmp)) {
+			JSONObject obj = new JSONObject(strTmp);
+			if (obj.has("articles")) {
+				JSONArray jsonarray = new JSONArray(obj.get("articles").toString());
+				for (int i = 0; i < jsonarray.length(); i++) {
+					JSONObject articleobj = new JSONObject(jsonarray.get(i).toString());
+					if (articleobj.has("article_id")) {
+						idTmp = articleobj.getString("article_id");
+
+						if (idTmp.equalsIgnoreCase(articleIdIndex)) {
+							
+							// title
+							if (articleobj.has("article_title")) {
+								title = articleobj.getString("article_title");
+							}
+							// content
+							if (articleobj.has("content")) {
+								content = articleobj.getString("content");
+							}
+							
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	private boolean isJSONValid(String jsonInString) {
+
+		JsonParser parser = new JsonParser();
+		JsonElement jsonele = parser.parse(jsonInString);
+		boolean check;
+		check = jsonele.isJsonObject();
+		
+		return check;
+	}
+	
+	private String ChineseWordParser(String input_str) 
+	{
+		String sentence = "";
+		for(int i=0; i<input_str.length();i++)
+		{  
+		    String test = input_str.substring(i, i+1);  
+		    if(test.matches("[\\u4E00-\\u9FA5]+")){  
+		    	sentence += test;
+		    }  
+		}
+		
+		return sentence;
+	}
+	
+	private String BIG5GB_converter(String traStr)
+	{
+		// BIG5 to GB
+		String simStrResult = simconverter.convert(traStr);
+		
+		return simStrResult;
+	}
+	
+	private void Chinese_Segmentation(String inputStr)
+	{
+	    segmented = segmenter.segmentString(inputStr);
+	    
+	    Terms_Split(segmented);
+	}
+	
+	private void Terms_Split(List<String> listStr)
+	{
+		for(int i=0; i<listStr.size(); i++) {
+			// Filter (length>1)
+			if(listStr.get(i).toString().trim().length() > 1) {
+				segTerms.add(listStr.get(i));
+			}			
+		}		
+	}
+	
+	private void Clean()
+	{
+		title = "";
+		content = "";
+		allTitleContent = "";
+		fileNameStr = "";
+		articleIdStr = "";
+		tagCategoryStr = "";
+		segTerms.clear();
+		averageValue.clear();
+		allweValueStr = "";
+		averageValueTmp.clone();
+		wordCount = 0;
 	}
 	
 	public static void main(String[] args) 

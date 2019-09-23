@@ -5,7 +5,7 @@ package ptt.arff;
  * tagging to arff 
  * 
  * version: September 01, 2019 09:54 PM
- * Last revision: September 23, 2019 00:30 AM
+ * Last revision: September 23, 2019 08:35 PM
  * 
  * Author : Chao-Hsuan Ke 
  * E-mail : phelpske.dev at gmail dot com
@@ -67,7 +67,7 @@ public class TaggingData_to_Arff_Fasttxt
 	
 	// fasttext (word embedding)
 	private int wordim = 300;
-	private String sourcebinPath = "/Users/phelps/Downloads/wiki/";		// should be revised
+	private String sourcebinPath = "/Users/phelps/Downloads/wiki/";		// model folder
 	private String modelFolder_zh = "wiki.simple.zh.Chinese.model";
 	FastText fastText_zh;
 	private ArrayList averageValue = new ArrayList();
@@ -113,7 +113,7 @@ public class TaggingData_to_Arff_Fasttxt
 			Chinese_Segmentation(simStr);
 
 			for (int k = 0; k < segTerms.size(); k++) {
-				fasttext(segTerms.get(k).toString());
+				fasttext_wordembedding(segTerms.get(k).toString());
 			}
 			// average
 			average();
@@ -235,6 +235,7 @@ public class TaggingData_to_Arff_Fasttxt
 		segTerms.clear();
 		averageValue.clear();
 		allweValueStr = "";
+		averageValueTmp.clone();
 	}
 	
 	private void Chinese_Seg_Initialize() throws Exception
@@ -271,7 +272,7 @@ public class TaggingData_to_Arff_Fasttxt
 		}		
 	}
 	
-	private void fasttext(String inputStr)
+	private void fasttext_wordembedding(String inputStr)
 	{
 		//for(int i=0; i<segTerms.size(); i++)
 		{
