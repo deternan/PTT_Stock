@@ -68,14 +68,15 @@ public class TaggingData_to_Arff_Fasttxt
 	// fasttext (word embedding)
 	private int wordim = 300;
 	private String sourcebinPath = "/Users/phelps/Downloads/wiki/";		// model folder
-	private String modelFolder_zh = "wiki.simple.zh.Chinese.model";
+//	private String modelFolder_zh = "wiki.simple.zh.Chinese.model/";
+	private String modelFolder_zh = "cc.zh.Chinese.model/";
 	FastText fastText_zh;
 	private ArrayList averageValue = new ArrayList();
 	double[] averageValueTmp = new double[wordim];
 	// output
 	private BufferedWriter writer;
 	private String arfffolder = sourceFolder;
-	private String arfffilename = "tagging_fasttxt.arff";
+	private String arfffilename = "tagging_fasttxt_cc.arff";
 	private String allweValueStr = "";
 	
 	public TaggingData_to_Arff_Fasttxt() throws Exception
