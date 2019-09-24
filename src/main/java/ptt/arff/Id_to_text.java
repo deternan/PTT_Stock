@@ -71,7 +71,7 @@ public class Id_to_text
 			System.out.println(fileNameStr+"	"+articleIdStr+"	"+allTitleContent.length());
 			// output
 			
-			writer.write(fileNameStr+"	"+articleIdStr+"	"+allTitleContent + "\n");
+			writer.write(fileNameStr+"	"+articleIdStr+"	"+tagCategoryStr+"	"+allTitleContent + "\n");
 			
 			Clean();
 		}
