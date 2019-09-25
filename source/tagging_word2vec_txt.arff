@@ -1,5 +1,4 @@
-@RELATION ptttagging
-
+@RELATION ptttagging_word2vec
 @ATTRIBUTE 1_feature NUMERIC
 @ATTRIBUTE 2_feature NUMERIC
 @ATTRIBUTE 3_feature NUMERIC
