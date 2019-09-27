@@ -25,7 +25,7 @@ public class Arff_Translation
 	// attribute record
 	private String sourceFolder = "/Users/phelps/Documents/github/PTT_Stock/source/";
 	private String fsFolder = "feature selection/";
-	private String attribute_file = "GainRatioAttributeEval_tfidf.txt";
+	private String attribute_file = "InfoGainAttributeEval_tfidf.txt";
 	private String arff_file = "tagging_tfidf.arff";
 	
 	
@@ -40,7 +40,7 @@ public class Arff_Translation
 	// output
 		private BufferedWriter writer;
 		private String arfffolder = sourceFolder;
-		private String arfffilename = "tagging_tfidf_fs_gr.arff";
+		private String arfffilename = "tagging_tfidf_fs_ig.arff";
 		private String allweValueStr = "";
 	
 	
