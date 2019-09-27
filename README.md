@@ -1,5 +1,5 @@
 
-## Functions and Tool
+## Functions and Tools
 1) 擷取 PTT 文章 <br>
 2) PTT 文章人工標記 GUI <br>
 3) 相關工具 <br>
@@ -46,7 +46,9 @@
 3) [每個user發表後被推文的數量](https://github.com/deternan/PTT_Stock/blob/master/src/main/java/ptt/statistics/Statistical_NumofPushByAllAuthor.java) <br>
 4) [每個user推文的數量](https://github.com/deternan/PTT_Stock/blob/master/src/main/java/ptt/statistics/Statistical_AuthorsPushedNumber.java) <br>
 
-
+---
+### Competition 
+[第 11 屆 iT 邦幫忙鐵人賽](https://ithelp.ithome.com.tw/users/20119726/ironman/2138)
 
 ---
 
