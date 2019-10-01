@@ -3,7 +3,7 @@ package ValuesProcessing;
 /*
  * download values (Main)
  * version: July 03, 2019 07:23 PM
- * Last revision: July 06, 2019 11:15 AM
+ * Last revision: October 01, 2019 11:28 PM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Vector;
 
-public class GatValues_Main
+public class GetValues_Main
 {
 	String sourceFolder = "/Users/phelps/Documents/github/PTT_Stock/source/";
 	
@@ -38,7 +38,19 @@ public class GatValues_Main
 	
 	GetValueandProcessing value;
 	
-	public GatValues_Main() throws Exception
+	public GetValues_Main() throws Exception
+	{
+		// by stock id
+		GetStockValue();
+		
+		// Stock Index
+			//https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20191001&type=IND
+			//發行量加權股價指數
+			
+		
+	}
+	
+	private void GetStockValue() throws Exception
 	{
 		Today();
 		
@@ -58,8 +70,6 @@ public class GatValues_Main
 		{
 			GetValueandProcessing value = new GetValueandProcessing(companyId.get(i).toString(), "tpex");
 		}
-		
-		
 	}
 	
 	private void ReadCompany(String pathfile) throws Exception
@@ -93,7 +103,7 @@ public class GatValues_Main
 	public static void main(String args[])
 	{
 		try {
-			GatValues_Main gv = new GatValues_Main();
+			GetValues_Main gv = new GetValues_Main();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
