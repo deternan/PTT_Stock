@@ -26,7 +26,7 @@ public class Units {
 	public static final String TPEX_outputTag = "TPEX";
 	public static final String extension = ".txt";
 	public static final String value_folder = "/Users/phelps/Documents/github/PTT_Stock/output/Values/";
-	
+	public static final String StockValue = "DateValue.txt";
 	// Date
 	public static final String basic_pattern = "yyyyMMdd";
 	
