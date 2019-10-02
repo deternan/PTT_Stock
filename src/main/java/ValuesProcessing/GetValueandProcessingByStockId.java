@@ -50,7 +50,7 @@ import com.google.gson.JsonParser;
 
 import GUI.Units;
 
-public class GetValueandProcessing 
+public class GetValueandProcessingByStockId 
 {
 	String value_folder = "/Users/phelps/Documents/github/PTT_Stock/output/Values/";
 	String extension = ".txt";
@@ -78,7 +78,7 @@ public class GetValueandProcessing
 	DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
 	String nowAsISO;
 	
-	public GetValueandProcessing(String ID, String tag) throws Exception
+	public GetValueandProcessingByStockId(String ID, String tag) throws Exception
 	{
 		this.ID = ID;
 		this.tag = tag;
@@ -179,7 +179,6 @@ public class GetValueandProcessing
 	private void Processing_TWSE(String jsonStr) throws Exception
 	{
 		JSONObject obj = new JSONObject(jsonStr);
-		//System.out.println(obj.get("data"));
 		if(obj.has("data")) {
 			JSONArray jsonarray = new JSONArray(obj.get("data").toString());
 			for(int i=0; i<jsonarray.length(); i++)
@@ -194,7 +193,6 @@ public class GetValueandProcessing
 	private void Processing_TPEX(String jsonStr) throws Exception
 	{
 		JSONObject obj = new JSONObject(jsonStr);
-		//System.out.println(obj.get("aaData"));
 		if(obj.has("aaData")) {
 			JSONArray jsonarray = new JSONArray(obj.get("aaData").toString());
 			for(int i=0; i<jsonarray.length(); i++)
@@ -208,9 +206,6 @@ public class GetValueandProcessing
 	private void Storage(String inputDate, String inputValue) throws Exception
 	{
 		writer.write(inputDate.replaceAll("/", "")+"	"+inputValue+"\n");
-//		ps = new PrintStream(writer); 
-//		ps.println(inputDate.replaceAll("/", "")+"	"+inputValue);
-//		ps.close();
 	}
 	
 	// avoid duplication

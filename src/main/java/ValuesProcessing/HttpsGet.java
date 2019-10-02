@@ -17,14 +17,10 @@ package ValuesProcessing;
  */
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
-import GUI.httpGet.company.get_Company_list;
 import GUI.Units;
 import GUI.httpGet.HttpsReader;
 
@@ -59,12 +55,10 @@ public class HttpsGet {
 		String line = null;
 		String response = "";
 		while ((line = buf.readLine()) != null) {// 每次讀取一行
-			//System.out.println(line);
 			response = line;
 		}
 		
 		return response;
 	}
-	
 	
 }
