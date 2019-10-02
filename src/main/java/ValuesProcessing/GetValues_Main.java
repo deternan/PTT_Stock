@@ -56,43 +56,9 @@ public class GetValues_Main
 	
 	private void GetStockValue() throws Exception
 	{
-		String startDate = "20180101";
+		String startDate = "20180806";		// start date
+		
 		GetValueandProcessing_StockValue stockvalue = new GetValueandProcessing_StockValue(startDate);
-		
-		
-//		BufferedReader bfr;
-//		String Line = "";
-//		FileReader fr = new FileReader("/Users/phelps/Desktop/" + "20191002.txt");
-//		bfr = new BufferedReader(fr);
-//				
-//		while((Line = bfr.readLine())!=null)
-//		{			
-//			JSONObject obj = new JSONObject(Line);
-//			
-//			// Value
-//			if(obj.has("params")) {
-//				JSONObject objPara = new JSONObject(obj.get("params").toString());
-//				if(objPara.has("date")) {
-//					System.out.println(objPara.get("date"));
-//				}
-//			}
-//			
-//			
-//			if(obj.has("data3")) {
-//				JSONArray jsonarray = new JSONArray(obj.get("data1").toString());
-//				for(int i=0; i<jsonarray.length(); i++)
-//				{
-//					//System.out.println(jsonarray.get(i));
-//					JSONArray arrayData = new JSONArray(jsonarray.get(i).toString());
-//					if(arrayData.get(0).toString().equalsIgnoreCase("發行量加權股價指數")) {
-//						System.out.println(arrayData.get(i));
-//					}
-//				}
-//			}
-//		}
-//		fr.close();
-//		bfr.close();
-		
 	}
 	
 	
