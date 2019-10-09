@@ -1,8 +1,8 @@
 package GUI;
 
 /*
- * Sotck GUI
- * b. Read articls
+ * Stock GUI
+ * b. Read articles
  * 
  * version: June 22, 2019 09:29 PM
  * Last revision: June 22, 2019 10:01 PM
