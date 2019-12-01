@@ -153,7 +153,7 @@ public class GetValueandProcessingByStockId
 		if("twse".equalsIgnoreCase(tag)) {
 			// TWSE
 			// https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=20190101&stockNo=2388
-			URL = Units.TWSEvalueUrl + DateStr + "8&stockNo=" + ID;
+			URL = Units.TWSEvalueUrl + DateStr + "&stockNo=" + ID;
 		}else if("tpex".equalsIgnoreCase(tag)) {
 			// TPEX
 			// https://www.tpex.org.tw/web/stock/aftertrading/daily_trading_info/st43_result.php?d=107/08&stkno=3105
