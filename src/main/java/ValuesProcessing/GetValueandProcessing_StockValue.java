@@ -3,7 +3,7 @@ package ValuesProcessing;
 /*
  * Parser Stock value by Date
  * version: October 02, 2019 09:30 PM
- * Last revision: October 02, 2019 11:20 PM
+ * Last revision: December 05, 2019 06:20 AM
  * 
  * Author : Chao-Hsuan Ke
  * E-mail : phelpske.dev at gmail dot com
@@ -39,8 +39,8 @@ public class GetValueandProcessing_StockValue
 	boolean datecheck;
 	String value_str;
 	
-	//https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20191001&type=IND
-	String URLBasic = "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=";
+	String URLBasic = "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20191001&type=IND";
+	//String URLBasic = "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=";
 	String URL;
 	// Get JsonResponse
 	String sourceLine = "";
