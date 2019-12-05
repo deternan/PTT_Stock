@@ -152,7 +152,8 @@ public class GetValueandProcessing_StockValue
 		}
 		
 		if(datecheck) {
-			if(obj.has("data3")) {
+			//if(obj.has("data3")) {
+			if(obj.has("data1")) {	
 				JSONArray jsonarray = new JSONArray(obj.get("data1").toString());
 				for(int i=0; i<jsonarray.length(); i++){
 					JSONArray arrayData = new JSONArray(jsonarray.get(i).toString());
