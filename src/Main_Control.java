@@ -2,7 +2,7 @@
  * PTT Stock - Main Control
  * 
  * version: April 29, 2018 02:23 AM
- * Last revision: May 21, 2018 00:54 AM
+ * Last revision: July 19, 2021 06:56 AM
  * 
  * 
  */
@@ -14,8 +14,7 @@ import java.util.Vector;
 public class Main_Control 
 {
 	// Read file
-	private String path = "D:\\GitHub\\PTT_Stock\\";
-	//private String path = "https://github.com/deternan/PTT_Stock/blob/master/";
+	private String path = "D:\\GitHub\\PTT_Stock\\";	
 	private String twse = "TWSE_2018.txt";
 	private String tpex = "TPEX_2018.txt";	
 	//TWSE
@@ -35,11 +34,6 @@ public class Main_Control
 	{		
 //		Read_TWSE_Info();
 //		Read_TPEX_Info();
-		
-//		System.out.println(twse_id.size());
-//		System.out.println(twse_name.size());		
-//		System.out.println(tpex_id.size());
-//		System.out.println(tpex_name.size());
 		
 		// ------------
 		Get_value gv = new Get_value(2317);
